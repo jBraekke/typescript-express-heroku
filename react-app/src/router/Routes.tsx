@@ -1,6 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Booking from '../pages/Booking';
 import Main from '../pages/Main';
+import NewBooking from '../pages/NewBooking';
 
 export default function Routes(): JSX.Element {
     return (
@@ -9,14 +11,10 @@ export default function Routes(): JSX.Element {
                 <Main />
             </Route>
             <Route path="/new-booking" exact>
-                <div>
-                    New booking
-                </div>
+                <NewBooking />
             </Route>
             <Route path="/booking" exact>
-                <div>
-                    All bookings
-                </div>
+                <Booking />
             </Route>
         </Switch>
     );
