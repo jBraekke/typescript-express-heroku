@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node build/index.js",
-    "postinstall": "tsc && cd react-app/ && npm install --only=dev && npm run build",
+    "postinstall": "tsc && cd react-app/ && npm install && npm install --only=dev && npm run build",
     "watch-node": "nodemon build/index.js",
     "watch-ts": "tsc -w",
     "deploy": "git add . && git commit -m Heroku && git push heroku master"
