@@ -11,13 +11,15 @@ class App {
   private mountRoutes(): void {
     const router = express.Router();
 
+    this.express.use(express.static(path.resolve(__dirname, '../react-app/dist')));
+
     router.get('/api/booking', function (req, res) {
       res.set('Content-Type', 'application/json');
       res.json({ bookings: [1, 2, 3] });
     });
 
     router.get('/', (req, res) => {
-      res.json({ message: 'Hello, I am your first router!' });
+      res.sendFile(path.resolve(__dirname, '../react-app/build', 'index.html'));
     });
     this.express.use('/', router);
   }
