@@ -11,7 +11,7 @@ class App {
   private mountRoutes(): void {
     const router = express.Router();
 
-    this.express.use(express.static(path.resolve(__dirname, '../react-app/dist')));
+    this.express.use(express.static(path.resolve(__dirname, '../react-app/build')));
 
     router.get('/api/booking', function (req, res) {
       res.set('Content-Type', 'application/json');
