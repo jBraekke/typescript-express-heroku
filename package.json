@@ -6,9 +6,8 @@
   "scripts": {
     "start": "node build/index.js",
     "postinstall": "tsc && cd react-app/ && npm install && npm install --only=dev && npm run build",
-    "watch-node": "nodemon build/index.js",
-    "watch-ts": "tsc -w",
-    "deploy": "git add . && git commit -m Heroku && git push heroku master"
+    "dev-client": "cd react-app && npm start",
+    "dev-server": "nodemon server/index.ts"
   },
   "repository": {
     "type": "git",
@@ -31,6 +30,7 @@
     "node": "12.18.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.1.1"
   }
 }
