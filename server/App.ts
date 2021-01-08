@@ -26,7 +26,6 @@ class App {
     
     router.post('/api/booking', function (req, res) {
       bookings.push(req.body);
-      console.log(req.body.navn, ', har nettopp bestilt time. Dette redder budsjettet!')
       res.sendStatus(201)
     });
 
