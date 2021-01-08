@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Main = (): JSX.Element => {
     return (
         <div>
-            <h1>Hoved meny, velkommen til oss</h1>
+            <h1>Hoved meny</h1>
 
             <div>
                 <Link to="/new-booking">
