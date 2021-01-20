@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +7,6 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
-import { Collapse, Fade, Grow, Slide, Zoom } from '@material-ui/core';
 
 function Copyright() {
     const classes = useStyles();
@@ -137,8 +136,6 @@ const footers = [
 
 export default function TestFooter() {
   const classes = useStyles();
-
-  const [hover, setHover] = useState(false);
   
 
   return (
@@ -158,11 +155,9 @@ export default function TestFooter() {
               <ul>
                 {footer.description.map((item) => (
                   <li key={item}>
-                    <Collapse  in={!hover}>
-                    <Link  className={classes.GridItemsPara} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} href="#" variant="subtitle1" color="textSecondary">
+                    <Link  className={classes.GridItemsPara}  href="#" variant="subtitle1" color="textSecondary">
                       {item}
                     </Link>
-                   </Collapse>
                   </li>
                 ))}
                 
