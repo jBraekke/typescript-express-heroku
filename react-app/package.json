@@ -14,6 +14,13 @@
     "@types/node": "^12.19.11",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
+    "@types/material-ui": "^0.21.8",
+    "@types/query-string": "^6.3.0",
+    "@material-ui/icons": "^4.11.2",
+    "@fontsource/roboto": "^4.1.0",
+    "@types/react-router-dom": "^5.1.7",
+    "@material-ui/core": "^4.11.2",
+    "prettier": "2.2.1",
     "date-fns": "^2.16.1",
     "react": "^17.0.1",
     "react-datepicker": "^3.3.0",
@@ -27,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npx prettier --write ."
   },
   "eslintConfig": {
     "extends": [

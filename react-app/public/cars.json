@@ -1,0 +1,48 @@
+{
+  "car": [
+    {
+      "model": "BMW123 Speed",
+      "brand": "BMW",
+      "description": "A superfast CAR"
+    },
+
+    {
+      "model": "VW123 Turbo",
+      "brand": "Volkswagen",
+      "description": "A superfast CAR ultra boost"
+    },
+    {
+      "model": "BMW123 Speed",
+      "brand": "BMW",
+      "description": "A superfast CAR"
+    },
+
+    {
+      "model": "VW123 Turbo",
+      "brand": "Volkswagen",
+      "description": "A superfast CAR ultra boost"
+    },
+    {
+      "model": "BMW123 Speed",
+      "brand": "BMW",
+      "description": "A superfast CAR"
+    },
+
+    {
+      "model": "VW123 Turbo",
+      "brand": "Volkswagen",
+      "description": "A superfast CAR ultra boost"
+    },
+    {
+      "model": "BMW123 Speed",
+      "brand": "BMW",
+      "description": "A superfast CAR"
+    },
+
+    {
+      "model": "VW123 Turbo",
+      "brand": "Volkswagen",
+      "description": "A superfast CAR ultra boost"
+    }
+  ]
+}

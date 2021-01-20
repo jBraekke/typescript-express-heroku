@@ -1,1 +1,0 @@
-export const getApiUrl =  process.env.NODE_ENV === 'production' ? '/api' : '//localhost:1337/api'; 
