@@ -38,7 +38,7 @@ const headersData = [
   },
   {
     label: "OM OSS",
-    href: "/logout",
+    href: "/aboutus",
   },
   {
     label: "LOGG INN",
