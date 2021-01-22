@@ -2,6 +2,7 @@ import { Box } from "@material-ui/core";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
+import AboutUsPage from "../pages/AboutUs/AboutUsPage";
 //import TestLayout from "../layouts/TestLayout";
 import FrontpagePage from "../pages/frontpage/FrontpagePage";
 import SignInPage from "../pages/signin/SignInPage";
@@ -23,6 +24,9 @@ const Routes = () => (
         </Route>
         <Route exact path="/login/signup">
           <SignUpPage />
+        </Route>
+        <Route exact path="/aboutus">
+          <AboutUsPage />
         </Route>
       </Switch>
     </MainLayout>
