@@ -13,7 +13,7 @@ const MainLayout = ({ children, ...props }: IProps) => {
   return (
     <Box>
       <NavBar />
-      <Container maxWidth="lg">
+      <Container>
         <Box mt={2}>{children}</Box>
       </Container>
       <TestFooter />

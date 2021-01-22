@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AboutUsPage from "../pages/AboutUs/AboutUsPage";
+import ContactUsPage from "../pages/contact/ContactUsPage";
 //import TestLayout from "../layouts/TestLayout";
 import FrontpagePage from "../pages/frontpage/FrontpagePage";
 import SignInPage from "../pages/signin/SignInPage";
@@ -18,6 +19,9 @@ const Routes = () => (
         </Route>
         <Route exact path="/welcome">
           <WelcomePage />
+        </Route>
+        <Route exact path="/contact">
+          <ContactUsPage />
         </Route>
         <Route exact path="/login/signin">
           <SignInPage />
