@@ -8,17 +8,23 @@ import {
   Card,
   CardActions,
   CardContent,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
   Input,
   Paper,
+  Slider,
+  Typography,
 } from "@material-ui/core";
 
 import theme from "../../themes/theme";
+import { Label } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {},
   filterPaper: {},
   buttonCenter: {
-    //backgroundColor: "rgba(0, 0, 0, 0.2);",
+    backgroundColor: "rgba(0, 0, 0, 0.6);",
     display: "flex",
     justifyContent: "center",
     alignitems: "center",
@@ -28,11 +34,17 @@ const useStyles = makeStyles({
     fontWeight: 700,
     fontSize: 20,
     opacity: "100%",
+    color: "white",
     borderRadius: 10,
     borderWidth: "10px",
   },
   inputStyle: {
     backgroundColor: "rgba(0, 0, 0, 0.2);",
+  },
+  leftGrid: {
+    marginTop: theme.spacing(30),
+    display: "flex",
+    flexDirection: "column",
   },
 });
 
@@ -41,9 +53,13 @@ const Welcome = () => {
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const [mainFilter, setMainFilter] = useState("");
+  const [value, setValue] = React.useState([100, 37]);
   const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchInput(event.target.value);
     if (searchInput.length >= 0) setPage(1);
+  };
+  const handleChangeSlider = (event: any, newValue: any) => {
+    setValue(newValue);
   };
 
   const getData = () => {
@@ -151,9 +167,91 @@ const Welcome = () => {
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
-        <Grid container item xs={12} spacing={0}>
-          <Grid item xs={2}>
-            Text her
+        <Grid container item xs={12} spacing={3}>
+          <Grid className={classes.leftGrid} item xs={2}>
+            <p>Velg tilgjengelighet</p>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Til salgs"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Til leie"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Snart ledig"
+              />
+            </FormGroup>
+            <p>Velg type</p>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Leilighet"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Hus"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Kontorer"
+              />
+            </FormGroup>
+
+            <Typography id="range-slider" gutterBottom>
+              Prisklasse
+            </Typography>
+            <Slider
+              value={value}
+              onChange={handleChangeSlider}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              //getAriaValueText={valuetext}
+            />
           </Grid>
           <Grid item xs={10}>
             <Grid container item xs={12} spacing={3}>
