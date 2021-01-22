@@ -16,13 +16,12 @@ const useStyles = makeStyles({
     alignitems: "center",
     textAlign: "center",
     borderRadius: 25,
-    
-    
+    borderTop: "1px solid black",
   },
   buttonCenter: {
     display: "flex",
     justifyContent: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.7);",
+
     alignitems: "center",
     textAlign: "center",
   },
@@ -30,7 +29,6 @@ const useStyles = makeStyles({
   title: {
     fontFamily: "EB Garamond",
     fontSize: "35px",
-    
   },
 
   description: {
@@ -40,7 +38,6 @@ const useStyles = makeStyles({
     fontWeight: 400,
     fontSize: 20,
   },
-
 });
 
 const InfoCardAboutUs = ({ title, description }: any) => {
@@ -49,12 +46,12 @@ const InfoCardAboutUs = ({ title, description }: any) => {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Box component="h2" className={classes.title}>{title}</Box>
+        <Box component="h2" className={classes.title}>
+          {title}
+        </Box>
         <Box className={classes.description}>{description}</Box>
       </CardContent>
-      <CardActions className={classes.buttonCenter}>
-       
-      </CardActions>
+      <CardActions className={classes.buttonCenter}></CardActions>
     </Card>
   );
 };
