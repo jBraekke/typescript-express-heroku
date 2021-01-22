@@ -1,3 +1,4 @@
+import { Box } from "@material-ui/core";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";

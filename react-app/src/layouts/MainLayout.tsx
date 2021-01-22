@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import NavBar from "../components/navigation/NavBar";
 import TestFooter from "../components/navigation/TestFooter";
 import Box from "@material-ui/core/Box";
-import { Container} from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 interface IProps {
   children: ReactNode;
@@ -13,10 +13,10 @@ const MainLayout = ({ children, ...props }: IProps) => {
   return (
     <Box>
       <NavBar />
-      <Container>
+      <Container maxWidth="xl">
         <Box mt={2}>{children}</Box>
       </Container>
-      <TestFooter/>
+      <TestFooter />
     </Box>
   );
 };
