@@ -5,7 +5,6 @@ import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const ContactForm = () => {
   const classes = useStyles();
   const methods = useForm();
-  const [datas, setDatas] = useState();
+  const [datas, setDatas] = useState("");
   const { handleSubmit, control } = methods;
 
   async function postData(url = "", data = {}) {
@@ -43,8 +42,11 @@ const ContactForm = () => {
     return response; // parses JSON response into native JavaScript objects
   }
 
-  const onSubmit = (data, e) => {
-    postData("http://localhost:9000/test/contact", data).then((data) => {
+  const onSubmit = (data: any, e: any) => {
+    setDatas("sending" + data.status);
+    console.log(e);
+    postData("http://localhost:1337/contact/sendmail", data).then((data) => {
+      setDatas("sending" + data.status);
       if (data.status === 250) {
         setDatas("Mail sent!");
       } else setDatas("Failed to send mail");
