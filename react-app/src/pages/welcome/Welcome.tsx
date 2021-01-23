@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import CarCard from "../../components/cards/CarCard";
+import Slide from "@material-ui/core/Slide";
+import Fade from "@material-ui/core/Fade";
 import {
   Box,
   Button,
@@ -18,7 +20,7 @@ import {
 } from "@material-ui/core";
 
 import theme from "../../themes/theme";
-import { Label } from "@material-ui/icons";
+import { FavoriteBorderOutlined, Label } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {},
@@ -53,6 +55,7 @@ const Welcome = () => {
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const [mainFilter, setMainFilter] = useState("");
+  const [test, setTest] = useState(false);
   const [value, setValue] = React.useState([100, 37]);
   const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchInput(event.target.value);
@@ -60,6 +63,10 @@ const Welcome = () => {
   };
   const handleChangeSlider = (event: any, newValue: any) => {
     setValue(newValue);
+  };
+
+  const handleChange = () => {
+    setTest((prev) => !prev);
   };
 
   const getData = () => {
@@ -127,9 +134,15 @@ const Welcome = () => {
     return (
       <>
         {paginatedCars.map((data, index) => (
-          <Grid key={index} item xs={6}>
-            <CarCard key={index} props={data}></CarCard>
-          </Grid>
+          <Fade
+            in={test}
+            style={{ transformOrigin: "0 0 0" }}
+            {...(test ? { timeout: 2000 } : {})}
+          >
+            <Grid key={index} item xs={6}>
+              <CarCard key={index} props={data}></CarCard>
+            </Grid>
+          </Fade>
         ))}
       </>
     );
@@ -205,13 +218,13 @@ const Welcome = () => {
                 label="Snart ledig"
               />
             </FormGroup>
-            <p>Velg type</p>
+            <p>Velg type(TRYKK PÅ LEILIGHET FOR Å SE)</p>
             <FormGroup row>
               <FormControlLabel
                 control={
                   <Checkbox
-                    //checked={}
-                    //onChange={}
+                    checked={test}
+                    onChange={handleChange}
                     name="checkedB"
                     color="primary"
                   />
@@ -253,6 +266,7 @@ const Welcome = () => {
               //getAriaValueText={valuetext}
             />
           </Grid>
+
           <Grid item xs={10}>
             <Grid container item xs={12} spacing={3}>
               <Grid item xs={12}>
@@ -266,6 +280,7 @@ const Welcome = () => {
                   onChange={stateChange}
                 />
               </Grid>
+
               <CornRow />
             </Grid>
             {pageButtons}
