@@ -56,6 +56,7 @@ const Welcome = () => {
   const [searchInput, setSearchInput] = useState("");
   const [mainFilter, setMainFilter] = useState("");
   const [test, setTest] = useState(false);
+
   const [value, setValue] = React.useState([100, 37]);
   const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchInput(event.target.value);
