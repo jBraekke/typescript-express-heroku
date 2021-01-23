@@ -120,16 +120,16 @@ const AboutUs = () => {
   return (
     <Box className={classes.root} mt={6}>
       <Grid container spacing={2}>
-        <Grid container item xs={12} spacing={3}>
-          <Grid item xs={6}>
+        <Grid container item sm={12} spacing={3}>
+          <Grid item sm={12} md={6}>
             <InfoRow />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item sm={12} md={6}>
             <Grid container item xs={12} spacing={3}>
-              <Grid item xs={12}>
+              <Grid item sm={6} md={12}>
                 <ImageCard url="sarpsborg.jpg" />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item sm={6} md={12}>
                 <ImageCard url="sarp.jpg" />
               </Grid>
               <FancyRow />

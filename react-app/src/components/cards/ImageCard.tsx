@@ -26,7 +26,8 @@ const ImageCard = ({ url }: any) => {
         alt="Sarpsborg"
         image={url}
         title="Sarpsborg"
-        height={420}
+        width="100%"
+        height="auto"
       />
     </Card>
   );

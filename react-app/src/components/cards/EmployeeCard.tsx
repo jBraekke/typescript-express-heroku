@@ -57,7 +57,8 @@ const EmployeeCard = ({ Name, Role, PhoneNumber, Email }: any) => {
       <CardMedia
         component="img"
         alt="Contemplative Reptile"
-        height="300"
+        width="100%"
+        height="auto"
         image="employee.jpg"
         title="Contemplative Reptile"
       />
