@@ -9,6 +9,7 @@ import {
   Link,
   MenuItem,
   Box,
+  SvgIcon,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { CardMedia } from "@material-ui/core";
@@ -20,29 +21,36 @@ import Avatar from "@material-ui/core/Avatar";
 //import FolderIcon from "@material-ui/icons/Folder";
 import HomeIcon from "@material-ui/icons/Home";
 import { green } from "@material-ui/core/colors";
-//import { black } from "material-ui/styles/colors";
-//import theme from "../../themes/theme";
+import HomeWorkIcon from "@material-ui/icons/HomeWork";
+import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
+import ImportContactsIcon from "@material-ui/icons/ImportContacts";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
 const headersData = [
   {
     label: "HJEM",
     href: "/",
+    comp: HomeIcon,
   },
   {
     label: "VÅRE LEILIGHETER",
     href: "/mentors",
+    comp: HomeWorkIcon,
   },
   {
-    label: "LEILIGHETER PÅ VEI INN",
-    href: "/account",
+    label: "KONTAKT OSS",
+    href: "/contact",
+    comp: ContactMailSharpIcon,
   },
   {
     label: "OM OSS",
     href: "/aboutus",
+    comp: ImportContactsIcon,
   },
   {
     label: "LOGG INN",
     href: "/login/signin",
+    comp: VpnKeyIcon,
   },
 ];
 
@@ -189,7 +197,7 @@ export default function Header() {
   };
 
   const getDrawerChoices = () => {
-    return headersData.map(({ label, href }) => {
+    return headersData.map(({ label, href, comp }: any) => {
       return (
         <Link
           {...{
@@ -200,6 +208,12 @@ export default function Header() {
             key: label,
           }}
         >
+          <Box mr={1}>
+            <Avatar className={iconFrame}>
+              <SvgIcon className={icon} component={comp} />
+            </Avatar>
+          </Box>
+
           <MenuItem>{label}</MenuItem>
         </Link>
       );
@@ -221,7 +235,7 @@ export default function Header() {
   );
 
   const getMenuButtons = () => {
-    return headersData.map(({ label, href }) => {
+    return headersData.map(({ label, href, comp }: any) => {
       return (
         <Button
           {...{
@@ -234,7 +248,7 @@ export default function Header() {
         >
           <Box mr={1}>
             <Avatar className={iconFrame}>
-              <HomeIcon className={icon} />
+              <SvgIcon className={icon} component={comp} />
             </Avatar>
           </Box>
           {label}
