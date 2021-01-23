@@ -34,7 +34,7 @@ const headersData = [
   },
   {
     label: "VÅRE LEILIGHETER",
-    href: "/mentors",
+    href: "/welcome",
     comp: HomeWorkIcon,
   },
   {

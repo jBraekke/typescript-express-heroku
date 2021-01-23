@@ -18,14 +18,13 @@ const useStyles = makeStyles((theme: Theme) =>
     textTitle: {
       fontFamily: "EB Garamond",
       fontWeight: 800,
-      fontSize: 30,
       borderBottom: "4px solid black",
     },
 
     textRole: {
       fontFamily: "EB Garamond",
       fontWeight: 500,
-      fontSize: 23,
+
       marginBottom: theme.spacing(3),
     },
 
