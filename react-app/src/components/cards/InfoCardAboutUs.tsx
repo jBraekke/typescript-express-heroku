@@ -16,7 +16,6 @@ const useStyles = makeStyles({
     alignitems: "center",
     textAlign: "center",
     borderRadius: 25,
-    borderTop: "1px solid black",
   },
   buttonCenter: {
     display: "flex",
