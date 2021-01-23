@@ -93,9 +93,18 @@ const AboutUs = () => {
             <Grid item xs={12}>
               <Box className={classes.textSchtyle}>Vår ledelse</Box>
             </Grid>
+          </Grid>
 
-            <Grid item xs={2}></Grid>
-            <Grid item xs={4}>
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            item
+            xs={12}
+            md={12}
+            spacing={1}
+          >
+            <Grid item xs={6} md={4}>
               <EmployeeCard
                 Name={"ANDRÉ LUNDEBY"}
                 Role={"DAGLIG LEDER"}
@@ -103,7 +112,7 @@ const AboutUs = () => {
                 Email={"harrypotter1337@gmail.com"}
               ></EmployeeCard>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6} md={4}>
               <EmployeeCard
                 Name={"STÅLE GRANDAHL"}
                 Role={"DAGLIG LEDER"}
@@ -119,7 +128,7 @@ const AboutUs = () => {
 
   return (
     <Box className={classes.root} mt={6}>
-      <Grid container spacing={2}>
+      <Grid container spacing={4}>
         <Grid container item sm={12} spacing={3}>
           <Grid item sm={12} md={6}>
             <InfoRow />
