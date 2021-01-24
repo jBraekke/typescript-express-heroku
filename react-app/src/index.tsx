@@ -21,6 +21,7 @@ const themeLight = createMuiTheme({
   },
 });
 
+/*
 const themeDark = createMuiTheme({
   palette: {
     background: {
@@ -31,6 +32,8 @@ const themeDark = createMuiTheme({
     },
   },
 });
+*/
+
 themeLight.typography.h4 = {
   fontSize: "1.2rem",
   "@media (min-width:600px)": {

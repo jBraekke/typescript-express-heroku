@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { Box, Typography } from "@material-ui/core";
-import PictureCard from "../../components/cards/PictureCard";
+import { Box } from "@material-ui/core";
+
 import InfoCardAboutUs from "../../components/cards/InfoCardAboutUs";
 import EmployeeCard from "../../components/cards/EmployeeCard";
 

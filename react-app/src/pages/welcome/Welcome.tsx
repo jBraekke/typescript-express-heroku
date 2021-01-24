@@ -2,25 +2,21 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import CarCard from "../../components/cards/CarCard";
-import Slide from "@material-ui/core/Slide";
 import Fade from "@material-ui/core/Fade";
 import {
   Box,
   Button,
   Card,
   CardActions,
-  CardContent,
   Checkbox,
   FormControlLabel,
   FormGroup,
   Input,
-  Paper,
   Slider,
   Typography,
 } from "@material-ui/core";
 
 import theme from "../../themes/theme";
-import { FavoriteBorderOutlined, Label } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {},
@@ -148,9 +144,7 @@ const Welcome = () => {
       </>
     );
   };
-  const clickHandler = (props: string) => {
-    setMainFilter(props);
-  };
+
   const FilterCard = () => {
     const classes = useStyles();
 
