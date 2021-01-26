@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {},
@@ -15,8 +16,16 @@ const PictureCard = () => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <Link href="/welcome" component={CardActionArea} color="inherit">
+    <Link
+      {...{
+        component: RouterLink,
+        to: "/welcome",
+        color: "inherit",
+        style: { textDecoration: "none" },
+        key: "label",
+      }}
+    >
+      <Card className={classes.root}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             Salg
@@ -33,10 +42,8 @@ const PictureCard = () => {
           image="purchase.jpg"
           title="Contemplative Reptile"
         />
-      </Link>
-    </Card>
-    
-    
+      </Card>
+    </Link>
   );
 };
 export default PictureCard;

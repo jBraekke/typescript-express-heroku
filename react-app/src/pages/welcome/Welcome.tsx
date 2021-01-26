@@ -2,20 +2,68 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import CarCard from "../../components/cards/CarCard";
-import { Button, Input } from "@material-ui/core";
+import Fade from "@material-ui/core/Fade";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Input,
+  Slider,
+  Typography,
+} from "@material-ui/core";
+
+import theme from "../../themes/theme";
 
 const useStyles = makeStyles({
-  root: { flexGrow: 1 },
+  root: {},
+  filterPaper: {},
+  buttonCenter: {
+    backgroundColor: "rgba(0, 0, 0, 0.6);",
+    display: "flex",
+    justifyContent: "center",
+    alignitems: "center",
+    textAlign: "center",
+  },
+  menuButton: {
+    fontWeight: 700,
+    fontSize: 20,
+    opacity: "100%",
+    color: "white",
+    borderRadius: 10,
+    borderWidth: "10px",
+  },
+  inputStyle: {
+    backgroundColor: "rgba(0, 0, 0, 0.2);",
+  },
+  leftGrid: {
+    marginTop: theme.spacing(30),
+    display: "flex",
+    flexDirection: "column",
+  },
 });
 
 const Welcome = () => {
   const [data, setData] = useState([] as any);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
+  const [mainFilter, setMainFilter] = useState("");
+  const [test, setTest] = useState(false);
 
+  const [value, setValue] = React.useState([100, 37]);
   const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchInput(event.target.value);
     if (searchInput.length >= 0) setPage(1);
+  };
+  const handleChangeSlider = (event: any, newValue: any) => {
+    setValue(newValue);
+  };
+
+  const handleChange = () => {
+    setTest((prev) => !prev);
   };
 
   const getData = () => {
@@ -37,7 +85,7 @@ const Welcome = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [mainFilter]);
 
   const paginate = function (array: any, index: any, size: any) {
     // transform values
@@ -54,9 +102,13 @@ const Welcome = () => {
     ];
   };
 
+  const testFilter = data.filter((d: any) =>
+    d.model.toLowerCase().includes(mainFilter)
+  );
+
   const carFilter =
     searchInput.length > 0
-      ? data.filter((d: any) =>
+      ? testFilter.filter((d: any) =>
           d.model.toLowerCase().includes(searchInput.toLowerCase())
         )
       : data;
@@ -79,29 +131,157 @@ const Welcome = () => {
     return (
       <>
         {paginatedCars.map((data, index) => (
-          <Grid key={index} item xs={6}>
-            <CarCard key={index} props={data}></CarCard>
-          </Grid>
+          <Fade
+            in={test}
+            style={{ transformOrigin: "0 0 0" }}
+            {...(test ? { timeout: 2000 } : {})}
+          >
+            <Grid key={index} item xs={6}>
+              <CarCard key={index} props={data}></CarCard>
+            </Grid>
+          </Fade>
         ))}
       </>
     );
   };
 
+  const FilterCard = () => {
+    const classes = useStyles();
+
+    return (
+      <Card className={classes.root}>
+        <CardActions className={classes.buttonCenter}>
+          <Box
+            className={classes.menuButton}
+            component={Button}
+            m={5}
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              setMainFilter("sarpsborg");
+            }}
+          >
+            Sarpsborg
+          </Box>
+          <Box className={classes.menuButton} component={Button} m={5}>
+            Moss
+          </Box>
+          <Box className={classes.menuButton} component={Button} m={5}>
+            Fredrikstad
+          </Box>
+        </CardActions>
+      </Card>
+    );
+  };
+
   return (
     <div className={classes.root}>
-      <Input
-        placeholder="Search for cars here.."
-        type="text"
-        value={searchInput}
-        onChange={stateChange}
-      />
-
-      <Grid container spacing={1}>
+      <Grid container spacing={0}>
         <Grid container item xs={12} spacing={3}>
-          <CornRow />
+          <Grid className={classes.leftGrid} item xs={2}>
+            <p>Velg tilgjengelighet</p>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Til salgs"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Til leie"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Snart ledig"
+              />
+            </FormGroup>
+            <p>Velg type(TRYKK PÅ LEILIGHET FOR Å SE)</p>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={test}
+                    onChange={handleChange}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Leilighet"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Hus"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    //checked={}
+                    //onChange={}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Kontorer"
+              />
+            </FormGroup>
+
+            <Typography id="range-slider" gutterBottom>
+              Prisklasse
+            </Typography>
+            <Slider
+              value={value}
+              onChange={handleChangeSlider}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              //getAriaValueText={valuetext}
+            />
+          </Grid>
+
+          <Grid item xs={10}>
+            <Grid container item xs={12} spacing={3}>
+              <Grid item xs={12}>
+                <FilterCard></FilterCard>
+              </Grid>
+              <Grid item xs={12}>
+                <Input
+                  placeholder="Søk etter addresse her..."
+                  type="text"
+                  value={searchInput}
+                  onChange={stateChange}
+                />
+              </Grid>
+
+              <CornRow />
+            </Grid>
+            {pageButtons}
+          </Grid>
         </Grid>
       </Grid>
-      {pageButtons}
     </div>
   );
 };

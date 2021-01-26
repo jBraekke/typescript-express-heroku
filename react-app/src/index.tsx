@@ -21,6 +21,7 @@ const themeLight = createMuiTheme({
   },
 });
 
+/*
 const themeDark = createMuiTheme({
   palette: {
     background: {
@@ -31,6 +32,27 @@ const themeDark = createMuiTheme({
     },
   },
 });
+*/
+
+themeLight.typography.h4 = {
+  fontSize: "1.2rem",
+  "@media (min-width:600px)": {
+    fontSize: "1.5rem",
+  },
+  [themeLight.breakpoints.up("md")]: {
+    fontSize: "2.4rem",
+  },
+};
+
+themeLight.typography.h5 = {
+  fontSize: "1.2rem",
+  "@media (min-width:600px)": {
+    fontSize: "1.5rem",
+  },
+  [themeLight.breakpoints.up("md")]: {
+    fontSize: "2.4rem",
+  },
+};
 
 ReactDOM.render(
   <React.StrictMode>

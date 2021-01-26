@@ -1,48 +1,26 @@
 {
   "car": [
     {
-      "model": "BMW123 Speed",
-      "brand": "BMW",
-      "description": "A superfast CAR"
-    },
-
-    {
-      "model": "VW123 Turbo",
-      "brand": "Volkswagen",
-      "description": "A superfast CAR ultra boost"
+      "model": "Lekker toppleilighet i Sarpsborg",
+      "brand": "Sarpsborg",
+      "description": "Halsgate 5"
     },
     {
-      "model": "BMW123 Speed",
-      "brand": "BMW",
-      "description": "A superfast CAR"
-    },
-
-    {
-      "model": "VW123 Turbo",
-      "brand": "Volkswagen",
-      "description": "A superfast CAR ultra boost"
-    },
-    {
-      "model": "BMW123 Speed",
-      "brand": "BMW",
-      "description": "A superfast CAR"
-    },
-
-    {
-      "model": "VW123 Turbo",
-      "brand": "Volkswagen",
-      "description": "A superfast CAR ultra boost"
-    },
-    {
-      "model": "BMW123 Speed",
-      "brand": "BMW",
-      "description": "A superfast CAR"
-    },
-
-    {
-      "model": "VW123 Turbo",
-      "brand": "Volkswagen",
-      "description": "A superfast CAR ultra boost"
+      "model": "Lekker toppleilighet i Fredrikstad",
+      "brand": "Fredrikstad",
+      "description": "Halsgate 5"
+    },    {
+      "model": "Lekker toppleilighet i Moss",
+      "brand": "Moss",
+      "description": "Halsgate 5"
+    },    {
+      "model": "Lekker toppleilighet i Sarpsborg",
+      "brand": "Sarpsborg",
+      "description": "Halsgate 5"
+    },    {
+      "model": "Lekker toppleilighet i Sarpsborg",
+      "brand": "Sarpsborg",
+      "description": "Halsgate 5"
     }
   ]
 }
