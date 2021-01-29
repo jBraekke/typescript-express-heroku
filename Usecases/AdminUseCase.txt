@@ -26,10 +26,12 @@ Admin -- (Logg inn)
 (Hjem) -- (Administrer leiligheter paa vei)
 (Hjem) -- (Administrer naeringsbygg)
 (Hjem) -- (Administrere brukere)
+(Hjem) -- (Kontrakt)
 (Hjem) -- (Aggregering)
 
 
-
+(Kontrakt) -- (Fylle ut kontrakt)
+(Fylle ut kontrakt) -- (Skrive ut kontrakt)
 (Notifikasjoner) -> Varsler
 
 (Administrer ledig leiligheter) -- (Legge ut en ny annonse)
