@@ -1,0 +1,42 @@
+@startuml
+!pragma teoz true
+skinparam actorStyle awesome
+actor Kunde
+Kunde -- (Hjem)
+(Hjem) -- (Visning av ledig leiligheter)
+(Hjem) -- (Visning av leiligheter paa vei inn)
+(Hjem) -- (Visning av naaringsbygg)
+(Hjem) -- (Meld fra om problemer til huseier)
+
+(Visning av ledig leiligheter) -- (Gaa inn paa en spesifikk leilighet)
+(Gaa inn paa en spesifikk leilighet) -- (Trykker paa meld interesse)
+
+(Visning av leiligheter paa vei inn) -- (Gaa inn paa en spesifikk leilighet)
+
+(Visning av naaringsbygg) -- (Gaa inn paa en spesifikk leilighet)
+
+(Trykker paa meld interesse) -- (Fyller ut MailForm)
+
+(Fyller ut MailForm) -- (Sendt)
+
+(Meld fra om problemer til huseier) -- (MailForm ved problemer om leilighet)
+
+(MailForm ved problemer om leilighet) -- (Fyller ut MailForm ang. problemer)
+
+(Fyller ut MailForm ang. problemer) -- (Sendt)
+
+actor Admin
+
+(Sendt) -- (Sendes til database)
+
+(Sendes til database) -- Admin
+
+
+
+
+
+
+
+
+
+@enduml
