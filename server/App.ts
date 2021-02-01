@@ -1,4 +1,4 @@
-import bodyParser = require("body-parser");
+//import bodyParser = require("body-parser");
 import email from "./routes/email.route";
 import * as express from "express";
 import * as path from "path";
