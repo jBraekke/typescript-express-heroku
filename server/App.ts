@@ -7,6 +7,7 @@ import * as helmet from "helmet";
 import * as compression from "compression";
 import * as dotenv from "dotenv";
 import { textSpanIsEmpty } from "typescript";
+import connectDatabase from "./config/db";
 dotenv.config();
 class App {
   public express;
@@ -22,6 +23,8 @@ class App {
     this.express.use(
       express.static(path.resolve(__dirname, "../react-app/build"))
     );
+
+    connectDatabase();
     //this.express.use(bodyParser.json());
     //this.express.use(bodyParser.urlencoded({ extended: true }));
     router.get("/*", cors(), (req, res) => {
