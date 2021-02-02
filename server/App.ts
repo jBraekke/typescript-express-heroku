@@ -8,6 +8,9 @@ import * as compression from "compression";
 import * as dotenv from "dotenv";
 import { textSpanIsEmpty } from "typescript";
 import connectDatabase from "./config/db";
+//const swaggerUi = require("swagger-ui-express");
+//const swaggerDocument = require("../swagger.json");
+
 dotenv.config();
 class App {
   public express;
@@ -19,7 +22,8 @@ class App {
 
   private mountRoutes(): void {
     const router = express.Router();
-
+    //router.use("/api-docs", swaggerUi.serve);
+    //router.get("/api-docs", swaggerUi.setup(swaggerDocument));
     this.express.use(
       express.static(path.resolve(__dirname, "../react-app/build"))
     );
@@ -30,6 +34,7 @@ class App {
     router.get("/*", cors(), (req, res) => {
       res.sendFile(path.resolve(__dirname, "../react-app/build", "index.html"));
     });
+
     this.express.use(express.json());
     //this.express.use(helmet());
     this.express.use("/", router);
