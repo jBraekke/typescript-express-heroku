@@ -1,4 +1,4 @@
-import bodyParser = require("body-parser");
+//import bodyParser = require("body-parser");
 import email from "./routes/email.route";
 import * as express from "express";
 import * as path from "path";
@@ -7,6 +7,10 @@ import * as helmet from "helmet";
 import * as compression from "compression";
 import * as dotenv from "dotenv";
 import { textSpanIsEmpty } from "typescript";
+import connectDatabase from "./config/db";
+//const swaggerUi = require("swagger-ui-express");
+//const swaggerDocument = require("../swagger.json");
+
 dotenv.config();
 class App {
   public express;
@@ -18,15 +22,19 @@ class App {
 
   private mountRoutes(): void {
     const router = express.Router();
-
+    //router.use("/api-docs", swaggerUi.serve);
+    //router.get("/api-docs", swaggerUi.setup(swaggerDocument));
     this.express.use(
       express.static(path.resolve(__dirname, "../react-app/build"))
     );
+
+    connectDatabase();
     //this.express.use(bodyParser.json());
     //this.express.use(bodyParser.urlencoded({ extended: true }));
     router.get("/*", cors(), (req, res) => {
       res.sendFile(path.resolve(__dirname, "../react-app/build", "index.html"));
     });
+
     this.express.use(express.json());
     //this.express.use(helmet());
     this.express.use("/", router);

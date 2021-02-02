@@ -1,0 +1,63 @@
+@startuml
+
+skinparam actorStyle awesome
+
+Actor Admin
+
+package Varsler{
+  usecase "Varsel om ny mail ang. interesse om ledig leilighet med navn og dato" as UC1
+  usecase "Varsel om ny mail .ang interesse om kommende leilighet med navn og dato" as UC2
+  usecase "Varsel om ny mail ang. problemer i leilighet med navn og dato" as UC3
+usecase "Varsel naar en arbeider har fullfort gjoremaal" as UC4
+}
+
+package Info{
+  usecase "Skal kunne se antall klikk paa hver ledig leilighet annonse"
+  usecase "Skal kunne se antall klikk paa hver kommende leilighet annonse" 
+  usecase "Skal kunne se antall klikk paa hver naeringsbygg annonse"  
+ 
+ 
+}
+
+Admin -- (Logg inn)
+(Logg inn) -- (Hjem) 
+(Hjem) -> (Notifikasjoner)
+(Hjem) -- (Administrer ledig leiligheter)
+(Hjem) -- (Administrer leiligheter paa vei)
+(Hjem) -- (Administrer naeringsbygg)
+(Hjem) -- (Administrere brukere)
+(Hjem) -- (Kontrakt)
+(Hjem) -- (Aggregering)
+
+
+(Kontrakt) -- (Fylle ut kontrakt)
+(Fylle ut kontrakt) -- (Skrive ut kontrakt)
+(Notifikasjoner) -> Varsler
+
+(Administrer ledig leiligheter) -- (Legge ut en ny annonse)
+(Administrer ledig leiligheter) -- (Redigere en annonse)
+(Administrer ledig leiligheter) -- (Slette en annonse)
+
+(Administrer leiligheter paa vei) -- (Legge ut en ny annonse)
+(Administrer leiligheter paa vei) -- (Redigere en annonse)
+(Administrer leiligheter paa vei) -- (Slette en annonse)
+
+(Administrer naeringsbygg) -- (Legge ut en ny annonse)
+(Administrer naeringsbygg) -- (Redigere en annonse)
+(Administrer naeringsbygg) -- (Slette en annonse)
+
+(Administrere brukere) -- (Legge til en bruker)
+(Administrere brukere) -- (Redigere en bruker)
+(Administrere brukere) -- (Slette en bruker)
+
+(Aggregering) -- Info
+
+
+
+
+
+
+
+
+
+@enduml

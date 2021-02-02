@@ -1,0 +1,63 @@
+@startuml
+skinparam actorStyle awesome
+actor Arbeider
+
+package Varsler{
+  usecase "Naar et nytt gjoremaal har kommet inn" as UC1
+  usecase "Haste oppdrag som maa bli utfort" as UC2
+  usecase "Datoer for naar gjoremaal ble lagt ut" as UC3
+ 
+}
+
+Arbeider -- (Registrering)
+(Registrering) -- (Logg Inn)
+(Logg Inn) -- (Hjem)
+(Hjem) -- (Gjoremaal)
+
+(Hjem) -- (Notifikasjoner)
+(Notifikasjoner) -- UC1
+(Notifikasjoner) -- UC2
+(Notifikasjoner) -- UC3
+
+(Haste oppdrag) -- (Gaar inn paa et spesifikt gjoremaal)
+(Vanlig oppdrag) -- (Gaar inn paa et spesifikt gjoremaal)
+
+(Gaar inn paa et spesifikt gjoremaal) -- (Paagaar)
+
+(Paagaar) -- (Ferdig)
+
+actor Admin
+
+(Ferdig) -- (Sendt til database)
+
+(Sendt til database) -- (Admin)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(Gjoremaal) -- (Haste oppdrag)
+(Gjoremaal) -- (Vanlig oppdrag)
+
+
+
+
+
+
+
+
+
+@enduml
