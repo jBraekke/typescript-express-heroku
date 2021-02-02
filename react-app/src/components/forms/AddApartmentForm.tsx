@@ -47,8 +47,8 @@ const ContactForm = () => {
     console.log(e);
     postData("http://localhost:1337/addApartment", data).then((data) => {
       setDatas("sending" + data.status);
-      if (data.status === 250) {
-        setDatas("Mail sent!");
+      if (data.status === 201) {
+        setDatas("Leilighet er lagt ut.");
       } else setDatas("Failed to send mail");
     });
   };
@@ -69,49 +69,50 @@ const ContactForm = () => {
           as={TextField}
           name="adresse"
           control={control}
-          defaultValue=""
+          defaultValue="PerSatansvei 41c"
           variant="outlined"
-          label="Tittel"
+          label="Adresse..."
+          
         />
         <Controller
           as={TextField}
           name="antallSoveRom"
           control={control}
-          defaultValue=""
+          defaultValue="0"
           variant="outlined"
           multiline
           rows={4}
-          label="Melding"
+          label="Antall soverom.."
         />
          <Controller
           as={TextField}
           name="prisPerMnd"
           control={control}
-          defaultValue=""
+          defaultValue="0"
           variant="outlined"
           multiline
           rows={4}
-          label="Melding"
+          label="Pris per måned.."
         />
          <Controller
           as={TextField}
           name="depositum"
           control={control}
-          defaultValue=""
+          defaultValue="0"
           variant="outlined"
           multiline
           rows={4}
-          label="Melding"
+          label="Depositum.."
         />
          <Controller
           as={TextField}
           name="husleieGaranti"
           control={control}
-          defaultValue=""
+          defaultValue="Husleiegaranti"
           variant="outlined"
           multiline
           rows={4}
-          label="Melding"
+          label="Husleiegaranti.."
         />
 
         <Button type="submit"> Send melding </Button>

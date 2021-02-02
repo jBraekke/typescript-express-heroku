@@ -10,7 +10,7 @@ import * as dotenv from "dotenv";
 import { textSpanIsEmpty } from "typescript";
 import connectDatabase from "./config/db";
 import bodyParser from "body-parser";
-import mongoose from 'mongoose';
+
 //const swaggerUi = require("swagger-ui-express");
 //const swaggerDocument = require("../swagger.json");
 
