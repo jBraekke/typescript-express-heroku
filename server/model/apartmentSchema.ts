@@ -22,7 +22,7 @@ const ApartmentSchema = new mongoose.Schema(
     },
     depositum: {
       type: Number,
-      required: [true, 'Skriv inn pris per måned!'],
+      required: [true, 'Skriv inn depositum!'],
       //select: false,
     },
     husleieGaranti: {
