@@ -9,9 +9,11 @@ import {
   Card,
   CardActions,
   Checkbox,
+  Container,
   FormControlLabel,
   FormGroup,
   Input,
+  Slide,
   Slider,
   Typography,
 } from "@material-ui/core";
@@ -31,10 +33,12 @@ const useStyles = makeStyles({
   menuButton: {
     fontWeight: 700,
     fontSize: 20,
-    opacity: "100%",
-    color: "white",
     borderRadius: 10,
     borderWidth: "10px",
+  },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
   },
   inputStyle: {
     backgroundColor: "rgba(0, 0, 0, 0.2);",
@@ -44,6 +48,11 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
   },
+  gridheader: {
+    backgroundImage: "url(stairs.jpg)",
+    backgroundRepeat: "no-repeat, repeat",
+    backgroundSize: "cover",
+  },
 });
 
 const Welcome = () => {
@@ -51,7 +60,7 @@ const Welcome = () => {
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const [mainFilter, setMainFilter] = useState("");
-  const [test, setTest] = useState(false);
+  const [test, setTest] = useState(true);
 
   const [value, setValue] = React.useState([100, 37]);
   const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -151,14 +160,7 @@ const Welcome = () => {
     return (
       <Card className={classes.root}>
         <CardActions className={classes.buttonCenter}>
-          <Box
-            className={classes.menuButton}
-            component={Button}
-            m={5}
-            onClick={(event: React.MouseEvent<HTMLElement>) => {
-              setMainFilter("sarpsborg");
-            }}
-          >
+          <Box className={classes.menuButton} component={Button} m={5}>
             Sarpsborg
           </Box>
           <Box className={classes.menuButton} component={Button} m={5}>
@@ -172,116 +174,140 @@ const Welcome = () => {
     );
   };
 
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={0}>
-        <Grid container item xs={12} spacing={3}>
-          <Grid className={classes.leftGrid} item xs={2}>
-            <p>Velg tilgjengelighet</p>
-            <FormGroup row>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    //checked={}
-                    //onChange={}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Til salgs"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    //checked={}
-                    //onChange={}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Til leie"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    //checked={}
-                    //onChange={}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Snart ledig"
-              />
-            </FormGroup>
-            <p>Velg type(TRYKK PÅ LEILIGHET FOR Å SE)</p>
-            <FormGroup row>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={test}
-                    onChange={handleChange}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Leilighet"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    //checked={}
-                    //onChange={}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Hus"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    //checked={}
-                    //onChange={}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Kontorer"
-              />
-            </FormGroup>
+  const FilterButtons = () => {
+    return (
+      <Box mt={2} className={classes.toolbar}>
+        <Button className={classes.menuButton}>Sarpsborg</Button>
+        <Button className={classes.menuButton}>Moss</Button>
+        <Button className={classes.menuButton}>Fredrikstad</Button>
+      </Box>
+    );
+  };
 
-            <Typography id="range-slider" gutterBottom>
-              Prisklasse
-            </Typography>
-            <Slider
-              value={value}
-              onChange={handleChangeSlider}
-              valueLabelDisplay="auto"
-              aria-labelledby="range-slider"
-              //getAriaValueText={valuetext}
+  const LeftGrid = () => {
+    return (
+      <Grid className={classes.leftGrid} item xs={2}>
+        <p>Velg tilgjengelighet</p>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Til salgs"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Til leie"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Snart ledig"
+          />
+        </FormGroup>
+        <p>Velg type(TRYKK PÅ LEILIGHET FOR Å SE)</p>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={test}
+                onChange={handleChange}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Leilighet"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Hus"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Kontorer"
+          />
+        </FormGroup>
+
+        <Typography id="range-slider" gutterBottom>
+          Prisklasse
+        </Typography>
+        <Slider
+          value={value}
+          onChange={handleChangeSlider}
+          valueLabelDisplay="auto"
+          aria-labelledby="range-slider"
+          //getAriaValueText={valuetext}
+        />
+      </Grid>
+    );
+  };
+
+  const RightGrid = () => {
+    return (
+      <Grid item xs={10}>
+        <Grid container item xs={12} spacing={3}>
+          <Grid item xs={12}>
+            <FilterButtons />
+          </Grid>
+          <Grid item xs={12}>
+            <Input
+              placeholder="Søk etter addresse her..."
+              type="text"
+              value={searchInput}
+              onChange={stateChange}
             />
           </Grid>
-
-          <Grid item xs={10}>
-            <Grid container item xs={12} spacing={3}>
-              <Grid item xs={12}>
-                <FilterCard></FilterCard>
-              </Grid>
-              <Grid item xs={12}>
-                <Input
-                  placeholder="Søk etter addresse her..."
-                  type="text"
-                  value={searchInput}
-                  onChange={stateChange}
-                />
-              </Grid>
-
-              <CornRow />
-            </Grid>
-            {pageButtons}
-          </Grid>
+          <CornRow />
         </Grid>
+        {pageButtons}
       </Grid>
+    );
+  };
+
+  return (
+    <div className={classes.root}>
+      <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+        <Grid className={classes.gridheader} container spacing={0}>
+          <Container>
+            <Grid container item xs={12} spacing={3}>
+              <LeftGrid></LeftGrid>
+              <RightGrid></RightGrid>
+            </Grid>
+          </Container>
+        </Grid>
+      </Slide>
     </div>
   );
 };

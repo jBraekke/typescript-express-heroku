@@ -35,10 +35,20 @@ const PictureCard = () => {
     >
       <Card className={classes.root}>
         <CardContent className={classes.content}>
-          <Typography variant="h4" component="h3">
+          <Typography
+            align="center"
+            color="textPrimary"
+            variant="h4"
+            component="h3"
+          >
             Salg
           </Typography>
-          <Typography variant="body2" component="p">
+          <Typography
+            align="center"
+            color="textPrimary"
+            variant="body2"
+            component="p"
+          >
             Vi tilbyr et flott utvalg av nyrenoverte og lekre boliger sentralt i
             Østfold
           </Typography>

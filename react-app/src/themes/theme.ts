@@ -15,6 +15,22 @@ const theme = createMuiTheme({
     background: {
       default: "#F6F3F5",
     },
+    text: {
+      primary: "#27204C",
+      secondary: "#ffffff",
+    },
+  },
+  typography: {
+    h1: {},
+    h2: {},
+    h3: {
+      fontWeight: 700,
+    },
+    h4: {},
+    h5: {},
+    h6: {},
+    subtitle1: {},
+    body1: {},
   },
   overrides: {
     MuiPaper: {

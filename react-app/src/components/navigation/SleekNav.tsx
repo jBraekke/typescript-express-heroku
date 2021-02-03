@@ -121,7 +121,7 @@ const SleekNav = () => {
           alt="logo"
           src="vestengveien1.jpg"
         />
-        <Typography variant="h4" component="h4">
+        <Typography align="left" variant="h4" component="h4">
           Vestengveien <br />
           Eiendomsutvikling AS
         </Typography>

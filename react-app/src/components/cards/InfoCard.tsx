@@ -32,10 +32,10 @@ const InfoCard = ({ title, description }: any) => {
   return (
     <Card elevation={0} className={classes.root}>
       <CardContent>
-        <Typography variant="h3" component="h3">
+        <Typography color="textPrimary" variant="h3" component="h3">
           {title}
         </Typography>
-        <Typography variant="subtitle1" component="p">
+        <Typography color="textPrimary" variant="subtitle1" component="p">
           {description}
         </Typography>
       </CardContent>
