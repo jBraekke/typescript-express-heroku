@@ -5,6 +5,7 @@ import Box from "@material-ui/core/Box";
 import { Container, makeStyles } from "@material-ui/core";
 import SleekNav from "../components/navigation/SleekNav";
 import theme from "../themes/theme";
+import SleekNavDrawers from "../components/navigation/SleekNavDrawers";
 
 interface IProps {
   children: ReactNode;

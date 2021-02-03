@@ -6,6 +6,7 @@ import InfoCard from "../../components/cards/InfoCard";
 import PictureCard from "../../components/cards/PictureCard";
 import { Box, Container, Slide, Typography } from "@material-ui/core";
 import { title } from "process";
+import theme from "../../themes/theme";
 
 const useStyles = makeStyles({
   root: { flexGrow: 1 },
@@ -75,6 +76,14 @@ const Frontpage = () => {
           </Container>
         </Grid>
       </Slide>
+      <Grid container spacing={1}>
+        <InfoRow></InfoRow>
+        <Container>
+          <Grid container item xs={12} spacing={3}>
+            <FancyRow />
+          </Grid>
+        </Container>
+      </Grid>
     </div>
   );
 };
