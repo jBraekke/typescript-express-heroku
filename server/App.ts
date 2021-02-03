@@ -1,6 +1,6 @@
 //import bodyParser = require("body-parser");
 import email from "./routes/email.route";
-import apartment from "./routes/apartment.route"
+import apartment from "./routes/apartment.route";
 import * as express from "express";
 import * as path from "path";
 import * as cors from "cors";
@@ -39,11 +39,12 @@ class App {
     });
 
     this.express.use(express.json());
-   
+
     //this.express.use(helmet());
     this.express.use("/", router);
     this.express.use("/contact/", email);
-    this.express.use("/addApartment", apartment)
+    this.express.use("/addApartment", apartment);
+    this.express.use("/listApartments", apartment);
     this.express.post("/api/world", (req, res) => {
       console.log(req.body);
       res.send(

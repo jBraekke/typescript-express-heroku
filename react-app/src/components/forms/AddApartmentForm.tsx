@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import { Button, MenuItem, Select } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -23,6 +23,7 @@ const ContactForm = () => {
   const methods = useForm();
   const [datas, setDatas] = useState("");
   const { handleSubmit, control } = methods;
+  const dropDownCity = ["Sarpsborg", "Fredrikstad", "Moss"];
 
   async function postData(url = "", data = {}) {
     // Default options are marked with *
@@ -71,8 +72,7 @@ const ContactForm = () => {
           control={control}
           defaultValue="PerSatansvei 41c"
           variant="outlined"
-          label="Adresse..."
-          
+          label="Adresse"
         />
         <Controller
           as={TextField}
@@ -82,9 +82,9 @@ const ContactForm = () => {
           variant="outlined"
           multiline
           rows={4}
-          label="Antall soverom.."
+          label="Antall soverom"
         />
-         <Controller
+        <Controller
           as={TextField}
           name="prisPerMnd"
           control={control}
@@ -92,9 +92,9 @@ const ContactForm = () => {
           variant="outlined"
           multiline
           rows={4}
-          label="Pris per måned.."
+          label="Pris per måned"
         />
-         <Controller
+        <Controller
           as={TextField}
           name="depositum"
           control={control}
@@ -102,18 +102,33 @@ const ContactForm = () => {
           variant="outlined"
           multiline
           rows={4}
-          label="Depositum.."
+          label="Depositum"
         />
-         <Controller
+        <Controller
           as={TextField}
           name="husleieGaranti"
           control={control}
-          defaultValue="Husleiegaranti"
+          defaultValue=""
           variant="outlined"
           multiline
           rows={4}
-          label="Husleiegaranti.."
+          label="Husleiegaranti"
         />
+        <Typography>Vennligst velg en by for annonsen</Typography>
+        <Controller
+          as={Select}
+          name="by"
+          control={control}
+          defaultValue=""
+          variant="outlined"
+          rows={4}
+          label="Melding"
+        >
+          {" "}
+          {dropDownCity.map((option: any) => (
+            <MenuItem value={option}>{option}</MenuItem>
+          ))}
+        </Controller>
 
         <Button type="submit"> Send melding </Button>
       </form>
