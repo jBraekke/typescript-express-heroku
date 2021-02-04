@@ -7,6 +7,7 @@ import PictureCard from "../../components/cards/PictureCard";
 import { Box, Container, Slide, Typography } from "@material-ui/core";
 import { title } from "process";
 import theme from "../../themes/theme";
+import { Info } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: { flexGrow: 1 },
@@ -43,10 +44,16 @@ const Frontpage = () => {
     return (
       <>
         <Grid item xs={6}>
-          <PictureCard />
+          <PictureCard title={"Leiligheter"} />
         </Grid>
         <Grid item xs={6}>
-          <PictureCard />
+          <PictureCard title={"Hus"} />
+        </Grid>
+        <Grid item xs={6}>
+          <PictureCard title={"Kommende boliger"} />
+        </Grid>
+        <Grid item xs={6}>
+          <PictureCard title={"Næringsbygg"} />
         </Grid>
       </>
     );
@@ -68,20 +75,19 @@ const Frontpage = () => {
     <div>
       <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <Grid className={classes.gridheader} container spacing={1}>
-          <InfoRow></InfoRow>
           <Container>
-            <Grid container item xs={12} spacing={3}>
-              <FancyRow />
-            </Grid>
+            <Box m={4}>
+              <Grid container item xs={12} spacing={3}>
+                <FancyRow />
+              </Grid>
+            </Box>
           </Container>
         </Grid>
       </Slide>
       <Grid container spacing={1}>
         <InfoRow></InfoRow>
         <Container>
-          <Grid container item xs={12} spacing={3}>
-            <FancyRow />
-          </Grid>
+          <Grid container item xs={12} spacing={3}></Grid>
         </Container>
       </Grid>
     </div>

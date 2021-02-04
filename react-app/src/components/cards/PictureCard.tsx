@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const PictureCard = () => {
+const PictureCard = ({ title, description }: any) => {
   const classes = useStyles();
 
   return (
@@ -37,20 +37,19 @@ const PictureCard = () => {
         <CardContent className={classes.content}>
           <Typography
             align="center"
-            color="textPrimary"
+            color="primary"
             variant="h4"
             component="h3"
           >
-            Salg
+            {title}
           </Typography>
           <Typography
             align="center"
-            color="textPrimary"
-            variant="body2"
+            color="primary"
+            variant="body1"
             component="p"
           >
-            Vi tilbyr et flott utvalg av nyrenoverte og lekre boliger sentralt i
-            Østfold
+            {description}
           </Typography>
         </CardContent>
       </Card>

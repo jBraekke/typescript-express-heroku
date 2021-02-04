@@ -6,10 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./themes/theme";
+import { responsiveFontSizes } from "@material-ui/core";
 
+var responsivetheme = responsiveFontSizes(theme);
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={responsivetheme}>
       <CssBaseline />
       <App />
     </ThemeProvider>

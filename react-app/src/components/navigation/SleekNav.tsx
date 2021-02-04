@@ -42,7 +42,7 @@ const useStyles = makeStyles({
   },
   toolbar: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
   content: theme.mixins.toolbar,
   gucciFlip: {
@@ -81,12 +81,12 @@ const headersData = [
     label: "OM OSS",
     href: "/aboutus",
     comp: ImportContactsIcon,
-  },
+  } /*
   {
     label: "LOGG INN",
     href: "/login/signin",
     comp: VpnKeyIcon,
-  },
+  },*/,
 ];
 
 const SleekNav = () => {

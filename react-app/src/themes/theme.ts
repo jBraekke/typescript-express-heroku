@@ -5,9 +5,11 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#1F2D46",
+      contrastText: "#fff",
     },
     secondary: {
       main: "#44B873",
+      contrastText: "#fff",
     },
     error: {
       main: red.A400,
@@ -21,16 +23,27 @@ const theme = createMuiTheme({
     },
   },
   typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
     h1: {},
     h2: {},
-    h3: {
-      fontWeight: 700,
-    },
+    h3: {},
     h4: {},
     h5: {},
     h6: {},
     subtitle1: {},
     body1: {},
+    body2: {},
   },
   overrides: {
     MuiPaper: {
