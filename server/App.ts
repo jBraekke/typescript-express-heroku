@@ -43,8 +43,7 @@ class App {
     //this.express.use(helmet());
     this.express.use("/", router);
     this.express.use("/contact/", email);
-    this.express.use("/addApartment", apartment);
-    this.express.use("/listApartments", apartment);
+    this.express.use("/apartments/", apartment);
     this.express.post("/api/world", (req, res) => {
       console.log(req.body);
       res.send(

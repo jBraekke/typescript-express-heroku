@@ -30,7 +30,7 @@ const fileFilter = (req: any, file: any, cb: any) => {
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 router.post(
-  "/",
+  "/add",
   upload.array("images", 5),
   async (req: Request, res: Response, next: NextFunction) => {
     let newApartment = new apartmentSchema({
@@ -49,6 +49,6 @@ router.post(
 
 //router.post("/", cors(), apartmentController.create);
 
-router.get("/", apartmentController.listApartments);
+router.get("/getlist", apartmentController.listApartments);
 
 export default router;
