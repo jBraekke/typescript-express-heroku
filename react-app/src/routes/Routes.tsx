@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AboutUsPage from "../pages/AboutUs/AboutUsPage";
+import AddApartmentPage from "../pages/addApartment/AddApartmentPage";
 import ContactUsPage from "../pages/contact/ContactUsPage";
 //import TestLayout from "../layouts/TestLayout";
 import FrontpagePage from "../pages/frontpage/FrontpagePage";
@@ -28,6 +29,11 @@ const Routes = () => (
         <Route exact path="/login/signup">
           <SignUpPage />
         </Route>
+
+        <Route exact path="/addApartment">
+          <AddApartmentPage />
+        </Route>
+
         <Route exact path="/aboutus">
           <AboutUsPage />
         </Route>
