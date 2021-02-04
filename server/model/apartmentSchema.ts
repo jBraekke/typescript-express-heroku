@@ -5,7 +5,7 @@ const ApartmentSchema = new mongoose.Schema(
     adresse: {
       type: String,
       required: [true, "Fyll ut adresse!"],
-      unique: true, // unique index and value
+      //unique: true, // unique index and value
     },
     antallSoveRom: {
       type: Number,
@@ -29,6 +29,11 @@ const ApartmentSchema = new mongoose.Schema(
     by: {
       type: String,
       required: [true, "Vennligst velg en by!"],
+    },
+
+    images: {
+      type: Object,
+      required: false,
     },
   },
   //{ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
