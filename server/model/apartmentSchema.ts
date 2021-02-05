@@ -1,6 +1,7 @@
 import * as mongoose from "mongoose";
+import { model, Types, Document } from "mongoose";
 
-const ApartmentSchema = new mongoose.Schema(
+const apartmentSchema = new mongoose.Schema(
   {
     adresse: {
       type: String,
@@ -31,15 +32,25 @@ const ApartmentSchema = new mongoose.Schema(
       required: [true, "Vennligst velg en by!"],
     },
 
-    images: {
+    /*images: {
       type: Object,
       required: false,
-    },
+    },*/
   },
   //{ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
   { toJSON: { getters: true } }
 );
 
-const Apartments = mongoose.model("Apartment", ApartmentSchema);
+export interface IApartment {
+  adresse: string;
+  antallSoveRom: Number;
+  prisPerMnd: Number;
+  depositum: Number;
+  husleieGaranti: string;
+  by: string;
+  //images?: Object;
+}
 
-export default Apartments;
+interface ApartmentModel extends IApartment, Document {}
+
+export default model<ApartmentModel>("Apartments", apartmentSchema);
