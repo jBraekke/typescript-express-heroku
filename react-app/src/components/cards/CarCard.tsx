@@ -20,11 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-interface IApartmentPropsTest {
-  props: IApartment;
-}
-
-const CarCard = ({ props }: IApartmentPropsTest) => {
+const CarCard = ({ props }: IApartmentProps) => {
   const classes = useStyles();
 
   return (

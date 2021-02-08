@@ -6,9 +6,19 @@ export interface IApartment {
   depositum: number;
   husleieGaranti: string;
   by: string;
-  images: [{ filename: string }];
+  images: [
+    {
+      originalname: string;
+      encoding: string;
+      mimetype: string;
+      destination: string;
+      filename: string;
+      path: string;
+      size: number;
+    }
+  ];
 }
 
 export interface IApartmentProps {
-  apartments: IApartment[];
+  props: IApartment;
 }
