@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { Link, Link as RouterLink } from "react-router-dom";
+import { IApartment, IApartmentProps } from "../../interfaces/IApartment";
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +20,11 @@ const useStyles = makeStyles({
   },
 });
 
-const CarCard = ({ props }: any) => {
+interface IApartmentPropsTest {
+  props: IApartment;
+}
+
+const CarCard = ({ props }: IApartmentPropsTest) => {
   const classes = useStyles();
 
   return (
@@ -36,19 +41,38 @@ const CarCard = ({ props }: any) => {
         className={classes.root}
         onMouseOver={(setShadow) => ({ shadow: 3 })}
       >
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="300"
-          image="hus.jpg"
-          title="Contemplative Reptile"
-        />
+        {props.images ? (
+          props.images.map((image) => (
+            <>
+              {" "}
+              <CardMedia
+                component="img"
+                alt="Contemplative Reptile"
+                height="300"
+                image={"./uploads/" + image.filename}
+                title="Contemplative Reptile"
+              />
+            </>
+          ))
+        ) : (
+          <>
+            {" "}
+            <CardMedia
+              component="img"
+              alt="Contemplative Reptile"
+              height="300"
+              image="hus.jpg"
+              title="Contemplative Reptile"
+            />
+          </>
+        )}
+
         <CardContent>
           <Typography gutterBottom variant="h6" component="h2">
-            {props.model}
+            {props._id}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
+            {props.adresse}
           </Typography>
         </CardContent>
       </Card>

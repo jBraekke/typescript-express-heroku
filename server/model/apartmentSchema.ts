@@ -32,10 +32,10 @@ const apartmentSchema = new mongoose.Schema(
       required: [true, "Vennligst velg en by!"],
     },
 
-    /*images: {
+    images: {
       type: Object,
       required: false,
-    },*/
+    },
   },
   //{ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
   { toJSON: { getters: true } }
@@ -48,7 +48,7 @@ export interface IApartment {
   depositum: Number;
   husleieGaranti: string;
   by: string;
-  //images?: Object;
+  images?: Object;
 }
 
 interface ApartmentModel extends IApartment, Document {}

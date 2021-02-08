@@ -4,7 +4,8 @@ import * as expressRouter from "express";
 import { apartmentController } from "../controllers/index";
 import apartmentSchema from "../model/apartmentSchema";
 import * as multer from "multer";
-
+import * as dotenv from "dotenv";
+dotenv.config;
 const router = expressRouter.Router();
 
 const storage = multer.diskStorage({
@@ -49,6 +50,6 @@ router.post(
 
 //router.post("/", cors(), apartmentController.create);
 
-router.get("/getlist", apartmentController.listApartments);
+router.get("/getlist", cors(), apartmentController.listApartments);
 
 export default router;

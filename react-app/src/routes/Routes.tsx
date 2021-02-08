@@ -8,6 +8,7 @@ import ContactUsPage from "../pages/contact/ContactUsPage";
 import FrontpagePage from "../pages/frontpage/FrontpagePage";
 import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
+import TestPage from "../pages/testing/TestPage";
 import WelcomePage from "../pages/welcome/WelcomePage";
 
 const Routes = () => (
@@ -16,6 +17,9 @@ const Routes = () => (
       <Switch>
         <Route exact path="/">
           <FrontpagePage />
+        </Route>
+        <Route exact path="/test">
+          <TestPage />
         </Route>
         <Route exact path="/welcome">
           <WelcomePage />
@@ -33,7 +37,6 @@ const Routes = () => (
         <Route exact path="/addApartment">
           <AddApartmentPage />
         </Route>
-
         <Route exact path="/aboutus">
           <AboutUsPage />
         </Route>

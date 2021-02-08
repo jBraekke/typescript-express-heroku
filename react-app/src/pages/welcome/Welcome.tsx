@@ -19,6 +19,7 @@ import {
 } from "@material-ui/core";
 
 import theme from "../../themes/theme";
+import { useFetch } from "../../hooks/useFetch";
 
 const useStyles = makeStyles({
   root: {},
@@ -56,7 +57,9 @@ const useStyles = makeStyles({
 });
 
 const Welcome = () => {
-  const [data, setData] = useState([] as any);
+  const url = "http://localhost:1337/api/apartments/getlist";
+  //const [data, setData] = useState([] as any);
+  const { status, data, error } = useFetch(url);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
   const [mainFilter, setMainFilter] = useState("");
@@ -75,27 +78,6 @@ const Welcome = () => {
     setTest((prev) => !prev);
   };
 
-  const getData = () => {
-    fetch("cars.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then(function (response) {
-        console.log(response);
-        return response.json();
-      })
-      .then(function (myJson) {
-        console.log(myJson);
-        setData(myJson.car);
-      });
-  };
-
-  useEffect(() => {
-    getData();
-  }, [mainFilter]);
-
   const paginate = function (array: any, index: any, size: any) {
     // transform values
     index = Math.abs(parseInt(index));
@@ -110,23 +92,23 @@ const Welcome = () => {
       ),
     ];
   };
-
+  /*
   const testFilter = data.filter((d: any) =>
     d.model.toLowerCase().includes(mainFilter)
-  );
-
+  );*/
+  /*
   const carFilter =
     searchInput.length > 0
       ? testFilter.filter((d: any) =>
           d.model.toLowerCase().includes(searchInput.toLowerCase())
         )
-      : data;
+      : data;*/
 
-  const paginatedCars = paginate(carFilter, page, 4);
+  const paginatedApartments = paginate(data, page, 4);
 
   const pageButtons = [] as any;
 
-  for (let index = 0; index < carFilter.length / 4; index++) {
+  for (let index = 0; index < data.length / 4; index++) {
     pageButtons.push(
       <Button key={index} onClick={() => setPage(index + 1)}>
         Page {index + 1}
@@ -139,7 +121,7 @@ const Welcome = () => {
   const CornRow = () => {
     return (
       <>
-        {paginatedCars.map((data, index) => (
+        {paginatedApartments.map((data, index) => (
           <Fade
             in={test}
             style={{ transformOrigin: "0 0 0" }}

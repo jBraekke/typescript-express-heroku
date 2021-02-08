@@ -30,14 +30,14 @@ export const useFetch = (url: any) => {
       dispatch({ type: "FETCHING" });
       if (cache.current[url]) {
         const data = cache.current[url];
-        dispatch({ type: "FETCHED", payload: data });
+        dispatch({ type: "FETCHED", payload: data.data });
       } else {
         try {
           const response = await fetch(url);
           const data = await response.json();
           cache.current[url] = data;
           if (cancelRequest) return;
-          dispatch({ type: "FETCHED", payload: data });
+          dispatch({ type: "FETCHED", payload: data.data });
         } catch (error) {
           if (cancelRequest) return;
           dispatch({ type: "FETCH_ERROR", payload: error.message });
