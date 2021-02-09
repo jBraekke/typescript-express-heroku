@@ -46,11 +46,14 @@ const ContactForm = () => {
   const onSubmit = (data: any, e: any) => {
     setDatas("sending" + data.status);
     console.log(e);
-    postData("http://localhost:1337/addApartment", data).then((data) => {
+    postData("http://localhost:1337/api/apartments/add", data).then((data) => {
       setDatas("sending" + data.status);
-      if (data.status === 201) {
+      if (data.status === 200) {
         setDatas("Leilighet er lagt ut.");
-      } else setDatas("Failed to send mail");
+      } else
+        setDatas(
+          "Kunne ikke legge ut leilighet. Har du fylt ut alle felter riktig?"
+        );
     });
   };
 
@@ -70,19 +73,19 @@ const ContactForm = () => {
           as={TextField}
           name="adresse"
           control={control}
-          defaultValue="PerSatansvei 41c"
+          defaultValue=""
           variant="outlined"
-          label="Adresse"
+          label="Skriv inn adresse..."
         />
         <Controller
           as={TextField}
           name="antallSoveRom"
           control={control}
-          defaultValue="0"
+          defaultValue=""
           variant="outlined"
           multiline
           rows={4}
-          label="Antall soverom"
+          label="Skriv inn antall soverom (tall)..."
         />
         <Controller
           as={TextField}
@@ -112,7 +115,7 @@ const ContactForm = () => {
           variant="outlined"
           multiline
           rows={4}
-          label="Husleiegaranti"
+          label="Skriv inn husleie garanti..."
         />
         <Typography>Vennligst velg en by for annonsen</Typography>
         <Controller
