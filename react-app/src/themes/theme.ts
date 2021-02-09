@@ -3,23 +3,47 @@ import { createMuiTheme } from "@material-ui/core/styles";
 // A custom theme for this app
 const theme = createMuiTheme({
   palette: {
-    type: "light",
     primary: {
-      main: "#61dafb",
-      light: "#61dafb",
-      dark: "#21a1c4",
+      main: "#1F2D46",
+      contrastText: "#fff",
     },
     secondary: {
-      main: "#b5ecfb",
-      light: "#61dafb",
-      dark: "#21a1c4",
+      main: "#44B873",
+      contrastText: "#fff",
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: "#282c34",
+      default: "#F6F3F5",
     },
+    text: {
+      primary: "#27204C",
+      secondary: "grey",
+    },
+  },
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    h1: {},
+    h2: {},
+    h3: {},
+    h4: {},
+    h5: {},
+    h6: {},
+    subtitle1: {},
+    body1: {},
+    body2: {},
   },
   overrides: {
     MuiPaper: {

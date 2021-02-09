@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import { Button, Card, MenuItem, Select } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "center",
     },
   },
+  formCard: {},
 }));
 
 const ContactForm = () => {
@@ -55,37 +56,53 @@ const ContactForm = () => {
 
   return (
     <>
-      <Typography variant="h4" component="h2">
-        Kontakt oss
-      </Typography>
-      <Typography>{datas}</Typography>
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <Controller
-          as={TextField}
-          name="subject"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Tittel"
-        />
-        <Controller
-          as={TextField}
-          name="text"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          multiline
-          rows={4}
-          label="Melding"
-        />
+      <Card className={classes.formCard}>
+        <Typography variant="h4" component="h2">
+          Kontakt oss
+        </Typography>
+        <Typography>{datas}</Typography>
+        <form
+          className={classes.root}
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Controller
+            as={TextField}
+            name="subject"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label="Tittel"
+          />
+          <Controller
+            as={TextField}
+            name="text"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            multiline
+            rows={4}
+            label="Melding"
+          />
+          <Controller
+            as={Select}
+            name="City"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            rows={4}
+            label="Melding"
+          >
+            {" "}
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Controller>
 
-        <Button type="submit"> Send melding </Button>
-      </form>
+          <Button type="submit"> Send melding </Button>
+        </form>
+      </Card>
     </>
   );
 };

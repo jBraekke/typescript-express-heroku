@@ -1,23 +1,21 @@
 import React, { ReactNode } from "react";
-import NavBar from "../components/navigation/NavBar";
+
 import TestFooter from "../components/navigation/TestFooter";
 import Box from "@material-ui/core/Box";
-import { Container } from "@material-ui/core";
+import SleekNav from "../components/navigation/SleekNav";
 
 interface IProps {
   children: ReactNode;
   // any other props that come into the component
 }
-
-const MainLayout = ({ children, ...props }: IProps) => {
+const MainLayout = ({ children }: IProps) => {
+  //const classes = useStyles();
   return (
-    <Box>
-      <NavBar />
-      <Container>
-        <Box mt={2}>{children}</Box>
-      </Container>
+    <>
+      <SleekNav />
+      <Box>{children}</Box>
       <TestFooter />
-    </Box>
+    </>
   );
 };
 

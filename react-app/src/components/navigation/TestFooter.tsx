@@ -1,6 +1,4 @@
 import React from "react";
-
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
@@ -52,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     backgroundImage:
       "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);",
-    marginTop: theme.spacing(10),
+
     padding: theme.spacing(0, 0),
 
     "@media (max-width: 900px)": {
@@ -147,9 +145,7 @@ export default function TestFooter() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-
-      <Box component="footer" mt={8} p={4} className={classes.footer}>
+      <Box component="footer" className={classes.footer}>
         <Grid
           container
           spacing={1}

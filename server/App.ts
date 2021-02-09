@@ -1,5 +1,6 @@
 //import bodyParser = require("body-parser");
 import email from "./routes/email.route";
+import apartment from "./routes/apartment.route";
 import * as express from "express";
 import * as path from "path";
 import * as cors from "cors";
@@ -8,6 +9,8 @@ import * as compression from "compression";
 import * as dotenv from "dotenv";
 import { textSpanIsEmpty } from "typescript";
 import connectDatabase from "./config/db";
+import bodyParser from "body-parser";
+
 //const swaggerUi = require("swagger-ui-express");
 //const swaggerDocument = require("../swagger.json");
 
@@ -31,14 +34,18 @@ class App {
     connectDatabase();
     //this.express.use(bodyParser.json());
     //this.express.use(bodyParser.urlencoded({ extended: true }));
-    router.get("/*", cors(), (req, res) => {
+    /*router.get("/*", cors(), (req, res) => {
+      res.sendFile(path.resolve(__dirname, "../react-app/build", "index.html"));
+    });*/
+    router.get(/^\/(?!api).*/, (req, res) => {
       res.sendFile(path.resolve(__dirname, "../react-app/build", "index.html"));
     });
-
     this.express.use(express.json());
+
     //this.express.use(helmet());
     this.express.use("/", router);
     this.express.use("/contact/", email);
+    this.express.use(process.env.API_KEY + "apartments/", apartment);
     this.express.post("/api/world", (req, res) => {
       console.log(req.body);
       res.send(

@@ -4,7 +4,9 @@
         "module": "commonjs",
         "outDir": "build",
         "sourceMap": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "typeRoots" : ["./server/types", "./node_modules/@types"]
+        
     },
     "files": [
         "./node_modules/@types/mocha/index.d.ts",

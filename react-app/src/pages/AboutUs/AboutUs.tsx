@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { Box } from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 
 import InfoCardAboutUs from "../../components/cards/InfoCardAboutUs";
 import EmployeeCard from "../../components/cards/EmployeeCard";
@@ -129,22 +129,24 @@ const AboutUs = () => {
   return (
     <Box className={classes.root} mt={6}>
       <Grid container spacing={4}>
-        <Grid container item sm={12} spacing={3}>
-          <Grid item sm={12} md={6}>
-            <InfoRow />
-          </Grid>
-          <Grid item sm={12} md={6}>
-            <Grid container item xs={12} spacing={3}>
-              <Grid item sm={6} md={12}>
-                <ImageCard url="sarpsborg.jpg" />
+        <Container>
+          <Grid container item sm={12} spacing={3}>
+            <Grid item sm={12} md={6}>
+              <InfoRow />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <Grid container item xs={12} spacing={3}>
+                <Grid item sm={6} md={12}>
+                  <ImageCard url="sarpsborg.jpg" />
+                </Grid>
+                <Grid item sm={6} md={12}>
+                  <ImageCard url="sarp.jpg" />
+                </Grid>
+                <FancyRow />
               </Grid>
-              <Grid item sm={6} md={12}>
-                <ImageCard url="sarp.jpg" />
-              </Grid>
-              <FancyRow />
             </Grid>
           </Grid>
-        </Grid>
+        </Container>
       </Grid>
 
       <AboutUsRow />
