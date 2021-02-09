@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useFetch } from "../../hooks/useFetch";
-import { IApartment } from "../../interfaces/IApartment";
-import { Fade } from "@material-ui/core";
+
 import CarCard from "../../components/cards/CarCard";
 //import CarCard from "../../components/cards/CarCard";
 //import { Button, Input } from "@material-ui/core";
@@ -15,7 +13,7 @@ const useStyles = makeStyles({
 const Test = () => {
   const url = "http://localhost:1337/api/apartments/getlist";
 
-  const { status, data, error } = useFetch(url);
+  const { data } = useFetch(url);
 
   const classes = useStyles();
 

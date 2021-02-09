@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import CarCard from "../../components/cards/CarCard";
@@ -6,8 +6,6 @@ import Fade from "@material-ui/core/Fade";
 import {
   Box,
   Button,
-  Card,
-  CardActions,
   Checkbox,
   Container,
   FormControlLabel,
@@ -59,10 +57,10 @@ const useStyles = makeStyles({
 const Welcome = () => {
   const url = "http://localhost:1337/api/apartments/getlist";
   //const [data, setData] = useState([] as any);
-  const { status, data, error } = useFetch(url);
+  const { data } = useFetch(url);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
-  const [mainFilter, setMainFilter] = useState("");
+
   const [test, setTest] = useState(true);
 
   const [value, setValue] = React.useState([100, 37]);
@@ -133,26 +131,6 @@ const Welcome = () => {
           </Fade>
         ))}
       </>
-    );
-  };
-
-  const FilterCard = () => {
-    const classes = useStyles();
-
-    return (
-      <Card className={classes.root}>
-        <CardActions className={classes.buttonCenter}>
-          <Box className={classes.menuButton} component={Button} m={5}>
-            Sarpsborg
-          </Box>
-          <Box className={classes.menuButton} component={Button} m={5}>
-            Moss
-          </Box>
-          <Box className={classes.menuButton} component={Button} m={5}>
-            Fredrikstad
-          </Box>
-        </CardActions>
-      </Card>
     );
   };
 

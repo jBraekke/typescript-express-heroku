@@ -4,10 +4,7 @@ import Grid from "@material-ui/core/Grid";
 //import CarCard from "../../components/cards/CarCard";
 import InfoCard from "../../components/cards/InfoCard";
 import PictureCard from "../../components/cards/PictureCard";
-import { Box, Container, Slide, Typography } from "@material-ui/core";
-import { title } from "process";
-import theme from "../../themes/theme";
-import { Info } from "@material-ui/icons";
+import { Box, Container, Slide } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: { flexGrow: 1 },
@@ -59,6 +56,7 @@ const Frontpage = () => {
     );
   };
 
+  /*
   const TitleTest = () => {
     return (
       <Box m={2} className={classes.titleBox}>
@@ -70,7 +68,7 @@ const Frontpage = () => {
       </Box>
     );
   };
-
+*/
   return (
     <div>
       <Slide direction="down" in={true} mountOnEnter unmountOnExit>

@@ -4,30 +4,21 @@ import {
   //Typography,
   makeStyles,
   Button,
-  IconButton,
-  Drawer,
-  Link,
-  MenuItem,
   Box,
   SvgIcon,
   Typography,
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import { CardMedia } from "@material-ui/core";
 //import { sizing } from "@material-ui/system";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 //import { Height } from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
 //import FolderIcon from "@material-ui/icons/Folder";
 import HomeIcon from "@material-ui/icons/Home";
-import { green } from "@material-ui/core/colors";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import theme from "../../themes/theme";
-import { white } from "material-ui/styles/colors";
 
 const useStyles = makeStyles({
   menuButton: {
@@ -81,12 +72,12 @@ const headersData = [
     label: "OM OSS",
     href: "/aboutus",
     comp: ImportContactsIcon,
-  } /*
+  },
   {
-    label: "LOGG INN",
-    href: "/login/signin",
-    comp: VpnKeyIcon,
-  },*/,
+    label: "Legg ut annonse",
+    href: "/addApartment",
+    comp: HomeIcon,
+  },
 ];
 
 const SleekNav = () => {

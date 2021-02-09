@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { Link, Link as RouterLink } from "react-router-dom";
-import { IApartment, IApartmentProps } from "../../interfaces/IApartment";
+import { IApartmentProps } from "../../interfaces/IApartment";
 
 const useStyles = makeStyles({
   root: {
@@ -65,10 +65,25 @@ const CarCard = ({ props }: IApartmentProps) => {
 
         <CardContent>
           <Typography gutterBottom variant="h6" component="h2">
-            {props._id}
+            ID: {props._id}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.adresse}
+            Adresse: {props.adresse}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Antall Soverom: {props.antallSoveRom}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Pris per måned: {props.prisPerMnd}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Depositum: {props.depositum}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Husleie garanti: {props.husleieGaranti}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            By: {props.by}
           </Typography>
         </CardContent>
       </Card>
