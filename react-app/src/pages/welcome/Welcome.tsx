@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import CarCard from "../../components/cards/CarCard";
@@ -54,16 +54,40 @@ const useStyles = makeStyles({
   },
 });
 
+interface RealEstateObj {
+  adresse: string;
+  antallSoveRom: number,
+  by: string,
+  depositum: number,
+  husleieGaranti: string, //burde være boolean
+  id: string,
+  prisPerMnd: number
+}
+
+
 const Welcome = () => {
-  const url = "http://localhost:1337/api/apartments/getlist";
-  //const [data, setData] = useState([] as any);
+  const url = "/api/apartments/getlist";
   const { data } = useFetch(url);
+  const [realEstate, setData] = useState<RealEstateObj[]>([]);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
-
   const [test, setTest] = useState(true);
+  const [value, setValue] = React.useState<number[]>([]);
+  const [slideValues, setSlideValues] = React.useState<number[]>([]);
 
-  const [value, setValue] = React.useState([100, 37]);
+  const getMinAndMaxPrice = (data: RealEstateObj[]) => {
+    const prices = data.map((x: RealEstateObj) => x.prisPerMnd)
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    return [min, max]
+  }
+
+  useEffect(() => {
+    setValue(getMinAndMaxPrice(data))
+    setSlideValues(getMinAndMaxPrice(data))
+    setData(data);
+  }, [data])
+
   const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchInput(event.target.value);
     if (searchInput.length >= 0) setPage(1);
@@ -101,12 +125,16 @@ const Welcome = () => {
           d.model.toLowerCase().includes(searchInput.toLowerCase())
         )
       : data;*/
+  const predictedView = realEstate.filter((x) => {
+    return x.prisPerMnd >= value[0] && x.prisPerMnd <= value[1]
+  }
+  );
 
-  const paginatedApartments = paginate(data, page, 4);
+  const paginatedApartments = paginate(predictedView, page, 4);
 
   const pageButtons = [] as any;
 
-  for (let index = 0; index < data.length / 4; index++) {
+  for (let index = 0; index < realEstate.length / 4; index++) {
     pageButtons.push(
       <Button key={index} onClick={() => setPage(index + 1)}>
         Page {index + 1}
@@ -228,7 +256,10 @@ const Welcome = () => {
           onChange={handleChangeSlider}
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"
-          //getAriaValueText={valuetext}
+          max={slideValues.length > 0 ? slideValues[1] : 100}
+          min={slideValues.length > 0 ? slideValues[0] : 0}
+          step={1000}
+        //getAriaValueText={valuetext}
         />
       </Grid>
     );

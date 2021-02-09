@@ -1,6 +1,6 @@
 import { useEffect, useRef, useReducer } from "react";
 
-export const useFetch = (url: any) => {
+export const useFetch = (url: string) => {
   const cache = useRef({} as any);
 
   const initialState = {
