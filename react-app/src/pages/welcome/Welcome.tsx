@@ -64,6 +64,10 @@ interface RealEstateObj {
   prisPerMnd: number
 }
 
+interface IFilter {
+  housing: boolean;
+}
+
 
 const Welcome = () => {
   const url = "/api/apartments/getlist";
@@ -74,6 +78,8 @@ const Welcome = () => {
   const [test, setTest] = useState(true);
   const [value, setValue] = React.useState<number[]>([]);
   const [slideValues, setSlideValues] = React.useState<number[]>([]);
+
+  const [filter, setFilter] = React.useState<IFilter>({ housing: false });
 
   const getMinAndMaxPrice = (data: RealEstateObj[]) => {
     const prices = data.map((x: RealEstateObj) => x.prisPerMnd)
@@ -126,7 +132,7 @@ const Welcome = () => {
         )
       : data;*/
   const predictedView = realEstate.filter((x) => {
-    return x.prisPerMnd >= value[0] && x.prisPerMnd <= value[1]
+    return x.prisPerMnd >= value[0] && x.prisPerMnd <= value[1] // && (filter.housing && x.type === "house")
   }
   );
 
@@ -182,8 +188,10 @@ const Welcome = () => {
               <Checkbox
                 //checked={}
                 //onChange={}
+                onChange={() => setFilter({ ...filter, housing: !filter.housing })}
                 name="checkedB"
                 color="primary"
+                value={filter.housing}
               />
             }
             label="Til salgs"
