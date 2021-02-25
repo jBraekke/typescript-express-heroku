@@ -1,42 +1,37 @@
-import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 function Copyright() {
   return (
     <Typography variant="body2" align="center" color="textSecondary">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '50vh',
-    
-    
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "50vh",
   },
   gridRoot: {
     flexGrow: 1,
-    
-
-   
   },
   paper: {
     padding: theme.spacing(3),
-    textAlign: 'center',
+    textAlign: "center",
     color: "white",
     backgroundColor: "rgba(0, 0, 0, 0.7);",
   },
@@ -63,15 +58,10 @@ const useStyles = makeStyles((theme) => ({
   },
   footer: {
     padding: theme.spacing(0, 0),
-    marginTop: 'auto',
+    marginTop: "auto",
     backgroundColor: "rgba(0, 0, 0, 0.7);",
-    
   },
 }));
-
-
-
-
 
 export default function StickyFooter() {
   const classes = useStyles();
@@ -79,42 +69,35 @@ export default function StickyFooter() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-     
-      
-      <footer className={classes.footer}>
-        
-      <div className={classes.gridRoot}>
-      <Grid container spacing={0} direction= "column" alignItems="stretch" justify="space-between">
-      
-      <Grid item xs={12} alignItems ="stretch" justify="space-between" >
-          <Paper className={classes.paper}>SE VÅRE LEILIGHETER</Paper>
-        </Grid>
-      
-      <Grid item xs={12} >
-          <Paper className={classes.paper}>KONTAKT OSS</Paper>
-        </Grid>
-       
-      
-        <Grid item xs={12} >
-          <Paper className={classes.paper}>SEND OSS EN MAIL</Paper>
-        </Grid>
-       
-       
-        <Grid item xs={12} >
-          <Paper className={classes.bottomPicture}><Copyright></Copyright></Paper>
-        </Grid>
-       
-      
-      
-      
-      
-      
-      </Grid>
-    </div>
-  
 
-   
-       
+      <footer className={classes.footer}>
+        <div className={classes.gridRoot}>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="stretch"
+            justify="space-between"
+          >
+            <Grid item xs={12} alignItems="stretch" justify="space-between">
+              <Paper className={classes.paper}>SE VÅRE LEILIGHETER</Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>KONTAKT OSS</Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>SEND OSS EN MAIL</Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.bottomPicture}>
+                <Copyright></Copyright>
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
       </footer>
     </div>
   );

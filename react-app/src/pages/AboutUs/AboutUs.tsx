@@ -88,8 +88,8 @@ const AboutUs = () => {
   const AboutUsRow = () => {
     return (
       <>
-        <Grid container spacing={1}>
-          <Grid container item xs={12} spacing={1}>
+        <Grid container>
+          <Grid container item xs={12}>
             <Grid item xs={12}>
               <Box className={classes.textSchtyle}>Vår ledelse</Box>
             </Grid>
@@ -128,14 +128,14 @@ const AboutUs = () => {
 
   return (
     <Box className={classes.root} mt={6}>
-      <Grid container spacing={4}>
+      <Grid container>
         <Container>
-          <Grid container item sm={12} spacing={3}>
+          <Grid container item sm={12}>
             <Grid item sm={12} md={6}>
               <InfoRow />
             </Grid>
             <Grid item sm={12} md={6}>
-              <Grid container item xs={12} spacing={3}>
+              <Grid container item xs={12}>
                 <Grid item sm={6} md={12}>
                   <ImageCard url="sarpsborg.jpg" />
                 </Grid>

@@ -21,7 +21,7 @@ const ContactUs = () => {
 
   return (
     <div className={classes.root}>
-      <Grid className={classes.gridheader} container spacing={1}>
+      <Grid className={classes.gridheader} container>
         <Container>
           <Grid container item xs={12} spacing={3}>
             <Grid item xs={12}></Grid>
