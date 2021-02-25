@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import CarCard from "../../components/cards/CarCard";
+import ApartmentCard from "../../components/cards/ApartmentCard";
 import Fade from "@material-ui/core/Fade";
 import {
   Box,
@@ -127,7 +127,7 @@ const Welcome = () => {
             {...(test ? { timeout: 2000 } : {})}
           >
             <Grid key={index} item xs={6}>
-              <CarCard key={index} props={data}></CarCard>
+              <ApartmentCard key={index} props={data}></ApartmentCard>
             </Grid>
           </Fade>
         ))}

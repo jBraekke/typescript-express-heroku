@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CarCard = ({ props }: IApartmentProps) => {
+const ApartmentCard = ({ props }: IApartmentProps) => {
   const classes = useStyles();
 
   return (
@@ -91,4 +91,4 @@ const CarCard = ({ props }: IApartmentProps) => {
   );
 };
 
-export default CarCard;
+export default ApartmentCard;

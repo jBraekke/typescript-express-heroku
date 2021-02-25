@@ -35,6 +35,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-evenly",
   },
+  logo: { display: "flex", justifyContent: "space-evenly" },
   content: theme.mixins.toolbar,
   gucciFlip: {
     //backgroundColor: "rgba(0, 0, 0, 0.8);",
@@ -49,6 +50,7 @@ const useStyles = makeStyles({
   pictureLogo: {
     height: theme.spacing(10),
     width: theme.spacing(10),
+    marginRight: theme.spacing(2),
   },
 });
 
@@ -107,15 +109,17 @@ const SleekNav = () => {
   const displayDesktop = () => {
     return (
       <Toolbar className={classes.toolbar}>
-        <Avatar
-          className={classes.pictureLogo}
-          alt="logo"
-          src="vestengveien1.jpg"
-        />
-        <Typography align="left" variant="h4" component="h4">
-          Vestengveien <br />
-          Eiendomsutvikling AS
-        </Typography>
+        <Box className={classes.logo}>
+          <Avatar
+            className={classes.pictureLogo}
+            alt="logo"
+            src="vestengveien1.jpg"
+          />
+          <Typography variant="h4" component="h4">
+            Vestengveien <br />
+            Eiendomsutvikling AS
+          </Typography>
+        </Box>
         <Box borderRadius={16} className={classes.gucciFlip}>
           {getMenuButtons()}
         </Box>
