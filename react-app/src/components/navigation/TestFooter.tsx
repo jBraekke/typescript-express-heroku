@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     textAlign: "center",
     backgroundImage:
-      "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);",
+      "radial-gradient(circle, rgba(25,25,25,1) 100%, rgba(3,104,233,1) 100%)",
 
     padding: theme.spacing(0, 0),
 
@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sweet: {
-    backgroundColor: "rgba(53,52,52);",
+    background:
+      "radial-gradient(circle, rgba(13,27,42,1) 100%, rgba(3,104,233,1) 100%)",
   },
   gridContainer: {
     marginTop: theme.spacing(1),
@@ -67,8 +68,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "right",
-    color: "black",
-    fontSize: 20,
+    color: "white",
+    fontSize: 22,
     fontWeight: 800,
     fontFamily: "EB Garamond",
     textAlign: "right",
@@ -82,17 +83,14 @@ const useStyles = makeStyles((theme) => ({
   },
 
   GridItemsPara: {
-    color: "black",
-    fontSize: 16,
-    fontWeight: 400,
-    fontFamily: "EB Garamond",
+    color: "white",
+    fontSize: 13,
     textAlign: "center",
   },
   GridItemCopy: {
     color: "white",
     fontSize: 13,
     fontWeight: 400,
-    fontFamily: "EB Garamond",
   },
   pictureLogo: {
     marginTop: theme.spacing(4),
@@ -105,37 +103,36 @@ const footers = [
   {
     title: "VESTENGVEIEN EIENDOMSUTVIKLING  A/S",
     description: [
-      "Haldens Mossepervei 41a, 1710, Grålum",
-      "Sentralbord: 69 14 30 59",
-      "Følg oss på Facebook",
+      "HALDENSVEI 41A, 1710, GRÅLUM",
+      "SENTRALBORD: 69 14 30 59",
+      "FØLG OSS PÅ FACEBOOK",
     ],
   },
   {
     title: "KJØPE",
     description: [
-      "Cool stuff",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
+      "COOL STUFF",
+      "RANDOM FEATURE",
+      "TEAM FEATURE",
+      "DEVELOPER STUFF",
     ],
   },
   {
     title: "LEIE",
     description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
+      "RESOURCE",
+      "RESOURCE NAME",
+      "ANOTHER RESOURCE",
+      "FINAL RESOURCE",
     ],
   },
   {
     title: "LES NEDERSTE LINK",
     description: [
-      "Åpningstider: 08:00 - 16:00",
-      "Vestengveien@gmail.com",
-      "Gjerne ring oss!",
-      "Lekt meg med animasjon. Bare fjern collapse i html henrik",
+      "ÅPNINGSTIDER: 08:00 - 16:00",
+      "VESTENGVEIEN@GMAIL.COM",
+      "KONTAKT OSS!",
+      "RAVE KING HEINRICH",
     ],
   },
 ];

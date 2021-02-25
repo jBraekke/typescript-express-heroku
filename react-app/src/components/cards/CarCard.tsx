@@ -43,10 +43,10 @@ const CarCard = ({ props }: IApartmentProps) => {
               {" "}
               <CardMedia
                 component="img"
-                alt="Contemplative Reptile"
+                alt="Apartment"
                 height="300"
                 image={"./uploads/" + image.filename}
-                title="Contemplative Reptile"
+                title="Apartment"
               />
             </>
           ))
@@ -55,10 +55,10 @@ const CarCard = ({ props }: IApartmentProps) => {
             {" "}
             <CardMedia
               component="img"
-              alt="Contemplative Reptile"
+              alt="Apartment"
               height="300"
               image="hus.jpg"
-              title="Contemplative Reptile"
+              title="Apartment"
             />
           </>
         )}
