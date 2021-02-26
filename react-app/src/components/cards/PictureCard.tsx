@@ -20,9 +20,14 @@ const useStyles = makeStyles({
   },
 });
 
-const PictureCard = ({ title, description }: any) => {
+const PictureCard = ({ title, description, image }: any) => {
   const classes = useStyles();
-
+  const divStyle = (src: any) => ({
+    backgroundImage: "url(" + src + ")",
+    backgroundRepeat: "no-repeat, repeat",
+    backgroundSize: "cover",
+    background: "rgba(0,0,0,0.1)",
+  });
   return (
     <Link
       {...{
@@ -33,7 +38,7 @@ const PictureCard = ({ title, description }: any) => {
         key: "label",
       }}
     >
-      <Card className={classes.root}>
+      <Card style={divStyle(image)}>
         <CardContent className={classes.content}>
           <Typography
             align="center"

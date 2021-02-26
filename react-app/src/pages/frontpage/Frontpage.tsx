@@ -53,7 +53,7 @@ const Frontpage = () => {
           <PictureCard title={"Leiligheter"} />
         </Grid>
         <Grid item xs={6}>
-          <PictureCard title={"Hus"} />
+          <PictureCard title={"Hus"} image="apartments.jpg" />
         </Grid>
         <Grid item xs={6}>
           <PictureCard title={"Kommende boliger"} />
