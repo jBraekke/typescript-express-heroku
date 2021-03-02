@@ -19,6 +19,8 @@ import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import theme from "../../themes/theme";
+import Hidden from "@material-ui/core/Hidden";
+import SleekDrawerNav from "./SleekDrawerNav";
 
 const useStyles = makeStyles({
   menuButton: {
@@ -51,6 +53,10 @@ const useStyles = makeStyles({
     height: theme.spacing(10),
     width: theme.spacing(10),
     marginRight: theme.spacing(2),
+  },
+  sexyText: {
+    fontFamily: "EB Garamond",
+    borderBottom: "2px solid white",
   },
 });
 
@@ -115,9 +121,9 @@ const SleekNav = () => {
             alt="logo"
             src="vestengveien1.jpg"
           />
-          <Typography variant="h4" component="h4">
-            Vestengveien <br />
-            Eiendomsutvikling AS
+          <Typography variant="h4" component="h4" className={classes.sexyText}>
+            VESTENGVEIEN <br />
+            EIENDOMSUTVIKLING AS
           </Typography>
         </Box>
         <Box borderRadius={16} className={classes.gucciFlip}>
@@ -127,10 +133,40 @@ const SleekNav = () => {
     );
   };
 
+  const displayMobile = () => {
+    return (
+      <Toolbar className={classes.toolbar}>
+        <Box>
+          <Avatar
+            className={classes.pictureLogo}
+            alt="logo"
+            src="vestengveien1.jpg"
+          />
+        </Box>
+        <Box>
+          <Typography variant="h4" component="h4" className={classes.sexyText}>
+            VESTENGVEIEN <br />
+            EIENDOMSUTVIKLING AS
+          </Typography>
+        </Box>
+
+        <Box className={classes.logo}>{SleekDrawerNav}</Box>
+      </Toolbar>
+    );
+  };
+
   return (
-    <Box component="header">
-      <AppBar className={classes.header}>{displayDesktop()}</AppBar>
-    </Box>
+    <>
+      <Box component="header">
+        <Hidden mdDown implementation="css">
+          <AppBar className={classes.header}>{displayDesktop()}</AppBar>
+        </Hidden>
+
+        <Hidden lgUp implementation="css">
+          <AppBar className={classes.header}>{displayMobile()}</AppBar>
+        </Hidden>
+      </Box>
+    </>
   );
 };
 

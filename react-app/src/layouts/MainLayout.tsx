@@ -3,6 +3,7 @@ import React, { ReactNode } from "react";
 import TestFooter from "../components/navigation/TestFooter";
 import Box from "@material-ui/core/Box";
 import SleekNav from "../components/navigation/SleekNav";
+import SleekDrawerNav from "../components/navigation/SleekDrawerNav";
 
 interface IProps {
   children: ReactNode;
