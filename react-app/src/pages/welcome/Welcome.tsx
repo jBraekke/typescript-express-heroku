@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import ApartmentCard from "../../components/cards/ApartmentCard";
 import Fade from "@material-ui/core/Fade";
 import {
+  Avatar,
   Box,
   Button,
   Checkbox,
@@ -54,6 +55,19 @@ const useStyles = makeStyles({
   },
   test: {
     height: "2000px",
+    display: "flex",
+    justifyContent: "center",
+    alignitems: "center",
+    textAlign: "center",
+    backgroundImage: "url(navsmoke3.jpg)",
+    backgroundRepeat: "no-repeat, repeat",
+    backgroundSize: "cover",
+    opacity: "40%",
+  },
+  pictureLogo: {
+    marginTop: theme.spacing(10),
+    height: theme.spacing(10),
+    width: theme.spacing(10),
   },
 });
 
@@ -260,24 +274,26 @@ const Welcome = () => {
     );
   };
 
-  return (
+  return status === "fetched" ? (
     <div className={classes.root}>
-      {status === "fetched" ? (
-        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
-          <Grid className={classes.gridheader} container spacing={0}>
-            <Container>
-              <Grid container item xs={12} spacing={3}>
-                <LeftGrid></LeftGrid>
-                <RightGrid></RightGrid>
-              </Grid>
-            </Container>
-          </Grid>
-        </Slide>
-      ) : (
-        <Container className={classes.test}>
-          <p>Loading</p>
-        </Container>
-      )}
+      <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+        <Grid className={classes.gridheader} container spacing={0}>
+          <Container>
+            <Grid container item xs={12} spacing={3}>
+              <LeftGrid></LeftGrid>
+              <RightGrid></RightGrid>
+            </Grid>
+          </Container>
+        </Grid>
+      </Slide>{" "}
+    </div>
+  ) : (
+    <div className={classes.test}>
+      <Avatar
+        className={classes.pictureLogo}
+        alt="logo"
+        src="vestengveien1.jpg"
+      />
     </div>
   );
 };

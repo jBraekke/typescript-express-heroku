@@ -49,16 +49,16 @@ const Frontpage = () => {
   const FancyRow = () => {
     return (
       <>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <PictureCard title={"Leiligheter"} image="apartments.jpg" />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <PictureCard title={"Hus"} image="house.jpg" />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <PictureCard title={"Kommende boliger"} image="incoming.jpeg" />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <PictureCard title={"Næringsbygg"} image="leieboer.jpg" />
         </Grid>
       </>

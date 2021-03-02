@@ -1,56 +1,98 @@
 import * as mongoose from "mongoose";
 import { model, Types, Document } from "mongoose";
+//import { IApartment } from "../../interfaces/IApartment";
+interface IApartment extends Document {
+  title: String;
+  description: String;
+  address: String;
+  city: String;
+  date?: Date;
+  squareMeter: Number;
+  bedrooms: Number;
+  bathrooms: Number;
+  price: Number;
+  apartment: Boolean;
+  incoming: Boolean;
+  house: Boolean;
+  commerce: Boolean;
+  deposit: Boolean;
+  rentGuarantee: Boolean;
+  parking: Boolean;
+  imagePath?: String;
+}
 
-const apartmentSchema = new mongoose.Schema(
+const ApartmentSchema: mongoose.Schema = new mongoose.Schema(
   {
-    adresse: {
+    title: {
+      type: String,
+      required: [true, "Fyll ut tittel!"],
+    },
+    description: {
+      type: String,
+      required: [true, "Fyll ut beskrivelse!"],
+    },
+    address: {
       type: String,
       required: [true, "Fyll ut adresse!"],
-      //unique: true, // unique index and value
     },
-    antallSoveRom: {
-      type: Number,
-      required: [true, "Fyll inn antall soverom!"],
-      //select: false,
-    },
-    prisPerMnd: {
-      type: Number,
-      required: [true, "Skriv inn pris per måned!"],
-      //select: false,
-    },
-    depositum: {
-      type: Number,
-      required: [true, "Skriv inn depositum!"],
-      //select: false,
-    },
-    husleieGaranti: {
+    city: {
       type: String,
-      required: [true, "Fyll ut husleie garanti!"],
+      required: [true, "Fyll ut by!"],
     },
-    by: {
+    date: {
+      type: Date,
+      required: [false, "Fyll ut dato!"],
+    },
+    squareMeter: {
+      type: Number,
+      required: [true, "Fyll ut kvadratmeter!"],
+    },
+    bedrooms: {
+      type: Number,
+      required: [true, "Fyll ut antall soverom!"],
+    },
+    bathrooms: {
+      type: Number,
+      required: [true, "Fyll ut antall bad!"],
+    },
+    price: {
+      type: Number,
+      required: [true, "Fyll ut pris!"],
+    },
+    apartment: {
+      type: Boolean,
+      required: [true, "Fyll ut leilighet!"],
+    },
+    incoming: {
+      type: Boolean,
+      required: [true, "Fyll ut innkommende!"],
+    },
+    house: {
+      type: Boolean,
+      required: [true, "Fyll ut hus!"],
+    },
+    commerce: {
+      type: Boolean,
+      required: [true, "Fyll ut næringsbygg!"],
+    },
+    deposit: {
+      type: Boolean,
+      required: [true, "Fyll ut depositum!"],
+    },
+    rentGuarantee: {
+      type: Boolean,
+      required: [true, "Fyll ut leiegaranti!"],
+    },
+    parking: {
+      type: Boolean,
+      required: [true, "Fyll ut parkering!"],
+    },
+    imagePath: {
       type: String,
-      required: [true, "Vennligst velg en by!"],
-    },
-
-    images: {
-      type: Object,
       required: false,
     },
   },
-  //{ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
-  { toJSON: { getters: true } }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-export interface IApartment {
-  adresse: string;
-  antallSoveRom: Number;
-  prisPerMnd: Number;
-  depositum: Number;
-  husleieGaranti: string;
-  by: string;
-  images?: Object;
-}
-
-interface ApartmentModel extends IApartment, Document {}
-
-export default model<ApartmentModel>("Apartments", apartmentSchema);
+export default mongoose.model<IApartment>("Apartments", ApartmentSchema);
