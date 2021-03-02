@@ -50,16 +50,16 @@ const Frontpage = () => {
     return (
       <>
         <Grid item xs={6}>
-          <PictureCard title={"Leiligheter"} />
+          <PictureCard title={"Leiligheter"} image="apartments.jpg" />
         </Grid>
         <Grid item xs={6}>
-          <PictureCard title={"Hus"} image="apartments.jpg" />
+          <PictureCard title={"Hus"} image="house.jpg" />
         </Grid>
         <Grid item xs={6}>
-          <PictureCard title={"Kommende boliger"} />
+          <PictureCard title={"Kommende boliger"} image="incoming.jpeg" />
         </Grid>
         <Grid item xs={6}>
-          <PictureCard title={"Næringsbygg"} />
+          <PictureCard title={"Næringsbygg"} image="leieboer.jpg" />
         </Grid>
       </>
     );
@@ -72,7 +72,7 @@ const Frontpage = () => {
           <Grid className={classes.gridheader} item xs={12}>
             <Container>
               <Box m={4}>
-                <Grid container item xs={12} spacing={3}>
+                <Grid container item xs={12}>
                   <FancyRow />
                 </Grid>
               </Box>

@@ -52,13 +52,16 @@ const useStyles = makeStyles({
     backgroundRepeat: "no-repeat, repeat",
     backgroundSize: "cover",
   },
+  test: {
+    height: "2000px",
+  },
 });
 
 const Welcome = () => {
   const url =
     "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
   //const [data, setData] = useState([] as any);
-  const { data } = useFetch(url);
+  const { status, error, data } = useFetch(url);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
 
@@ -259,16 +262,22 @@ const Welcome = () => {
 
   return (
     <div className={classes.root}>
-      <Slide direction="down" in={true} mountOnEnter unmountOnExit>
-        <Grid className={classes.gridheader} container spacing={0}>
-          <Container>
-            <Grid container item xs={12} spacing={3}>
-              <LeftGrid></LeftGrid>
-              <RightGrid></RightGrid>
-            </Grid>
-          </Container>
-        </Grid>
-      </Slide>
+      {status === "fetched" ? (
+        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+          <Grid className={classes.gridheader} container spacing={0}>
+            <Container>
+              <Grid container item xs={12} spacing={3}>
+                <LeftGrid></LeftGrid>
+                <RightGrid></RightGrid>
+              </Grid>
+            </Container>
+          </Grid>
+        </Slide>
+      ) : (
+        <Container className={classes.test}>
+          <p>Loading</p>
+        </Container>
+      )}
     </div>
   );
 };

@@ -45,7 +45,7 @@ const ContactForm = () => {
 
   const onSubmit = (data: any, e: any) => {
     setDatas("sending" + data.status);
-    console.log(e);
+    console.log(data);
     postData(
       "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/add",
       data

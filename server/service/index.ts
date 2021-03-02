@@ -1,1 +1,1 @@
-export * as apartmentService from "./apartment";
+export * as apartmentService from "./apartment.service";

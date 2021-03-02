@@ -22,12 +22,16 @@ const useStyles = makeStyles({
 
 const PictureCard = ({ title, description, image }: any) => {
   const classes = useStyles();
-  const divStyle = (src: any) => ({
-    backgroundImage: "url(" + src + ")",
-    backgroundRepeat: "no-repeat, repeat",
-    backgroundSize: "cover",
-    background: "rgba(0,0,0,0.1)",
+  const testStyles = makeStyles({
+    image: {
+      backgroundImage: "url(" + image + ")",
+      backgroundRepeat: "no-repeat, repeat",
+      backgroundSize: "cover",
+      background: "rgba(0,0,0,0.1)",
+    },
   });
+  const test = testStyles();
+
   return (
     <Link
       {...{
@@ -38,7 +42,7 @@ const PictureCard = ({ title, description, image }: any) => {
         key: "label",
       }}
     >
-      <Card style={divStyle(image)}>
+      <Card className={test.image}>
         <CardContent className={classes.content}>
           <Typography
             align="center"
