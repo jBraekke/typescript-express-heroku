@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "25vh",
+    //minHeight: "25vh",
     maxWidth: "100%",
     overflowX: "hidden",
   },
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 0),
 
     "@media (max-width: 900px)": {
-      marginTop: theme.spacing(10),
+      //marginTop: theme.spacing(10),
     },
   },
   sweet: {
