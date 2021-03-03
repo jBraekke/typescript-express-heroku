@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AboutUsPage from "../pages/aboutUs/AboutUsPage";
 import AddApartmentPage from "../pages/addApartment/AddApartmentPage";
+import ApartmentPage from "../pages/availableApartments/ApartmentPage";
 import ContactUsPage from "../pages/contact/ContactUsPage";
 import FrontpagePage from "../pages/home/HomePage";
 import SignInPage from "../pages/signin/SignInPage";
@@ -17,7 +18,7 @@ const Routes = () => (
           <FrontpagePage />
         </Route>
         <Route exact path="/welcome">
-          <AddApartmentPage />
+          <ApartmentPage />
         </Route>
         <Route exact path="/contact">
           <ContactUsPage />
