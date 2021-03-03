@@ -8,6 +8,7 @@ import {
   SvgIcon,
   Typography,
   useMediaQuery,
+ 
 } from "@material-ui/core";
 //import { sizing } from "@material-ui/system";
 import React from "react";
@@ -21,11 +22,13 @@ import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import theme from "../../themes/theme";
 import SleekDrawerNav from "./SleekDrawerNav";
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles({
   menuButton: {
     opacity: "100%",
     color: "#FFFFFF",
+    
     "&:hover": {
       textDecoration: "underline",
       textDecorationColor: "lightgreen",
@@ -34,7 +37,7 @@ const useStyles = makeStyles({
     },
 
     [theme.breakpoints.down('lg')]: {
-      marginLeft: theme.spacing(10),
+      //marginLeft: theme.spacing(10),
       textAlign: "center",
     },
 
@@ -53,6 +56,8 @@ const useStyles = makeStyles({
     position: "sticky",
     margin: "0",
   },
+  
+  
   icon: {
     backgroundColor: theme.palette.secondary.main,
   },
@@ -64,6 +69,14 @@ const useStyles = makeStyles({
   sexyText: {
     fontFamily: "EB Garamond",
     borderBottom: "2px solid white",
+    //marginRight: theme.spacing(20),
+    [theme.breakpoints.down('lg')]: {
+      //marginLeft: theme.spacing(10),
+      textAlign: "left",
+      borderBottom: "none",
+      
+     
+    },
   },
 });
 
@@ -150,8 +163,8 @@ const SleekNav = () => {
         </Box>
         <Box>
           <Typography variant="h4" component="h4" className={classes.sexyText}>
-            VESTENGVEIEN <br />
-            EIENDOMSUTVIKLING AS
+          Vestengveien 
+            Eiendomsutvikling A/S
           </Typography>
         </Box>
         <Box className={classes.logo}>{SleekDrawerNav}</Box>
@@ -168,10 +181,12 @@ const SleekNav = () => {
             alt="logo"
             src="vestengveien1.jpg"
           />
+         
           <Typography variant="h4" component="h4" className={classes.sexyText}>
-            VESTENGVEIEN <br />
-            EIENDOMSUTVIKLING AS
+            Vestengveien <br />
+            Eiendomsutvikling A/S
           </Typography>
+          
         </Box>
         <Box borderRadius={16} className={classes.gucciFlip}>
           {getMenuButtons()}
@@ -180,8 +195,8 @@ const SleekNav = () => {
     );
   };
 
-    const matches1 = useMediaQuery(theme.breakpoints.up('xs'));
-    const matches2 = useMediaQuery(theme.breakpoints.up('md'));
+    const matches1 = useMediaQuery(theme.breakpoints.down('xs'));
+    const matches2 = useMediaQuery(theme.breakpoints.up('sm'));
     const matches3 = useMediaQuery(theme.breakpoints.up('lg'));
     
   return (

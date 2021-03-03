@@ -12,6 +12,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
+import Divider from '@material-ui/core/Divider';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -43,14 +44,18 @@ const useStyles = makeStyles((theme) => ({
   },
 
   pictureLogo: {
-    height: theme.spacing(15),
-    width: theme.spacing(15),
-    marginLeft: theme.spacing(6.5),
-    marginTop: theme.spacing(30)
+    height: theme.spacing(17),
+    width: theme.spacing(17),
+    marginLeft: theme.spacing(5.5),
+    marginTop: theme.spacing(30),
+    opacity: "50%",
+    
+    
   },
 
   menuItems: { opacity: "100%",
   color: "#FFFFFF",
+  marginTop: theme.spacing(2),
   "&:hover": {
     textDecoration: "underline",
     textDecorationColor: "lightgreen",
@@ -169,11 +174,13 @@ function SleekDrawerNav() {
          
           {getMenuButtons()}
 
+            
             <Avatar
             className={classes.pictureLogo}
             alt="logo"
             src="vestengveien1.jpg"
           />
+        
 
         </Drawer>
       </nav>
