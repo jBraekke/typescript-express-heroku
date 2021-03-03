@@ -2,11 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Box, Container } from "@material-ui/core";
-
 import InfoCardAboutUs from "../../components/cards/InfoCardAboutUs";
-import EmployeeCard from "../../components/cards/EmployeeCard";
-
-import ImageCard from "../../components/cards/ImageCard";
+import EmployeeCard from "../../components/cards/EmployeeCardAboutUs";
+import ImageCard from "../../components/cards/ImageCardAboutUs";
 //import CarCard from "../../components/cards/CarCard";
 //import { Button, Input } from "@material-ui/core";
 

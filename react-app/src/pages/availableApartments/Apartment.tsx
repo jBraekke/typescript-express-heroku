@@ -71,7 +71,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Welcome = () => {
+const Home = () => {
   const url =
     "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
   //const [data, setData] = useState([] as any);
@@ -174,6 +174,7 @@ const Welcome = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedTilSalgs"
               />
             }
             label="Til salgs"
@@ -185,6 +186,7 @@ const Welcome = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedTilLeie"
               />
             }
             label="Til leie"
@@ -196,6 +198,7 @@ const Welcome = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedSnartLedig"
               />
             }
             label="Snart ledig"
@@ -247,6 +250,7 @@ const Welcome = () => {
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"
           //getAriaValueText={valuetext}
+          title="rangeSlider"
         />
       </Grid>
     );
@@ -265,6 +269,7 @@ const Welcome = () => {
               type="text"
               value={searchInput}
               onChange={stateChange}
+              id="searchInput"
             />
           </Grid>
           <CornRow />
@@ -298,4 +303,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default Home;

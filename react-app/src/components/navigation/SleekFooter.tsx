@@ -137,7 +137,7 @@ const footers = [
   },
 ];
 
-export default function TestFooter() {
+export default function SleekFooter() {
   const classes = useStyles();
 
   return (

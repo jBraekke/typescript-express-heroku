@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   root: { flexGrow: 1 },
 });
 
-const ContactUs = () => {
+const AddApartment = () => {
   const classes = useStyles();
 
   return (
@@ -20,4 +20,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default AddApartment;

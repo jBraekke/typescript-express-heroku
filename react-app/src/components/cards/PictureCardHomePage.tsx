@@ -1,9 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-
 import CardContent from "@material-ui/core/CardContent";
-
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
@@ -20,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const PictureCard = ({ title, description, image }: any) => {
+const PictureCardHomePage = ({ title, description, image }: any) => {
   const classes = useStyles();
   const testStyles = makeStyles({
     image: {
@@ -30,7 +28,7 @@ const PictureCard = ({ title, description, image }: any) => {
       background: "rgba(0,0,0,0.1)",
     },
   });
-  const test = testStyles();
+  const classes2 = testStyles();
 
   return (
     <Link
@@ -42,7 +40,7 @@ const PictureCard = ({ title, description, image }: any) => {
         key: "label",
       }}
     >
-      <Card className={test.image}>
+      <Card className={classes2.image}>
         <CardContent className={classes.content}>
           <Typography
             align="center"
@@ -65,7 +63,7 @@ const PictureCard = ({ title, description, image }: any) => {
     </Link>
   );
 };
-export default PictureCard;
+export default PictureCardHomePage;
 /*        <CardMedia
           component="img"
           alt="Contemplative Reptile"
