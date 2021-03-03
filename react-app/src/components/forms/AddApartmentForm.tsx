@@ -79,6 +79,7 @@ const ContactForm = () => {
           defaultValue=""
           variant="outlined"
           label="Skriv inn adresse..."
+          id="adresse"
         />
         <Controller
           as={TextField}
@@ -89,6 +90,7 @@ const ContactForm = () => {
           multiline
           rows={4}
           label="Skriv inn antall soverom (tall)..."
+          id="antallSoveRom"
         />
         <Controller
           as={TextField}
@@ -99,6 +101,7 @@ const ContactForm = () => {
           multiline
           rows={4}
           label="Pris per måned"
+          id="prisPerMnd"
         />
         <Controller
           as={TextField}
@@ -109,6 +112,7 @@ const ContactForm = () => {
           multiline
           rows={4}
           label="Depositum"
+          id="depositum"
         />
         <Controller
           as={TextField}
@@ -119,6 +123,7 @@ const ContactForm = () => {
           multiline
           rows={4}
           label="Skriv inn husleie garanti..."
+          id="husleieGaranti"
         />
         <Typography>Vennligst velg en by for annonsen</Typography>
         <Controller
@@ -129,6 +134,7 @@ const ContactForm = () => {
           variant="outlined"
           rows={4}
           label="Melding"
+          id="by"
         >
           {" "}
           {dropDownCity.map((option: any) => (

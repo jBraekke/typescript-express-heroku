@@ -174,6 +174,7 @@ const Home = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedTilSalgs"
               />
             }
             label="Til salgs"
@@ -185,6 +186,7 @@ const Home = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedTilLeie"
               />
             }
             label="Til leie"
@@ -196,6 +198,7 @@ const Home = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedSnartLedig"
               />
             }
             label="Snart ledig"
@@ -247,6 +250,7 @@ const Home = () => {
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"
           //getAriaValueText={valuetext}
+          title="rangeSlider"
         />
       </Grid>
     );
@@ -265,6 +269,7 @@ const Home = () => {
               type="text"
               value={searchInput}
               onChange={stateChange}
+              id="searchInput"
             />
           </Grid>
           <CornRow />
