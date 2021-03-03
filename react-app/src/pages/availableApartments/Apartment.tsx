@@ -71,7 +71,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Welcome = () => {
+const Home = () => {
   const url =
     "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
   //const [data, setData] = useState([] as any);
@@ -298,4 +298,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default Home;

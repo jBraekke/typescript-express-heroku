@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 //import CarCard from "../../components/cards/CarCard";
-import InfoCard from "../../components/cards/InfoCard";
-import PictureCard from "../../components/cards/PictureCard";
+import InfoCard from "../../components/cards/InfoCardHomePage";
+import PictureCard from "../../components/cards/PictureCardHomePage";
 import { Box, Container, Slide } from "@material-ui/core";
 
 const img = new Image();

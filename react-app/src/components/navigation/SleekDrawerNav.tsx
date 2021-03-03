@@ -1,26 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Avatar, Box, Button, Grid, SvgIcon } from "@material-ui/core";
+import { Avatar, Box, Button, SvgIcon } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
-import theme from "../../themes/theme";
-import Divider from '@material-ui/core/Divider';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({

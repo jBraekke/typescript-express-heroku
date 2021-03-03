@@ -55,11 +55,11 @@ const EmployeeCard = ({ Name, Role, PhoneNumber, Email }: any) => {
     <Card className={classes.root}>
       <CardMedia
         component="img"
-        alt="Contemplative Reptile"
+        alt="Employee"
         width="100%"
         height="auto"
         image="employee.jpg"
-        title="Contemplative Reptile"
+        title="Employee"
       />
 
       <CardContent>
