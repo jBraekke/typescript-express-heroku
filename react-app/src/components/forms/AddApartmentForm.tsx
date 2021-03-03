@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Container, MenuItem, Select } from "@material-ui/core";
+import { Button, Container, Input, MenuItem, Select } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { IApartment } from "../../interfaces/IApartment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,7 @@ const ContactForm = () => {
   const classes = useStyles();
   const methods = useForm();
   const [datas, setDatas] = useState("");
+  const [images, setImages] = useState([]) as any;
   const { handleSubmit, control } = methods;
   const dropDownCity = ["Sarpsborg", "Fredrikstad", "Moss"];
 
@@ -42,22 +44,46 @@ const ContactForm = () => {
     });
     return response; // parses JSON response into native JavaScript objects
   }
-
-  const onSubmit = (data: any, e: any) => {
-    setDatas("sending" + data.status);
-    console.log(data);
-    postData(
-      "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/add",
-      data
-    ).then((data) => {
-      setDatas("sending" + data.status);
-      if (data.status === 200) {
-        setDatas("Leilighet er lagt ut.");
-      } else
-        setDatas(
-          "Kunne ikke legge ut leilighet. Har du fylt ut alle felter riktig?"
-        );
+  async function postImage(url = "", data = {}) {
+    const response = await fetch(url, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-type": "multipart/form-data",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
     });
+    return response; // parses JSON response into native JavaScript objects
+  }
+
+  const onSubmit = (data: IApartment, e: any) => {
+    setDatas("sending" + data);
+    data.imagePath = images[0].name;
+    console.log(data);
+    postData("https://http://localhost:1337/api/apartments/add", data).then(
+      (data) => {
+        setDatas("sending" + data.status);
+        if (data.status === 200) {
+          setDatas("Leilighet er lagt ut.");
+        } else
+          setDatas(
+            "Kunne ikke legge ut leilighet. Har du fylt ut alle felter riktig?"
+          );
+      }
+    );
+
+    const formData = new FormData();
+    formData.append("image", images);
+    postImage("http://localhost:1337/api/multer/uploadimage", formData);
+  };
+
+  const onFileChange = (event: any) => {
+    setImages(event.target.files[0]);
   };
 
   return (
@@ -66,6 +92,7 @@ const ContactForm = () => {
         Legg til leilighet
       </Typography>
       <Typography>{datas}</Typography>
+      <Input type="file" onChange={onFileChange} />
       <form
         className={classes.root}
         noValidate
@@ -74,68 +101,37 @@ const ContactForm = () => {
       >
         <Controller
           as={TextField}
-          name="adresse"
+          name="title"
           control={control}
-          defaultValue=""
+          defaultValue="Tittel"
           variant="outlined"
-          label="Skriv inn adresse..."
+          label="Skriv inn tittel..."
         />
         <Controller
           as={TextField}
-          name="antallSoveRom"
+          name="description"
           control={control}
-          defaultValue=""
+          defaultValue="Beskrivelse"
           variant="outlined"
-          multiline
-          rows={4}
-          label="Skriv inn antall soverom (tall)..."
+          label="Skriv inn beskrivelse..."
         />
         <Controller
           as={TextField}
-          name="prisPerMnd"
+          name="address"
           control={control}
-          defaultValue="0"
+          defaultValue="Adresse"
           variant="outlined"
-          multiline
-          rows={4}
-          label="Pris per måned"
+          label="Skriv inn addresse..."
         />
         <Controller
           as={TextField}
-          name="depositum"
+          type="date"
+          name="date"
           control={control}
-          defaultValue="0"
+          defaultValue="Tittel"
           variant="outlined"
-          multiline
-          rows={4}
-          label="Depositum"
+          label="Skriv inn tittel..."
         />
-        <Controller
-          as={TextField}
-          name="husleieGaranti"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          multiline
-          rows={4}
-          label="Skriv inn husleie garanti..."
-        />
-        <Typography>Vennligst velg en by for annonsen</Typography>
-        <Controller
-          as={Select}
-          name="by"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          rows={4}
-          label="Melding"
-        >
-          {" "}
-          {dropDownCity.map((option: any) => (
-            <MenuItem value={option}>{option}</MenuItem>
-          ))}
-        </Controller>
-
         <Button type="submit"> Send melding </Button>
       </form>
     </>

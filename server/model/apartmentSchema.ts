@@ -18,6 +18,7 @@ interface IApartment extends Document {
   deposit: Boolean;
   rentGuarantee: Boolean;
   parking: Boolean;
+  newlyBuilt: Boolean;
   imagePath?: String;
 }
 
@@ -86,6 +87,10 @@ const ApartmentSchema: mongoose.Schema = new mongoose.Schema(
     parking: {
       type: Boolean,
       required: [true, "Fyll ut parkering!"],
+    },
+    newlyBuilt: {
+      type: Boolean,
+      required: [true, "Fyll ut nybygg!"],
     },
     imagePath: {
       type: String,
