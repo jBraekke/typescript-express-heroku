@@ -20,6 +20,7 @@ import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import theme from "../../themes/theme";
+import Divider from '@material-ui/core/Divider';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
 
+  title: {
+    fontFamily: "EB Garamond",
+    marginBottom: theme.spacing(3),
+    color: "#FFFFFF",
+    borderBottom: "1px solid lightgreen",
+    paddingBottom: "5px",
+  },
+
   appBar: {
     //zIndex: theme.zIndex.drawer + 1,
     position: "relative",
@@ -42,12 +51,28 @@ const useStyles = makeStyles((theme) => ({
     float: "right",
   },
 
-  menuItems: {},
+  pictureLogo: {
+    height: theme.spacing(15),
+    width: theme.spacing(15),
+    marginLeft: theme.spacing(6.5),
+    marginTop: theme.spacing(30)
+  },
+
+  menuItems: { opacity: "100%",
+  color: "#FFFFFF",
+  "&:hover": {
+    textDecoration: "underline",
+    textDecorationColor: "lightgreen",
+    opacity: "100%",
+    textUnderlineOffset: "30px",
+  },},
   toolbar: {},
 
   drawerPaper: {
     width: drawerWidth,
+   backgroundColor: theme.palette.primary.main,
   },
+  
   content: {},
   closeMenuButton: {
     marginLeft: "auto",
@@ -126,7 +151,7 @@ function SleekDrawerNav() {
 
       <nav className={classes.drawer}>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-
+       
         <Drawer
           variant="temporary"
           anchor={theme.direction === "rtl" ? "left" : "right"}
@@ -139,13 +164,26 @@ function SleekDrawerNav() {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
+         
           <IconButton
             onClick={handleDrawerToggle}
             className={classes.closeMenuButton}
           >
-            <CloseIcon />
+            <CloseIcon style={{ color: 'white' }}   />
+            
           </IconButton>
+          <Typography color="textPrimary" variant="h6" component="h6" className={classes.title}>
+          Vestengveien Eiendomsutvikling AS        
+        </Typography>
+         
           {getMenuButtons()}
+
+            <Avatar
+            className={classes.pictureLogo}
+            alt="logo"
+            src="vestengveien1.jpg"
+          />
+
         </Drawer>
       </nav>
       <div className={classes.content}>

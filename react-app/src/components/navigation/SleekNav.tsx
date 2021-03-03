@@ -7,6 +7,7 @@ import {
   Box,
   SvgIcon,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 //import { sizing } from "@material-ui/system";
 import React from "react";
@@ -19,7 +20,6 @@ import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import theme from "../../themes/theme";
-import Hidden from "@material-ui/core/Hidden";
 import SleekDrawerNav from "./SleekDrawerNav";
 
 const useStyles = makeStyles({
@@ -32,10 +32,17 @@ const useStyles = makeStyles({
       opacity: "100%",
       textUnderlineOffset: "30px",
     },
+
+    [theme.breakpoints.down('lg')]: {
+      marginLeft: theme.spacing(10),
+      textAlign: "center",
+    },
+
   },
   toolbar: {
     display: "flex",
     justifyContent: "space-evenly",
+
   },
   logo: { display: "flex", justifyContent: "space-evenly" },
   content: theme.mixins.toolbar,
@@ -81,6 +88,7 @@ const headersData = [
     href: "/aboutus",
     comp: ImportContactsIcon,
   },
+ 
   {
     label: "Legg ut annonse",
     href: "/addApartment",
@@ -112,7 +120,46 @@ const SleekNav = () => {
     });
   };
 
-  const displayDesktop = () => {
+
+  const DisplayMobileSmall = () => {
+    
+    return (
+      <Toolbar className={classes.toolbar}>
+        <Box>
+          <Avatar
+            className={classes.pictureLogo}
+            alt="logo"
+            src="vestengveien1.jpg"
+          />
+        </Box>
+        <Box className={classes.logo}>{SleekDrawerNav}</Box>
+      </Toolbar>
+    );
+  };
+  
+  
+  const DisplayMobileMedium = () => {
+    return (
+      <Toolbar className={classes.toolbar}>
+        <Box>
+          <Avatar
+            className={classes.pictureLogo}
+            alt="logo"
+            src="vestengveien1.jpg"
+          />
+        </Box>
+        <Box>
+          <Typography variant="h4" component="h4" className={classes.sexyText}>
+            VESTENGVEIEN <br />
+            EIENDOMSUTVIKLING AS
+          </Typography>
+        </Box>
+        <Box className={classes.logo}>{SleekDrawerNav}</Box>
+      </Toolbar>
+    );
+  };
+
+  const DisplayDesktop = () => {
     return (
       <Toolbar className={classes.toolbar}>
         <Box className={classes.logo}>
@@ -133,38 +180,17 @@ const SleekNav = () => {
     );
   };
 
-  const displayMobile = () => {
-    return (
-      <Toolbar className={classes.toolbar}>
-        <Box>
-          <Avatar
-            className={classes.pictureLogo}
-            alt="logo"
-            src="vestengveien1.jpg"
-          />
-        </Box>
-        <Box>
-          <Typography variant="h4" component="h4" className={classes.sexyText}>
-            VESTENGVEIEN <br />
-            EIENDOMSUTVIKLING AS
-          </Typography>
-        </Box>
-
-        <Box className={classes.logo}>{SleekDrawerNav}</Box>
-      </Toolbar>
-    );
-  };
-
+    const matches1 = useMediaQuery(theme.breakpoints.up('xs'));
+    const matches2 = useMediaQuery(theme.breakpoints.up('md'));
+    const matches3 = useMediaQuery(theme.breakpoints.up('lg'));
+    
   return (
+    
     <>
       <Box component="header">
-        <Hidden mdDown implementation="css">
-          <AppBar className={classes.header}>{displayDesktop()}</AppBar>
-        </Hidden>
-
-        <Hidden lgUp implementation="css">
-          <AppBar className={classes.header}>{displayMobile()}</AppBar>
-        </Hidden>
+        {matches3 ? <AppBar className={classes.header}><DisplayDesktop></DisplayDesktop></AppBar>:
+          matches2 ? (<AppBar className={classes.header}><DisplayMobileMedium></DisplayMobileMedium></AppBar>):
+           matches1 ?  (<AppBar className={classes.header}><DisplayMobileSmall></DisplayMobileSmall></AppBar>): null}
       </Box>
     </>
   );
