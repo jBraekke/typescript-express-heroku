@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Container, Input, MenuItem, Select } from "@material-ui/core";
+import { Button, Input } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -23,9 +23,8 @@ const ContactForm = () => {
   const classes = useStyles();
   const methods = useForm();
   const [datas, setDatas] = useState("");
-  const [images, setImages] = useState([]) as any;
+  const [images, setImages] = useState() as any;
   const { handleSubmit, control } = methods;
-  const dropDownCity = ["Sarpsborg", "Fredrikstad", "Moss"];
 
   async function postData(url = "", data = {}) {
     // Default options are marked with *
@@ -61,9 +60,9 @@ const ContactForm = () => {
     return response; // parses JSON response into native JavaScript objects
   }
 
-  const onSubmit = (data: IApartment, e: any) => {
+  const onSubmit = (data: IApartment) => {
     setDatas("sending" + data);
-    data.imagePath = images[0].name;
+    data.imagePath = images.name;
     console.log(data);
     postData("https://http://localhost:1337/api/apartments/add", data).then(
       (data) => {

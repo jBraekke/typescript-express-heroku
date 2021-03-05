@@ -8,7 +8,6 @@ import {
   SvgIcon,
   Typography,
   useMediaQuery,
- 
 } from "@material-ui/core";
 //import { sizing } from "@material-ui/system";
 import React from "react";
@@ -22,13 +21,12 @@ import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import theme from "../../themes/theme";
 import SleekDrawerNav from "./SleekDrawerNav";
-import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles({
   menuButton: {
     opacity: "100%",
     color: "#FFFFFF",
-    
+
     "&:hover": {
       textDecoration: "underline",
       textDecorationColor: "lightgreen",
@@ -36,16 +34,14 @@ const useStyles = makeStyles({
       textUnderlineOffset: "30px",
     },
 
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down("lg")]: {
       //marginLeft: theme.spacing(10),
       textAlign: "center",
     },
-
   },
   toolbar: {
     display: "flex",
     justifyContent: "space-evenly",
-
   },
   logo: { display: "flex", justifyContent: "space-evenly" },
   content: theme.mixins.toolbar,
@@ -56,8 +52,7 @@ const useStyles = makeStyles({
     position: "sticky",
     margin: "0",
   },
-  
-  
+
   icon: {
     backgroundColor: theme.palette.secondary.main,
   },
@@ -70,12 +65,10 @@ const useStyles = makeStyles({
     fontFamily: "EB Garamond",
     borderBottom: "2px solid white",
     //marginRight: theme.spacing(20),
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down("lg")]: {
       //marginLeft: theme.spacing(10),
       textAlign: "left",
       borderBottom: "none",
-      
-     
     },
   },
 });
@@ -101,7 +94,7 @@ const headersData = [
     href: "/aboutus",
     comp: ImportContactsIcon,
   },
- 
+
   {
     label: "Legg ut annonse",
     href: "/addApartment",
@@ -133,9 +126,7 @@ const SleekNav = () => {
     });
   };
 
-
   const DisplayMobileSmall = () => {
-    
     return (
       <Toolbar className={classes.toolbar}>
         <Box>
@@ -149,8 +140,7 @@ const SleekNav = () => {
       </Toolbar>
     );
   };
-  
-  
+
   const DisplayMobileMedium = () => {
     return (
       <Toolbar className={classes.toolbar}>
@@ -163,8 +153,7 @@ const SleekNav = () => {
         </Box>
         <Box>
           <Typography variant="h4" component="h4" className={classes.sexyText}>
-          Vestengveien 
-            Eiendomsutvikling A/S
+            Vestengveien Eiendomsutvikling A/S
           </Typography>
         </Box>
         <Box className={classes.logo}>{SleekDrawerNav}</Box>
@@ -181,12 +170,11 @@ const SleekNav = () => {
             alt="logo"
             src="vestengveien1.jpg"
           />
-         
+
           <Typography variant="h4" component="h4" className={classes.sexyText}>
             Vestengveien <br />
             Eiendomsutvikling A/S
           </Typography>
-          
         </Box>
         <Box borderRadius={16} className={classes.gucciFlip}>
           {getMenuButtons()}
@@ -195,17 +183,26 @@ const SleekNav = () => {
     );
   };
 
-    const matches1 = useMediaQuery(theme.breakpoints.down('xs'));
-    const matches2 = useMediaQuery(theme.breakpoints.up('sm'));
-    const matches3 = useMediaQuery(theme.breakpoints.up('lg'));
-    
+  const matches1 = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches2 = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches3 = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
-    
     <>
       <Box component="header">
-        {matches3 ? <AppBar className={classes.header}><DisplayDesktop></DisplayDesktop></AppBar>:
-          matches2 ? (<AppBar className={classes.header}><DisplayMobileMedium></DisplayMobileMedium></AppBar>):
-           matches1 ?  (<AppBar className={classes.header}><DisplayMobileSmall></DisplayMobileSmall></AppBar>): null}
+        {matches3 ? (
+          <AppBar className={classes.header}>
+            <DisplayDesktop></DisplayDesktop>
+          </AppBar>
+        ) : matches2 ? (
+          <AppBar className={classes.header}>
+            <DisplayMobileMedium></DisplayMobileMedium>
+          </AppBar>
+        ) : matches1 ? (
+          <AppBar className={classes.header}>
+            <DisplayMobileSmall></DisplayMobileSmall>
+          </AppBar>
+        ) : null}
       </Box>
     </>
   );

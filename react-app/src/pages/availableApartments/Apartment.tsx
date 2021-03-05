@@ -143,7 +143,7 @@ const Home = () => {
             style={{ transformOrigin: "0 0 0" }}
             {...(test ? { timeout: 2000 } : {})}
           >
-            <Grid key={index} item xs={6}>
+            <Grid key={index} item xs={12} md={6}>
               <ApartmentCard key={index} props={data}></ApartmentCard>
             </Grid>
           </Fade>
