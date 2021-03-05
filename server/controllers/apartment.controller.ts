@@ -1,4 +1,5 @@
 import catchAsyncErrors from "../utils/catchAsync";
+const { body, validationResult } = require("express-validator");
 
 import { apartmentService } from "../service/index";
 
@@ -8,7 +9,6 @@ export const listApartments = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const create = catchAsyncErrors(async (req, res, next) => {
-  //req.body.admin = req.user.id;
   const article = await apartmentService.createApartments(req.body);
   res.status(201).json({ success: true, data: article });
 });

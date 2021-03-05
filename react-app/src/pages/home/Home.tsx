@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 //import CarCard from "../../components/cards/CarCard";
-import InfoCard from "../../components/cards/InfoCard";
-import PictureCard from "../../components/cards/PictureCard";
+import InfoCard from "../../components/cards/InfoCardHomePage";
+import PictureCard from "../../components/cards/PictureCardHomePage";
 import { Box, Container, Slide } from "@material-ui/core";
 
 const img = new Image();
@@ -49,17 +49,17 @@ const Frontpage = () => {
   const FancyRow = () => {
     return (
       <>
-        <Grid item xs={6}>
-          <PictureCard title={"Leiligheter"} />
+        <Grid item xs={12} md={6}>
+          <PictureCard title={"Leiligheter"} image="apartments.jpg" />
         </Grid>
-        <Grid item xs={6}>
-          <PictureCard title={"Hus"} />
+        <Grid item xs={12} md={6}>
+          <PictureCard title={"Hus"} image="house.jpg" />
         </Grid>
-        <Grid item xs={6}>
-          <PictureCard title={"Kommende boliger"} />
+        <Grid item xs={12} md={6}>
+          <PictureCard title={"Kommende boliger"} image="incoming.jpeg" />
         </Grid>
-        <Grid item xs={6}>
-          <PictureCard title={"Næringsbygg"} />
+        <Grid item xs={12} md={6}>
+          <PictureCard title={"Næringsbygg"} image="leieboer.jpg" />
         </Grid>
       </>
     );
@@ -72,7 +72,7 @@ const Frontpage = () => {
           <Grid className={classes.gridheader} item xs={12}>
             <Container>
               <Box m={4}>
-                <Grid container item xs={12} spacing={3}>
+                <Grid container item xs={12}>
                   <FancyRow />
                 </Grid>
               </Box>

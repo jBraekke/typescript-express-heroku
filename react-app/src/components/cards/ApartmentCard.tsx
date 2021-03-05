@@ -37,19 +37,17 @@ const ApartmentCard = ({ props }: IApartmentProps) => {
         className={classes.root}
         onMouseOver={(setShadow) => ({ shadow: 3 })}
       >
-        {props.images ? (
-          props.images.map((image) => (
-            <>
-              {" "}
-              <CardMedia
-                component="img"
-                alt="Apartment"
-                height="300"
-                image={"./uploads/" + image.filename}
-                title="Apartment"
-              />
-            </>
-          ))
+        {props.imagePath ? (
+          <>
+            {" "}
+            <CardMedia
+              component="img"
+              alt="Apartment"
+              height="300"
+              image={"./uploads/" + props.imagePath}
+              title="Apartment"
+            />
+          </>
         ) : (
           <>
             {" "}
@@ -65,25 +63,25 @@ const ApartmentCard = ({ props }: IApartmentProps) => {
 
         <CardContent>
           <Typography gutterBottom variant="h6" component="h2">
-            ID: {props._id}
+            Tittel: {props.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Adresse: {props.adresse}
+            Adresse: {props.address}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Antall Soverom: {props.antallSoveRom}
+            Antall Soverom: {props.bedrooms}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Pris per måned: {props.prisPerMnd}
+            Pris per måned: {props.price}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Depositum: {props.depositum}
+            Depositum: {props.deposit}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Husleie garanti: {props.husleieGaranti}
+            Husleie garanti: {props.rentGuarantee}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            By: {props.by}
+            By: {props.city}
           </Typography>
         </CardContent>
       </Card>

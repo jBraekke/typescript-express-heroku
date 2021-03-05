@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import ApartmentCard from "../../components/cards/ApartmentCard";
 import Fade from "@material-ui/core/Fade";
 import {
+  Avatar,
   Box,
   Button,
   Checkbox,
@@ -52,13 +53,29 @@ const useStyles = makeStyles({
     backgroundRepeat: "no-repeat, repeat",
     backgroundSize: "cover",
   },
+  test: {
+    height: "2000px",
+    display: "flex",
+    justifyContent: "center",
+    alignitems: "center",
+    textAlign: "center",
+    backgroundImage: "url(navsmoke3.jpg)",
+    backgroundRepeat: "no-repeat, repeat",
+    backgroundSize: "cover",
+    opacity: "40%",
+  },
+  pictureLogo: {
+    marginTop: theme.spacing(10),
+    height: theme.spacing(10),
+    width: theme.spacing(10),
+  },
 });
 
-const Welcome = () => {
+const Home = () => {
   const url =
     "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
   //const [data, setData] = useState([] as any);
-  const { data } = useFetch(url);
+  const { status, error, data } = useFetch(url);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
 
@@ -126,7 +143,7 @@ const Welcome = () => {
             style={{ transformOrigin: "0 0 0" }}
             {...(test ? { timeout: 2000 } : {})}
           >
-            <Grid key={index} item xs={6}>
+            <Grid key={index} item xs={12} md={6}>
               <ApartmentCard key={index} props={data}></ApartmentCard>
             </Grid>
           </Fade>
@@ -157,6 +174,7 @@ const Welcome = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedTilSalgs"
               />
             }
             label="Til salgs"
@@ -168,6 +186,7 @@ const Welcome = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedTilLeie"
               />
             }
             label="Til leie"
@@ -179,6 +198,7 @@ const Welcome = () => {
                 //onChange={}
                 name="checkedB"
                 color="primary"
+                id="checkedSnartLedig"
               />
             }
             label="Snart ledig"
@@ -230,6 +250,7 @@ const Welcome = () => {
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"
           //getAriaValueText={valuetext}
+          title="rangeSlider"
         />
       </Grid>
     );
@@ -248,6 +269,7 @@ const Welcome = () => {
               type="text"
               value={searchInput}
               onChange={stateChange}
+              id="searchInput"
             />
           </Grid>
           <CornRow />
@@ -257,7 +279,7 @@ const Welcome = () => {
     );
   };
 
-  return (
+  return status === "fetched" ? (
     <div className={classes.root}>
       <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <Grid className={classes.gridheader} container spacing={0}>
@@ -268,9 +290,17 @@ const Welcome = () => {
             </Grid>
           </Container>
         </Grid>
-      </Slide>
+      </Slide>{" "}
+    </div>
+  ) : (
+    <div className={classes.test}>
+      <Avatar
+        className={classes.pictureLogo}
+        alt="logo"
+        src="vestengveien1.jpg"
+      />
     </div>
   );
 };
 
-export default Welcome;
+export default Home;

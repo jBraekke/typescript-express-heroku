@@ -74,6 +74,7 @@ const ContactForm = () => {
             defaultValue=""
             variant="outlined"
             label="Tittel"
+            id="subject"
           />
           <Controller
             as={TextField}
@@ -84,6 +85,7 @@ const ContactForm = () => {
             multiline
             rows={4}
             label="Melding"
+            id="text"
           />
           <Controller
             as={Select}
@@ -93,6 +95,7 @@ const ContactForm = () => {
             variant="outlined"
             rows={4}
             label="Melding"
+            id="City"
           >
             {" "}
             <MenuItem value={10}>Ten</MenuItem>

@@ -1,15 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import AboutUsPage from "../pages/AboutUs/AboutUsPage";
+import AboutUsPage from "../pages/aboutUs/AboutUsPage";
 import AddApartmentPage from "../pages/addApartment/AddApartmentPage";
+import ApartmentPage from "../pages/availableApartments/ApartmentPage";
 import ContactUsPage from "../pages/contact/ContactUsPage";
-//import TestLayout from "../layouts/TestLayout";
-import FrontpagePage from "../pages/frontpage/FrontpagePage";
+import FrontpagePage from "../pages/home/HomePage";
 import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
-import TestPage from "../pages/testing/TestPage";
-import WelcomePage from "../pages/welcome/WelcomePage";
+
 
 const Routes = () => (
   <Router>
@@ -18,11 +17,8 @@ const Routes = () => (
         <Route exact path="/">
           <FrontpagePage />
         </Route>
-        <Route exact path="/test">
-          <TestPage />
-        </Route>
         <Route exact path="/welcome">
-          <WelcomePage />
+          <ApartmentPage />
         </Route>
         <Route exact path="/contact">
           <ContactUsPage />
@@ -33,7 +29,6 @@ const Routes = () => (
         <Route exact path="/login/signup">
           <SignUpPage />
         </Route>
-
         <Route exact path="/addApartment">
           <AddApartmentPage />
         </Route>

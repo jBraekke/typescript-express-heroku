@@ -1,5 +1,5 @@
 import React from "react";
-import Frontpage from "./Frontpage";
+import Frontpage from "./Home";
 
 const FrontpagePage = () => <Frontpage />;
 

@@ -18,7 +18,6 @@ export interface IApartment {
   deposit: boolean;
   rentGuarantee: boolean;
   parking: boolean;
-  newlyBuilt: boolean;
   imagePath?: string;
 }
 

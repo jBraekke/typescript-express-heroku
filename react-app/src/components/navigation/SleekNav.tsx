@@ -7,6 +7,7 @@ import {
   Box,
   SvgIcon,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 //import { sizing } from "@material-ui/system";
 import React from "react";
@@ -19,16 +20,23 @@ import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import theme from "../../themes/theme";
+import SleekDrawerNav from "./SleekDrawerNav";
 
 const useStyles = makeStyles({
   menuButton: {
     opacity: "100%",
     color: "#FFFFFF",
+
     "&:hover": {
       textDecoration: "underline",
       textDecorationColor: "lightgreen",
       opacity: "100%",
       textUnderlineOffset: "30px",
+    },
+
+    [theme.breakpoints.down("lg")]: {
+      //marginLeft: theme.spacing(10),
+      textAlign: "center",
     },
   },
   toolbar: {
@@ -44,6 +52,7 @@ const useStyles = makeStyles({
     position: "sticky",
     margin: "0",
   },
+
   icon: {
     backgroundColor: theme.palette.secondary.main,
   },
@@ -51,6 +60,16 @@ const useStyles = makeStyles({
     height: theme.spacing(10),
     width: theme.spacing(10),
     marginRight: theme.spacing(2),
+  },
+  sexyText: {
+    fontFamily: "EB Garamond",
+    borderBottom: "2px solid white",
+    //marginRight: theme.spacing(20),
+    [theme.breakpoints.down("lg")]: {
+      //marginLeft: theme.spacing(10),
+      textAlign: "left",
+      borderBottom: "none",
+    },
   },
 });
 
@@ -75,6 +94,7 @@ const headersData = [
     href: "/aboutus",
     comp: ImportContactsIcon,
   },
+
   {
     label: "Legg ut annonse",
     href: "/addApartment",
@@ -106,7 +126,42 @@ const SleekNav = () => {
     });
   };
 
-  const displayDesktop = () => {
+  const DisplayMobileSmall = () => {
+    return (
+      <Toolbar className={classes.toolbar}>
+        <Box>
+          <Avatar
+            className={classes.pictureLogo}
+            alt="logo"
+            src="vestengveien1.jpg"
+          />
+        </Box>
+        <Box className={classes.logo}>{SleekDrawerNav}</Box>
+      </Toolbar>
+    );
+  };
+
+  const DisplayMobileMedium = () => {
+    return (
+      <Toolbar className={classes.toolbar}>
+        <Box>
+          <Avatar
+            className={classes.pictureLogo}
+            alt="logo"
+            src="vestengveien1.jpg"
+          />
+        </Box>
+        <Box>
+          <Typography variant="h4" component="h4" className={classes.sexyText}>
+            Vestengveien Eiendomsutvikling A/S
+          </Typography>
+        </Box>
+        <Box className={classes.logo}>{SleekDrawerNav}</Box>
+      </Toolbar>
+    );
+  };
+
+  const DisplayDesktop = () => {
     return (
       <Toolbar className={classes.toolbar}>
         <Box className={classes.logo}>
@@ -115,9 +170,10 @@ const SleekNav = () => {
             alt="logo"
             src="vestengveien1.jpg"
           />
-          <Typography variant="h4" component="h4">
+
+          <Typography variant="h4" component="h4" className={classes.sexyText}>
             Vestengveien <br />
-            Eiendomsutvikling AS
+            Eiendomsutvikling A/S
           </Typography>
         </Box>
         <Box borderRadius={16} className={classes.gucciFlip}>
@@ -127,10 +183,28 @@ const SleekNav = () => {
     );
   };
 
+  const matches1 = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches2 = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches3 = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
-    <Box component="header">
-      <AppBar className={classes.header}>{displayDesktop()}</AppBar>
-    </Box>
+    <>
+      <Box component="header">
+        {matches3 ? (
+          <AppBar className={classes.header}>
+            <DisplayDesktop></DisplayDesktop>
+          </AppBar>
+        ) : matches2 ? (
+          <AppBar className={classes.header}>
+            <DisplayMobileMedium></DisplayMobileMedium>
+          </AppBar>
+        ) : matches1 ? (
+          <AppBar className={classes.header}>
+            <DisplayMobileSmall></DisplayMobileSmall>
+          </AppBar>
+        ) : null}
+      </Box>
+    </>
   );
 };
 
