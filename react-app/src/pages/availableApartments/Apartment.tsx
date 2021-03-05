@@ -75,7 +75,7 @@ const Home = () => {
   const url =
     "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
   //const [data, setData] = useState([] as any);
-  const { status, error, data } = useFetch(url);
+  const { status, data } = useFetch(url);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
 
