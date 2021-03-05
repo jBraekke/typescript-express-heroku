@@ -9,7 +9,6 @@ import FrontpagePage from "../pages/home/HomePage";
 import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
 
-
 const Routes = () => (
   <Router>
     <MainLayout>
