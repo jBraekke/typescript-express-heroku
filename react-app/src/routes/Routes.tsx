@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import AboutUsPage from "../pages/aboutUs/AboutUsPage";
+import AboutUsPage from "../pages/about/AboutUsPage";
 import AddApartmentPage from "../pages/addApartment/AddApartmentPage";
 import ApartmentPage from "../pages/availableApartments/ApartmentPage";
 import ContactUsPage from "../pages/contact/ContactUsPage";
