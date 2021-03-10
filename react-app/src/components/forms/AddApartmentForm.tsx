@@ -84,7 +84,9 @@ const ContactForm = () => {
   const onFileChange = (event: any) => {
     setImages(event.target.files[0]);
   };
-
+  const inputProps = {
+    maxLength: 5,
+  };
   return (
     <>
       <Typography variant="h4" component="h2">
@@ -102,6 +104,8 @@ const ContactForm = () => {
           as={TextField}
           name="title"
           control={control}
+          rules={{ required: true }}
+          inputProps={inputProps}
           defaultValue="Tittel"
           variant="outlined"
           label="Skriv inn tittel..."
