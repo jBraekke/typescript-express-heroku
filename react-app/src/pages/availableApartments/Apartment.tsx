@@ -72,8 +72,7 @@ const useStyles = makeStyles({
 });
 
 const Home = () => {
-  const url =
-    "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
+  const url = "http://localhost:1337/api/apartments/getlist";
   //const [data, setData] = useState([] as any);
   const { status, data } = useFetch(url);
   const [page, setPage] = useState(0);
