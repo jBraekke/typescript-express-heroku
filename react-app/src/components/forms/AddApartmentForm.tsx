@@ -6,6 +6,8 @@ import {
   FormControlLabel,
   FormGroup,
   Input,
+  MenuItem,
+  Select,
 } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
@@ -33,7 +35,7 @@ const ContactForm = () => {
   const methods = useForm();
   const [datas, setDatas] = useState("");
   const [images, setImages] = useState([]) as any;
-  const { handleSubmit, control, register, errors } = methods;
+  const { handleSubmit, control, errors } = methods;
 
   async function postData(url = "", data = {}) {
     // Default options are marked with *
@@ -69,7 +71,7 @@ const ContactForm = () => {
     setDatas("sending" + data);
     //temp Fix
     data.imagePath = images.name;
-    data.city = "Sarpsborg";
+    /*data.city = "Sarpsborg";
     data.squareMeter = 123;
     data.bedrooms = 2;
     data.bathrooms = 2;
@@ -81,7 +83,7 @@ const ContactForm = () => {
     data.rentGuarantee = false;
     data.parking = true;
     data.deposit = true;
-    data.newlyBuilt = true;
+    data.newlyBuilt = true;*/
 
     console.log(data);
     postData("http://localhost:1337/api/apartments/add", data).then((data) => {
@@ -104,15 +106,14 @@ const ContactForm = () => {
   const onFileChange = (event: any) => {
     setImages(event.target.files[0]);
   };
-  const inputProps = {
-    //maxLength: 5,
-  };
+
   return (
     <>
       <Typography variant="h4" component="h2">
         Legg til leilighet
       </Typography>
       <Typography>{datas}</Typography>
+      <Typography>Legg til bilde</Typography>
       <Input type="file" onChange={onFileChange} />
       <form
         className={classes.root}
@@ -150,11 +151,14 @@ const ContactForm = () => {
               message: "Bare bokstaver og nummer tillatt",
             },
           }}
-          error={!!errors.title}
+          error={!!errors.description}
           defaultValue="Beskrivelse"
           variant="outlined"
           label="Skriv inn beskrivelse..."
         />
+        {errors.description && (
+          <span className={classes.error}>{errors.description.message}</span>
+        )}
         <Controller
           as={TextField}
           name="address"
@@ -166,14 +170,115 @@ const ContactForm = () => {
               message: "Bare bokstaver og nummer tillatt",
             },
           }}
-          error={!!errors.title}
+          error={!!errors.address}
           defaultValue="Adresse"
           variant="outlined"
           label="Skriv inn addresse..."
         />
+        {errors.address && (
+          <span className={classes.error}>{errors.address.message}</span>
+        )}
+        <Typography>Skriv in antall/pris</Typography>
+        <Controller
+          as={TextField}
+          name="squareMeter"
+          control={control}
+          rules={{
+            required: true,
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Bare nummer tillatt",
+            },
+          }}
+          error={!!errors.squareMeter}
+          defaultValue="Kvadratmeter"
+          variant="outlined"
+          label="Skriv inn kvadratmeter..."
+        />
+        {errors.squareMeter && (
+          <span className={classes.error}>{errors.squareMeter.message}</span>
+        )}
+        <Controller
+          as={TextField}
+          name="bedrooms"
+          control={control}
+          rules={{
+            required: true,
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Bare nummer tillatt",
+            },
+          }}
+          error={!!errors.bedrooms}
+          defaultValue="soverom"
+          variant="outlined"
+          label="Skriv inn antall soverom..."
+        />
+        {errors.bedrooms && (
+          <span className={classes.error}>{errors.bedrooms.message}</span>
+        )}
+        <Controller
+          as={TextField}
+          name="bathrooms"
+          control={control}
+          rules={{
+            required: true,
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Bare nummer tillatt",
+            },
+          }}
+          error={!!errors.bedrooms}
+          defaultValue="bad"
+          variant="outlined"
+          label="Skriv inn antall bad..."
+        />
+        {errors.bathrooms && (
+          <span className={classes.error}>{errors.bathrooms.message}</span>
+        )}
+        <Controller
+          as={TextField}
+          name="price"
+          control={control}
+          rules={{
+            required: true,
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Bare nummer tillatt",
+            },
+          }}
+          error={!!errors.price}
+          defaultValue="pris"
+          variant="outlined"
+          label="Skriv inn pris..."
+        />
+        {errors.price && (
+          <span className={classes.error}>{errors.price.message}</span>
+        )}
+        <Typography>Velg By</Typography>
+        <Controller
+          rules={{
+            required: true,
+            pattern: {
+              value: /^[A-Za-z]*$/,
+              message: "Bare bokstaver tillatt/Må fylles ut!",
+            },
+          }}
+          as={Select}
+          error={!!errors.city}
+          name="city"
+          control={control}
+        >
+          <MenuItem value={"Sarpsborg"}>Sarpsborg</MenuItem>
+          <MenuItem value={"Fredrikstad"}>Fredrikstad</MenuItem>
+          <MenuItem value={"Moss"}>Moss</MenuItem>
+        </Controller>
+        {errors.city && (
+          <span className={classes.error}>{errors.city.message}</span>
+        )}
 
         <FormGroup>
-          <Typography>Velg type bolig</Typography>
+          <Typography>Velg type bolig (Velg en eller flere)</Typography>
           <FormControlLabel
             control={
               <Controller
@@ -205,6 +310,105 @@ const ContactForm = () => {
               />
             }
             label="Hus"
+          />
+          <FormControlLabel
+            control={
+              <Controller
+                control={control}
+                name="incoming"
+                defaultValue={false}
+                render={({ onChange, value }) => (
+                  <Checkbox
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={value}
+                  />
+                )}
+              />
+            }
+            label="Innkommende leilighet"
+          />
+          <FormControlLabel
+            control={
+              <Controller
+                control={control}
+                name="commerce"
+                defaultValue={false}
+                render={({ onChange, value }) => (
+                  <Checkbox
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={value}
+                  />
+                )}
+              />
+            }
+            label="Næringsbygg"
+          />
+          <FormControlLabel
+            control={
+              <Controller
+                control={control}
+                name="newlyBuilt"
+                defaultValue={false}
+                render={({ onChange, value }) => (
+                  <Checkbox
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={value}
+                  />
+                )}
+              />
+            }
+            label="Nybygg"
+          />
+        </FormGroup>
+        <FormGroup>
+          <Typography>Hva har boligen? (Velg en eller flere)</Typography>
+          <FormControlLabel
+            control={
+              <Controller
+                control={control}
+                name="deposit"
+                defaultValue={false}
+                render={({ onChange, value }) => (
+                  <Checkbox
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={value}
+                  />
+                )}
+              />
+            }
+            label="Depositum"
+          />
+          <FormControlLabel
+            control={
+              <Controller
+                control={control}
+                name="rentGuarantee"
+                defaultValue={false}
+                render={({ onChange, value }) => (
+                  <Checkbox
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={value}
+                  />
+                )}
+              />
+            }
+            label="Leiegaranti"
+          />
+          <FormControlLabel
+            control={
+              <Controller
+                control={control}
+                name="parking"
+                defaultValue={false}
+                render={({ onChange, value }) => (
+                  <Checkbox
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={value}
+                  />
+                )}
+              />
+            }
+            label="Parkering"
           />
         </FormGroup>
         <Button type="submit"> Send melding </Button>
