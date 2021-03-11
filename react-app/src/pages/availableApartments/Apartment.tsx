@@ -15,6 +15,7 @@ import {
   Slide,
   Slider,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 
 import theme from "../../themes/theme";
@@ -47,6 +48,11 @@ const useStyles = makeStyles({
     marginTop: theme.spacing(30),
     display: "flex",
     flexDirection: "column",
+  },
+  topGrid: {
+    display: "flex",
+    flexDirection: "column",
+    //position: "static",
   },
   gridheader: {
     backgroundImage: "url(stairs.jpg)",
@@ -161,7 +167,7 @@ const Home = () => {
     );
   };
 
-  const LeftGrid = () => {
+  const LeftGridDesktop = () => {
     return (
       <Grid className={classes.leftGrid} item xs={2}>
         <p>Velg tilgjengelighet</p>
@@ -255,7 +261,7 @@ const Home = () => {
     );
   };
 
-  const RightGrid = () => {
+  const RightGridDesktop = () => {
     return (
       <Grid item xs={10}>
         <Grid container item xs={12} spacing={3}>
@@ -278,27 +284,186 @@ const Home = () => {
     );
   };
 
-  return status === "fetched" ? (
-    <div className={classes.root}>
-      <Slide direction="down" in={true} mountOnEnter unmountOnExit>
-        <Grid className={classes.gridheader} container spacing={0}>
-          <Container>
-            <Grid container item xs={12} spacing={3}>
-              <LeftGrid></LeftGrid>
-              <RightGrid></RightGrid>
-            </Grid>
-          </Container>
+  const DesktopView = () => {
+    return status === "fetched" ? (
+      <div className={classes.root}>
+        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+          <Grid className={classes.gridheader} container spacing={0}>
+            <Container>
+              <Grid container item xs={12} spacing={3}>
+                <LeftGridDesktop></LeftGridDesktop>
+                <RightGridDesktop></RightGridDesktop>
+              </Grid>
+            </Container>
+          </Grid>
+        </Slide>{" "}
+      </div>
+    ) : (
+      <div className={classes.test}>
+        <Avatar
+          className={classes.pictureLogo}
+          alt="logo"
+          src="vestengveien1.jpg"
+        />
+      </div>
+    );
+  };
+
+  const TopGridMobile = () => {
+    return (
+      <Grid className={classes.topGrid} item xs={12}>
+        <p>Velg tilgjengelighet</p>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+                id="checkedTilSalgs"
+              />
+            }
+            label="Til salgs"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+                id="checkedTilLeie"
+              />
+            }
+            label="Til leie"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+                id="checkedSnartLedig"
+              />
+            }
+            label="Snart ledig"
+          />
+        </FormGroup>
+        <p>Velg type(TRYKK PÅ LEILIGHET FOR Å SE)</p>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={test}
+                onChange={handleChange}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Leilighet"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Hus"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                //checked={}
+                //onChange={}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Kontorer"
+          />
+        </FormGroup>
+
+        <Typography id="range-slider" gutterBottom>
+          Prisklasse
+        </Typography>
+        <Slider
+          value={value}
+          onChange={handleChangeSlider}
+          valueLabelDisplay="auto"
+          aria-labelledby="range-slider"
+          //getAriaValueText={valuetext}
+          title="rangeSlider"
+        />
+      </Grid>
+    );
+  };
+
+  const BottomGridMobile = () => {
+    return (
+      <Grid item xs={12}>
+        <Grid container item xs={12} spacing={3}>
+          <Grid item xs={12}>
+            <FilterButtons />
+          </Grid>
+          <Grid item xs={12}>
+            <Input
+              placeholder="Søk etter addresse her..."
+              type="text"
+              value={searchInput}
+              onChange={stateChange}
+              id="searchInput"
+            />
+          </Grid>
+          <CornRow />
         </Grid>
-      </Slide>{" "}
-    </div>
-  ) : (
-    <div className={classes.test}>
-      <Avatar
-        className={classes.pictureLogo}
-        alt="logo"
-        src="vestengveien1.jpg"
-      />
-    </div>
+        {pageButtons}
+      </Grid>
+    );
+  };
+
+  const MobileView = () => {
+    return status === "fetched" ? (
+      <div className={classes.root}>
+        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+          <Grid className={classes.gridheader} container spacing={0}>
+            <Container>
+              <Grid container item xs={12} spacing={3}>
+                <TopGridMobile></TopGridMobile>
+                <BottomGridMobile></BottomGridMobile>
+              </Grid>
+            </Container>
+          </Grid>
+        </Slide>{" "}
+      </div>
+    ) : (
+      <div className={classes.test}>
+        <Avatar
+          className={classes.pictureLogo}
+          alt="logo"
+          src="vestengveien1.jpg"
+        />
+      </div>
+    );
+  };
+  const matches1 = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches2 = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches3 = useMediaQuery(theme.breakpoints.up("lg"));
+
+  return (
+    <>
+      {matches3 ? (
+        <DesktopView></DesktopView>
+      ) : matches2 ? (
+        <MobileView></MobileView>
+      ) : matches1 ? (
+        <MobileView></MobileView>
+      ) : null}
+    </>
   );
 };
 
