@@ -6,6 +6,7 @@ import AddApartmentPage from "../pages/addApartment/AddApartmentPage";
 import ApartmentPage from "../pages/availableApartments/ApartmentPage";
 import ContactUsPage from "../pages/contact/ContactUsPage";
 import FrontpagePage from "../pages/home/HomePage";
+import PdfPage from "../pages/pdf/PdfPage";
 import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
 
@@ -34,6 +35,13 @@ const Routes = () => (
         <Route exact path="/aboutus">
           <AboutUsPage />
         </Route>
+
+        <Route exact path="/pdf">
+          <PdfPage />
+        </Route>
+
+
+
       </Switch>
     </MainLayout>
   </Router>
