@@ -28,6 +28,7 @@ export interface IApartmentFilter {
   house: boolean;
   commerce: boolean;
   newlyBuilt: boolean;
+  city: string;
 }
 
 export interface IApartmentProps {
