@@ -22,6 +22,15 @@ export interface IApartment {
   imagePath?: string;
 }
 
+export interface IApartmentFilter {
+  apartment: boolean;
+  incoming: boolean;
+  house: boolean;
+  commerce: boolean;
+  newlyBuilt: boolean;
+  city: string;
+}
+
 export interface IApartmentProps {
   props: IApartment;
 }

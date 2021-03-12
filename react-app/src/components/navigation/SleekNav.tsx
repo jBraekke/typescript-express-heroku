@@ -100,6 +100,11 @@ const headersData = [
     href: "/addApartment",
     comp: HomeIcon,
   },
+  {
+    label: "Lag Kontrakt",
+    href: "/pdf",
+    comp: HomeIcon,
+  },
 ];
 
 const SleekNav = () => {

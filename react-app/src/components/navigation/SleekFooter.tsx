@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   footer: {
     textAlign: "center",
+    position: "sticky",
     backgroundImage:
       "radial-gradient(circle, rgba(25,25,25,1) 100%, rgba(3,104,233,1) 100%)",
 
@@ -73,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 800,
     fontFamily: "EB Garamond",
     textAlign: "right",
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(3),
 
     "@media (max-width: 1200px)": {
       textAlign: "center",

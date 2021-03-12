@@ -9,14 +9,21 @@ import { IApartmentProps } from "../../interfaces/IApartment";
 
 const useStyles = makeStyles({
   root: {
+    marginBottom: 0,
+    padding: 0,
     "&:hover": {
       boxShadow: "17px 17px 18px #D4D2D2",
       transition: "all 0.2s ease-in",
-      marginTop: -3,
+      marginTop: 3,
+      marginBottom: 7,
     },
   },
   media: {
     height: 200,
+  },
+
+  card: {
+    maxWidth: 345,
   },
 });
 
@@ -39,22 +46,20 @@ const ApartmentCard = ({ props }: IApartmentProps) => {
       >
         {props.imagePath ? (
           <>
-            {" "}
             <CardMedia
               component="img"
-              alt="Apartment"
               height="300"
+              alt="Apartment"
               image={"./uploads/" + props.imagePath}
               title="Apartment"
             />
           </>
         ) : (
           <>
-            {" "}
             <CardMedia
               component="img"
-              alt="Apartment"
               height="300"
+              alt="Apartment"
               image="hus.jpg"
               title="Apartment"
             />
@@ -63,26 +68,23 @@ const ApartmentCard = ({ props }: IApartmentProps) => {
 
         <CardContent>
           <Typography gutterBottom variant="h6" component="h2">
-            Tittel: {props.title}
+            {props.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Adresse: {props.address}
+            {props.city}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Antall Soverom: {props.bedrooms}
+            {props.address}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Pris per måned: {props.price}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Depositum: {props.deposit}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Husleie garanti: {props.rentGuarantee}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            By: {props.city}
-          </Typography>
+          {props.newlyBuilt ? (
+            <Typography variant="body2" color="textSecondary" component="p">
+              Kjøpspris: {props.price}kr
+            </Typography>
+          ) : (
+            <Typography variant="body2" color="textSecondary" component="p">
+              Pris per måned: {props.price}kr
+            </Typography>
+          )}
         </CardContent>
       </Card>
     </Link>

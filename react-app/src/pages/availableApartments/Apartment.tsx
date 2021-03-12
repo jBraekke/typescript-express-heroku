@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ApartmentCard from "../../components/cards/ApartmentCard";
 import Fade from "@material-ui/core/Fade";
+import Pagination from "@material-ui/lab/Pagination";
 import {
   Avatar,
   Box,
@@ -10,15 +11,14 @@ import {
   Checkbox,
   Container,
   FormControlLabel,
-  FormGroup,
-  Input,
   Slide,
-  Slider,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 
 import theme from "../../themes/theme";
 import { useFetch } from "../../hooks/useFetch";
+import { IApartment, IApartmentFilter } from "../../interfaces/IApartment";
 
 const useStyles = makeStyles({
   root: {},
@@ -48,6 +48,11 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
   },
+  topGrid: {
+    display: "flex",
+    flexDirection: "column",
+    //position: "static",
+  },
   gridheader: {
     backgroundImage: "url(stairs.jpg)",
     backgroundRepeat: "no-repeat, repeat",
@@ -74,24 +79,38 @@ const useStyles = makeStyles({
 const Home = () => {
   const url =
     "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
-  //const [data, setData] = useState([] as any);
+
   const { status, data } = useFetch(url);
-  const [page, setPage] = useState(0);
-  const [searchInput, setSearchInput] = useState("");
+  const [page, setPage] = useState(1);
 
-  const [test, setTest] = useState(true);
+  const [realEstate, setData] = useState<IApartment[]>([]);
 
-  const [value, setValue] = React.useState([100, 37]);
-  const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setSearchInput(event.target.value);
-    if (searchInput.length >= 0) setPage(1);
-  };
-  const handleChangeSlider = (event: any, newValue: any) => {
-    setValue(newValue);
-  };
+  const [filter, setFilter] = useState<IApartmentFilter>({
+    apartment: true,
+    incoming: true,
+    house: true,
+    commerce: true,
+    newlyBuilt: true,
+    city: "",
+  });
 
-  const handleChange = () => {
-    setTest((prev) => !prev);
+  const predictedView = realEstate.filter((x) => {
+    return ((filter.apartment && x.apartment === true) ||
+      (filter.incoming && x.incoming === true) ||
+      (filter.house && x.house === true) ||
+      (filter.commerce && x.commerce === true) ||
+      (filter.newlyBuilt && x.newlyBuilt === true)) &&
+      filter.city === ""
+      ? x
+      : filter.city === x.city;
+  });
+
+  useEffect(() => {
+    setData(data);
+  }, [data]);
+
+  const handleChange = (event: any, value: number) => {
+    setPage(value);
   };
 
   const paginate = function (array: any, index: any, size: any) {
@@ -108,30 +127,7 @@ const Home = () => {
       ),
     ];
   };
-  /*
-  const testFilter = data.filter((d: any) =>
-    d.model.toLowerCase().includes(mainFilter)
-  );*/
-  /*
-  const carFilter =
-    searchInput.length > 0
-      ? testFilter.filter((d: any) =>
-          d.model.toLowerCase().includes(searchInput.toLowerCase())
-        )
-      : data;*/
-
-  const paginatedApartments = paginate(data, page, 4);
-
-  const pageButtons = [] as any;
-
-  for (let index = 0; index < data.length / 4; index++) {
-    pageButtons.push(
-      <Button key={index} onClick={() => setPage(index + 1)}>
-        Page {index + 1}
-      </Button>
-    );
-  }
-
+  const paginatedApartments = paginate(predictedView, page, 4);
   const classes = useStyles();
 
   const CornRow = () => {
@@ -139,9 +135,9 @@ const Home = () => {
       <>
         {paginatedApartments.map((data, index) => (
           <Fade
-            in={test}
+            in={true}
             style={{ transformOrigin: "0 0 0" }}
-            {...(test ? { timeout: 2000 } : {})}
+            {...(true ? { timeout: 2000 } : {})}
           >
             <Grid key={index} item xs={12} md={6}>
               <ApartmentCard key={index} props={data}></ApartmentCard>
@@ -155,151 +151,295 @@ const Home = () => {
   const FilterButtons = () => {
     return (
       <Box mt={2} className={classes.toolbar}>
-        <Button className={classes.menuButton}>Sarpsborg</Button>
-        <Button className={classes.menuButton}>Moss</Button>
-        <Button className={classes.menuButton}>Fredrikstad</Button>
+        <Button
+          className={classes.menuButton}
+          onClick={() => setFilter({ ...filter, city: "Sarpsborg" })}
+        >
+          Sarpsborg
+        </Button>
+        <Button
+          className={classes.menuButton}
+          onClick={() => setFilter({ ...filter, city: "Moss" })}
+        >
+          Moss
+        </Button>
+        <Button
+          className={classes.menuButton}
+          onClick={() => setFilter({ ...filter, city: "Fredrikstad" })}
+        >
+          Fredrikstad
+        </Button>
       </Box>
     );
   };
 
-  const LeftGrid = () => {
+  const LeftGridDesktop = () => {
     return (
       <Grid className={classes.leftGrid} item xs={2}>
-        <p>Velg tilgjengelighet</p>
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-                id="checkedTilSalgs"
-              />
-            }
-            label="Til salgs"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-                id="checkedTilLeie"
-              />
-            }
-            label="Til leie"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-                id="checkedSnartLedig"
-              />
-            }
-            label="Snart ledig"
-          />
-        </FormGroup>
-        <p>Velg type(TRYKK PÅ LEILIGHET FOR Å SE)</p>
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={test}
-                onChange={handleChange}
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label="Leilighet"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label="Hus"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label="Kontorer"
-          />
-        </FormGroup>
-
-        <Typography id="range-slider" gutterBottom>
-          Prisklasse
-        </Typography>
-        <Slider
-          value={value}
-          onChange={handleChangeSlider}
-          valueLabelDisplay="auto"
-          aria-labelledby="range-slider"
-          //getAriaValueText={valuetext}
-          title="rangeSlider"
+        <Typography>Velg type bolig (Velg en eller flere)</Typography>
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() => setFilter({ ...filter, house: !filter.house })}
+              name="checkedHouse"
+              color="primary"
+              value={filter.house}
+              checked={filter.house}
+            />
+          }
+          label="Hus"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() =>
+                setFilter({ ...filter, apartment: !filter.apartment })
+              }
+              name="checkedApartment"
+              color="primary"
+              value={filter.apartment}
+              checked={filter.apartment}
+            />
+          }
+          label="Leilighet"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() =>
+                setFilter({ ...filter, incoming: !filter.incoming })
+              }
+              name="checkedIncoming"
+              color="primary"
+              value={filter.incoming}
+              checked={filter.incoming}
+            />
+          }
+          label="Innkommende leilighet"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() =>
+                setFilter({ ...filter, commerce: !filter.commerce })
+              }
+              name="checkedCommerce"
+              color="primary"
+              value={filter.commerce}
+              checked={filter.commerce}
+            />
+          }
+          label="Næringsbygg"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() =>
+                setFilter({ ...filter, newlyBuilt: !filter.newlyBuilt })
+              }
+              name="checkedB"
+              color="primary"
+              value={filter.newlyBuilt}
+              checked={filter.newlyBuilt}
+            />
+          }
+          label="Nybygg"
         />
       </Grid>
     );
   };
 
-  const RightGrid = () => {
+  const RightGridDesktop = () => {
     return (
-      <Grid item xs={10}>
+      <Grid key="RightGrid" item xs={10}>
         <Grid container item xs={12} spacing={3}>
           <Grid item xs={12}>
             <FilterButtons />
           </Grid>
           <Grid item xs={12}>
-            <Input
-              placeholder="Søk etter addresse her..."
-              type="text"
-              value={searchInput}
-              onChange={stateChange}
-              id="searchInput"
+            <Pagination
+              count={Math.ceil(predictedView.length / 4)}
+              page={page}
+              onChange={handleChange}
             />
           </Grid>
           <CornRow />
+          <Grid item xs={12}>
+            <Pagination
+              count={Math.ceil(predictedView.length / 4)}
+              page={page}
+              onChange={handleChange}
+            />
+          </Grid>
         </Grid>
-        {pageButtons}
       </Grid>
     );
   };
 
-  return status === "fetched" ? (
-    <div className={classes.root}>
-      <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+  const DesktopView = () => {
+    return status === "fetched" ? (
+      <div className={classes.root}>
+        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+          <Grid className={classes.gridheader} container spacing={0}>
+            <Container>
+              <Grid container item xs={12} spacing={3}>
+                <LeftGridDesktop></LeftGridDesktop>
+                <RightGridDesktop></RightGridDesktop>
+              </Grid>
+            </Container>
+          </Grid>
+        </Slide>{" "}
+      </div>
+    ) : (
+      <div className={classes.test}>
+        <Avatar
+          className={classes.pictureLogo}
+          alt="logo"
+          src="vestengveien1.jpg"
+        />
+      </div>
+    );
+  };
+
+  const TopGridMobile = () => {
+    return (
+      <Grid item xs={12}>
+        <Typography>Velg type bolig (Velg en eller flere)</Typography>
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() => setFilter({ ...filter, house: !filter.house })}
+              name="checkedHouse"
+              color="primary"
+              value={filter.house}
+              checked={filter.house}
+            />
+          }
+          label="Hus"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() =>
+                setFilter({ ...filter, apartment: !filter.apartment })
+              }
+              name="checkedApartment"
+              color="primary"
+              value={filter.apartment}
+              checked={filter.apartment}
+            />
+          }
+          label="Leilighet"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() =>
+                setFilter({ ...filter, incoming: !filter.incoming })
+              }
+              name="checkedIncoming"
+              color="primary"
+              value={filter.incoming}
+              checked={filter.incoming}
+            />
+          }
+          label="Innkommende leilighet"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() =>
+                setFilter({ ...filter, commerce: !filter.commerce })
+              }
+              name="checkedCommerce"
+              color="primary"
+              value={filter.commerce}
+              checked={filter.commerce}
+            />
+          }
+          label="Næringsbygg"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() =>
+                setFilter({ ...filter, newlyBuilt: !filter.newlyBuilt })
+              }
+              name="checkedB"
+              color="primary"
+              value={filter.newlyBuilt}
+              checked={filter.newlyBuilt}
+            />
+          }
+          label="Nybygg"
+        />
+      </Grid>
+    );
+  };
+
+  const BottomGridMobile = () => {
+    return (
+      <Grid item xs={12}>
+        <Grid container item xs={12} spacing={3}>
+          <Grid item xs={12}>
+            <FilterButtons />
+          </Grid>
+          <TopGridMobile></TopGridMobile>
+          <Grid item xs={12}>
+            <Pagination
+              count={Math.ceil(predictedView.length / 4)}
+              page={page}
+              onChange={handleChange}
+            />
+          </Grid>
+          <CornRow />
+          <Grid item xs={12}>
+            <Pagination
+              count={Math.ceil(predictedView.length / 4)}
+              page={page}
+              onChange={handleChange}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const MobileView = () => {
+    return status === "fetched" ? (
+      <div className={classes.root}>
         <Grid className={classes.gridheader} container spacing={0}>
           <Container>
             <Grid container item xs={12} spacing={3}>
-              <LeftGrid></LeftGrid>
-              <RightGrid></RightGrid>
+              <BottomGridMobile></BottomGridMobile>
             </Grid>
           </Container>
         </Grid>
-      </Slide>{" "}
-    </div>
-  ) : (
-    <div className={classes.test}>
-      <Avatar
-        className={classes.pictureLogo}
-        alt="logo"
-        src="vestengveien1.jpg"
-      />
-    </div>
+      </div>
+    ) : (
+      <div className={classes.test}>
+        <Avatar
+          className={classes.pictureLogo}
+          alt="logo"
+          src="vestengveien1.jpg"
+        />
+      </div>
+    );
+  };
+  const matches1 = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches2 = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches3 = useMediaQuery(theme.breakpoints.up("lg"));
+
+  return (
+    <>
+      {matches3 ? (
+        <DesktopView></DesktopView>
+      ) : matches2 ? (
+        <MobileView></MobileView>
+      ) : matches1 ? (
+        <MobileView></MobileView>
+      ) : null}
+    </>
   );
 };
 
