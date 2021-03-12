@@ -448,7 +448,7 @@ const PdfComponent = () => {
           control={control}
         ></Controller>
 
-        <Button type="submit"> Send melding </Button>
+        <Button type="submit"> Lag kontrakt </Button>
       </form>
     </>
   );
