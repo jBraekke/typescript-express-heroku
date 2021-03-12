@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ApartmentCard from "../../components/cards/ApartmentCard";
@@ -15,10 +15,12 @@ import {
   Slide,
   Slider,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 
 import theme from "../../themes/theme";
 import { useFetch } from "../../hooks/useFetch";
+import { IApartment, IApartmentFilter } from "../../interfaces/IApartment";
 
 const useStyles = makeStyles({
   root: {},
@@ -48,6 +50,11 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
   },
+  topGrid: {
+    display: "flex",
+    flexDirection: "column",
+    //position: "static",
+  },
   gridheader: {
     backgroundImage: "url(stairs.jpg)",
     backgroundRepeat: "no-repeat, repeat",
@@ -72,14 +79,25 @@ const useStyles = makeStyles({
 });
 
 const Home = () => {
-  const url =
-    "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
+  const url = "http://localhost:1337/api/apartments/getlist";
   //const [data, setData] = useState([] as any);
   const { status, data } = useFetch(url);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
-
+  const [slideValues, setSlideValues] = useState<number[]>([]);
+  const [realEstate, setData] = useState<IApartment[]>([]);
   const [test, setTest] = useState(true);
+  const [filter, setFilter] = useState<IApartmentFilter>({
+    apartment: false,
+    incoming: false,
+    house: false,
+    commerce: false,
+    newlyBuilt: false,
+  });
+
+  const predictedView = realEstate.filter((x) => {
+    return x.price >= value[0] && x.price <= value[1]; // && (filter.housing && x.type === "house")
+  });
 
   const [value, setValue] = React.useState([100, 37]);
   const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -93,6 +111,18 @@ const Home = () => {
   const handleChange = () => {
     setTest((prev) => !prev);
   };
+  const getMinAndMaxPrice = (data: IApartment[]) => {
+    const prices = data.map((x: IApartment) => x.price);
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    return [min, max];
+  };
+
+  useEffect(() => {
+    setValue(getMinAndMaxPrice(data));
+    setSlideValues(getMinAndMaxPrice(data));
+    setData(data);
+  }, [data]);
 
   const paginate = function (array: any, index: any, size: any) {
     // transform values
@@ -108,18 +138,6 @@ const Home = () => {
       ),
     ];
   };
-  /*
-  const testFilter = data.filter((d: any) =>
-    d.model.toLowerCase().includes(mainFilter)
-  );*/
-  /*
-  const carFilter =
-    searchInput.length > 0
-      ? testFilter.filter((d: any) =>
-          d.model.toLowerCase().includes(searchInput.toLowerCase())
-        )
-      : data;*/
-
   const paginatedApartments = paginate(data, page, 4);
 
   const pageButtons = [] as any;
@@ -162,9 +180,75 @@ const Home = () => {
     );
   };
 
-  const LeftGrid = () => {
+  const LeftGridDesktop = () => {
     return (
       <Grid className={classes.leftGrid} item xs={2}>
+        <Typography id="range-slider" gutterBottom>
+          Prisklasse
+        </Typography>
+        <Slider
+          value={value}
+          onChange={handleChangeSlider}
+          valueLabelDisplay="auto"
+          aria-labelledby="range-slider"
+          //getAriaValueText={valuetext}
+          title="rangeSlider"
+        />
+      </Grid>
+    );
+  };
+
+  const RightGridDesktop = () => {
+    return (
+      <Grid item xs={10}>
+        <Grid container item xs={12} spacing={3}>
+          <Grid item xs={12}>
+            <FilterButtons />
+          </Grid>
+          <Grid item xs={12}>
+            <Input
+              placeholder="Søk etter addresse her..."
+              type="text"
+              value={searchInput}
+              onChange={stateChange}
+              id="searchInput"
+            />
+          </Grid>
+          <CornRow />
+        </Grid>
+        {pageButtons}
+      </Grid>
+    );
+  };
+
+  const DesktopView = () => {
+    return status === "fetched" ? (
+      <div className={classes.root}>
+        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+          <Grid className={classes.gridheader} container spacing={0}>
+            <Container>
+              <Grid container item xs={12} spacing={3}>
+                <LeftGridDesktop></LeftGridDesktop>
+                <RightGridDesktop></RightGridDesktop>
+              </Grid>
+            </Container>
+          </Grid>
+        </Slide>{" "}
+      </div>
+    ) : (
+      <div className={classes.test}>
+        <Avatar
+          className={classes.pictureLogo}
+          alt="logo"
+          src="vestengveien1.jpg"
+        />
+      </div>
+    );
+  };
+
+  const TopGridMobile = () => {
+    return (
+      <Grid className={classes.topGrid} item xs={12}>
         <p>Velg tilgjengelighet</p>
         <FormGroup row>
           <FormControlLabel
@@ -256,9 +340,9 @@ const Home = () => {
     );
   };
 
-  const RightGrid = () => {
+  const BottomGridMobile = () => {
     return (
-      <Grid item xs={10}>
+      <Grid item xs={12}>
         <Grid container item xs={12} spacing={3}>
           <Grid item xs={12}>
             <FilterButtons />
@@ -279,27 +363,44 @@ const Home = () => {
     );
   };
 
-  return status === "fetched" ? (
-    <div className={classes.root}>
-      <Slide direction="down" in={true} mountOnEnter unmountOnExit>
-        <Grid className={classes.gridheader} container spacing={0}>
-          <Container>
-            <Grid container item xs={12} spacing={3}>
-              <LeftGrid></LeftGrid>
-              <RightGrid></RightGrid>
-            </Grid>
-          </Container>
-        </Grid>
-      </Slide>{" "}
-    </div>
-  ) : (
-    <div className={classes.test}>
-      <Avatar
-        className={classes.pictureLogo}
-        alt="logo"
-        src="vestengveien1.jpg"
-      />
-    </div>
+  const MobileView = () => {
+    return status === "fetched" ? (
+      <div className={classes.root}>
+        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+          <Grid className={classes.gridheader} container spacing={0}>
+            <Container>
+              <Grid container item xs={12} spacing={3}>
+                <TopGridMobile></TopGridMobile>
+                <BottomGridMobile></BottomGridMobile>
+              </Grid>
+            </Container>
+          </Grid>
+        </Slide>{" "}
+      </div>
+    ) : (
+      <div className={classes.test}>
+        <Avatar
+          className={classes.pictureLogo}
+          alt="logo"
+          src="vestengveien1.jpg"
+        />
+      </div>
+    );
+  };
+  const matches1 = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches2 = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches3 = useMediaQuery(theme.breakpoints.up("lg"));
+
+  return (
+    <>
+      {matches3 ? (
+        <DesktopView></DesktopView>
+      ) : matches2 ? (
+        <MobileView></MobileView>
+      ) : matches1 ? (
+        <MobileView></MobileView>
+      ) : null}
+    </>
   );
 };
 
