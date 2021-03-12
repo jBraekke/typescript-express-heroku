@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ApartmentCard from "../../components/cards/ApartmentCard";
@@ -20,6 +20,7 @@ import {
 
 import theme from "../../themes/theme";
 import { useFetch } from "../../hooks/useFetch";
+import { IApartment, IApartmentFilter } from "../../interfaces/IApartment";
 
 const useStyles = makeStyles({
   root: {},
@@ -83,8 +84,20 @@ const Home = () => {
   const { status, data } = useFetch(url);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState("");
-
+  const [slideValues, setSlideValues] = useState<number[]>([]);
+  const [realEstate, setData] = useState<IApartment[]>([]);
   const [test, setTest] = useState(true);
+  const [filter, setFilter] = useState<IApartmentFilter>({
+    apartment: false,
+    incoming: false,
+    house: false,
+    commerce: false,
+    newlyBuilt: false,
+  });
+
+  const predictedView = realEstate.filter((x) => {
+    return x.price >= value[0] && x.price <= value[1]; // && (filter.housing && x.type === "house")
+  });
 
   const [value, setValue] = React.useState([100, 37]);
   const stateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -98,6 +111,18 @@ const Home = () => {
   const handleChange = () => {
     setTest((prev) => !prev);
   };
+  const getMinAndMaxPrice = (data: IApartment[]) => {
+    const prices = data.map((x: IApartment) => x.price);
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    return [min, max];
+  };
+
+  useEffect(() => {
+    setValue(getMinAndMaxPrice(data));
+    setSlideValues(getMinAndMaxPrice(data));
+    setData(data);
+  }, [data]);
 
   const paginate = function (array: any, index: any, size: any) {
     // transform values
@@ -113,18 +138,6 @@ const Home = () => {
       ),
     ];
   };
-  /*
-  const testFilter = data.filter((d: any) =>
-    d.model.toLowerCase().includes(mainFilter)
-  );*/
-  /*
-  const carFilter =
-    searchInput.length > 0
-      ? testFilter.filter((d: any) =>
-          d.model.toLowerCase().includes(searchInput.toLowerCase())
-        )
-      : data;*/
-
   const paginatedApartments = paginate(data, page, 4);
 
   const pageButtons = [] as any;
@@ -170,82 +183,6 @@ const Home = () => {
   const LeftGridDesktop = () => {
     return (
       <Grid className={classes.leftGrid} item xs={2}>
-        <p>Velg tilgjengelighet</p>
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-                id="checkedTilSalgs"
-              />
-            }
-            label="Til salgs"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-                id="checkedTilLeie"
-              />
-            }
-            label="Til leie"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-                id="checkedSnartLedig"
-              />
-            }
-            label="Snart ledig"
-          />
-        </FormGroup>
-        <p>Velg type(TRYKK PÅ LEILIGHET FOR Å SE)</p>
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={test}
-                onChange={handleChange}
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label="Leilighet"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label="Hus"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                //checked={}
-                //onChange={}
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label="Kontorer"
-          />
-        </FormGroup>
-
         <Typography id="range-slider" gutterBottom>
           Prisklasse
         </Typography>
