@@ -56,7 +56,10 @@ const ContactForm = () => {
     data.newlyBuilt = true;*/
 
     console.log(data);
-    postData("http://localhost:1337/api/apartments/add", data).then((data) => {
+    postData(
+      "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/add",
+      data
+    ).then((data) => {
       setDatas("sending" + data.status);
       if (data.status === 200) {
         setDatas("Leilighet er lagt ut.");

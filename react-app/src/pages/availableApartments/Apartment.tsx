@@ -11,10 +11,7 @@ import {
   Checkbox,
   Container,
   FormControlLabel,
-  FormGroup,
-  Input,
   Slide,
-  Slider,
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
@@ -80,11 +77,12 @@ const useStyles = makeStyles({
 });
 
 const Home = () => {
-  const url = "http://localhost:1337/api/apartments/getlist";
+  const url =
+    "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/getlist";
 
   const { status, data } = useFetch(url);
   const [page, setPage] = useState(1);
-  const [searchInput, setSearchInput] = useState("");
+
   const [realEstate, setData] = useState<IApartment[]>([]);
 
   const [filter, setFilter] = useState<IApartmentFilter>({
@@ -111,10 +109,6 @@ const Home = () => {
     setData(data);
   }, [data]);
 
-  const stateChange = (event: any) => {
-    setSearchInput(event.target.value);
-    //if (searchInput.length >= 0) setPage(1);
-  };
   const handleChange = (event: any, value: number) => {
     setPage(value);
   };
