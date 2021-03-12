@@ -1,13 +1,6 @@
-import {
-  Button,
-  Input,
-  makeStyles,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Button, makeStyles, TextField, Typography } from "@material-ui/core";
 import { AcroFormCheckBox, jsPDF } from "jspdf";
-import DatePicker from "react-datepicker";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
 
@@ -441,7 +434,7 @@ const PdfComponent = () => {
           as={TextField}
           name="electrictyNumber"
           control={control}
-          defaultValue="Avtalt leieperiode"
+          defaultValue="STRØMMÅLERNR"
           variant="outlined"
           label=" STRØMMÅLERNR.:"
         ></Controller>
