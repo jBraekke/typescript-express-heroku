@@ -4,6 +4,7 @@ import { useHistory, useParams, NavLink } from 'react-router-dom';
 import Grid from "@material-ui/core/Grid";
 import { useFetch } from "../../hooks/useFetch";
 import { IApartment } from "../../interfaces/IApartment";
+import { Container } from "@material-ui/core";
 //import CarCard from "../../components/cards/CarCard";
 //import { Button, Input } from "@material-ui/core";
 
@@ -43,22 +44,29 @@ const ApartmentView = () => {
         setRealEstate(data);
         
       }
-    }, []);
+    });
 
   const classes = useStyles();
 
 
   const CornRow = () => {
-    return <><p>{realEstate?.address}</p></>;
+    return <><Grid item xs={12}>
+      <p>{realEstate?.title}</p>
+      <p>{realEstate?.address}</p>
+      <p>{realEstate?.description}</p>
+      <p>{realEstate?.city}</p>
+      </Grid></>;
   };
 
   return (
     <div className={classes.root}>
+      <Container>
       <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={3}>
+        <Grid container xs={12} spacing={3}>
           <CornRow />
         </Grid>
       </Grid>
+      </Container>
     </div>
   );
 };
