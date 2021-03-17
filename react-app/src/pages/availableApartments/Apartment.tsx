@@ -19,7 +19,7 @@ import {
 import theme from "../../themes/theme";
 import { useFetch } from "../../hooks/useFetch";
 import { IApartment, IApartmentFilter } from "../../interfaces/IApartment";
-
+import LoadingScreen from "../../components/loading/LoadingScreen"
 const useStyles = makeStyles({
   root: {},
   filterPaper: {},
@@ -84,6 +84,7 @@ const Home = () => {
 
   const { status, data } = useFetch(url2);
   const [page, setPage] = useState(1);
+  const [checked, setChecked] = useState(true);
 
   const [realEstate, setData] = useState<IApartment[]>([]);
 
@@ -109,11 +110,14 @@ const Home = () => {
 
   useEffect(() => {
     setData(data);
+
   }, [data]);
 
   const handleChange = (event: any, value: number) => {
     setPage(value);
   };
+
+
 
   const paginate = function (array: any, index: any, size: any) {
     // transform values
@@ -121,7 +125,7 @@ const Home = () => {
     index = index > 0 ? index - 1 : index;
     size = parseInt(size);
     size = size < 1 ? 1 : size;
-
+    
     // filter
     return [
       ...array.filter(
@@ -281,7 +285,6 @@ const Home = () => {
   const DesktopView = () => {
     return status === "fetched" ? (
       <div className={classes.root}>
-        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
           <Grid className={classes.gridheader} container spacing={0}>
             <Container>
               <Grid container item xs={12} spacing={3}>
@@ -290,16 +293,9 @@ const Home = () => {
               </Grid>
             </Container>
           </Grid>
-        </Slide>{" "}
       </div>
     ) : (
-      <div className={classes.test}>
-        <Avatar
-          className={classes.pictureLogo}
-          alt="logo"
-          src="vestengveien1.jpg"
-        />
-      </div>
+      <LoadingScreen></LoadingScreen>
     );
   };
 
