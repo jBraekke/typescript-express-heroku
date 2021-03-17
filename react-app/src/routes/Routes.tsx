@@ -9,6 +9,7 @@ import FrontpagePage from "../pages/home/HomePage";
 import PdfPage from "../pages/pdf/PdfPage";
 import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
+import ApartmentViewPage from "../pages/apartmentView/ApartmentViewPage";
 
 const Routes = () => (
   <Router>
@@ -19,6 +20,9 @@ const Routes = () => (
         </Route>
         <Route exact path="/welcome">
           <ApartmentPage />
+        </Route>
+        <Route exact path="/apartmentview/:id">
+          <ApartmentViewPage />
         </Route>
         <Route exact path="/contact">
           <ContactUsPage />
