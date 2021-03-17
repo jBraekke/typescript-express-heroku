@@ -16,7 +16,7 @@ export interface IContract {
   rentTime3: Number;
   rent1: Number;
   rent1a: Number;
-  rent2: Date;
+  rent2: Number;
   rent3: Date;
   rent4: Number;
   rent4a: Date;
@@ -48,7 +48,7 @@ function createHeaders(keys: any) {
     width: 110,
     height: 2,
     align: "center",
-    padding: 0,
+    
   }));
 }
 
@@ -75,11 +75,6 @@ const PdfComponent = () => {
   const classes = useStyles();
 
   const onSubmit = (data: IContract) => {
-    console.log(data);
-    console.log(moment(data.rentTime1).format("DD.MM.yyyy"));
-    console.log(moment(data.rentTime2).format("DD.MM.yyyy"));
-    console.log(moment(data.rent2).format("DD.MM.yyyy"));
-    console.log(moment(data.rent3).format("DD.MM.yyyy"));
     setFormData(data);
     PdfValues(data);
   };
@@ -94,17 +89,24 @@ const PdfComponent = () => {
     doc.line(10, 190, 200, 190);
     doc.line(10, 225, 200, 225);
     doc.line(10, 270, 200, 270);
-    doc.setFont("Book Antiqua", "bold");
-
+    
+    
+    
+    
+    doc.setFont("Times New Roman", "bold");
     doc.setFontSize(22);
-    doc.text("LEIEKONTRAKT", 100, 25, undefined, "center");
+    doc.text("LEIEKONTRAKT", 100, 20, undefined, "center");
 
-    doc.setFont("Book Antiqua", "normal");
+    doc.setFont("Times New Roman", "normal");
+    doc.setFontSize(14);
+    doc.setFont("Times New Roman", "bold");
+    doc.text("UTELEIER:", 10, 40);
+    doc.setFont("Times New Roman", "normal");
+    doc.text("Vestengveien Eiendomsutvikling A/S", 39, 40);
     doc.setFontSize(12);
-    doc.setFont("Book Antiqua", "bold");
-    doc.text("UTELEIER", 10, 40);
+    doc.setFont("Times New Roman", "bold");
     doc.text("EIENDOM", 10, 60);
-    doc.setFont("Book Antiqua", "normal");
+    doc.setFont("Times New Roman", "normal");
     doc.text("Adresse:" + " " + formData?.adress, 10, 65);
     doc.text("Bolignr:" + " " + formData?.apartmentNumber, 10, 70);
     doc.text("Avtalen gjelder:", 10, 75);
@@ -119,108 +121,100 @@ const PdfComponent = () => {
     checkBox.height = 7;
     doc.addField(checkBox);
 
-    doc.text("Leilighet", 106, 75);
+    doc.text("Leilighet", 99, 75);
     var checkBox1 = new AcroFormCheckBox();
     checkBox1.fieldName = "leilighet2";
     checkBox1.appearanceState = "Off";
-    checkBox1.x = 125;
+    checkBox1.x = 118;
     checkBox1.y = 70;
     checkBox1.width = 7;
     checkBox1.height = 7;
     checkBox1.color = "black";
     doc.addField(checkBox1);
 
-    doc.text("Rom", 150, 75);
+    doc.text("Rom", 138, 75);
     var checkBox2 = new AcroFormCheckBox();
     checkBox2.fieldName = "leilighet3";
     checkBox2.appearanceState = "Off";
-    checkBox2.x = 162;
+    checkBox2.x = 148;
     checkBox2.y = 70;
     checkBox2.width = 7;
     checkBox2.height = 7;
     checkBox2.color = "black";
     doc.addField(checkBox2);
 
-    doc.setFont("Book Antiqua", "bold");
+    doc.setFont("Times New Roman", "bold");
     doc.text("LEIETAKER", 10, 85);
-    doc.setFont("Book Antiqua", "normal");
+    doc.setFont("Times New Roman", "normal");
     doc.text("Navn:" + " " + formData?.name, 10, 90);
     doc.text("Personnr:" + " " + formData?.socialSecurityNumber, 10, 95);
     doc.text("Tlf/Mobil:" + " " + formData?.phoneNumber, 10, 100);
     doc.text("E-Post:" + " " + formData?.email, 10, 105);
 
-    doc.setFont("Book Antiqua", "bold");
+    doc.setFont("Times New Roman", "bold");
     doc.text("HUSSTANDSMEDLEMMER (som bor i samme leieenheten)", 10, 115);
     doc.table(20, 120, data, header, { autoSize: false });
 
-    doc.setFont("Book Antiqua", "bold");
+    doc.setFont("Times New Roman", "bold");
     doc.text("LEIETID", 10, 170);
-    doc.setFont("Book Antiqua", "normal");
+    doc.setFont("Times New Roman", "normal");
     doc.text(
-      "Leieforholdet løper fra den: " +
+      "Leieforholdet løper fra den:" +
         " " +
         moment(formData?.rentTime1).format("DD.MM.yyyy"),
       10,
       175
     );
     doc.text(
-      "Leieforholdet opphører uten oppsigelse den: " +
+      "Leieforholdet opphører uten oppsigelse den:" +
         " " +
-        moment(formData?.rentTime2).format("DD.MM.yyyy"),
+        moment(formData?.rentTime2).format("DD.MM.yyyy") + " " + "(minimum 3 år).",
       10,
       180
     );
-    doc.text("(minimum 3 år).", 150, 180);
+    
     doc.text(
-      "I avtalt leieperiode er det:" + " " + formData?.rentTime3,
+      "I avtalt leieperiode er det:" + " " + formData?.rentTime3  + " " + "måneder gjensidig oppsigelsestid.",
       10,
       185
     );
-    doc.text("måneder gjensidig oppsigelsestid.", 120, 185);
+    
 
-    doc.setFont("Book Antiqua", "bold");
+    doc.setFont("Times New Roman", "bold");
     doc.text("LEIE", 10, 195);
-    doc.setFont("Book Antiqua", "normal");
+    doc.setFont("Times New Roman", "normal");
 
-    doc.text("Leie Kr: " + " " + formData?.rent1, 10, 200);
-    doc.text("/ mnd, til konto " + " " + formData?.rent1a, 90, 200);
-    doc.text("i DNB Bank.", 170, 200);
+    doc.text("Leie Kr:" + " " + formData?.rent1 + ",-" + " " + "/ mnd, til konto" + " " + "15031579012" + " " + "i DNB Bank." , 10, 200);
+    
     doc.text(
-      "Leien betales forskuddsvis den: " +
+      "Leien betales forskuddsvis den:" +
         " " +
-        moment(formData?.rent2).format("DD.MM.yyyy"),
+        formData?.rent2 + "." + " " + "hver måned.",
       10,
       205
     );
-    doc.text("hver måned.", 135, 205);
+   
     doc.text(
-      "Første husleie betales innen : " +
+      "Første husleie betales innen :" +
         " " +
-        moment(formData?.rent3).format("DD.MM.yyyy"),
+        moment(formData?.rent3).format("DD.MM.yyyy") + " " + "til utleiers konto.",
       10,
       210
     );
-    doc.text("til utleiers konto.", 135, 210);
+    doc.setFontSize(12);
+    doc.setFont("Times New Roman", "normal");
     doc.text(
-      "Forskuddsleie Kr : " + " " + formData?.rent4 + " " + ",-",
-      10,
-      215
-    );
+      "Forskuddsleie Kr:" + " " + formData?.rent4 + ",-" + " " + "(=max. 2 mnd. husleie)," + " " + "betales innen" + " " + moment(formData?.rent4a).format("DD.MM.yyyy") + " " + "til utleiers konto.", 10, 215);  
+    doc.setFont("Times New Roman", "normal");
+    doc.setFontSize(12);
+    doc.setFont("Times New Roman", "italic");
     doc.text(
-      "(=max. 2 mnd. husleie), betales innen " +
-        " " +
-        moment(formData?.rent4a).format("DD.MM.yyyy"),
-      60,
-      215
-    );
-    doc.text("til utleiers konto.  ", 170, 215);
-    doc.text(
-      "Ved bruk av husleiegaranti er det leietakers plikt og til en hver tid passe på at denne er gyldig.       ",
+      "Ved bruk av husleiegaranti er det leietakers plikt og til en hver tid passe på at denne er gyldig.",
       10,
       220
     );
-
-    doc.setFont("Book Antiqua", "bold");
+    
+    doc.setFont("Times New Roman", "bold");
     doc.text("STRØM", 10, 230);
     doc.setFont("Book Antiqua", "normal");
     var checkBoxStrøm = new AcroFormCheckBox();
@@ -244,39 +238,49 @@ const PdfComponent = () => {
     doc.addField(checkBoxStrøm1);
 
     doc.text("Strøm er IKKE inkludert i husleien. ", 20, 239);
-    doc.setFont("Book Antiqua", "bold");
+    doc.setFont("Times New Roman", "bold");
     doc.text("Utleier tegner eget abon.ment på vegne av leietaker.", 84, 239);
-    doc.setFont("Book Antiqua", "normal");
+    doc.setFont("Times New Roman", "normal");
     doc.text("Strøm er inkludert i husleien.", 20, 247);
-    doc.setFont("Book Antiqua", "bold");
+    doc.setFont("Times New Roman", "bold");
     doc.text("STRØMMÅLERNR.: " + " " + formData?.electrictyNumber, 10, 257);
     doc.text(
       "DATO: " + " " + moment(formData?.electrictyDate).format("DD.MM.yyyy"),
-      90,
+      107,
       257
     );
-    doc.text("AVLEST:  ", 150, 257);
+    doc.text("AVLEST:  ", 160, 257);
     doc.setFontSize(12);
     doc.text("Spørsmål  leieenhet:  ", 10, 263);
-    doc.setFont("Book Antiqua", "normal");
-    doc.text(
-      "vestengveien@live.no/ Spørsmål  faktura: vestengveien.faktura@outlook.com ",
-      48,
-      263
-    );
-    doc.setFont("Book Antiqua", "bold");
+    doc.setFont("Times New Roman", "normal");
+    doc.setTextColor(6,69,173);
+    doc.text("vestengveien@live.no", 49, 263);
+    doc.setTextColor(0);
+    doc.text("/ Spørsmål til faktura: ", 88, 263);
+    doc.setTextColor(6,69,173);
+    doc.text("vestengveien.faktura@outlook.com", 127, 263);
+    doc.setTextColor(0);
+
+
+
+    doc.setFont("Times New Roman", "bold");
     doc.text("SIGNATURER", 10, 275);
     doc.text(
       "Utleier og leietaker vedtar herved ALLE punktene i denne avtalen, totalt 7 sider.",
       10,
       280
     );
-    doc.setFont("Book Antiqua", "normal");
+    doc.setFont("Times New Roman", "normal");
     doc.text("Sted/Dato:", 10, 287);
-    doc.text("Sted/Dato:", 150, 287);
-    doc.setFont("Book Antiqua", "bold");
+    doc.text("Sted/Dato:", 120, 287);
+    doc.setFont("Times New Roman", "bold");
     doc.text("Utleier:", 10, 295);
-    doc.text("Leietaker:", 150, 295);
+    doc.text("Leietaker:", 120, 295);
+    doc.setLineDashPattern([2, 2], 0);
+    doc.line(30, 287, 114, 287);
+    doc.line(140, 287, 200 , 287);
+    doc.line(27, 295, 115, 295);
+    doc.line(140, 295, 200 , 295);
     doc.save("satan.pdf");
   };
 
@@ -380,24 +384,11 @@ const PdfComponent = () => {
           variant="outlined"
           label=" Leie Kr i mnd"
         ></Controller>
-
-        <Controller
-          as={TextField}
-          name="rent1a"
-          control={control}
-          defaultValue="Kontonummer"
-          variant="outlined"
-          label=" til konto i DNB Bank (kontonummer)"
-        ></Controller>
-
-        <Typography>
-          Leien betales forskuddsvis den: dato hver måned.
-        </Typography>
         <Controller
           as={TextField}
           name="rent2"
-          type="Date"
-          variant="filled"
+          variant="outlined"
+          label=" Leien betales forskuddsvis den: x hver måned."
           control={control}
         ></Controller>
 
