@@ -1,4 +1,5 @@
 export interface IApartment {
+  _id: any;
   title: string;
   description: string;
   address: string;
