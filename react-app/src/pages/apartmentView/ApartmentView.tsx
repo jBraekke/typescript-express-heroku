@@ -4,7 +4,7 @@ import { useHistory, useParams, NavLink } from 'react-router-dom';
 import Grid from "@material-ui/core/Grid";
 import { useFetch } from "../../hooks/useFetch";
 import { IApartment } from "../../interfaces/IApartment";
-import { Container } from "@material-ui/core";
+import { Card, CardMedia, Container } from "@material-ui/core";
 //import CarCard from "../../components/cards/CarCard";
 //import { Button, Input } from "@material-ui/core";
 
@@ -38,11 +38,18 @@ const ApartmentView = () => {
     const params = useParams() as any;
   const { status, data } = useFetch(url2 + params.id);
   const [realEstate, setRealEstate] = useState<IApartment>();
+  const [imageRefresh, setimageRefresh] = useState({});
+  
     useEffect(() => {
       
       if (params.id) {
         setRealEstate(data);
-        
+        /*
+        setimageRefresh([{
+          imageSrc: './uploads/' + realEstate?.imagePath,
+          imageHash: Date.now()
+       }])
+    */
       }
     });
 
@@ -50,19 +57,54 @@ const ApartmentView = () => {
 
 
   const CornRow = () => {
-    return <><Grid item xs={12}>
+    return <>
+    
+        {realEstate?.imagePath ? (
+          <>
+            <CardMedia
+              component="img"
+              height="300"
+              alt="Apartment"
+              src={"./uploads/" + realEstate?.imagePath}
+              title="Apartment"
+            />
+          </>
+        ) : (
+          <>
+            <CardMedia
+              component="img"
+              height="300"
+              alt="Apartment2"
+              src="public/hus.jpg"
+              title="Apartment"
+            />
+          </>
+        )}
+    
+
+      <Grid container item xs={12}>
+    <Grid item xs={12}>
       <p>{realEstate?.title}</p>
       <p>{realEstate?.address}</p>
       <p>{realEstate?.description}</p>
       <p>{realEstate?.city}</p>
-      </Grid></>;
+      </Grid>
+      </Grid>
+      
+      
+      
+      
+      
+      
+      
+      </>;
   };
 
   return (
     <div className={classes.root}>
       <Container>
-      <Grid container spacing={1}>
-        <Grid container xs={12} spacing={3}>
+      <Grid container >
+        <Grid container xs={12}>
           <CornRow />
         </Grid>
       </Grid>
