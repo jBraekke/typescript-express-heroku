@@ -1,10 +1,11 @@
-import { Button, makeStyles, TextField, Typography } from "@material-ui/core";
+import { Button, Container, makeStyles, TextField, Typography } from "@material-ui/core";
 import { AcroFormCheckBox, jsPDF } from "jspdf";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
 
 export interface IContract {
+  fileName: string;
   adress: string;
   apartmentNumber: Number;
   name: string;
@@ -24,20 +25,7 @@ export interface IContract {
   electrictyDate: Date;
 }
 
-var data = [
-  {
-    Navn: "Robert André Lundeby",
-    Personnr: "123543412123",
-  },
-  {
-    Navn: "Kristine Olafsen",
-    Personnr: "123523123",
-  },
-  {
-    Navn: "Henriette Jørgesen Olsen",
-    Personnr: "123523123",
-  },
-];
+
 
 var header = createHeaders(["Navn", "Personnr"]);
 
@@ -80,6 +68,20 @@ const PdfComponent = () => {
   };
 
   const PdfValues = (formData: IContract) => {
+    var data = [
+      {
+        Navn: "Robert André Lundeby",
+        Personnr: "123543412123",
+      },
+      {
+        Navn: "Kristine Olafsen",
+        Personnr: "123523123",
+      },
+      {
+        Navn: "Henriette Jørgesen Olsen",
+        Personnr: "123523123",
+      },
+    ];
     var doc = new jsPDF();
 
     doc.line(10, 110, 200, 110);
@@ -281,11 +283,12 @@ const PdfComponent = () => {
     doc.line(140, 287, 200 , 287);
     doc.line(27, 295, 115, 295);
     doc.line(140, 295, 200 , 295);
-    doc.save("satan.pdf");
+    doc.save(formData?.fileName + ".pdf");
   };
 
   return (
     <>
+    <Container>
       <Typography variant="h4" component="h2">
         Opprett kontrakt
       </Typography>
@@ -296,6 +299,15 @@ const PdfComponent = () => {
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <Controller
+          as={TextField}
+          name="fileName"
+          control={control}
+          defaultValue="Filnavn"
+          variant="outlined"
+          label="Navnet til pdf dokumentet"
+        ></Controller>
+
         <Controller
           as={TextField}
           name="adress"
@@ -348,6 +360,24 @@ const PdfComponent = () => {
           defaultValue="Email"
           variant="outlined"
           label="Skriv inn epost til leietaker.."
+        ></Controller>
+
+        <Controller
+          as={TextField}
+          name="memberName1"
+          control={control}
+          defaultValue="Medlem1"
+          variant="outlined"
+          label="Skriv inn navn til husstandsmedlem"
+        ></Controller>
+
+        <Controller
+          as={TextField}
+          name="memberSSN1"
+          control={control}
+          defaultValue="MedlemSSN1"
+          variant="outlined"
+          label="Skriv inn fødselsnummer til husstandsmedlem"
         ></Controller>
 
         <Typography>Leieforholdet løper fra den..</Typography>
@@ -439,8 +469,11 @@ const PdfComponent = () => {
           control={control}
         ></Controller>
 
+
+
         <Button type="submit"> Lag kontrakt </Button>
       </form>
+      </Container>
     </>
   );
 };
