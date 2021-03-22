@@ -1,4 +1,4 @@
-import { Button, Container, makeStyles, TextField, Typography } from "@material-ui/core";
+import { Button, Container, FormGroup, makeStyles, TextField, Typography } from "@material-ui/core";
 import { AcroFormCheckBox, jsPDF } from "jspdf";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -23,6 +23,14 @@ export interface IContract {
   rent4a: Date;
   electrictyNumber: Number;
   electrictyDate: Date;
+  memberName1: string;
+  memberSSN1: string;
+  memberName2: string;
+  memberSSN2: string;
+  memberName3: string;
+  memberSSN3: string;
+  memberName4: string;
+  memberSSN4: string;
 }
 
 
@@ -54,6 +62,12 @@ const useStyles = makeStyles((theme) => ({
   error: {
     color: "red",
   },
+  member: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: theme.spacing(2),
+    
+  }
 }));
 
 const PdfComponent = () => {
@@ -70,92 +84,97 @@ const PdfComponent = () => {
   const PdfValues = (formData: IContract) => {
     var data = [
       {
-        Navn: "Robert André Lundeby",
-        Personnr: "123543412123",
+        Navn: formData?.memberName1,
+        Personnr: formData?.memberSSN1,
       },
       {
-        Navn: "Kristine Olafsen",
-        Personnr: "123523123",
+        Navn: formData?.memberName2,
+        Personnr: formData?.memberSSN2,
       },
       {
-        Navn: "Henriette Jørgesen Olsen",
-        Personnr: "123523123",
+        Navn: formData?.memberName3,
+        Personnr: formData?.memberSSN3,
+      },
+      {
+        Navn: formData?.memberName4,
+        Personnr: formData?.memberSSN4,
       },
     ];
     var doc = new jsPDF();
 
-    doc.line(10, 110, 200, 110);
+    doc.line(10, 100, 200, 100);
 
-    doc.line(10, 80, 200, 80);
+    doc.line(10, 70, 200, 70);
     doc.line(10, 165, 200, 165);
     doc.line(10, 190, 200, 190);
     doc.line(10, 225, 200, 225);
     doc.line(10, 270, 200, 270);
     
-    
-    
+    var img = new Image();
+    img.src = "vestengveien1.jpg"
+    doc.addImage(img, 'png', 150, 20, 30, 30)
     
     doc.setFont("Times New Roman", "bold");
     doc.setFontSize(22);
-    doc.text("LEIEKONTRAKT", 100, 20, undefined, "center");
+    doc.text("LEIEKONTRAKT", 100, 10, undefined, "center");
 
     doc.setFont("Times New Roman", "normal");
     doc.setFontSize(14);
     doc.setFont("Times New Roman", "bold");
-    doc.text("UTELEIER:", 10, 40);
+    doc.text("UTELEIER", 10, 30);
     doc.setFont("Times New Roman", "normal");
-    doc.text("Vestengveien Eiendomsutvikling A/S", 39, 40);
+    doc.text("Vestengveien Eiendomsutvikling A/S", 10, 40);
     doc.setFontSize(12);
     doc.setFont("Times New Roman", "bold");
-    doc.text("EIENDOM", 10, 60);
+    doc.text("EIENDOM", 10, 50);
     doc.setFont("Times New Roman", "normal");
-    doc.text("Adresse:" + " " + formData?.adress, 10, 65);
-    doc.text("Bolignr:" + " " + formData?.apartmentNumber, 10, 70);
-    doc.text("Avtalen gjelder:", 10, 75);
+    doc.text("Adresse:" + " " + formData?.adress, 10, 55);
+    doc.text("Bolignr:" + " " + formData?.apartmentNumber, 10, 60);
+    doc.text("Avtalen gjelder:", 10, 65);
 
-    doc.text("Hus", 70, 75);
+    doc.text("Hus", 70, 65);
     var checkBox = new AcroFormCheckBox();
     checkBox.fieldName = "leilighet1";
     checkBox.appearanceState = "Off";
     checkBox.x = 80;
-    checkBox.y = 70;
+    checkBox.y = 60;
     checkBox.width = 7;
     checkBox.height = 7;
     doc.addField(checkBox);
 
-    doc.text("Leilighet", 99, 75);
+    doc.text("Leilighet", 99, 65);
     var checkBox1 = new AcroFormCheckBox();
     checkBox1.fieldName = "leilighet2";
     checkBox1.appearanceState = "Off";
     checkBox1.x = 118;
-    checkBox1.y = 70;
+    checkBox1.y = 60;
     checkBox1.width = 7;
     checkBox1.height = 7;
     checkBox1.color = "black";
     doc.addField(checkBox1);
 
-    doc.text("Rom", 138, 75);
+    doc.text("Rom", 138, 65);
     var checkBox2 = new AcroFormCheckBox();
     checkBox2.fieldName = "leilighet3";
     checkBox2.appearanceState = "Off";
     checkBox2.x = 148;
-    checkBox2.y = 70;
+    checkBox2.y = 60;
     checkBox2.width = 7;
     checkBox2.height = 7;
     checkBox2.color = "black";
     doc.addField(checkBox2);
 
     doc.setFont("Times New Roman", "bold");
-    doc.text("LEIETAKER", 10, 85);
+    doc.text("LEIETAKER", 10, 75);
     doc.setFont("Times New Roman", "normal");
-    doc.text("Navn:" + " " + formData?.name, 10, 90);
-    doc.text("Personnr:" + " " + formData?.socialSecurityNumber, 10, 95);
-    doc.text("Tlf/Mobil:" + " " + formData?.phoneNumber, 10, 100);
-    doc.text("E-Post:" + " " + formData?.email, 10, 105);
+    doc.text("Navn:" + " " + formData?.name, 10, 80);
+    doc.text("Personnr:" + " " + formData?.socialSecurityNumber, 10, 85);
+    doc.text("Tlf/Mobil:" + " " + formData?.phoneNumber, 10, 90);
+    doc.text("E-Post:" + " " + formData?.email, 10, 95);
 
     doc.setFont("Times New Roman", "bold");
-    doc.text("HUSSTANDSMEDLEMMER (som bor i samme leieenheten)", 10, 115);
-    doc.table(20, 120, data, header, { autoSize: false });
+    doc.text("HUSSTANDSMEDLEMMER (som bor i samme leieenheten)", 10, 105);
+    doc.table(20, 110, data, header, { autoSize: false });
 
     doc.setFont("Times New Roman", "bold");
     doc.text("LEIETID", 10, 170);
@@ -241,7 +260,7 @@ const PdfComponent = () => {
 
     doc.text("Strøm er IKKE inkludert i husleien. ", 20, 239);
     doc.setFont("Times New Roman", "bold");
-    doc.text("Utleier tegner eget abon.ment på vegne av leietaker.", 84, 239);
+    doc.text("Utleier tegner eget abonnement på vegne av leietaker.", 84, 239);
     doc.setFont("Times New Roman", "normal");
     doc.text("Strøm er inkludert i husleien.", 20, 247);
     doc.setFont("Times New Roman", "bold");
@@ -303,7 +322,7 @@ const PdfComponent = () => {
           as={TextField}
           name="fileName"
           control={control}
-          defaultValue="Filnavn"
+          defaultValue=""
           variant="outlined"
           label="Navnet til pdf dokumentet"
         ></Controller>
@@ -312,7 +331,7 @@ const PdfComponent = () => {
           as={TextField}
           name="adress"
           control={control}
-          defaultValue="Adresse"
+          defaultValue=""
           variant="outlined"
           label="Skriv inn addresse..."
         ></Controller>
@@ -321,7 +340,7 @@ const PdfComponent = () => {
           as={TextField}
           name="apartmentNumber"
           control={control}
-          defaultValue="Bolignr"
+          defaultValue=""
           variant="outlined"
           label="Skriv inn bolignr.."
         ></Controller>
@@ -330,7 +349,7 @@ const PdfComponent = () => {
           as={TextField}
           name="name"
           control={control}
-          defaultValue="Name"
+          defaultValue=""
           variant="outlined"
           label="Skriv inn navn på leietaker.."
         ></Controller>
@@ -339,7 +358,7 @@ const PdfComponent = () => {
           as={TextField}
           name="socialSecurityNumber"
           control={control}
-          defaultValue="Personnummer"
+          defaultValue=""
           variant="outlined"
           label="Skriv inn personnummer til leietaker.."
         ></Controller>
@@ -348,7 +367,7 @@ const PdfComponent = () => {
           as={TextField}
           name="phoneNumber"
           control={control}
-          defaultValue="Telefonnummer"
+          defaultValue=""
           variant="outlined"
           label="Skriv inn telefonnummer til leietaker.."
         ></Controller>
@@ -357,16 +376,17 @@ const PdfComponent = () => {
           as={TextField}
           name="email"
           control={control}
-          defaultValue="Email"
+          defaultValue=""
           variant="outlined"
           label="Skriv inn epost til leietaker.."
         ></Controller>
 
+      <FormGroup className={classes.member}>
         <Controller
           as={TextField}
           name="memberName1"
           control={control}
-          defaultValue="Medlem1"
+          defaultValue=""
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
         ></Controller>
@@ -375,10 +395,68 @@ const PdfComponent = () => {
           as={TextField}
           name="memberSSN1"
           control={control}
-          defaultValue="MedlemSSN1"
+          defaultValue=""
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
         ></Controller>
+      </FormGroup>
+      <FormGroup className={classes.member}>
+        <Controller
+          as={TextField}
+          name="memberName2"
+          control={control}
+          defaultValue=""
+          variant="outlined"
+          label="Skriv inn navn til husstandsmedlem"
+        ></Controller>
+
+        <Controller
+          as={TextField}
+          name="memberSSN2"
+          control={control}
+          defaultValue=""
+          variant="outlined"
+          label="Skriv inn fødselsnummer til husstandsmedlem"
+        ></Controller>
+      </FormGroup>
+      <FormGroup className={classes.member}>
+        <Controller
+          as={TextField}
+          name="memberName3"
+          control={control}
+          defaultValue=""
+          variant="outlined"
+          label="Skriv inn navn til husstandsmedlem"
+        ></Controller>
+
+        <Controller
+          as={TextField}
+          name="memberSSN3"
+          control={control}
+          defaultValue=""
+          variant="outlined"
+          label="Skriv inn fødselsnummer til husstandsmedlem"
+        ></Controller>
+      </FormGroup>
+      <FormGroup className={classes.member}>
+        <Controller
+          as={TextField}
+          name="memberName4"
+          control={control}
+          defaultValue=""
+          variant="outlined"
+          label="Skriv inn navn til husstandsmedlem"
+        ></Controller>
+
+        <Controller
+          as={TextField}
+          name="memberSSN4"
+          control={control}
+          defaultValue=""
+          variant="outlined"
+          label="Skriv inn fødselsnummer til husstandsmedlem"
+        ></Controller>
+      </FormGroup>
 
         <Typography>Leieforholdet løper fra den..</Typography>
         <Controller
@@ -401,7 +479,7 @@ const PdfComponent = () => {
           as={TextField}
           name="rentTime3"
           control={control}
-          defaultValue="Avtalt leieperiode"
+          defaultValue=""
           variant="outlined"
           label=" I avtalt leieperiode er det x måneder gjensidig oppsigelsestid.."
         ></Controller>
@@ -410,7 +488,7 @@ const PdfComponent = () => {
           as={TextField}
           name="rent1"
           control={control}
-          defaultValue="Leiepris"
+          defaultValue=""
           variant="outlined"
           label=" Leie Kr i mnd"
         ></Controller>
@@ -437,7 +515,7 @@ const PdfComponent = () => {
           as={TextField}
           name="rent4"
           control={control}
-          defaultValue="Forskuddsleie"
+          defaultValue=""
           variant="outlined"
           label=" Forskuddsleie Kr : (=max. 2 mnd. husleie)"
         ></Controller>
@@ -455,7 +533,7 @@ const PdfComponent = () => {
           as={TextField}
           name="electrictyNumber"
           control={control}
-          defaultValue="STRØMMÅLERNR"
+          defaultValue=""
           variant="outlined"
           label=" STRØMMÅLERNR.:"
         ></Controller>
