@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import { Link, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, NavLink } from "react-router-dom";
 import { IApartmentProps } from "../../interfaces/IApartment";
 
 const useStyles = makeStyles({
@@ -31,14 +31,12 @@ const ApartmentCard = ({ props }: IApartmentProps) => {
   const classes = useStyles();
 
   return (
-    <Link
-      {...{
-        component: RouterLink,
-        to: "/welcome",
-        color: "inherit",
-        style: { textDecoration: "none" },
-        key: "label",
-      }}
+    <RouterLink to={`apartmentview/${props._id}`}
+    {...{
+      color: "inherit",
+      style: { textDecoration: "none" },
+      key: "label",
+    }} 
     >
       <Card
         className={classes.root}
@@ -87,7 +85,7 @@ const ApartmentCard = ({ props }: IApartmentProps) => {
           )}
         </CardContent>
       </Card>
-    </Link>
+    </RouterLink>
   );
 };
 
