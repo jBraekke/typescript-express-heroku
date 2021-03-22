@@ -57,7 +57,7 @@ const ContactForm = () => {
 
     console.log(data);
     postData(
-      "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/add",
+      "/api/apartments/add",
       data
     ).then((data) => {
       setDatas("sending" + data.status);
@@ -72,7 +72,7 @@ const ContactForm = () => {
     if (images) {
       const formData = new FormData();
       formData.append("image", images);
-      postImage("http://localhost:1337/api/multer/uploadimage", formData);
+      postImage("/api/multer/uploadimage", formData);
     }
   };
 
