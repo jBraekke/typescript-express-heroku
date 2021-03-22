@@ -109,7 +109,7 @@ const ApartmentView = () => {
   const url =
   "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/get";
   const url2 =
-  "http://localhost:1337/api/apartments/";
+  "/api/apartments/";
   /*const getData = () => {
     fetch(url2 + params.id, {
       headers: {
