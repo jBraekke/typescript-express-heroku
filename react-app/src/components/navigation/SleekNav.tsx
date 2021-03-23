@@ -138,7 +138,7 @@ const SleekNav = () => {
           <Avatar
             className={classes.pictureLogo}
             alt="logo"
-            src="vestengveien1.jpg"
+            src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
         </Box>
         <Box className={classes.logo}>{SleekDrawerNav}</Box>
@@ -153,7 +153,7 @@ const SleekNav = () => {
           <Avatar
             className={classes.pictureLogo}
             alt="logo"
-            src="vestengveien1.jpg"
+            src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
         </Box>
         <Box>
@@ -173,7 +173,7 @@ const SleekNav = () => {
           <Avatar
             className={classes.pictureLogo}
             alt="logo"
-            src="vestengveien1.jpg"
+            src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
 
           <Typography variant="h4" component="h4" className={classes.sexyText}>
