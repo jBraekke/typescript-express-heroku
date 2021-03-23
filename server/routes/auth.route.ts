@@ -1,14 +1,42 @@
 import express from "express";
 import { to } from "await-to-js";
-import { verifyPassword, hashPassword } from "../auth/utils";
+import { verifyPassword, hashPassword, getRedirectUrl } from "../auth/utils";
 import { login } from "../auth/strategies/jwt";
-import { createUser, getUserByEmail } from "../database/user";
+import { createUser, getUserByEmail } from "../service/user.service";
+
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  const [err, user]: any = await to(getUserByEmail(email));
 
-  return res.status(200).json({ success: true, data: null });
+  const authenticationError = () => {
+    return res
+      .status(500)
+      .json({ success: false, data: "Authentication error!" });
+  };
+
+  if (!(await verifyPassword(password, user.password))) {
+    console.error("Passwords do not match");
+    return authenticationError();
+  }
+
+  const [loginErr, token] = await to(login(req, user));
+
+  if (loginErr) {
+    console.error("Log in error", loginErr);
+    return authenticationError();
+  }
+
+  return res
+    .status(200)
+    .cookie("jwt", token, {
+      httpOnly: true,
+    })
+    .json({
+      success: true,
+      data: getRedirectUrl(user.role),
+    });
 });
 
 router.post("/register", async (req, res) => {
@@ -25,7 +53,7 @@ router.post("/register", async (req, res) => {
     });
   }
 
-  let [err, user] = await to(
+  let [err, user]: any = await to(
     createUser({
       firstName,
       lastName,
@@ -40,7 +68,7 @@ router.post("/register", async (req, res) => {
       .json({ success: false, data: "Email is already taken" });
   }
 
-  const [loginErr, token] = await to(login(req, user));
+  const [loginErr, token]: any = await to(login(req, user));
 
   if (loginErr) {
     console.error(loginErr);
@@ -56,7 +84,7 @@ router.post("/register", async (req, res) => {
     })
     .json({
       success: true,
-      data: "/",
+      data: getRedirectUrl(user.role),
     });
 });
 

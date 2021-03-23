@@ -5,7 +5,7 @@ import User from "../model/userSchema";
 import { ROLES } from "../utils";
 
 const setup = () => {
-  passport.serializeUser((user, done) => done(null, user._id));
+  passport.serializeUser((user: any, done) => done(null, user._id));
 
   passport.deserializeUser(async (id, done) => {
     try {

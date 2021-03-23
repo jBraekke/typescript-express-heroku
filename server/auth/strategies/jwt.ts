@@ -6,6 +6,7 @@ import { getUserById } from "../../service/user.service";
 import { signToken } from "../utils";
 
 const JWTStrategy = passportJWT.Strategy;
+
 const strategy = () => {
   const strategyOptions = {
     jwtFromRequest: (req) => req.cookies.jwt,
@@ -19,6 +20,7 @@ const strategy = () => {
     if (err) {
       return cb(err);
     }
+
     req.user = user;
     return cb(null, user);
   };
@@ -28,7 +30,13 @@ const strategy = () => {
 
 const login = (req, user) => {
   return new Promise((resolve, reject) => {
-    // TODO
+    req.login(user, { session: false }, (err) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(signToken(user));
+    });
   });
 };
 
