@@ -4,10 +4,14 @@ import { useHistory, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { useFetch } from "../../hooks/useFetch";
 import { IApartment } from "../../interfaces/IApartment";
+import SendIcon from "@material-ui/icons/Send";
+import Button from "@material-ui/core/Button";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import {
   Box,
-  Button,
   Card,
+  CardActions,
   CardContent,
   CardMedia,
   Container,
@@ -29,27 +33,59 @@ const useStyles = makeStyles({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
+
   informationText: {
     marginLeft: theme.spacing(5),
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(2),
+  },
+
+  description: {
+    textAlign: "left",
   },
 
   secondInformationText: {
     float: "right",
-    marginRight: theme.spacing(20),
+    marginRight: theme.spacing(10),
     fontWeight: "bold",
   },
   secondInformationTextMobile: {
-    marginLeft: theme.spacing(7),
+    marginLeft: theme.spacing(2),
     fontWeight: "bold",
   },
 
   cardContentMobile: {
     marginTop: theme.spacing(10),
   },
+  card: {
+    marginRight: theme.spacing(5),
+  },
 
   container: {
     //textAlign: "center",
+    marginTop: theme.spacing(2),
+  },
+  sendossmail: {
+    fontWeight: "bold",
+    fontSize: 16,
+    textDecoration: "underline",
+    textUnderlineOffset: "5px",
+  },
+  sendossmail2: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  sendossmail3: {
+    fontSize: 16,
+  },
+
+  månedsleie: {
+    fontSize: 22,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
+  sendossmail4: {
+    fontSize: 18,
+    fontWeight: "bold",
     marginTop: theme.spacing(2),
   },
   button: {
@@ -61,7 +97,10 @@ const useStyles = makeStyles({
     fontSize: "20px",
     fontFamiliy: "Garamond, serif",
     fontWeight: "bold",
-    color: "lightgray",
+    color: "white",
+    marginTop: theme.spacing(20),
+    alignItems: "center",
+    justifyContent: "center",
 
     "&:hover": {
       opacity: "80%",
@@ -131,6 +170,11 @@ const ApartmentView = () => {
   const { status, data } = useFetch(url2 + params.id);
   const [realEstate, setRealEstate] = useState<IApartment>();
   const [imageRefresh, setimageRefresh] = useState({});
+
+  const boolAnswers = {
+    YES: "Ja",
+    NO: "Nei",
+  };
 
   useEffect(() => {
     if (params.id) {
@@ -203,9 +247,9 @@ const ApartmentView = () => {
               component="h6"
               className={classes.informationText}
             >
-              Månedsleie:{" "}
+              Pris pr. måned:{" "}
               <span className={classes.secondInformationTextMobile}>
-                {realEstate?.price}
+                {realEstate?.price} kr
               </span>{" "}
             </Typography>
             <Typography
@@ -224,8 +268,8 @@ const ApartmentView = () => {
               className={classes.informationText}
             >
               Husleiegaranti:{" "}
-              <span className={classes.secondInformationText}>
-                {realEstate?.rentGuarantee}
+              <span className={classes.secondInformationTextMobile}>
+                {realEstate?.rentGuarantee ? boolAnswers.YES : boolAnswers.NO}
               </span>{" "}
             </Typography>
             <Typography
@@ -235,7 +279,7 @@ const ApartmentView = () => {
             >
               Mulighet for parkering:{" "}
               <span className={classes.secondInformationTextMobile}>
-                {realEstate?.parking}
+                {realEstate?.parking ? boolAnswers.YES : boolAnswers.NO}
               </span>{" "}
             </Typography>
             <Typography
@@ -358,17 +402,17 @@ const ApartmentView = () => {
           </>
         )}
 
-        <Grid item xs={7}>
-          <Typography
-            variant="h4"
-            component="h4"
-            className={classes.headerAddress}
-          >
-            Oversikt
-          </Typography>
-        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Typography
+              variant="h4"
+              component="h4"
+              className={classes.headerAddress}
+            >
+              Oversikt
+            </Typography>
+          </Grid>
 
-        <Grid container item xs={12}>
           <Grid item xs={4}>
             <Typography
               variant="h6"
@@ -387,7 +431,7 @@ const ApartmentView = () => {
             >
               Husleiegaranti:{" "}
               <span className={classes.secondInformationText}>
-                {realEstate?.rentGuarantee}
+                {realEstate?.rentGuarantee ? boolAnswers.YES : boolAnswers.NO}
               </span>{" "}
             </Typography>
             <Typography
@@ -397,8 +441,23 @@ const ApartmentView = () => {
             >
               Mulighet for parkering:{" "}
               <span className={classes.secondInformationText}>
-                {realEstate?.parking}
+                {realEstate?.parking ? boolAnswers.YES : boolAnswers.NO}
               </span>{" "}
+            </Typography>
+
+            <Typography
+              variant="h4"
+              component="h4"
+              className={classes.headerAddress}
+            >
+              {realEstate?.title}
+            </Typography>
+            <Typography
+              variant="h6"
+              component="h6"
+              className={classes.informationText}
+            >
+              {realEstate?.description}
             </Typography>
           </Grid>
 
@@ -434,42 +493,103 @@ const ApartmentView = () => {
               </span>{" "}
             </Typography>
           </Grid>
-
           <Grid item xs={4}>
-            <Card>
+            <Card className={classes.card}>
+              <CardMedia
+                component="img"
+                height="300"
+                alt="Apartment"
+                src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
+                title="vestengveien"
+              />
+
               <CardContent>
-                <Typography variant="h4" align={"center"} component="h2">
-                  Kontakt oss om leilighet
+                <Typography
+                  variant="h6"
+                  align={"center"}
+                  component="h6"
+                  className={classes.sendossmail}
+                >
+                  Vestengveien Eiendomsutvikling AS
+                </Typography>
+                <Typography
+                  variant="h6"
+                  align={"center"}
+                  component="h6"
+                  className={classes.sendossmail3}
+                >
+                  Telefon:{" "}
+                  <span className={classes.sendossmail2}> {91614232} </span>
+                </Typography>
+
+                <Typography
+                  variant="h6"
+                  align={"center"}
+                  component="h6"
+                  className={classes.sendossmail3}
+                >
+                  Addresse:{" "}
+                  <span className={classes.sendossmail2}>
+                    {" "}
+                    {"Lilletuneveien 61B"}{" "}
+                  </span>
+                </Typography>
+                <br />
+                <Divider />
+                <Typography
+                  variant="h6"
+                  align={"center"}
+                  component="h6"
+                  className={classes.månedsleie}
+                >
+                  Pris pr. måned:{" "}
+                  <span className={classes.sendossmail4}>
+                    {realEstate?.price} kr
+                  </span>
+                </Typography>
+                <Divider />
+
+                <Typography
+                  variant="h6"
+                  align={"center"}
+                  component="h6"
+                  className={classes.sendossmail4}
+                >
+                  Kontakt oss på mail!
                 </Typography>
                 <br />
 
                 <br />
-                <Button className={classes.button}>Send oss en mail</Button>
-                <br />
-                <Button className={classes.buttonRediger}>
+              </CardContent>
+              <CardActions style={{ justifyContent: "center" }}>
+                <Button
+                  variant={"contained"}
+                  color="primary"
+                  endIcon={<SendIcon></SendIcon>}
+                  size={"large"}
+                >
+                  Send oss en mail
+                </Button>
+
+                {/* <Button
+                  variant={"contained"}
+                  color="primary"
+                  endIcon={<EditIcon></EditIcon>}
+                  size={"large"}
+                >
                   Rediger annonse
                 </Button>
-                <br />
-                <Button className={classes.buttonSlett}>Slett annonse</Button>
-              </CardContent>
-            </Card>
-          </Grid>
 
-          <Grid item xs={6}>
-            <Typography
-              variant="h2"
-              component="h2"
-              //className={classes.headerAddress}
-            >
-              {realEstate?.title}
-            </Typography>
-            <Typography
-              variant="h6"
-              component="h6"
-              //className={classes.informationText}
-            >
-              {realEstate?.description}
-            </Typography>
+                <Button
+                  variant={"contained"}
+                  color="primary"
+                  endIcon={<DeleteIcon></DeleteIcon>}
+                  size={"large"}
+                >
+                  Slett annonse
+                </Button> */}
+              </CardActions>
+            </Card>
           </Grid>
         </Grid>
       </>
