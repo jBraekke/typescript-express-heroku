@@ -9,7 +9,8 @@ import * as compression from "compression";
 import * as dotenv from "dotenv";
 import { textSpanIsEmpty } from "typescript";
 import connectDatabase from "./config/db";
-
+import cookieParser from "cookie-parser";
+import passport from "passport";
 //const swaggerUi = require("swagger-ui-express");
 //const swaggerDocument = require("../swagger.json");
 
@@ -26,6 +27,8 @@ class App {
     const router = express.Router();
     this.express.use(express.urlencoded({ extended: false }));
     this.express.use(express.json());
+    this.express.use(cookieParser());
+    this.express.use(passport.initialize());
     //router.use("/api-docs", swaggerUi.serve);
     //router.get("/api-docs", swaggerUi.setup(swaggerDocument));
     this.express.use(
