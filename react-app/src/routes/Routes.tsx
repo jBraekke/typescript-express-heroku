@@ -10,6 +10,7 @@ import PdfPage from "../pages/pdf/PdfPage";
 import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
 import ApartmentViewPage from "../pages/apartmentView/ApartmentViewPage";
+import RegisterPage from "../pages/register/RegisterPage";
 
 const Routes = () => (
   <Router>
@@ -42,6 +43,10 @@ const Routes = () => (
 
         <Route exact path="/pdf">
           <PdfPage />
+        </Route>
+
+        <Route exact path="/createuser">
+          <RegisterPage />
         </Route>
 
 

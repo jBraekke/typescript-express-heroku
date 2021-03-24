@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 import { to } from "await-to-js";
 import { verifyPassword, hashPassword, getRedirectUrl } from "../auth/utils";
 import { login } from "../auth/strategies/jwt";

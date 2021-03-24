@@ -1,5 +1,5 @@
-import passport from "passport";
-import passportJWT from "passport-jwt";
+import * as passport from "passport";
+import * as passportJWT from "passport-jwt";
 import { to } from "await-to-js";
 
 import { getUserById } from "../../service/user.service";

@@ -1,5 +1,5 @@
 import passport from "passport";
-import passportFacebook from "passport-facebook";
+import * as passportFacebook from "passport-facebook";
 import { to } from "await-to-js";
 
 import { getUserByProviderId, createUser } from "../../service/user.service";

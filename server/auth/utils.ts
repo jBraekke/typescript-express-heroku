@@ -1,6 +1,6 @@
-import passport from "passport";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import * as passport from "passport";
+import * as jwt from "jsonwebtoken";
+import * as bcrypt from "bcrypt";
 import User from "../model/userSchema";
 import { ROLES } from "../utils";
 

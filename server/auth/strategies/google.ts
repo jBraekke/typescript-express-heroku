@@ -1,5 +1,5 @@
 import passport from "passport";
-import passportGoogle from "passport-google-oauth";
+import * as passportGoogle from "passport-google-oauth";
 import { to } from "await-to-js";
 
 import { getUserByProviderId, createUser } from "../../service/user.service";
