@@ -146,8 +146,6 @@ const useStyles = makeStyles({
 });
 
 const ApartmentView = () => {
-  const url =
-    "https://vestengveien-eiendomsutvikling.herokuapp.com/api/apartments/get";
   const url2 = "/api/apartments/";
   /*const getData = () => {
     fetch(url2 + params.id, {
@@ -596,6 +594,251 @@ const ApartmentView = () => {
     );
   };
 
+  const TestDisplay = () => {
+    return (
+      <>
+        <Grid item xs={12}>
+          <Typography
+            variant="h2"
+            component="h2"
+            className={classes.headerAddress}
+          >
+            {realEstate?.address}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6" component="h6">
+            {realEstate?.city}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          {realEstate?.imagePath ? (
+            <>
+              <CardMedia
+                component="img"
+                height="300"
+                alt="Apartment"
+                src={
+                  process.env.PUBLIC_URL + "/uploads/" + realEstate.imagePath
+                }
+                title="Apartment"
+              />
+            </>
+          ) : (
+            <>
+              <CardMedia
+                component="img"
+                height="500"
+                alt="Apartment"
+                src={process.env.PUBLIC_URL + "/hus.jpg"}
+                title="Apartment"
+              />
+            </>
+          )}
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Grid container xs={12}>
+            <Grid item xs={12}>
+              {" "}
+              <Typography
+                variant="h4"
+                component="h4"
+                className={classes.headerAddress}
+              >
+                Oversikt
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography
+                variant="h6"
+                component="h6"
+                className={classes.informationText}
+              >
+                Depositum:{" "}
+                <span className={classes.secondInformationText}>
+                  {realEstate?.deposit}
+                </span>{" "}
+              </Typography>
+              <Typography
+                variant="h6"
+                component="h6"
+                className={classes.informationText}
+              >
+                Husleiegaranti:{" "}
+                <span className={classes.secondInformationText}>
+                  {realEstate?.rentGuarantee ? boolAnswers.YES : boolAnswers.NO}
+                </span>{" "}
+              </Typography>
+              <Typography
+                variant="h6"
+                component="h6"
+                className={classes.informationText}
+              >
+                Mulighet for parkering:{" "}
+                <span className={classes.secondInformationText}>
+                  {realEstate?.parking ? boolAnswers.YES : boolAnswers.NO}
+                </span>{" "}
+              </Typography>
+              <Divider />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography
+                variant="h6"
+                component="h6"
+                className={classes.informationText}
+              >
+                Kvadratmeter:{" "}
+                <span className={classes.secondInformationText}>
+                  {realEstate?.squareMeter}
+                </span>{" "}
+              </Typography>
+              <Typography
+                variant="h6"
+                component="h6"
+                className={classes.informationText}
+              >
+                Antall soverom:{" "}
+                <span className={classes.secondInformationText}>
+                  {realEstate?.bedrooms}
+                </span>{" "}
+              </Typography>
+              <Typography
+                variant="h6"
+                component="h6"
+                className={classes.informationText}
+              >
+                Antall bad:{" "}
+                <span className={classes.secondInformationText}>
+                  {realEstate?.bathrooms}
+                </span>{" "}
+              </Typography>
+              <Divider />
+            </Grid>
+            <Grid item xs={12}>
+              {" "}
+              <Typography
+                variant="h4"
+                component="h4"
+                className={classes.headerAddress}
+              >
+                {realEstate?.title}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                variant="h6"
+                component="h6"
+                className={classes.informationText}
+              >
+                {realEstate?.description}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Divider />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          {" "}
+          <Card className={classes.card}>
+            <CardMedia
+              component="img"
+              height="250"
+              alt="Apartment"
+              src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
+              title="vestengveien"
+            />
+
+            <CardContent>
+              <Typography
+                variant="h6"
+                align={"center"}
+                component="h6"
+                className={classes.sendossmail}
+              >
+                Vestengveien Eiendomsutvikling AS
+              </Typography>
+              <Typography
+                variant="h6"
+                align={"center"}
+                component="h6"
+                className={classes.sendossmail3}
+              >
+                Telefon:{" "}
+                <span className={classes.sendossmail2}> {91614232} </span>
+              </Typography>
+
+              <Typography
+                variant="h6"
+                align={"center"}
+                component="h6"
+                className={classes.sendossmail3}
+              >
+                Addresse:{" "}
+                <span className={classes.sendossmail2}>
+                  {" "}
+                  {"Lilletuneveien 61B"}{" "}
+                </span>
+              </Typography>
+              <br />
+              <Divider />
+              <Typography
+                variant="h6"
+                align={"center"}
+                component="h6"
+                className={classes.månedsleie}
+              >
+                Pris pr. måned:{" "}
+                <span className={classes.sendossmail4}>
+                  {realEstate?.price} kr
+                </span>
+              </Typography>
+              <Divider />
+
+              <Typography
+                variant="h6"
+                align={"center"}
+                component="h6"
+                className={classes.sendossmail4}
+              >
+                Kontakt oss på mail!
+              </Typography>
+              <br />
+
+              <br />
+            </CardContent>
+            <CardActions style={{ justifyContent: "center" }}>
+              <Button
+                variant={"contained"}
+                color="primary"
+                endIcon={<SendIcon></SendIcon>}
+                size={"large"}
+              >
+                Send oss en mail
+              </Button>
+
+              {/* <Button
+                  variant={"contained"}
+                  color="primary"
+                  endIcon={<EditIcon></EditIcon>}
+                  size={"large"}
+                >
+                  Rediger annonse
+                </Button>
+
+                <Button
+                  variant={"contained"}
+                  color="primary"
+                  endIcon={<DeleteIcon></DeleteIcon>}
+                  size={"large"}
+                >
+                  Slett annonse
+                </Button> */}
+            </CardActions>
+          </Card>
+        </Grid>
+      </>
+    );
+  };
+
   const mobileView = useMediaQuery(theme.breakpoints.up("xs"));
   const desktopView = useMediaQuery(theme.breakpoints.up("lg"));
 
@@ -604,13 +847,7 @@ const ApartmentView = () => {
       <Container>
         <Grid container>
           <Grid container xs={12}>
-            {desktopView ? (
-              <DisplayDesktop></DisplayDesktop>
-            ) : mobileView ? (
-              <DisplayMobile></DisplayMobile>
-            ) : (
-              <DisplayMobile />
-            )}
+            <TestDisplay></TestDisplay>
           </Grid>
         </Grid>
       </Container>
