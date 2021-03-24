@@ -67,12 +67,24 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
   },
   member: {
-    display: "flex",
-    flexDirection: "row",
-    marginTop: theme.spacing(1),
+
+     margin: theme.spacing(0.5),
+     width: "60%",
+    
     
   },
- 
+
+  test5: {
+    display: "flex",
+    //justifyContent : 'center',
+    alignItems: "center",
+    textAlign: "center",
+    width: "100%",
+    
+    
+  },
+
+  
 
 }));
 
@@ -368,7 +380,7 @@ const PdfComponent = () => {
 
         </Controller>
 
-        {errors.fileName && (
+        {errors.adress && (
           <span className={classes.error}>{errors.adress.message}</span>
         )}
 
@@ -477,11 +489,12 @@ const PdfComponent = () => {
           <span className={classes.error}>{errors.email.message}</span>
         )}
 
-      <FormGroup className={classes.member}>
+          <Container className={classes.test5}>
         <Controller
           as={TextField}
           name="memberName1"
-          defaultValue=" "
+          className={classes.member}
+          defaultValue=""
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
           control={control}
@@ -502,8 +515,9 @@ const PdfComponent = () => {
         <Controller
           as={TextField}
           name="memberSSN1"
+          className={classes.member}
           control={control}
-          defaultValue=" "
+          defaultValue=""
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
           rules={{
@@ -519,13 +533,14 @@ const PdfComponent = () => {
           <span className={classes.error}>{errors.memberSSN1.message}</span>
         )}
 
-      </FormGroup>
-      <FormGroup className={classes.member}>
+      
+      
         <Controller
           as={TextField}
           name="memberName2"
+          className={classes.member}
           control={control}
-          defaultValue=" "
+          defaultValue=""
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
           rules={{
@@ -544,8 +559,9 @@ const PdfComponent = () => {
         <Controller
           as={TextField}
           name="memberSSN2"
+          className={classes.member}
           control={control}
-          defaultValue=" "
+          defaultValue=""
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
           rules={{
@@ -560,14 +576,15 @@ const PdfComponent = () => {
         {errors.memberSSN2 && (
           <span className={classes.error}>{errors.memberSSN2.message}</span>
         )}
-      </FormGroup>
-      <FormGroup className={classes.member}>
+      
+     
        
         <Controller
           as={TextField}
           name="memberName3"
+          className={classes.member}
           control={control}
-          defaultValue=" "
+          defaultValue=""
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
           rules={{
@@ -585,9 +602,10 @@ const PdfComponent = () => {
 
         <Controller
           as={TextField}
+          className={classes.member}
           name="memberSSN3"
           control={control}
-          defaultValue=" "
+          defaultValue=""
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
           rules={{
@@ -602,13 +620,14 @@ const PdfComponent = () => {
          {errors.memberSSN3 && (
           <span className={classes.error}>{errors.memberSSN3.message}</span>
         )}
-      </FormGroup>
-      <FormGroup className={classes.member}>
+      
+     
         <Controller
           as={TextField}
           name="memberName4"
+          className={classes.member}
           control={control}
-          defaultValue=" "
+          defaultValue=""
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
           rules={{
@@ -627,8 +646,9 @@ const PdfComponent = () => {
         <Controller
           as={TextField}
           name="memberSSN4"
+          className={classes.member}
           control={control}
-          defaultValue=" "
+          defaultValue=""
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
           rules={{
@@ -643,7 +663,7 @@ const PdfComponent = () => {
          {errors.memberSSN4 && (
           <span className={classes.error}>{errors.memberSSN4.message}</span>
         )}
-      </FormGroup>
+      </Container>
 
         <Typography>Leieforholdet løper fra den..</Typography>
         <Controller
@@ -795,7 +815,7 @@ const PdfComponent = () => {
           name="read"
           type="Date"
           variant="filled"
-          defaultValue=" "
+          defaultValue="Nei"
           control={control}
         ></Controller>
 
