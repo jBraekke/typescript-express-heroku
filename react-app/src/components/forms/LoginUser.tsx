@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   formCard: {},
 }));
 
-const AddUser = () => {
+const LoginUser = () => {
   const classes = useStyles();
   const methods = useForm();
   const [datas, setDatas] = useState("");
@@ -46,11 +46,12 @@ const AddUser = () => {
   const onSubmit = (data: any, e: any) => {
     setDatas("sending" + data.status);
     console.log(e);
-    postData("api/auth/register", data).then((data) => {
+    postData("api/auth/login", data).then((data) => {
       setDatas("sending" + data.status);
       if (data.status === 200) {
-        setDatas("User created!");
-      } else setDatas("Failed to create user..");
+        setDatas("User logged in!");
+        console.log(data);
+      } else setDatas("Failed to log in user..");
     });
   };
 
@@ -58,7 +59,7 @@ const AddUser = () => {
     <>
      
         <Typography variant="h4" component="h2">
-          Legg til bruker
+          Logg inn
         </Typography>
         <Typography>{datas}</Typography>
         <form
@@ -70,38 +71,14 @@ const AddUser = () => {
           
           <Controller
             as={TextField}
-            name="firstName"
-            control={control}
-            defaultValue=""
-            variant="outlined"
-            label="Fornavn"
-            id="subject"
-          />
-          <Controller
-            as={TextField}
-            name="lastName"
-            control={control}
-            defaultValue=""
-            variant="outlined"
-            multiline
-            rows={4}
-            label="Etternavn"
-            id="text"
-          />
-
-        <Controller
-            as={TextField}
             name="email"
             control={control}
             defaultValue=""
             variant="outlined"
-            multiline
-            rows={4}
             label="Email"
-            id="text"
+            id="subject"
           />
-         
-         <Controller
+          <Controller
             as={TextField}
             name="password"
             control={control}
@@ -112,13 +89,11 @@ const AddUser = () => {
             label="Passord"
             id="text"
           />
-         
-         
 
-          <Button type="submit"> Opprett bruker </Button>
+          <Button type="submit"> Login bruker </Button>
         </form>
   
     </>
   );
 };
-export default AddUser;
+export default LoginUser;

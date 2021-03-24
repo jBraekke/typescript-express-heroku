@@ -11,6 +11,7 @@ import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
 import ApartmentViewPage from "../pages/apartmentView/ApartmentViewPage";
 import RegisterPage from "../pages/register/RegisterPage";
+import LoginPage from "../pages/login/LoginPage";
 
 const Routes = () => (
   <Router>
@@ -49,7 +50,9 @@ const Routes = () => (
           <RegisterPage />
         </Route>
 
-
+        <Route exact path="/loginuser">
+          <LoginPage />
+        </Route>
 
       </Switch>
     </MainLayout>
