@@ -31,9 +31,11 @@ const FetchUsers = () => {
                style={{ transformOrigin: "0 0 0" }}
                {...(true ? { timeout: 2000 } : {})}
              >
+               
                 <Grid key={index} item xs={12} md={6}>
                   <UserCard key={index} props={data}></UserCard>
                 </Grid>
+                
             </Fade>
               
             ))}
@@ -43,8 +45,9 @@ const FetchUsers = () => {
 
     return (
         <>
+        <Grid container spacing={4}>
         <CornRow/>
-        
+        </Grid>
       </>
     );
 };

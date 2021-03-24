@@ -3,6 +3,7 @@ import { AcroFormCheckBox, jsPDF } from "jspdf";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
+import AddIcon from '@material-ui/icons/Add';
 
 export interface IContract {
   fileName: string;
@@ -31,6 +32,7 @@ export interface IContract {
   memberSSN3: string;
   memberName4: string;
   memberSSN4: string;
+  read: Date;
 }
 
 
@@ -52,11 +54,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
+     
       display: "flex",
       justifyContent: "center",
       flexDirection: "column",
       alignitems: "center",
       textAlign: "center",
+      padding: theme.spacing(1),
     },
   },
   error: {
@@ -82,6 +86,7 @@ const PdfComponent = () => {
   };
 
   const PdfValues = (formData: IContract) => {
+    
     var data = [
       {
         Navn: formData?.memberName1,
@@ -270,7 +275,7 @@ const PdfComponent = () => {
       107,
       257
     );
-    doc.text("AVLEST:  ", 160, 257);
+    doc.text("AVLEST: " + " " + moment(formData?.read).format("DD.MM.yyyy") , 160, 257);
     doc.setFontSize(12);
     doc.text("Spørsmål  leieenhet:  ", 10, 263);
     doc.setFont("Times New Roman", "normal");
@@ -308,7 +313,7 @@ const PdfComponent = () => {
   return (
     <>
     <Container>
-      <Typography variant="h4" component="h2">
+      <Typography variant="h4" component="h2" align={"center"}>
         Opprett kontrakt
       </Typography>
 
@@ -386,7 +391,7 @@ const PdfComponent = () => {
           as={TextField}
           name="memberName1"
           control={control}
-          defaultValue=""
+          defaultValue=" "
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
         ></Controller>
@@ -395,7 +400,7 @@ const PdfComponent = () => {
           as={TextField}
           name="memberSSN1"
           control={control}
-          defaultValue=""
+          defaultValue=" "
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
         ></Controller>
@@ -405,7 +410,7 @@ const PdfComponent = () => {
           as={TextField}
           name="memberName2"
           control={control}
-          defaultValue=""
+          defaultValue=" "
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
         ></Controller>
@@ -414,7 +419,7 @@ const PdfComponent = () => {
           as={TextField}
           name="memberSSN2"
           control={control}
-          defaultValue=""
+          defaultValue=" "
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
         ></Controller>
@@ -424,7 +429,7 @@ const PdfComponent = () => {
           as={TextField}
           name="memberName3"
           control={control}
-          defaultValue=""
+          defaultValue=" "
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
         ></Controller>
@@ -433,7 +438,7 @@ const PdfComponent = () => {
           as={TextField}
           name="memberSSN3"
           control={control}
-          defaultValue=""
+          defaultValue=" "
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
         ></Controller>
@@ -443,7 +448,7 @@ const PdfComponent = () => {
           as={TextField}
           name="memberName4"
           control={control}
-          defaultValue=""
+          defaultValue=" "
           variant="outlined"
           label="Skriv inn navn til husstandsmedlem"
         ></Controller>
@@ -452,7 +457,7 @@ const PdfComponent = () => {
           as={TextField}
           name="memberSSN4"
           control={control}
-          defaultValue=""
+          defaultValue=" "
           variant="outlined"
           label="Skriv inn fødselsnummer til husstandsmedlem"
         ></Controller>
@@ -547,9 +552,26 @@ const PdfComponent = () => {
           control={control}
         ></Controller>
 
+      <Typography>Avlest </Typography>
+        <Controller
+          as={TextField}
+          name="read"
+          type="Date"
+          variant="filled"
+          defaultValue=" "
+          control={control}
+        ></Controller>
 
 
-        <Button type="submit"> Lag kontrakt </Button>
+
+        <Button type="submit"
+         variant={"contained"}
+         color="primary"
+         endIcon={<AddIcon></AddIcon>}
+         size={"large"}
+        > Lag kontrakt 
+        
+        </Button>
       </form>
       </Container>
     </>
