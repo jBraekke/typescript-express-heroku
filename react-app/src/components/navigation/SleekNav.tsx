@@ -105,6 +105,16 @@ const headersData = [
     href: "/pdf",
     comp: HomeIcon,
   },
+  {
+    label: "Lag bruker",
+    href: "/createuser",
+    comp: HomeIcon,
+  },
+  {
+    label: "Logg inn med bruker",
+    href: "/loginuser",
+    comp: HomeIcon,
+  },
 ];
 
 const SleekNav = () => {

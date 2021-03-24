@@ -3,7 +3,7 @@ import catchAsyncErrors from "../utils/catchAsync";
 import ErrorHandler from "../utils/errorHandler";
 import { userService } from "../service/index";
 
-export const listApartments = catchAsyncErrors(async (req, res, next) => {
+export const listUsers = catchAsyncErrors(async (req, res, next) => {
   const listUsers = await userService.listUsers();
   res.status(200).json({ success: true, data: listUsers });
 });

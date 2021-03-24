@@ -3,6 +3,8 @@ import { to } from "await-to-js";
 import { verifyPassword, hashPassword, getRedirectUrl } from "../auth/utils";
 import { login } from "../auth/strategies/jwt";
 import { createUser, getUserByEmail } from "../service/user.service";
+import * as cors from "cors";
+import { userController } from "../controllers/index";
 
 const router = express.Router();
 
@@ -87,5 +89,7 @@ router.post("/register", async (req, res) => {
       data: getRedirectUrl(user.role),
     });
 });
+
+router.get("/getlistUsers", cors(), userController.listUsers);
 
 export default router;

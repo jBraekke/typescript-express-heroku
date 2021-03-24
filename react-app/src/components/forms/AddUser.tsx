@@ -4,6 +4,7 @@ import { Button, Card, MenuItem, Select } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,8 +74,10 @@ const AddUser = () => {
             name="firstName"
             control={control}
             defaultValue=""
+            rows={2}
+            multiline
             variant="outlined"
-            label="Fornavn"
+            label="Skriv inn ditt fornavn..."
             id="subject"
           />
           <Controller
@@ -84,8 +87,8 @@ const AddUser = () => {
             defaultValue=""
             variant="outlined"
             multiline
-            rows={4}
-            label="Etternavn"
+            rows={2}
+            label="Skriv inn ditt etternavn..."
             id="text"
           />
 
@@ -96,8 +99,8 @@ const AddUser = () => {
             defaultValue=""
             variant="outlined"
             multiline
-            rows={4}
-            label="Email"
+            rows={2}
+            label="Skriv inn din email..."
             id="text"
           />
          
@@ -108,14 +111,19 @@ const AddUser = () => {
             defaultValue=""
             variant="outlined"
             multiline
-            rows={4}
-            label="Passord"
+            rows={2}
+            label="Skriv inn ditt passord..."
             id="text"
           />
          
          
 
-          <Button type="submit"> Opprett bruker </Button>
+          <Button 
+          type="submit"  variant={"contained"}
+                  color = "primary"
+                  endIcon={<AddIcon></AddIcon>}
+                  size={"large"}> Opprett bruker 
+          </Button>
         </form>
   
     </>
