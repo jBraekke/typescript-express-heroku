@@ -116,6 +116,18 @@ const AddUser = () => {
             label="Skriv inn ditt passord..."
             id="text"
           />
+
+      <Controller
+            as={TextField}
+            name="role"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            multiline
+            rows={2}
+            label="Skriv inn rolle"
+            id="text"
+          />
          
          
 

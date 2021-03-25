@@ -77,6 +77,9 @@ const UserCard = ({ props }: IUserProps) => {
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.password}</Typography>
+           
+            <Typography variant="body2" color="textSecondary" component="p">
+            {props.role}</Typography>
         </CardContent>
 
         <CardActions style={{ justifyContent: "center" }}>
