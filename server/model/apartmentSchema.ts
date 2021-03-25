@@ -15,7 +15,7 @@ interface IApartment extends Document {
   incoming: Boolean;
   house: Boolean;
   commerce: Boolean;
-  deposit: Boolean;
+  deposit: Number;
   rentGuarantee: Boolean;
   parking: Boolean;
   newlyBuilt: Boolean;
