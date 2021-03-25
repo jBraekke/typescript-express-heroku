@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
 
   if (!/\b\w+\@\w+\.\w+(?:\.\w+)?\b/.test(email)) {
     return res
@@ -61,6 +61,7 @@ router.post("/register", async (req, res) => {
       lastName,
       email,
       password: await hashPassword(password),
+      role,
     })
   );
 

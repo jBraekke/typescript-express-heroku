@@ -3,24 +3,21 @@ import { model, Schema, Document } from "mongoose";
 interface IUserSchema extends Document {
   email: String;
   password: String;
-  businessName: String;
   firstName: String;
   lastName: String;
-  displayName: String;
-  providerId: String;
-  provider: String;
+  role: String;
+  
 }
 
 const UserSchema: Schema = new Schema(
   {
     email: String,
     password: String,
-    businessName: String,
     firstName: String,
     lastName: String,
-    displayName: String,
-    providerId: String,
-    provider: String,
+    role: String,
+
+  
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
