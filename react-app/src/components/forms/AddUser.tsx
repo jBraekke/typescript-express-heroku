@@ -41,6 +41,7 @@ const AddUser = () => {
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify(data), // body data type must match "Content-Type" header
     });
+    //console.log(response.json());
     return response; // parses JSON response into native JavaScript objects
   }
 
@@ -51,7 +52,7 @@ const AddUser = () => {
       setDatas("sending" + data.status);
       if (data.status === 200) {
         setDatas("User created!");
-      } else setDatas("Failed to create user..");
+      } else setDatas("Failed to create user...");
     });
   };
 
