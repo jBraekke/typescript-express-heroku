@@ -80,7 +80,7 @@ const headersData = [
     comp: HomeIcon,
   },
   {
-    label: "VÅRE LEILIGHETER",
+    label: "LEDIG LEILIGHETER",
     href: "/welcome",
     comp: HomeWorkIcon,
   },

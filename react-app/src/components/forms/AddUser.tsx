@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Card, MenuItem, Select } from "@material-ui/core";
+import { Button, Card, MenuItem, Select, Snackbar } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
-
+import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import { postData, postImage } from "../../utils/fetchPost";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -28,25 +29,27 @@ const AddUser = () => {
   const methods = useForm();
   const [datas, setDatas] = useState("");
   const { handleSubmit, control, errors } = methods;
+  const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
 
-  async function postData(url = "", data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    //console.log(response.json());
-    return response; // parses JSON response into native JavaScript objects
+  function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleCloseError = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenError(false);
+  };
 
   const onSubmit = (data: any, e: any) => {
     setDatas("sending" + data.status);
@@ -55,8 +58,10 @@ const AddUser = () => {
       .then((data) => {
         setDatas("sending" + data.status);
         if (!data.ok) {
+          setOpenError(true);
           throw data;
         }
+        setOpen(true);
         return data.json();
       })
       .then((data) => {
@@ -72,6 +77,20 @@ const AddUser = () => {
 
   return (
     <>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Bruker lagt til!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openError}
+        autoHideDuration={6000}
+        onClose={handleCloseError}
+      >
+        <Alert onClose={handleCloseError} severity="error">
+          Bruker ble ikke lagt til, prøv igjen!
+        </Alert>
+      </Snackbar>
       <Typography variant="h4" component="h2">
         Legg til bruker
       </Typography>

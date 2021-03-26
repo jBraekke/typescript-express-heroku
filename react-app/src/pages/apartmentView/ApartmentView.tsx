@@ -56,9 +56,7 @@ const useStyles = makeStyles({
   cardContentMobile: {
     marginTop: theme.spacing(10),
   },
-  card: {
-    marginRight: theme.spacing(5),
-  },
+  card: {},
 
   container: {
     //textAlign: "center",

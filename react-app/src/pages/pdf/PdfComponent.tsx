@@ -1,11 +1,18 @@
-import { Button, Container, FormGroup, makeStyles, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  FormGroup,
+  makeStyles,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { AcroFormCheckBox, jsPDF } from "jspdf";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
-import AddIcon from '@material-ui/icons/Add';
-
-
+import AddIcon from "@material-ui/icons/Add";
+import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 export interface IContract {
   fileName: string;
   adress: string;
@@ -36,8 +43,6 @@ export interface IContract {
   read: Date;
 }
 
-
-
 var header = createHeaders(["Navn", "Personnr"]);
 
 function createHeaders(keys: any) {
@@ -47,7 +52,6 @@ function createHeaders(keys: any) {
     width: 110,
     height: 2,
     align: "center",
-    
   }));
 }
 
@@ -67,11 +71,8 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
   },
   member: {
-
-     margin: theme.spacing(0.5),
-     width: "60%",
-    
-    
+    margin: theme.spacing(0.5),
+    width: "60%",
   },
 
   test5: {
@@ -80,12 +81,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "center",
     width: "100%",
-    
-    
   },
-
-  
-
 }));
 
 const PdfComponent = () => {
@@ -93,15 +89,33 @@ const PdfComponent = () => {
   const methods = useForm();
   const { handleSubmit, control, errors } = methods;
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpen(false);
+  };
+
+  const handleCloseError = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenError(false);
+  };
   const onSubmit = (data: IContract) => {
+    setOpen(true);
     setFormData(data);
     PdfValues(data);
   };
 
-
   const PdfValues = (formData: IContract) => {
-    
     var data = [
       {
         Navn: formData?.memberName1,
@@ -129,11 +143,11 @@ const PdfComponent = () => {
     doc.line(10, 190, 200, 190);
     doc.line(10, 225, 200, 225);
     doc.line(10, 270, 200, 270);
-    
+
     var img = new Image();
-    img.src = "vestengveien1.jpg"
-    doc.addImage(img, 'png', 150, 20, 30, 30)
-    
+    img.src = "vestengveien1.jpg";
+    doc.addImage(img, "png", 150, 20, 30, 30);
+
     doc.setFont("Times New Roman", "bold");
     doc.setFontSize(22);
     doc.text("LEIEKONTRAKT", 100, 10, undefined, "center");
@@ -209,43 +223,80 @@ const PdfComponent = () => {
     doc.text(
       "Leieforholdet opphører uten oppsigelse den:" +
         " " +
-        moment(formData?.rentTime2).format("DD.MM.yyyy") + " " + "(minimum 3 år).",
+        moment(formData?.rentTime2).format("DD.MM.yyyy") +
+        " " +
+        "(minimum 3 år).",
       10,
       180
     );
-    
+
     doc.text(
-      "I avtalt leieperiode er det:" + " " + formData?.rentTime3  + " " + "måneder gjensidig oppsigelsestid.",
+      "I avtalt leieperiode er det:" +
+        " " +
+        formData?.rentTime3 +
+        " " +
+        "måneder gjensidig oppsigelsestid.",
       10,
       185
     );
-    
 
     doc.setFont("Times New Roman", "bold");
     doc.text("LEIE", 10, 195);
     doc.setFont("Times New Roman", "normal");
 
-    doc.text("Leie Kr:" + " " + formData?.rent1 + ",-" + " " + "/ mnd, til konto" + " " + "15031579012" + " " + "i DNB Bank." , 10, 200);
-    
+    doc.text(
+      "Leie Kr:" +
+        " " +
+        formData?.rent1 +
+        ",-" +
+        " " +
+        "/ mnd, til konto" +
+        " " +
+        "15031579012" +
+        " " +
+        "i DNB Bank.",
+      10,
+      200
+    );
+
     doc.text(
       "Leien betales forskuddsvis den:" +
         " " +
-        formData?.rent2 + "." + " " + "hver måned.",
+        formData?.rent2 +
+        "." +
+        " " +
+        "hver måned.",
       10,
       205
     );
-   
+
     doc.text(
       "Første husleie betales innen :" +
         " " +
-        moment(formData?.rent3).format("DD.MM.yyyy") + " " + "til utleiers konto.",
+        moment(formData?.rent3).format("DD.MM.yyyy") +
+        " " +
+        "til utleiers konto.",
       10,
       210
     );
     doc.setFontSize(12);
     doc.setFont("Times New Roman", "normal");
     doc.text(
-      "Forskuddsleie Kr:" + " " + formData?.rent4 + ",-" + " " + "(=max. 2 mnd. husleie)," + " " + "betales innen" + " " + moment(formData?.rent4a).format("DD.MM.yyyy") + " " + "til utleiers konto.", 10, 215);  
+      "Forskuddsleie Kr:" +
+        " " +
+        formData?.rent4 +
+        ",-" +
+        " " +
+        "(=max. 2 mnd. husleie)," +
+        " " +
+        "betales innen" +
+        " " +
+        moment(formData?.rent4a).format("DD.MM.yyyy") +
+        " " +
+        "til utleiers konto.",
+      10,
+      215
+    );
     doc.setFont("Times New Roman", "normal");
     doc.setFontSize(12);
     doc.setFont("Times New Roman", "italic");
@@ -254,7 +305,7 @@ const PdfComponent = () => {
       10,
       220
     );
-    
+
     doc.setFont("Times New Roman", "bold");
     doc.text("STRØM", 10, 230);
     doc.setFont("Book Antiqua", "normal");
@@ -290,19 +341,25 @@ const PdfComponent = () => {
       107,
       257
     );
-    doc.text("AVLEST: " + " " + moment(formData?.read).format("DD.MM.yyyy") , 160, 257);
+
+    formData.read
+      ? doc.text(
+          "AVLEST: " + " " + moment(formData?.read).format("DD.MM.yyyy"),
+          160,
+          257
+        )
+      : doc.text("AVLEST: ", 160, 257);
+
     doc.setFontSize(12);
     doc.text("Spørsmål  leieenhet:  ", 10, 263);
     doc.setFont("Times New Roman", "normal");
-    doc.setTextColor(6,69,173);
+    doc.setTextColor(6, 69, 173);
     doc.text("vestengveien@live.no", 49, 263);
     doc.setTextColor(0);
     doc.text("/ Spørsmål til faktura: ", 88, 263);
-    doc.setTextColor(6,69,173);
+    doc.setTextColor(6, 69, 173);
     doc.text("vestengveien.faktura@outlook.com", 127, 263);
     doc.setTextColor(0);
-
-
 
     doc.setFont("Times New Roman", "bold");
     doc.text("SIGNATURER", 10, 275);
@@ -319,517 +376,530 @@ const PdfComponent = () => {
     doc.text("Leietaker:", 120, 295);
     doc.setLineDashPattern([2, 2], 0);
     doc.line(30, 287, 114, 287);
-    doc.line(140, 287, 200 , 287);
+    doc.line(140, 287, 200, 287);
     doc.line(27, 295, 115, 295);
-    doc.line(140, 295, 200 , 295);
+    doc.line(140, 295, 200, 295);
     doc.save(formData?.fileName + ".pdf");
   };
 
   return (
     <>
-    <Container>
-      <Typography variant="h4" component="h2" align={"center"}>
-        Opprett kontrakt
-      </Typography>
-
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Leilighet lagt til!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openError}
+        autoHideDuration={6000}
+        onClose={handleCloseError}
       >
-        <Controller
-          as={TextField}
-          name="fileName"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Navnet til pdf dokumentet"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Za-z0-9]*$/,
-              message: "Bare bokstaver og nummer tillatt",
-            },
-          }}
-          error={!!errors.fileName}
+        <Alert onClose={handleCloseError} severity="error">
+          Leiligheten ble ikke lagt til, prøv igjen!
+        </Alert>
+      </Snackbar>
+      <Container>
+        <Typography variant="h4" component="h2" align={"center"}>
+          Opprett kontrakt
+        </Typography>
+
+        <form
+          className={classes.root}
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit(onSubmit)}
         >
+          <Controller
+            as={TextField}
+            name="fileName"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label="Navnet til pdf dokumentet"
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[A-Za-z0-9]*$/,
+                message: "Bare bokstaver og nummer tillatt",
+              },
+            }}
+            error={!!errors.fileName}
+          ></Controller>
 
-        </Controller>
-        
-        {errors.fileName && (
-          <span className={classes.error}>{errors.fileName.message}</span>
-        )}
+          {errors.fileName && (
+            <span className={classes.error}>{errors.fileName.message}</span>
+          )}
 
-        <Controller
-          as={TextField}
-          name="adress"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn addresse..."
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Za-z0-9]*$/,
-              message: "Bare bokstaver og nummer tillatt",
-            },
-          }}
-          error={!!errors.adress}
-        >
+          <Controller
+            as={TextField}
+            name="adress"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label="Skriv inn addresse..."
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[A-Za-z0-9]*$/,
+                message: "Bare bokstaver og nummer tillatt",
+              },
+            }}
+            error={!!errors.adress}
+          ></Controller>
 
-        </Controller>
+          {errors.adress && (
+            <span className={classes.error}>{errors.adress.message}</span>
+          )}
 
-        {errors.adress && (
-          <span className={classes.error}>{errors.adress.message}</span>
-        )}
+          <Controller
+            as={TextField}
+            name="apartmentNumber"
+            control={control}
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[0-9]*$/,
+                message: "Bare nummer tillatt",
+              },
+            }}
+            error={!!errors.apartmentNumber}
+            defaultValue=""
+            variant="outlined"
+            label="Skriv inn bolignr..."
+          />
 
-      <Controller
-          as={TextField}
-          name="apartmentNumber"
-          control={control}
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Bare nummer tillatt",
-            },
-          }}
-          error={!!errors.apartmentNumber}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn bolignr..."
-        />
-        
-      {errors.apartmentNumber && (
-          <span className={classes.error}>{errors.apartmentNumber.message}</span>
-        )}
+          {errors.apartmentNumber && (
+            <span className={classes.error}>
+              {errors.apartmentNumber.message}
+            </span>
+          )}
 
+          <Controller
+            as={TextField}
+            name="name"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label="Skriv inn navn på leietaker.."
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[A-Za-z]*$/,
+                message: "Bare bokstaver tillatt",
+              },
+            }}
+            error={!!errors.name}
+          ></Controller>
+          {errors.name && (
+            <span className={classes.error}>{errors.name.message}</span>
+          )}
 
-      
+          <Controller
+            as={TextField}
+            name="socialSecurityNumber"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label="Skriv inn personnummer til leietaker.."
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[[0-9]{11,11}]*$/,
+                message: "Personummer er 11 tall, kun tillat med tall.",
+              },
+            }}
+            error={!!errors.socialSecurityNumber}
+          ></Controller>
+          {errors.socialSecurityNumber && (
+            <span className={classes.error}>
+              {errors.socialSecurityNumber.message}
+            </span>
+          )}
 
-        <Controller
-          as={TextField}
-          name="name"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn navn på leietaker.."
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Za-z]*$/,
-              message: "Bare bokstaver tillatt",
-            },
-          }}
-          error={!!errors.name}
-        ></Controller>
-         {errors.name && (
-          <span className={classes.error}>{errors.name.message}</span>
-        )}
+          <Controller
+            as={TextField}
+            name="phoneNumber"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label="Skriv inn telefonnummer til leietaker.."
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[[0-9]{8,8}]*$/,
+                message: "Telefon nummer er 8 tall, kun tillat med tall.",
+              },
+            }}
+            error={!!errors.phoneNumber}
+          ></Controller>
+          {errors.phoneNumber && (
+            <span className={classes.error}>{errors.phoneNumber.message}</span>
+          )}
 
-
-        <Controller
-          as={TextField}
-          name="socialSecurityNumber"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn personnummer til leietaker.."
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[[0-9]{11,11}]*$/,
-              message: "Personummer er 11 tall, kun tillat med tall.",
-            },
-          }}
-          error={!!errors.socialSecurityNumber}
-        ></Controller>
-        {errors.socialSecurityNumber && (
-          <span className={classes.error}>{errors.socialSecurityNumber.message}</span>
-        )}
-
-        <Controller
-          as={TextField}
-          name="phoneNumber"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn telefonnummer til leietaker.."
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[[0-9]{8,8}]*$/,
-              message: "Telefon nummer er 8 tall, kun tillat med tall.",
-            },
-          }}
-          error={!!errors.phoneNumber}
-        ></Controller>
-         {errors.phoneNumber && (
-          <span className={classes.error}>{errors.phoneNumber.message}</span>
-        )}
-
-        <Controller
-          as={TextField}
-          name="email"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn epost til leietaker.."
-          rules={{
-            required: true,
-            pattern: {
-              value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              message: "Skriv inn en gyldig epost addresse..",
-            },
-          }}
-          error={!!errors.email}
-        ></Controller>
-         {errors.email && (
-          <span className={classes.error}>{errors.email.message}</span>
-        )}
+          <Controller
+            as={TextField}
+            name="email"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label="Skriv inn epost til leietaker.."
+            rules={{
+              required: true,
+              pattern: {
+                value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                message: "Skriv inn en gyldig epost addresse..",
+              },
+            }}
+            error={!!errors.email}
+          ></Controller>
+          {errors.email && (
+            <span className={classes.error}>{errors.email.message}</span>
+          )}
 
           <Container className={classes.test5}>
-        <Controller
-          as={TextField}
-          name="memberName1"
-          className={classes.member}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn navn til husstandsmedlem"
-          control={control}
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Za-z]*$/,
-              message: "Bare bokstaver tillatt",
-            },
-          }}
-          error={!!errors.memberName1}
-        ></Controller>
-         {errors.memberName1 && (
-          <span className={classes.error}>{errors.memberName1.message}</span>
-        )}
+            <Controller
+              as={TextField}
+              name="memberName1"
+              className={classes.member}
+              defaultValue=""
+              variant="outlined"
+              label="Skriv inn navn til husstandsmedlem"
+              control={control}
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[A-Za-z]*$/,
+                  message: "Bare bokstaver tillatt",
+                },
+              }}
+              error={!!errors.memberName1}
+            ></Controller>
+            {errors.memberName1 && (
+              <span className={classes.error}>
+                {errors.memberName1.message}
+              </span>
+            )}
 
+            <Controller
+              as={TextField}
+              name="memberSSN1"
+              className={classes.member}
+              control={control}
+              defaultValue=""
+              variant="outlined"
+              label="Skriv inn fødselsnummer til husstandsmedlem"
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[[0-9]{11,11}]*$/,
+                  message: "Personummer er 11 tall, kun tillat med tall.",
+                },
+              }}
+              error={!!errors.memberSSN1}
+            ></Controller>
+            {errors.memberSSN1 && (
+              <span className={classes.error}>{errors.memberSSN1.message}</span>
+            )}
 
-        <Controller
-          as={TextField}
-          name="memberSSN1"
-          className={classes.member}
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn fødselsnummer til husstandsmedlem"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[[0-9]{11,11}]*$/,
-              message: "Personummer er 11 tall, kun tillat med tall.",
-            },
-          }}
-          error={!!errors.memberSSN1}
-        ></Controller>
-         {errors.memberSSN1 && (
-          <span className={classes.error}>{errors.memberSSN1.message}</span>
-        )}
+            <Controller
+              as={TextField}
+              name="memberName2"
+              className={classes.member}
+              control={control}
+              defaultValue=""
+              variant="outlined"
+              label="Skriv inn navn til husstandsmedlem"
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[A-Za-z]*$/,
+                  message: "Bare bokstaver tillatt",
+                },
+              }}
+              error={!!errors.memberName2}
+            ></Controller>
+            {errors.memberName2 && (
+              <span className={classes.error}>
+                {errors.memberName2.message}
+              </span>
+            )}
 
-      
-      
-        <Controller
-          as={TextField}
-          name="memberName2"
-          className={classes.member}
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn navn til husstandsmedlem"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Za-z]*$/,
-              message: "Bare bokstaver tillatt",
-            },
-          }}
-          error={!!errors.memberName2}
-        ></Controller>
-         {errors.memberName2 && (
-          <span className={classes.error}>{errors.memberName2.message}</span>
-        )}
+            <Controller
+              as={TextField}
+              name="memberSSN2"
+              className={classes.member}
+              control={control}
+              defaultValue=""
+              variant="outlined"
+              label="Skriv inn fødselsnummer til husstandsmedlem"
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[[0-9]{11,11}]*$/,
+                  message: "Personummer er 11 tall, kun tillat med tall.",
+                },
+              }}
+              error={!!errors.memberSSN2}
+            ></Controller>
+            {errors.memberSSN2 && (
+              <span className={classes.error}>{errors.memberSSN2.message}</span>
+            )}
 
-        <Controller
-          as={TextField}
-          name="memberSSN2"
-          className={classes.member}
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn fødselsnummer til husstandsmedlem"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[[0-9]{11,11}]*$/,
-              message: "Personummer er 11 tall, kun tillat med tall.",
-            },
-          }}
-          error={!!errors.memberSSN2}
-        ></Controller>
-        {errors.memberSSN2 && (
-          <span className={classes.error}>{errors.memberSSN2.message}</span>
-        )}
-      
-     
-       
-        <Controller
-          as={TextField}
-          name="memberName3"
-          className={classes.member}
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn navn til husstandsmedlem"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Za-z]*$/,
-              message: "Bare bokstaver tillatt",
-            },
-          }}
-          error={!!errors.memberName3}
-        ></Controller>
-        {errors.memberName3 && (
-          <span className={classes.error}>{errors.memberName3.message}</span>
-        )}
+            <Controller
+              as={TextField}
+              name="memberName3"
+              className={classes.member}
+              control={control}
+              defaultValue=""
+              variant="outlined"
+              label="Skriv inn navn til husstandsmedlem"
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[A-Za-z]*$/,
+                  message: "Bare bokstaver tillatt",
+                },
+              }}
+              error={!!errors.memberName3}
+            ></Controller>
+            {errors.memberName3 && (
+              <span className={classes.error}>
+                {errors.memberName3.message}
+              </span>
+            )}
 
-        <Controller
-          as={TextField}
-          className={classes.member}
-          name="memberSSN3"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn fødselsnummer til husstandsmedlem"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[[0-9]{11,11}]*$/,
-              message: "Personummer er 11 tall, kun tillat med tall.",
-            },
-          }}
-          error={!!errors.memberSSN3}
-        ></Controller>
-         {errors.memberSSN3 && (
-          <span className={classes.error}>{errors.memberSSN3.message}</span>
-        )}
-      
-     
-        <Controller
-          as={TextField}
-          name="memberName4"
-          className={classes.member}
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn navn til husstandsmedlem"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Za-z]*$/,
-              message: "Bare bokstaver tillatt",
-            },
-          }}
-          error={!!errors.memberName4}
-        ></Controller>
-         {errors.memberName4 && (
-          <span className={classes.error}>{errors.memberName4.message}</span>
-        )}
+            <Controller
+              as={TextField}
+              className={classes.member}
+              name="memberSSN3"
+              control={control}
+              defaultValue=""
+              variant="outlined"
+              label="Skriv inn fødselsnummer til husstandsmedlem"
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[[0-9]{11,11}]*$/,
+                  message: "Personummer er 11 tall, kun tillat med tall.",
+                },
+              }}
+              error={!!errors.memberSSN3}
+            ></Controller>
+            {errors.memberSSN3 && (
+              <span className={classes.error}>{errors.memberSSN3.message}</span>
+            )}
 
-        <Controller
-          as={TextField}
-          name="memberSSN4"
-          className={classes.member}
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label="Skriv inn fødselsnummer til husstandsmedlem"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[[0-9]{11,11}]*$/,
-              message: "Personummer er 11 tall, kun tillat med tall.",
-            },
-          }}
-          error={!!errors.memberSSN4}
-        ></Controller>
-         {errors.memberSSN4 && (
-          <span className={classes.error}>{errors.memberSSN4.message}</span>
-        )}
-      </Container>
+            <Controller
+              as={TextField}
+              name="memberName4"
+              className={classes.member}
+              control={control}
+              defaultValue=""
+              variant="outlined"
+              label="Skriv inn navn til husstandsmedlem"
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[A-Za-z]*$/,
+                  message: "Bare bokstaver tillatt",
+                },
+              }}
+              error={!!errors.memberName4}
+            ></Controller>
+            {errors.memberName4 && (
+              <span className={classes.error}>
+                {errors.memberName4.message}
+              </span>
+            )}
 
-        <Typography>Leieforholdet løper fra den..</Typography>
-        <Controller
-          as={TextField}
-          name="rentTime1"
-          type="Date"
-          variant="filled"
-          control={control}
-        ></Controller>
-        <Typography>Leieforholdet opphører uten oppsigelse den...</Typography>
-        <Controller
-          as={TextField}
-          name="rentTime2"
-          type="Date"
-          variant="filled"
-          control={control}
-        ></Controller>
+            <Controller
+              as={TextField}
+              name="memberSSN4"
+              className={classes.member}
+              control={control}
+              defaultValue=""
+              variant="outlined"
+              label="Skriv inn fødselsnummer til husstandsmedlem"
+              rules={{
+                required: true,
+                pattern: {
+                  value: /^[[0-9]{11,11}]*$/,
+                  message: "Personummer er 11 tall, kun tillat med tall.",
+                },
+              }}
+              error={!!errors.memberSSN4}
+            ></Controller>
+            {errors.memberSSN4 && (
+              <span className={classes.error}>{errors.memberSSN4.message}</span>
+            )}
+          </Container>
 
-        <Controller
-          as={TextField}
-          name="rentTime3"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label=" I avtalt leieperiode er det x måneder gjensidig oppsigelsestid.."
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Bare nummer tillatt",
-            },
-          }}
-          error={!!errors.rentTime3}
-        ></Controller>
-        {errors.rentTime3 && (
-          <span className={classes.error}>{errors.rentTime3.message}</span>
-        )}
+          <Typography>Leieforholdet løper fra den..</Typography>
+          <Controller
+            as={TextField}
+            name="rentTime1"
+            type="Date"
+            variant="filled"
+            control={control}
+          ></Controller>
+          <Typography>Leieforholdet opphører uten oppsigelse den...</Typography>
+          <Controller
+            as={TextField}
+            name="rentTime2"
+            type="Date"
+            variant="filled"
+            control={control}
+          ></Controller>
 
-        <Controller
-          as={TextField}
-          name="rent1"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label=" Leie Kr i mnd"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Bare nummer tillatt",
-            },
-          }}
-          error={!!errors.rent1}
-        ></Controller>
-         {errors.rent1 && (
-          <span className={classes.error}>{errors.rent1.message}</span>
-        )}
-        <Controller
-          as={TextField}
-          name="rent2"
-          variant="outlined"
-          label=" Leien betales forskuddsvis den: x hver måned."
-          control={control}
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Bare nummer tillatt",
-            },
-          }}
-          error={!!errors.rent2}
-        ></Controller>
-         {errors.rent2 && (
-          <span className={classes.error}>{errors.rent2.message}</span>
-        )}
+          <Controller
+            as={TextField}
+            name="rentTime3"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label=" I avtalt leieperiode er det x måneder gjensidig oppsigelsestid.."
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[0-9]*$/,
+                message: "Bare nummer tillatt",
+              },
+            }}
+            error={!!errors.rentTime3}
+          ></Controller>
+          {errors.rentTime3 && (
+            <span className={classes.error}>{errors.rentTime3.message}</span>
+          )}
 
-        <Typography>
-          Første husleie betales innen : dato til utleiers konto.
-        </Typography>
-        <Controller
-          as={TextField}
-          name="rent3"
-          type="Date"
-          variant="filled"
-          control={control}
-        ></Controller>
+          <Controller
+            as={TextField}
+            name="rent1"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label=" Leie Kr i mnd"
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[0-9]*$/,
+                message: "Bare nummer tillatt",
+              },
+            }}
+            error={!!errors.rent1}
+          ></Controller>
+          {errors.rent1 && (
+            <span className={classes.error}>{errors.rent1.message}</span>
+          )}
+          <Controller
+            as={TextField}
+            name="rent2"
+            variant="outlined"
+            label=" Leien betales forskuddsvis den: x hver måned."
+            control={control}
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[0-9]*$/,
+                message: "Bare nummer tillatt",
+              },
+            }}
+            error={!!errors.rent2}
+          ></Controller>
+          {errors.rent2 && (
+            <span className={classes.error}>{errors.rent2.message}</span>
+          )}
 
-        <Controller
-          as={TextField}
-          name="rent4"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label=" Forskuddsleie Kr : (=max. 2 mnd. husleie)"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Bare nummer tillatt",
-            },
-          }}
-          error={!!errors.rent4}
-        ></Controller>
-         {errors.rent4 && (
-          <span className={classes.error}>{errors.rent4.message}</span>
-        )}
+          <Typography>
+            Første husleie betales innen : dato til utleiers konto.
+          </Typography>
+          <Controller
+            as={TextField}
+            name="rent3"
+            type="Date"
+            variant="filled"
+            control={control}
+          ></Controller>
 
-        <Typography>betales innen DATO til utleiers konto. </Typography>
-        <Controller
-          as={TextField}
-          name="rent4a"
-          type="Date"
-          variant="filled"
-          control={control}
-        ></Controller>
+          <Controller
+            as={TextField}
+            name="rent4"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label=" Forskuddsleie Kr : (=max. 2 mnd. husleie)"
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[0-9]*$/,
+                message: "Bare nummer tillatt",
+              },
+            }}
+            error={!!errors.rent4}
+          ></Controller>
+          {errors.rent4 && (
+            <span className={classes.error}>{errors.rent4.message}</span>
+          )}
 
-        <Controller
-          as={TextField}
-          name="electrictyNumber"
-          control={control}
-          defaultValue=""
-          variant="outlined"
-          label=" STRØMMÅLERNR.:"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[[0-9]{17,17}]*$/,
-              message: "Strømmåler nummer er 17 tall, kun tillat med tall.",
-            },
-          }}
-          error={!!errors.electrictyNumber}
-        ></Controller>
-         {errors.electrictyNumber && (
-          <span className={classes.error}>{errors.electrictyNumber.message}</span>
-        )}
+          <Typography>betales innen DATO til utleiers konto. </Typography>
+          <Controller
+            as={TextField}
+            name="rent4a"
+            type="Date"
+            variant="filled"
+            control={control}
+          ></Controller>
 
-        <Typography>Strømmålerdato </Typography>
-        <Controller
-          as={TextField}
-          name="electrictyDate"
-          type="Date"
-          variant="filled"
-          control={control}
-        ></Controller>
+          <Controller
+            as={TextField}
+            name="electrictyNumber"
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            label=" STRØMMÅLERNR.:"
+            rules={{
+              required: true,
+              pattern: {
+                value: /^[[0-9]{17,17}]*$/,
+                message: "Strømmåler nummer er 17 tall, kun tillat med tall.",
+              },
+            }}
+            error={!!errors.electrictyNumber}
+          ></Controller>
+          {errors.electrictyNumber && (
+            <span className={classes.error}>
+              {errors.electrictyNumber.message}
+            </span>
+          )}
 
-      <Typography>Avlest </Typography>
-        <Controller
-          as={TextField}
-          name="read"
-          type="Date"
-          variant="filled"
-          defaultValue="Nei"
-          control={control}
-        ></Controller>
+          <Typography>Strømmålerdato </Typography>
+          <Controller
+            as={TextField}
+            name="electrictyDate"
+            type="Date"
+            variant="filled"
+            control={control}
+          ></Controller>
 
+          <Typography>Avlest </Typography>
+          <Controller
+            as={TextField}
+            name="read"
+            type="Date"
+            variant="filled"
+            control={control}
+          ></Controller>
 
-
-        <Button type="submit"
-         variant={"contained"}
-         color="primary"
-         endIcon={<AddIcon></AddIcon>}
-         size={"large"}
-        > Lag kontrakt 
-        
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            variant={"contained"}
+            color="primary"
+            endIcon={<AddIcon></AddIcon>}
+            size={"large"}
+          >
+            {" "}
+            Lag kontrakt
+          </Button>
+        </form>
       </Container>
     </>
   );
