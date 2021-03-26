@@ -8,6 +8,8 @@ import SendIcon from "@material-ui/icons/Send";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { Link as RouterLink, NavLink } from "react-router-dom";
+
 import {
   Box,
   Card,
@@ -187,6 +189,7 @@ const ApartmentView = () => {
   });
 
   const classes = useStyles();
+  const history = useHistory();
 
   const DisplayMobile = () => {
     return (
@@ -805,15 +808,26 @@ const ApartmentView = () => {
 
               <br />
             </CardContent>
+
             <CardActions style={{ justifyContent: "center" }}>
-              <Button
-                variant={"contained"}
-                color="primary"
-                endIcon={<SendIcon></SendIcon>}
-                size={"large"}
+              <RouterLink
+                to={`../contact/${realEstate?.city}/${realEstate?.address}`}
+                {...{
+                  color: "inherit",
+                  style: { textDecoration: "none" },
+                  key: "label",
+                }}
               >
-                Send oss en mail
-              </Button>
+                <Button
+                  variant={"contained"}
+                  color="primary"
+                  endIcon={<SendIcon></SendIcon>}
+                  size={"large"}
+                  //to="#form"
+                >
+                  SEND OSS EN MAIL
+                </Button>
+              </RouterLink>
 
               {/* <Button
                   variant={"contained"}

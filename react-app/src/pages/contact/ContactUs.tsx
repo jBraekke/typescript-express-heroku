@@ -3,29 +3,31 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ContactForm from "../../components/forms/ContactForm";
 import { Container } from "@material-ui/core";
-import LoadingScreen from "../../components/loading/LoadingScreen"
-
+import LoadingScreen from "../../components/loading/LoadingScreen";
 
 const ContactUs = () => {
-  
   const [imageLoad, setImageLoad] = useState(false);
-  const img = new Image();
-  img.onload = function () {
+  const image = new Image();
+  image.onload = function () {
     setImageLoad(true);
-  }
-  img.src = "salg1.jpg";
-
+  };
+  image.src = process.env.PUBLIC_URL + "/salg1.jpg";
   const useStyles = makeStyles({
     root: { flexGrow: 1 },
     gridheader: {
-      backgroundImage: "url(" + img.src + ")",
+      backgroundImage: "url(" + image.src + ")",
       backgroundRepeat: "no-repeat, repeat",
       backgroundSize: "cover",
       height: "1000px",
     },
   });
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const classes = useStyles();
-  return imageLoad ? (
+  return (
     <div className={classes.root}>
       <Grid className={classes.gridheader} container>
         <Container>
@@ -38,7 +40,7 @@ const ContactUs = () => {
         </Container>
       </Grid>
     </div>
-  ): <LoadingScreen></LoadingScreen>
+  );
 };
 
 export default ContactUs;
