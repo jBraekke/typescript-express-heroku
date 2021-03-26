@@ -1,4 +1,5 @@
 import User from "../model/userSchema";
+import ErrorHandler from "../utils/errorHandler";
 
 export const getUserById = async (id) => User.findById(id);
 export const createUser = async function createUser({
@@ -13,7 +14,8 @@ export const createUser = async function createUser({
     const user = await User.findOne({ email })
 
     if (user) {
-      reject('Email is already in use')
+      return reject(new ErrorHandler('Vennligst velg en annen epost addresse!', 500));
+     
     }
 
     resolve(

@@ -62,13 +62,12 @@ router.post("/register", async (req, res) => {
       email,
       password: await hashPassword(password),
       role,
-    })
-  );
-
+    })   
+  )
   if (err) {
     return res
       .status(500)
-      .json({ success: false, data: "Email is already taken" });
+      .json({ success: false, data: "Epost addresse er allerede tatt, vennligst velg en annen epost addresse!" });
   }
 
   const [loginErr, token]: any = await to(login(req, user));
