@@ -341,7 +341,6 @@ const PdfComponent = () => {
       107,
       257
     );
-
     formData.read
       ? doc.text(
           "AVLEST: " + " " + moment(formData?.read).format("DD.MM.yyyy"),
@@ -349,7 +348,6 @@ const PdfComponent = () => {
           257
         )
       : doc.text("AVLEST: ", 160, 257);
-
     doc.setFontSize(12);
     doc.text("Spørsmål  leieenhet:  ", 10, 263);
     doc.setFont("Times New Roman", "normal");
@@ -416,10 +414,11 @@ const PdfComponent = () => {
             defaultValue=""
             variant="outlined"
             label="Navnet til pdf dokumentet"
+            required
             rules={{
               required: true,
               pattern: {
-                value: /^[A-Za-z0-9]*$/,
+                value: /^[A-Za-z0-9ÆØÅæøå]*$/,
                 message: "Bare bokstaver og nummer tillatt",
               },
             }}
@@ -437,10 +436,11 @@ const PdfComponent = () => {
             defaultValue=""
             variant="outlined"
             label="Skriv inn addresse..."
+            required
             rules={{
               required: true,
               pattern: {
-                value: /^[A-Za-z0-9]*$/,
+                value: /^[A-Za-z0-9" "ÆØÅæøå]*$/,
                 message: "Bare bokstaver og nummer tillatt",
               },
             }}
@@ -466,6 +466,7 @@ const PdfComponent = () => {
             defaultValue=""
             variant="outlined"
             label="Skriv inn bolignr..."
+            required
           />
 
           {errors.apartmentNumber && (
@@ -481,10 +482,11 @@ const PdfComponent = () => {
             defaultValue=""
             variant="outlined"
             label="Skriv inn navn på leietaker.."
+            required
             rules={{
               required: true,
               pattern: {
-                value: /^[A-Za-z]*$/,
+                value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
                 message: "Bare bokstaver tillatt",
               },
             }}
@@ -501,6 +503,7 @@ const PdfComponent = () => {
             defaultValue=""
             variant="outlined"
             label="Skriv inn personnummer til leietaker.."
+            required
             rules={{
               required: true,
               pattern: {
@@ -523,6 +526,7 @@ const PdfComponent = () => {
             defaultValue=""
             variant="outlined"
             label="Skriv inn telefonnummer til leietaker.."
+            required
             rules={{
               required: true,
               pattern: {
@@ -543,6 +547,7 @@ const PdfComponent = () => {
             defaultValue=""
             variant="outlined"
             label="Skriv inn epost til leietaker.."
+            required
             rules={{
               required: true,
               pattern: {
@@ -563,12 +568,12 @@ const PdfComponent = () => {
               className={classes.member}
               defaultValue=""
               variant="outlined"
-              label="Skriv inn navn til husstandsmedlem"
+              label="Skriv inn navn til husstandsmedlem 1"
               control={control}
               rules={{
-                required: true,
+                required: false,
                 pattern: {
-                  value: /^[A-Za-z]*$/,
+                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
                   message: "Bare bokstaver tillatt",
                 },
               }}
@@ -587,9 +592,9 @@ const PdfComponent = () => {
               control={control}
               defaultValue=""
               variant="outlined"
-              label="Skriv inn fødselsnummer til husstandsmedlem"
+              label="Skriv inn personnummer til husstandsmedlem 1"
               rules={{
-                required: true,
+                required: false,
                 pattern: {
                   value: /^[[0-9]{11,11}]*$/,
                   message: "Personummer er 11 tall, kun tillat med tall.",
@@ -601,6 +606,8 @@ const PdfComponent = () => {
               <span className={classes.error}>{errors.memberSSN1.message}</span>
             )}
 
+            <br />
+
             <Controller
               as={TextField}
               name="memberName2"
@@ -608,11 +615,11 @@ const PdfComponent = () => {
               control={control}
               defaultValue=""
               variant="outlined"
-              label="Skriv inn navn til husstandsmedlem"
+              label="Skriv inn navn til husstandsmedlem 2"
               rules={{
-                required: true,
+                required: false,
                 pattern: {
-                  value: /^[A-Za-z]*$/,
+                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
                   message: "Bare bokstaver tillatt",
                 },
               }}
@@ -631,9 +638,9 @@ const PdfComponent = () => {
               control={control}
               defaultValue=""
               variant="outlined"
-              label="Skriv inn fødselsnummer til husstandsmedlem"
+              label="Skriv inn personummer til husstandsmedlem 2"
               rules={{
-                required: true,
+                required: false,
                 pattern: {
                   value: /^[[0-9]{11,11}]*$/,
                   message: "Personummer er 11 tall, kun tillat med tall.",
@@ -644,7 +651,7 @@ const PdfComponent = () => {
             {errors.memberSSN2 && (
               <span className={classes.error}>{errors.memberSSN2.message}</span>
             )}
-
+            <br />
             <Controller
               as={TextField}
               name="memberName3"
@@ -652,11 +659,11 @@ const PdfComponent = () => {
               control={control}
               defaultValue=""
               variant="outlined"
-              label="Skriv inn navn til husstandsmedlem"
+              label="Skriv inn navn til husstandsmedlem 3"
               rules={{
-                required: true,
+                required: false,
                 pattern: {
-                  value: /^[A-Za-z]*$/,
+                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
                   message: "Bare bokstaver tillatt",
                 },
               }}
@@ -675,9 +682,9 @@ const PdfComponent = () => {
               control={control}
               defaultValue=""
               variant="outlined"
-              label="Skriv inn fødselsnummer til husstandsmedlem"
+              label="Skriv inn personummer til husstandsmedlem 3"
               rules={{
-                required: true,
+                required: false,
                 pattern: {
                   value: /^[[0-9]{11,11}]*$/,
                   message: "Personummer er 11 tall, kun tillat med tall.",
@@ -688,7 +695,7 @@ const PdfComponent = () => {
             {errors.memberSSN3 && (
               <span className={classes.error}>{errors.memberSSN3.message}</span>
             )}
-
+            <br />
             <Controller
               as={TextField}
               name="memberName4"
@@ -696,11 +703,11 @@ const PdfComponent = () => {
               control={control}
               defaultValue=""
               variant="outlined"
-              label="Skriv inn navn til husstandsmedlem"
+              label="Skriv inn navn til husstandsmedlem 4"
               rules={{
-                required: true,
+                required: false,
                 pattern: {
-                  value: /^[A-Za-z]*$/,
+                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
                   message: "Bare bokstaver tillatt",
                 },
               }}
@@ -719,9 +726,9 @@ const PdfComponent = () => {
               control={control}
               defaultValue=""
               variant="outlined"
-              label="Skriv inn fødselsnummer til husstandsmedlem"
+              label="Skriv inn personummer til husstandsmedlem 4"
               rules={{
-                required: true,
+                required: false,
                 pattern: {
                   value: /^[[0-9]{11,11}]*$/,
                   message: "Personummer er 11 tall, kun tillat med tall.",
@@ -733,11 +740,12 @@ const PdfComponent = () => {
               <span className={classes.error}>{errors.memberSSN4.message}</span>
             )}
           </Container>
-
+          <br />
           <Typography>Leieforholdet løper fra den..</Typography>
           <Controller
             as={TextField}
             name="rentTime1"
+            required
             type="Date"
             variant="filled"
             control={control}
@@ -746,6 +754,7 @@ const PdfComponent = () => {
           <Controller
             as={TextField}
             name="rentTime2"
+            required
             type="Date"
             variant="filled"
             control={control}
@@ -755,6 +764,7 @@ const PdfComponent = () => {
             as={TextField}
             name="rentTime3"
             control={control}
+            required
             defaultValue=""
             variant="outlined"
             label=" I avtalt leieperiode er det x måneder gjensidig oppsigelsestid.."
@@ -775,6 +785,7 @@ const PdfComponent = () => {
             as={TextField}
             name="rent1"
             control={control}
+            required
             defaultValue=""
             variant="outlined"
             label=" Leie Kr i mnd"
@@ -794,6 +805,7 @@ const PdfComponent = () => {
             as={TextField}
             name="rent2"
             variant="outlined"
+            required
             label=" Leien betales forskuddsvis den: x hver måned."
             control={control}
             rules={{
@@ -816,6 +828,7 @@ const PdfComponent = () => {
             as={TextField}
             name="rent3"
             type="Date"
+            required
             variant="filled"
             control={control}
           ></Controller>
@@ -825,6 +838,7 @@ const PdfComponent = () => {
             name="rent4"
             control={control}
             defaultValue=""
+            required
             variant="outlined"
             label=" Forskuddsleie Kr : (=max. 2 mnd. husleie)"
             rules={{
@@ -845,6 +859,7 @@ const PdfComponent = () => {
             as={TextField}
             name="rent4a"
             type="Date"
+            required
             variant="filled"
             control={control}
           ></Controller>
@@ -853,6 +868,7 @@ const PdfComponent = () => {
             as={TextField}
             name="electrictyNumber"
             control={control}
+            required
             defaultValue=""
             variant="outlined"
             label=" STRØMMÅLERNR.:"
@@ -876,6 +892,7 @@ const PdfComponent = () => {
             as={TextField}
             name="electrictyDate"
             type="Date"
+            required
             variant="filled"
             control={control}
           ></Controller>

@@ -26,9 +26,15 @@ const Routes = () => (
         <Route exact path="/apartmentview/:id">
           <ApartmentViewPage />
         </Route>
-        <Route exact path="/contact">
+
+        {/* <Route exact path="/contact/">
+          <ContactUsPage />
+        </Route> */}
+
+        <Route exact path="/contact/:city/:address">
           <ContactUsPage />
         </Route>
+
         <Route exact path="/login/signin">
           <SignInPage />
         </Route>
@@ -53,7 +59,6 @@ const Routes = () => (
         <Route exact path="/loginuser">
           <LoginPage />
         </Route>
-
       </Switch>
     </MainLayout>
   </Router>

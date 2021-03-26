@@ -4,6 +4,8 @@ import { Button, Card, MenuItem, Select } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import MailIcon from "@material-ui/icons/Mail";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,10 +56,12 @@ const ContactForm = () => {
     });
   };
 
+  const params = useParams() as any;
+
   return (
     <>
       <Card className={classes.formCard}>
-        <Typography variant="h4" component="h2">
+        <Typography variant="h2" component="h2" gutterBottom>
           Kontakt oss
         </Typography>
         <Typography>{datas}</Typography>
@@ -71,11 +75,51 @@ const ContactForm = () => {
             as={TextField}
             name="subject"
             control={control}
+            defaultValue={params.address}
+            variant="outlined"
+            label="Adresse"
+            id="subject"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+
+          <Controller
+            as={TextField}
+            name=""
+            control={control}
+            defaultValue={params.city}
+            variant="outlined"
+            label="By"
+            id="subject"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+
+          <Controller
+            as={TextField}
+            name=""
+            control={control}
             defaultValue=""
             variant="outlined"
-            label="Tittel"
-            id="subject"
+            multiline
+            label="Vennligst skriv inn din epost adresse.."
+            id="text"
+            required
           />
+          <Controller
+            as={TextField}
+            name=""
+            control={control}
+            defaultValue=""
+            variant="outlined"
+            multiline
+            label="Vennligst skriv inn ditt telefonnummer.."
+            id="text"
+            required
+          />
+
           <Controller
             as={TextField}
             name="text"
@@ -83,27 +127,21 @@ const ContactForm = () => {
             defaultValue=""
             variant="outlined"
             multiline
-            rows={4}
-            label="Melding"
+            rows={5}
+            label="Om du ønsker kan du skrive en liten melding om hva du er ute etter..."
             id="text"
           />
-          <Controller
-            as={Select}
-            name="City"
-            control={control}
-            defaultValue=""
-            variant="outlined"
-            rows={4}
-            label="Melding"
-            id="City"
+
+          <Button
+            type="submit"
+            variant={"contained"}
+            color="primary"
+            endIcon={<MailIcon></MailIcon>}
+            size={"large"}
           >
             {" "}
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Controller>
-
-          <Button type="submit"> Send melding </Button>
+            Send oss en mail{" "}
+          </Button>
         </form>
       </Card>
     </>
