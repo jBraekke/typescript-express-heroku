@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import { IApartment } from "../../interfaces/IApartment";
 import { postData, postImage } from "../../utils/fetchPost";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import AddIcon from "@material-ui/icons/Add";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -153,7 +154,7 @@ const ContactForm = () => {
           rules={{
             required: true,
             pattern: {
-              value: /^[A-Za-z0-9" "ÆØÅæøå]*$/,
+              value: /^[A-Za-z0-9" "ÆØÅæøå.,'\\?\\!]*$/,
               message: "Bare bokstaver og nummer tillatt",
             },
           }}
@@ -169,10 +170,12 @@ const ContactForm = () => {
           as={TextField}
           name="description"
           control={control}
+          multiline
+          rows={10}
           rules={{
             required: true,
             pattern: {
-              value: /^[A-Za-z0-9" "ÆØÅæøå]*$/,
+              value: /^[A-Za-z0-9" "ÆØÅæøå.,'-\\?\\!]*$/,
               message: "Bare bokstaver og nummer tillatt",
             },
           }}
@@ -191,7 +194,7 @@ const ContactForm = () => {
           rules={{
             required: true,
             pattern: {
-              value: /^[A-Za-z0-9" "ÆØÅæøå]*$/,
+              value: /^[A-Za-z0-9" "ÆØÅæøå.,'`-]*$/,
               message: "Bare bokstaver og nummer tillatt",
             },
           }}
@@ -210,7 +213,7 @@ const ContactForm = () => {
           rules={{
             required: true,
             pattern: {
-              value: /^[A-Za-z0-9" "ÆØÅæøå]*$/,
+              value: /^[A-Za-z0-9" "ÆØÅæøå.,]*$/,
               message: "Bare bokstaver og nummer tillatt",
             },
           }}
@@ -442,7 +445,15 @@ const ContactForm = () => {
             label="Parkering"
           />
         </FormGroup>
-        <Button type="submit"> Send melding </Button>
+        <Button
+          type="submit"
+          variant={"contained"}
+          color="primary"
+          endIcon={<AddIcon></AddIcon>}
+          size={"large"}
+        >
+          Legg til annonse{" "}
+        </Button>
       </form>
     </>
   );
