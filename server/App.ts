@@ -7,12 +7,15 @@ import * as cors from "cors";
 import * as helmet from "helmet";
 import * as compression from "compression";
 import * as dotenv from "dotenv";
+import authRoutes from "./routes/auth.route";
 import { textSpanIsEmpty } from "typescript";
 import connectDatabase from "./config/db";
-
+import * as cookieParser from "cookie-parser";
+import * as passport from "passport";
 //const swaggerUi = require("swagger-ui-express");
 //const swaggerDocument = require("../swagger.json");
-
+import { ROLES } from "./utils";
+import { initialiseAuthentication, utils } from "./auth";
 dotenv.config();
 class App {
   public express;
@@ -26,6 +29,8 @@ class App {
     const router = express.Router();
     this.express.use(express.urlencoded({ extended: false }));
     this.express.use(express.json());
+    this.express.use(cookieParser());
+    this.express.use(passport.initialize());
     //router.use("/api-docs", swaggerUi.serve);
     //router.get("/api-docs", swaggerUi.setup(swaggerDocument));
     this.express.use(
@@ -39,10 +44,38 @@ class App {
     router.get(/^\/(?!api).*/, (req, res) => {
       res.sendFile(path.resolve(__dirname, "../react-app/build", "index.html"));
     });
-
+    initialiseAuthentication(this.express);
     //this.express.use(helmet());
+    /* this.express.get(
+      "/admin-dashboard",
+      passport.authenticate("jwt", { failureRedirect: "/login" }),
+      utils.checkIsInRole(ROLES.Admin),
+      (req, res) => {
+        return handle(req, res);
+      }
+    );
+
+    this.express.get(
+      "/customer-dashboard",
+      passport.authenticate("jwt", { failureRedirect: "/login" }),
+      utils.checkIsInRole(ROLES.Customer),
+      (req, res) => {
+        return handle(req, res);
+      }
+    );
+
+    this.express.get(
+      "/both-dashboard",
+      passport.authenticate("jwt", { failureRedirect: "/login" }),
+      utils.checkIsInRole(ROLES.Admin, ROLES.Customer),
+      (req, res) => {
+        return handle(req, res);
+      }
+    );
+    */
     this.express.use("/", router);
     this.express.use("/contact/", email);
+    this.express.use(process.env.API_KEY + "auth/", authRoutes);
     this.express.use(process.env.API_KEY + "apartments/", apartment);
     this.express.use(process.env.API_KEY + "multer/", uploadimage);
     this.express.post("/api/world", (req, res) => {

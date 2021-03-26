@@ -10,6 +10,8 @@ import PdfPage from "../pages/pdf/PdfPage";
 import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
 import ApartmentViewPage from "../pages/apartmentView/ApartmentViewPage";
+import RegisterPage from "../pages/register/RegisterPage";
+import LoginPage from "../pages/login/LoginPage";
 
 const Routes = () => (
   <Router>
@@ -24,9 +26,15 @@ const Routes = () => (
         <Route exact path="/apartmentview/:id">
           <ApartmentViewPage />
         </Route>
-        <Route exact path="/contact">
+
+        {/* <Route exact path="/contact/">
+          <ContactUsPage />
+        </Route> */}
+
+        <Route exact path="/contact/:city/:address">
           <ContactUsPage />
         </Route>
+
         <Route exact path="/login/signin">
           <SignInPage />
         </Route>
@@ -44,8 +52,13 @@ const Routes = () => (
           <PdfPage />
         </Route>
 
+        <Route exact path="/createuser">
+          <RegisterPage />
+        </Route>
 
-
+        <Route exact path="/loginuser">
+          <LoginPage />
+        </Route>
       </Switch>
     </MainLayout>
   </Router>

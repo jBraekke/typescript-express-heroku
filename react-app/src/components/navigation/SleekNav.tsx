@@ -80,7 +80,7 @@ const headersData = [
     comp: HomeIcon,
   },
   {
-    label: "VÅRE LEILIGHETER",
+    label: "LEDIG LEILIGHETER",
     href: "/welcome",
     comp: HomeWorkIcon,
   },
@@ -103,6 +103,16 @@ const headersData = [
   {
     label: "Lag Kontrakt",
     href: "/pdf",
+    comp: HomeIcon,
+  },
+  {
+    label: "Lag bruker",
+    href: "/createuser",
+    comp: HomeIcon,
+  },
+  {
+    label: "Logg inn med bruker",
+    href: "/loginuser",
     comp: HomeIcon,
   },
 ];
@@ -138,7 +148,7 @@ const SleekNav = () => {
           <Avatar
             className={classes.pictureLogo}
             alt="logo"
-            src="vestengveien1.jpg"
+            src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
         </Box>
         <Box className={classes.logo}>{SleekDrawerNav}</Box>
@@ -153,7 +163,7 @@ const SleekNav = () => {
           <Avatar
             className={classes.pictureLogo}
             alt="logo"
-            src="vestengveien1.jpg"
+            src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
         </Box>
         <Box>
@@ -173,7 +183,7 @@ const SleekNav = () => {
           <Avatar
             className={classes.pictureLogo}
             alt="logo"
-            src="vestengveien1.jpg"
+            src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
 
           <Typography variant="h4" component="h4" className={classes.sexyText}>

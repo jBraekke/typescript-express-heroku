@@ -11,6 +11,7 @@ const theme = createMuiTheme({
       main: "#44B873",
       contrastText: "#fff",
     },
+    
     error: {
       main: red.A400,
     },

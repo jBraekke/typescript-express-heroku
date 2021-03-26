@@ -153,7 +153,7 @@ export default function SleekFooter() {
           <Avatar
             className={classes.pictureLogo}
             alt="logo"
-            src="vestengveien1.jpg"
+            src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
 
           {footers.map((footer) => (
