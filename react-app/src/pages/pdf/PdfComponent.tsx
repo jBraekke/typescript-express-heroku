@@ -1,7 +1,10 @@
 import {
   Button,
+  Card,
+  CardContent,
   Container,
   FormGroup,
+  Grid,
   makeStyles,
   Snackbar,
   TextField,
@@ -71,8 +74,12 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
   },
   member: {
-    margin: theme.spacing(0.5),
-    width: "60%",
+    marginTop: theme.spacing(3),
+    width: "100%",
+  },
+  member1: {
+   // marginTop: theme.spacing(5),
+    //width: "100%",
   },
 
   test5: {
@@ -384,7 +391,7 @@ const PdfComponent = () => {
     <>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
-          Leilighet lagt til!
+          Kontrakt er opprettet!
         </Alert>
       </Snackbar>
       <Snackbar
@@ -393,7 +400,7 @@ const PdfComponent = () => {
         onClose={handleCloseError}
       >
         <Alert onClose={handleCloseError} severity="error">
-          Leiligheten ble ikke lagt til, prøv igjen!
+          Kontrakt ble ikke laget.. Prøv igjen!
         </Alert>
       </Snackbar>
       <Container>
@@ -458,8 +465,8 @@ const PdfComponent = () => {
             rules={{
               required: true,
               pattern: {
-                value: /^[0-9]*$/,
-                message: "Bare nummer tillatt",
+                value: /^[A-Za-z0-9" "ÆØÅæøå]*$/,
+                message: "Bare bokstaver og nummer er tillat.",
               },
             }}
             error={!!errors.apartmentNumber}
@@ -560,8 +567,11 @@ const PdfComponent = () => {
           {errors.email && (
             <span className={classes.error}>{errors.email.message}</span>
           )}
-
+          
           <Container className={classes.test5}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" component="h6" gutterBottom>Husstandsmedlem 1</Typography>
             <Controller
               as={TextField}
               name="memberName1"
@@ -584,7 +594,7 @@ const PdfComponent = () => {
                 {errors.memberName1.message}
               </span>
             )}
-
+         
             <Controller
               as={TextField}
               name="memberSSN1"
@@ -596,8 +606,8 @@ const PdfComponent = () => {
               rules={{
                 required: false,
                 pattern: {
-                  value: /^[[0-9]{11,11}]*$/,
-                  message: "Personummer er 11 tall, kun tillat med tall.",
+                  value: /^[[0-9]]*$/,
+                  message: "Kun tall er tillat.",
                 },
               }}
               error={!!errors.memberSSN1}
@@ -605,9 +615,13 @@ const PdfComponent = () => {
             {errors.memberSSN1 && (
               <span className={classes.error}>{errors.memberSSN1.message}</span>
             )}
-
-            <br />
-
+            </CardContent>
+            </Card>
+            
+            
+            <Card>
+            <CardContent>
+              <Typography variant="h6" component="h6" gutterBottom>Husstandsmedlem 2</Typography>
             <Controller
               as={TextField}
               name="memberName2"
@@ -642,8 +656,8 @@ const PdfComponent = () => {
               rules={{
                 required: false,
                 pattern: {
-                  value: /^[[0-9]{11,11}]*$/,
-                  message: "Personummer er 11 tall, kun tillat med tall.",
+                  value: /^[[0-9]]*$/,
+                  message: "Kun tall er tillat.",
                 },
               }}
               error={!!errors.memberSSN2}
@@ -651,7 +665,13 @@ const PdfComponent = () => {
             {errors.memberSSN2 && (
               <span className={classes.error}>{errors.memberSSN2.message}</span>
             )}
-            <br />
+           </CardContent>
+            </Card>
+           
+            
+            <Card>
+            <CardContent>
+              <Typography variant="h6" component="h6" gutterBottom>Husstandsmedlem 3</Typography>
             <Controller
               as={TextField}
               name="memberName3"
@@ -674,6 +694,7 @@ const PdfComponent = () => {
                 {errors.memberName3.message}
               </span>
             )}
+           
 
             <Controller
               as={TextField}
@@ -686,8 +707,8 @@ const PdfComponent = () => {
               rules={{
                 required: false,
                 pattern: {
-                  value: /^[[0-9]{11,11}]*$/,
-                  message: "Personummer er 11 tall, kun tillat med tall.",
+                  value: /^[[0-9]]*$/,
+                  message: "Kun tall er tillat.",
                 },
               }}
               error={!!errors.memberSSN3}
@@ -695,7 +716,12 @@ const PdfComponent = () => {
             {errors.memberSSN3 && (
               <span className={classes.error}>{errors.memberSSN3.message}</span>
             )}
-            <br />
+              </CardContent>
+            </Card>
+           
+            <Card>
+            <CardContent>
+              <Typography variant="h6" component="h6" gutterBottom>Husstandsmedlem 4</Typography>
             <Controller
               as={TextField}
               name="memberName4"
@@ -730,8 +756,8 @@ const PdfComponent = () => {
               rules={{
                 required: false,
                 pattern: {
-                  value: /^[[0-9]{11,11}]*$/,
-                  message: "Personummer er 11 tall, kun tillat med tall.",
+                  value: /^[[0-9]]*$/,
+                  message: "Kun tall er tillat.",
                 },
               }}
               error={!!errors.memberSSN4}
@@ -739,8 +765,10 @@ const PdfComponent = () => {
             {errors.memberSSN4 && (
               <span className={classes.error}>{errors.memberSSN4.message}</span>
             )}
-          </Container>
-          <br />
+          </CardContent>
+            </Card>
+         </Container>
+         
           <Typography>Leieforholdet løper fra den..</Typography>
           <Controller
             as={TextField}
@@ -873,7 +901,7 @@ const PdfComponent = () => {
             variant="outlined"
             label=" STRØMMÅLERNR.:"
             rules={{
-              required: true,
+              required: false,
               pattern: {
                 value: /^[[0-9]{17,17}]*$/,
                 message: "Strømmåler nummer er 17 tall, kun tillat med tall.",
