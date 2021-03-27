@@ -66,31 +66,10 @@ export const userRegister = catchAsyncErrors(async (req, res) => {
     })
   );
   if (err) {
-    return res
-      .status(500)
-      .json({
-        success: false,
-        data:
-          "Epost addresse er allerede tatt, vennligst velg en annen epost addresse!",
-      });
-  }
-
-  const [loginErr, token]: any = await to(login(req, user));
-
-  if (loginErr) {
-    console.error(loginErr);
-    return res
-      .status(500)
-      .json({ success: false, data: "Authentication error!" });
-  }
-
-  return res
-    .status(200)
-    .cookie("jwt", token, {
-      httpOnly: true,
-    })
-    .json({
-      success: true,
-      data: getRedirectUrl(user.role),
+    return res.status(500).json({
+      success: false,
+      data:
+        "Epost addresse er allerede tatt, vennligst velg en annen epost addresse!",
     });
+  }
 });
