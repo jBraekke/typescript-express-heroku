@@ -27,9 +27,9 @@ const Routes = () => (
           <ApartmentViewPage />
         </Route>
 
-        {/* <Route exact path="/contact/">
+        <Route exact path="/contact/">
           <ContactUsPage />
-        </Route> */}
+        </Route> 
 
         <Route exact path="/contact/:city/:address">
           <ContactUsPage />

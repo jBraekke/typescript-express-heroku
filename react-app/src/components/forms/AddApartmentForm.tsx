@@ -225,7 +225,6 @@ const ContactForm = () => {
         {errors.rentGuarantee && (
           <span className={classes.error}>{errors.rentGuarantee.message}</span>
         )}
-        <Typography>Skriv in antall/pris</Typography>
         <Controller
           as={TextField}
           name="squareMeter"

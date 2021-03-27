@@ -617,7 +617,7 @@ const ApartmentView = () => {
             <>
               <CardMedia
                 component="img"
-                height="300"
+                height="500"
                 alt="Apartment"
                 src={
                   process.env.PUBLIC_URL + "/uploads/" + realEstate.imagePath

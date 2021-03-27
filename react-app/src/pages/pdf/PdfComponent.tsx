@@ -606,8 +606,8 @@ const PdfComponent = () => {
               rules={{
                 required: false,
                 pattern: {
-                  value: /^[[0-9]]*$/,
-                  message: "Kun tall er tillat.",
+                  value: /^[[0-9]{1,11}]*$/,
+                  message: "Kun tall er tillat - maks 11 tall.",
                 },
               }}
               error={!!errors.memberSSN1}
@@ -656,8 +656,8 @@ const PdfComponent = () => {
               rules={{
                 required: false,
                 pattern: {
-                  value: /^[[0-9]]*$/,
-                  message: "Kun tall er tillat.",
+                  value: /^[[0-9]{1,11}]*$/,
+                  message: "Kun tall er tillat - maks 11 tall.",
                 },
               }}
               error={!!errors.memberSSN2}
@@ -707,8 +707,8 @@ const PdfComponent = () => {
               rules={{
                 required: false,
                 pattern: {
-                  value: /^[[0-9]]*$/,
-                  message: "Kun tall er tillat.",
+                  value: /^[[0-9]{1,11}]*$/,
+                  message: "Kun tall er tillat - maks 11 tall.",
                 },
               }}
               error={!!errors.memberSSN3}
@@ -756,8 +756,8 @@ const PdfComponent = () => {
               rules={{
                 required: false,
                 pattern: {
-                  value: /^[[0-9]]*$/,
-                  message: "Kun tall er tillat.",
+                  value: /^[[0-9]{1,11}]*$/,
+                  message: "Kun tall er tillat - maks 11 tall.",
                 },
               }}
               error={!!errors.memberSSN4}

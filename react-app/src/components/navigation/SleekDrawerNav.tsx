@@ -178,7 +178,8 @@ function SleekDrawerNav() {
             <Avatar
             className={classes.pictureLogo}
             alt="logo"
-            src="vestengveien1.jpg"
+            //src="vestengveien1.jpg"¨
+            src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
         
 
