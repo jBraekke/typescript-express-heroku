@@ -42,14 +42,6 @@ var get_cookies = function (request) {
 export const me = catchAsyncErrors(async (req, res, next) => {
   //const user = await userService.getUserById(req.params.id);
   //var decoded = jwt_decode(req.cookie);
-  interface IUserSchema {
-    email: String;
-    password: String;
-    firstName: String;
-    lastName: String;
-    role: String;
-    exp: number;
-  }
   console.log(req.cookies["jwt"]);
   const cookie = req.cookies["jwt"];
   if (!cookie) {
@@ -59,7 +51,7 @@ export const me = catchAsyncErrors(async (req, res, next) => {
   console.log(user);
   const now = new Date().getTime();
 
-  //Sjekk expiry date av token
+  //Sjekk expiry date av token må fikses
   if (user.exp * 1000 < now) {
     res.status(401).json({ success: false });
   }

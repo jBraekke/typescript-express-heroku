@@ -45,10 +45,10 @@ class App {
     //Only allows authenticated users to access page but uses Next.js instead of CRA
     this.express.get(
       "/pdf",
-      passport.authenticate("jwt", { failureRedirect: "/login" }),
+      passport.authenticate("jwt", { failureRedirect: "/loginuser" }),
       utils.checkIsInRole(ROLES.Admin),
       (req, res) => {
-        return res.redirect("/pdf");
+        res.redirect("/pdf");
       }
     );
 

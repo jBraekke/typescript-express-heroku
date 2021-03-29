@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   member1: {
-   // marginTop: theme.spacing(5),
+    // marginTop: theme.spacing(5),
     //width: "100%",
   },
 
@@ -98,6 +98,18 @@ const PdfComponent = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [openError, setOpenError] = useState(false);
+  /*useEffect(() => {
+    export const getPdf = async () => {
+      try {
+        return await fetch("api/auth/me")
+          .then((response) => response.json())
+          .then((data) => data);
+      } catch (err) {
+        return err.response;
+      }
+    };
+  })*/
+
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
@@ -567,208 +579,221 @@ const PdfComponent = () => {
           {errors.email && (
             <span className={classes.error}>{errors.email.message}</span>
           )}
-          
+
           <Container className={classes.test5}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" component="h6" gutterBottom>Husstandsmedlem 1</Typography>
-            <Controller
-              as={TextField}
-              name="memberName1"
-              className={classes.member}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn navn til husstandsmedlem 1"
-              control={control}
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-                  message: "Bare bokstaver tillatt",
-                },
-              }}
-              error={!!errors.memberName1}
-            ></Controller>
-            {errors.memberName1 && (
-              <span className={classes.error}>
-                {errors.memberName1.message}
-              </span>
-            )}
-         
-            <Controller
-              as={TextField}
-              name="memberSSN1"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn personnummer til husstandsmedlem 1"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[[0-9]{1,11}]*$/,
-                  message: "Kun tall er tillat - maks 11 tall.",
-                },
-              }}
-              error={!!errors.memberSSN1}
-            ></Controller>
-            {errors.memberSSN1 && (
-              <span className={classes.error}>{errors.memberSSN1.message}</span>
-            )}
-            </CardContent>
-            </Card>
-            
-            
             <Card>
-            <CardContent>
-              <Typography variant="h6" component="h6" gutterBottom>Husstandsmedlem 2</Typography>
-            <Controller
-              as={TextField}
-              name="memberName2"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn navn til husstandsmedlem 2"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-                  message: "Bare bokstaver tillatt",
-                },
-              }}
-              error={!!errors.memberName2}
-            ></Controller>
-            {errors.memberName2 && (
-              <span className={classes.error}>
-                {errors.memberName2.message}
-              </span>
-            )}
+              <CardContent>
+                <Typography variant="h6" component="h6" gutterBottom>
+                  Husstandsmedlem 1
+                </Typography>
+                <Controller
+                  as={TextField}
+                  name="memberName1"
+                  className={classes.member}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn navn til husstandsmedlem 1"
+                  control={control}
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+                      message: "Bare bokstaver tillatt",
+                    },
+                  }}
+                  error={!!errors.memberName1}
+                ></Controller>
+                {errors.memberName1 && (
+                  <span className={classes.error}>
+                    {errors.memberName1.message}
+                  </span>
+                )}
 
-            <Controller
-              as={TextField}
-              name="memberSSN2"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn personummer til husstandsmedlem 2"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[[0-9]{1,11}]*$/,
-                  message: "Kun tall er tillat - maks 11 tall.",
-                },
-              }}
-              error={!!errors.memberSSN2}
-            ></Controller>
-            {errors.memberSSN2 && (
-              <span className={classes.error}>{errors.memberSSN2.message}</span>
-            )}
-           </CardContent>
-            </Card>
-           
-            
-            <Card>
-            <CardContent>
-              <Typography variant="h6" component="h6" gutterBottom>Husstandsmedlem 3</Typography>
-            <Controller
-              as={TextField}
-              name="memberName3"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn navn til husstandsmedlem 3"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-                  message: "Bare bokstaver tillatt",
-                },
-              }}
-              error={!!errors.memberName3}
-            ></Controller>
-            {errors.memberName3 && (
-              <span className={classes.error}>
-                {errors.memberName3.message}
-              </span>
-            )}
-           
-
-            <Controller
-              as={TextField}
-              className={classes.member}
-              name="memberSSN3"
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn personummer til husstandsmedlem 3"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[[0-9]{1,11}]*$/,
-                  message: "Kun tall er tillat - maks 11 tall.",
-                },
-              }}
-              error={!!errors.memberSSN3}
-            ></Controller>
-            {errors.memberSSN3 && (
-              <span className={classes.error}>{errors.memberSSN3.message}</span>
-            )}
+                <Controller
+                  as={TextField}
+                  name="memberSSN1"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn personnummer til husstandsmedlem 1"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[[0-9]{1,11}]*$/,
+                      message: "Kun tall er tillat - maks 11 tall.",
+                    },
+                  }}
+                  error={!!errors.memberSSN1}
+                ></Controller>
+                {errors.memberSSN1 && (
+                  <span className={classes.error}>
+                    {errors.memberSSN1.message}
+                  </span>
+                )}
               </CardContent>
             </Card>
-           
-            <Card>
-            <CardContent>
-              <Typography variant="h6" component="h6" gutterBottom>Husstandsmedlem 4</Typography>
-            <Controller
-              as={TextField}
-              name="memberName4"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn navn til husstandsmedlem 4"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-                  message: "Bare bokstaver tillatt",
-                },
-              }}
-              error={!!errors.memberName4}
-            ></Controller>
-            {errors.memberName4 && (
-              <span className={classes.error}>
-                {errors.memberName4.message}
-              </span>
-            )}
 
-            <Controller
-              as={TextField}
-              name="memberSSN4"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn personummer til husstandsmedlem 4"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[[0-9]{1,11}]*$/,
-                  message: "Kun tall er tillat - maks 11 tall.",
-                },
-              }}
-              error={!!errors.memberSSN4}
-            ></Controller>
-            {errors.memberSSN4 && (
-              <span className={classes.error}>{errors.memberSSN4.message}</span>
-            )}
-          </CardContent>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" component="h6" gutterBottom>
+                  Husstandsmedlem 2
+                </Typography>
+                <Controller
+                  as={TextField}
+                  name="memberName2"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn navn til husstandsmedlem 2"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+                      message: "Bare bokstaver tillatt",
+                    },
+                  }}
+                  error={!!errors.memberName2}
+                ></Controller>
+                {errors.memberName2 && (
+                  <span className={classes.error}>
+                    {errors.memberName2.message}
+                  </span>
+                )}
+
+                <Controller
+                  as={TextField}
+                  name="memberSSN2"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn personummer til husstandsmedlem 2"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[[0-9]{1,11}]*$/,
+                      message: "Kun tall er tillat - maks 11 tall.",
+                    },
+                  }}
+                  error={!!errors.memberSSN2}
+                ></Controller>
+                {errors.memberSSN2 && (
+                  <span className={classes.error}>
+                    {errors.memberSSN2.message}
+                  </span>
+                )}
+              </CardContent>
             </Card>
-         </Container>
-         
+
+            <Card>
+              <CardContent>
+                <Typography variant="h6" component="h6" gutterBottom>
+                  Husstandsmedlem 3
+                </Typography>
+                <Controller
+                  as={TextField}
+                  name="memberName3"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn navn til husstandsmedlem 3"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+                      message: "Bare bokstaver tillatt",
+                    },
+                  }}
+                  error={!!errors.memberName3}
+                ></Controller>
+                {errors.memberName3 && (
+                  <span className={classes.error}>
+                    {errors.memberName3.message}
+                  </span>
+                )}
+
+                <Controller
+                  as={TextField}
+                  className={classes.member}
+                  name="memberSSN3"
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn personummer til husstandsmedlem 3"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[[0-9]{1,11}]*$/,
+                      message: "Kun tall er tillat - maks 11 tall.",
+                    },
+                  }}
+                  error={!!errors.memberSSN3}
+                ></Controller>
+                {errors.memberSSN3 && (
+                  <span className={classes.error}>
+                    {errors.memberSSN3.message}
+                  </span>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent>
+                <Typography variant="h6" component="h6" gutterBottom>
+                  Husstandsmedlem 4
+                </Typography>
+                <Controller
+                  as={TextField}
+                  name="memberName4"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn navn til husstandsmedlem 4"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+                      message: "Bare bokstaver tillatt",
+                    },
+                  }}
+                  error={!!errors.memberName4}
+                ></Controller>
+                {errors.memberName4 && (
+                  <span className={classes.error}>
+                    {errors.memberName4.message}
+                  </span>
+                )}
+
+                <Controller
+                  as={TextField}
+                  name="memberSSN4"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn personummer til husstandsmedlem 4"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[[0-9]{1,11}]*$/,
+                      message: "Kun tall er tillat - maks 11 tall.",
+                    },
+                  }}
+                  error={!!errors.memberSSN4}
+                ></Controller>
+                {errors.memberSSN4 && (
+                  <span className={classes.error}>
+                    {errors.memberSSN4.message}
+                  </span>
+                )}
+              </CardContent>
+            </Card>
+          </Container>
+
           <Typography>Leieforholdet løper fra den..</Typography>
           <Controller
             as={TextField}
