@@ -44,7 +44,7 @@ export const userLogin = catchAsyncErrors(async (req, res) => {
 
 export const userRegister = catchAsyncErrors(async (req, res) => {
   const { firstName, lastName, email, password, role } = req.body;
-
+  console.log(email);
   if (!/\b\w+\@\w+\.\w+(?:\.\w+)?\b/.test(email)) {
     return res
       .status(500)
@@ -72,4 +72,9 @@ export const userRegister = catchAsyncErrors(async (req, res) => {
         "Epost addresse er allerede tatt, vennligst velg en annen epost addresse!",
     });
   }
+
+  return res.status(201).json({
+    success: true,
+    data: "Registrert!",
+  });
 });
