@@ -5,6 +5,8 @@ import * as dotenv from "dotenv";
 dotenv.config;
 const router = expressRouter.Router();
 
+//Jeg lar denne være da det bare er en funksjon
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./react-app/public/uploads/");
@@ -27,19 +29,14 @@ const fileFilter = (req: any, file: any, cb: any) => {
 };
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
-router.post(
-  "/uploadimage",
-  cors(),
-  upload.single("image"),
-  (req, res, next) => {
-    try {
-      return res.status(201).json({
-        message: "File uploaded successfully",
-      });
-    } catch (error) {
-      console.error(error);
-    }
+router.post("/uploadimage", upload.single("image"), (req, res, next) => {
+  try {
+    return res.status(201).json({
+      message: "File uploaded successfully",
+    });
+  } catch (error) {
+    console.error(error);
   }
-);
+});
 
 export default router;
