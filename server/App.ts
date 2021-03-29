@@ -43,14 +43,14 @@ class App {
     initialiseAuthentication(this.express);
 
     //Only allows authenticated users to access page but uses Next.js instead of CRA
-    /* this.express.get(
-      "/admin-dashboard",
+    this.express.get(
+      "/pdf",
       passport.authenticate("jwt", { failureRedirect: "/login" }),
       utils.checkIsInRole(ROLES.Admin),
       (req, res) => {
-        return handle(req, res);
+        return res.redirect("/pdf");
       }
-    );*/
+    );
 
     this.express.use("/", router);
     this.express.use("/contact/", cors(), email);

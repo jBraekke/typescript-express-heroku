@@ -41,6 +41,7 @@
     "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
     "jspdf": "^2.3.1",
+    "jwt-decode": "^3.1.2",
     "mocha": "^8.2.1",
     "moment": "^2.29.1",
     "mongoose": "^5.11.14",
