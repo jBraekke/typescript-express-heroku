@@ -161,7 +161,7 @@ const PdfComponent = () => {
     doc.setFont("Times New Roman", "bold");
     doc.text("UTELEIER", 10, 30);
     doc.setFont("Times New Roman", "normal");
-    doc.text("Vestengveien Eiendomsutvikling A/S", 10, 40);
+    //doc.text("Vestengveien Eiendomsutvikling A/S", 10, 40);
     doc.setFontSize(12);
     doc.setFont("Times New Roman", "bold");
     doc.text("EIENDOM", 10, 50);
