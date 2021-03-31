@@ -103,13 +103,6 @@ const PdfComponent = () => {
   const [openError, setOpenError] = useState(false);
   const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
   const history = useHistory();
-  useEffect(() => {
-    console.log(isAdmin);
-    console.log(isLoggedIn);
-    if (!isAdmin || !isLoggedIn) {
-      history.push("/pdf");
-    }
-  });
 
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;

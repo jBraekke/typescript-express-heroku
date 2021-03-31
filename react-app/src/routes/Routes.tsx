@@ -81,9 +81,9 @@ const Routes = () => (
           <AboutUsPage />
         </Route>
 
-        <TestRoutes exact path="/pdf">
+        <Route exact path="/pdf">
           <PdfPage />
-        </TestRoutes>
+        </Route>
 
         <Route exact path="/createuser">
           <RegisterPage />
