@@ -18,7 +18,7 @@ const ContactUs = () => {
       backgroundImage: "url(" + image.src + ")",
       backgroundRepeat: "no-repeat, repeat",
       backgroundSize: "cover",
-      height: "1000px",
+      height: "700px",
     },
   });
 

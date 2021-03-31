@@ -1,7 +1,10 @@
 import {
   Button,
+  Card,
+  CardContent,
   Container,
   FormGroup,
+  Grid,
   makeStyles,
   Snackbar,
   TextField,
@@ -41,6 +44,7 @@ export interface IContract {
   memberName4: string;
   memberSSN4: string;
   read: Date;
+  leietakerOrdner: string;
 }
 
 var header = createHeaders(["Navn", "Personnr"]);
@@ -71,8 +75,12 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
   },
   member: {
-    margin: theme.spacing(0.5),
-    width: "60%",
+    marginTop: theme.spacing(3),
+    width: "100%",
+  },
+  member1: {
+    // marginTop: theme.spacing(5),
+    //width: "100%",
   },
 
   test5: {
@@ -91,6 +99,18 @@ const PdfComponent = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [openError, setOpenError] = useState(false);
+  /*useEffect(() => {
+    export const getPdf = async () => {
+      try {
+        return await fetch("api/auth/me")
+          .then((response) => response.json())
+          .then((data) => data);
+      } catch (err) {
+        return err.response;
+      }
+    };
+  })*/
+
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
@@ -125,24 +145,15 @@ const PdfComponent = () => {
         Navn: formData?.memberName2,
         Personnr: formData?.memberSSN2,
       },
-      {
-        Navn: formData?.memberName3,
-        Personnr: formData?.memberSSN3,
-      },
-      {
-        Navn: formData?.memberName4,
-        Personnr: formData?.memberSSN4,
-      },
     ];
     var doc = new jsPDF();
 
     doc.line(10, 100, 200, 100);
-
     doc.line(10, 70, 200, 70);
-    doc.line(10, 165, 200, 165);
-    doc.line(10, 190, 200, 190);
-    doc.line(10, 225, 200, 225);
-    doc.line(10, 270, 200, 270);
+    doc.line(10, 145, 200, 145);
+    doc.line(10, 170, 200, 170);
+    doc.line(10, 205, 200, 205);
+    doc.line(10, 247, 200, 247);
 
     var img = new Image();
     img.src = "vestengveien1.jpg";
@@ -211,14 +222,14 @@ const PdfComponent = () => {
     doc.table(20, 110, data, header, { autoSize: false });
 
     doc.setFont("Times New Roman", "bold");
-    doc.text("LEIETID", 10, 170);
+    doc.text("LEIETID", 10, 150);
     doc.setFont("Times New Roman", "normal");
     doc.text(
       "Leieforholdet løper fra den:" +
         " " +
         moment(formData?.rentTime1).format("DD.MM.yyyy"),
       10,
-      175
+      155
     );
     doc.text(
       "Leieforholdet opphører uten oppsigelse den:" +
@@ -227,7 +238,7 @@ const PdfComponent = () => {
         " " +
         "(minimum 3 år).",
       10,
-      180
+      160
     );
 
     doc.text(
@@ -237,11 +248,11 @@ const PdfComponent = () => {
         " " +
         "måneder gjensidig oppsigelsestid.",
       10,
-      185
+      165
     );
 
     doc.setFont("Times New Roman", "bold");
-    doc.text("LEIE", 10, 195);
+    doc.text("LEIE", 10, 175);
     doc.setFont("Times New Roman", "normal");
 
     doc.text(
@@ -256,7 +267,7 @@ const PdfComponent = () => {
         " " +
         "i DNB Bank.",
       10,
-      200
+      180
     );
 
     doc.text(
@@ -267,7 +278,7 @@ const PdfComponent = () => {
         " " +
         "hver måned.",
       10,
-      205
+      185
     );
 
     doc.text(
@@ -277,7 +288,7 @@ const PdfComponent = () => {
         " " +
         "til utleiers konto.",
       10,
-      210
+      190
     );
     doc.setFontSize(12);
     doc.setFont("Times New Roman", "normal");
@@ -295,7 +306,7 @@ const PdfComponent = () => {
         " " +
         "til utleiers konto.",
       10,
-      215
+      195
     );
     doc.setFont("Times New Roman", "normal");
     doc.setFontSize(12);
@@ -303,17 +314,17 @@ const PdfComponent = () => {
     doc.text(
       "Ved bruk av husleiegaranti er det leietakers plikt og til en hver tid passe på at denne er gyldig.",
       10,
-      220
+      200
     );
 
     doc.setFont("Times New Roman", "bold");
-    doc.text("STRØM", 10, 230);
+    doc.text("STRØM", 10, 210);
     doc.setFont("Book Antiqua", "normal");
     var checkBoxStrøm = new AcroFormCheckBox();
     checkBoxStrøm.fieldName = "strøm1";
     checkBoxStrøm.appearanceState = "Off";
     checkBoxStrøm.x = 10;
-    checkBoxStrøm.y = 234;
+    checkBoxStrøm.y = 214;
     checkBoxStrøm.width = 7;
     checkBoxStrøm.height = 7;
     checkBoxStrøm.color = "black";
@@ -323,58 +334,63 @@ const PdfComponent = () => {
     checkBoxStrøm1.fieldName = "strøm2";
     checkBoxStrøm1.appearanceState = "Off";
     checkBoxStrøm1.x = 10;
-    checkBoxStrøm1.y = 242;
+    checkBoxStrøm1.y = 222;
     checkBoxStrøm1.width = 7;
     checkBoxStrøm1.height = 7;
     checkBoxStrøm1.color = "black";
     doc.addField(checkBoxStrøm1);
 
-    doc.text("Strøm er IKKE inkludert i husleien. ", 20, 239);
-    doc.setFont("Times New Roman", "bold");
-    doc.text("Utleier tegner eget abonnement på vegne av leietaker.", 84, 239);
+    doc.text("Strøm er IKKE inkludert i husleien. ", 20, 219);
+
+    doc.text(formData?.leietakerOrdner, 82, 219);
     doc.setFont("Times New Roman", "normal");
-    doc.text("Strøm er inkludert i husleien.", 20, 247);
+    doc.text("Strøm er inkludert i husleien.", 20, 227);
     doc.setFont("Times New Roman", "bold");
-    doc.text("STRØMMÅLERNR.: " + " " + formData?.electrictyNumber, 10, 257);
-    doc.text(
-      "DATO: " + " " + moment(formData?.electrictyDate).format("DD.MM.yyyy"),
-      107,
-      257
-    );
+    doc.text("STRØMMÅLERNR.: " + " " + formData?.electrictyNumber, 10, 237);
+
+    formData.electrictyDate
+      ? doc.text(
+          "DATO: " +
+            " " +
+            moment(formData?.electrictyDate).format("DD.MM.yyyy"),
+          107,
+          237
+        )
+      : doc.text("Dato: ", 107, 237);
     formData.read
       ? doc.text(
           "AVLEST: " + " " + moment(formData?.read).format("DD.MM.yyyy"),
           160,
-          257
+          237
         )
-      : doc.text("AVLEST: ", 160, 257);
+      : doc.text("AVLEST: ", 160, 237);
     doc.setFontSize(12);
-    doc.text("Spørsmål  leieenhet:  ", 10, 263);
+    doc.text("Spørsmål  leieenhet:  ", 10, 242);
     doc.setFont("Times New Roman", "normal");
     doc.setTextColor(6, 69, 173);
-    doc.text("vestengveien@live.no", 49, 263);
+    doc.text("vestengveien@live.no", 49, 242);
     doc.setTextColor(0);
-    doc.text("/ Spørsmål til faktura: ", 88, 263);
+    doc.text("/ Spørsmål til faktura: ", 88, 242);
     doc.setTextColor(6, 69, 173);
-    doc.text("vestengveien.faktura@outlook.com", 127, 263);
+    doc.text("vestengveien.faktura@outlook.com", 127, 242);
     doc.setTextColor(0);
 
     doc.setFont("Times New Roman", "bold");
-    doc.text("SIGNATURER", 10, 275);
+    doc.text("SIGNATURER", 10, 252);
     doc.text(
       "Utleier og leietaker vedtar herved ALLE punktene i denne avtalen, totalt 7 sider.",
       10,
-      280
+      257
     );
     doc.setFont("Times New Roman", "normal");
-    doc.text("Sted/Dato:", 10, 287);
-    doc.text("Sted/Dato:", 120, 287);
+    doc.text("Sted/Dato:", 10, 273);
+    doc.text("Sted/Dato:", 120, 273);
     doc.setFont("Times New Roman", "bold");
     doc.text("Utleier:", 10, 295);
     doc.text("Leietaker:", 120, 295);
     doc.setLineDashPattern([2, 2], 0);
-    doc.line(30, 287, 114, 287);
-    doc.line(140, 287, 200, 287);
+    doc.line(30, 273, 114, 273);
+    doc.line(140, 273, 200, 273);
     doc.line(27, 295, 115, 295);
     doc.line(140, 295, 200, 295);
     doc.save(formData?.fileName + ".pdf");
@@ -384,7 +400,7 @@ const PdfComponent = () => {
     <>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
-          Leilighet lagt til!
+          Kontrakt er opprettet!
         </Alert>
       </Snackbar>
       <Snackbar
@@ -393,7 +409,7 @@ const PdfComponent = () => {
         onClose={handleCloseError}
       >
         <Alert onClose={handleCloseError} severity="error">
-          Leiligheten ble ikke lagt til, prøv igjen!
+          Kontrakt ble ikke laget.. Prøv igjen!
         </Alert>
       </Snackbar>
       <Container>
@@ -418,7 +434,7 @@ const PdfComponent = () => {
             rules={{
               required: true,
               pattern: {
-                value: /^[A-Za-z0-9ÆØÅæøå]*$/,
+                value: /^[A-Za-z0-9ÆØÅæøå" "-.,`]*$/,
                 message: "Bare bokstaver og nummer tillatt",
               },
             }}
@@ -440,7 +456,7 @@ const PdfComponent = () => {
             rules={{
               required: true,
               pattern: {
-                value: /^[A-Za-z0-9" "ÆØÅæøå]*$/,
+                value: /^[A-Za-z0-9" "ÆØÅæøå,." "-]*$/,
                 message: "Bare bokstaver og nummer tillatt",
               },
             }}
@@ -458,8 +474,8 @@ const PdfComponent = () => {
             rules={{
               required: true,
               pattern: {
-                value: /^[0-9]*$/,
-                message: "Bare nummer tillatt",
+                value: /^[A-Za-z0-9" "ÆØÅæøå]*$/,
+                message: "Bare bokstaver og nummer er tillat.",
               },
             }}
             error={!!errors.apartmentNumber}
@@ -505,10 +521,11 @@ const PdfComponent = () => {
             label="Skriv inn personnummer til leietaker.."
             required
             rules={{
-              required: true,
+              required: false,
               pattern: {
-                value: /^[[0-9]{11,11}]*$/,
-                message: "Personummer er 11 tall, kun tillat med tall.",
+                value: /^[[0-9]{2,11}]*$/,
+                message:
+                  "Personummer er 11 tall, kun tillat med tall fra 2 - 11.",
               },
             }}
             error={!!errors.socialSecurityNumber}
@@ -528,7 +545,7 @@ const PdfComponent = () => {
             label="Skriv inn telefonnummer til leietaker.."
             required
             rules={{
-              required: true,
+              required: false,
               pattern: {
                 value: /^[[0-9]{8,8}]*$/,
                 message: "Telefon nummer er 8 tall, kun tillat med tall.",
@@ -549,7 +566,7 @@ const PdfComponent = () => {
             label="Skriv inn epost til leietaker.."
             required
             rules={{
-              required: true,
+              required: false,
               pattern: {
                 value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: "Skriv inn en gyldig epost addresse..",
@@ -562,185 +579,113 @@ const PdfComponent = () => {
           )}
 
           <Container className={classes.test5}>
-            <Controller
-              as={TextField}
-              name="memberName1"
-              className={classes.member}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn navn til husstandsmedlem 1"
-              control={control}
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-                  message: "Bare bokstaver tillatt",
-                },
-              }}
-              error={!!errors.memberName1}
-            ></Controller>
-            {errors.memberName1 && (
-              <span className={classes.error}>
-                {errors.memberName1.message}
-              </span>
-            )}
+            <Card>
+              <CardContent>
+                <Typography variant="h6" component="h6" gutterBottom>
+                  Husstandsmedlem 1
+                </Typography>
+                <Controller
+                  as={TextField}
+                  name="memberName1"
+                  className={classes.member}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn navn til husstandsmedlem 1"
+                  control={control}
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/]+$/u,
+                      message: "Bare bokstaver tillatt",
+                    },
+                  }}
+                  error={!!errors.memberName1}
+                ></Controller>
+                {errors.memberName1 && (
+                  <span className={classes.error}>
+                    {errors.memberName1.message}
+                  </span>
+                )}
 
-            <Controller
-              as={TextField}
-              name="memberSSN1"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn personnummer til husstandsmedlem 1"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[[0-9]{11,11}]*$/,
-                  message: "Personummer er 11 tall, kun tillat med tall.",
-                },
-              }}
-              error={!!errors.memberSSN1}
-            ></Controller>
-            {errors.memberSSN1 && (
-              <span className={classes.error}>{errors.memberSSN1.message}</span>
-            )}
+                <Controller
+                  as={TextField}
+                  name="memberSSN1"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn personnummer til husstandsmedlem 1"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[[0-9" "/]{0,60}]*$/,
+                      message: "Kun tall er tillat.",
+                    },
+                  }}
+                  error={!!errors.memberSSN1}
+                ></Controller>
+                {errors.memberSSN1 && (
+                  <span className={classes.error}>
+                    {errors.memberSSN1.message}
+                  </span>
+                )}
+              </CardContent>
+            </Card>
 
-            <br />
+            <Card>
+              <CardContent>
+                <Typography variant="h6" component="h6" gutterBottom>
+                  Husstandsmedlem 2
+                </Typography>
+                <Controller
+                  as={TextField}
+                  name="memberName2"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn navn til husstandsmedlem 2"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-/]+$/u,
+                      message: "Bare bokstaver tillatt",
+                    },
+                  }}
+                  error={!!errors.memberName2}
+                ></Controller>
+                {errors.memberName2 && (
+                  <span className={classes.error}>
+                    {errors.memberName2.message}
+                  </span>
+                )}
 
-            <Controller
-              as={TextField}
-              name="memberName2"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn navn til husstandsmedlem 2"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-                  message: "Bare bokstaver tillatt",
-                },
-              }}
-              error={!!errors.memberName2}
-            ></Controller>
-            {errors.memberName2 && (
-              <span className={classes.error}>
-                {errors.memberName2.message}
-              </span>
-            )}
-
-            <Controller
-              as={TextField}
-              name="memberSSN2"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn personummer til husstandsmedlem 2"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[[0-9]{11,11}]*$/,
-                  message: "Personummer er 11 tall, kun tillat med tall.",
-                },
-              }}
-              error={!!errors.memberSSN2}
-            ></Controller>
-            {errors.memberSSN2 && (
-              <span className={classes.error}>{errors.memberSSN2.message}</span>
-            )}
-            <br />
-            <Controller
-              as={TextField}
-              name="memberName3"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn navn til husstandsmedlem 3"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-                  message: "Bare bokstaver tillatt",
-                },
-              }}
-              error={!!errors.memberName3}
-            ></Controller>
-            {errors.memberName3 && (
-              <span className={classes.error}>
-                {errors.memberName3.message}
-              </span>
-            )}
-
-            <Controller
-              as={TextField}
-              className={classes.member}
-              name="memberSSN3"
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn personummer til husstandsmedlem 3"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[[0-9]{11,11}]*$/,
-                  message: "Personummer er 11 tall, kun tillat med tall.",
-                },
-              }}
-              error={!!errors.memberSSN3}
-            ></Controller>
-            {errors.memberSSN3 && (
-              <span className={classes.error}>{errors.memberSSN3.message}</span>
-            )}
-            <br />
-            <Controller
-              as={TextField}
-              name="memberName4"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn navn til husstandsmedlem 4"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-                  message: "Bare bokstaver tillatt",
-                },
-              }}
-              error={!!errors.memberName4}
-            ></Controller>
-            {errors.memberName4 && (
-              <span className={classes.error}>
-                {errors.memberName4.message}
-              </span>
-            )}
-
-            <Controller
-              as={TextField}
-              name="memberSSN4"
-              className={classes.member}
-              control={control}
-              defaultValue=""
-              variant="outlined"
-              label="Skriv inn personummer til husstandsmedlem 4"
-              rules={{
-                required: false,
-                pattern: {
-                  value: /^[[0-9]{11,11}]*$/,
-                  message: "Personummer er 11 tall, kun tillat med tall.",
-                },
-              }}
-              error={!!errors.memberSSN4}
-            ></Controller>
-            {errors.memberSSN4 && (
-              <span className={classes.error}>{errors.memberSSN4.message}</span>
-            )}
+                <Controller
+                  as={TextField}
+                  name="memberSSN2"
+                  className={classes.member}
+                  control={control}
+                  defaultValue=""
+                  variant="outlined"
+                  label="Skriv inn personummer til husstandsmedlem 2"
+                  rules={{
+                    required: false,
+                    pattern: {
+                      value: /^[[[0-9" "/]{0,60}]*$/,
+                      message: "Kun tall er tillat - maks 11 tall.",
+                    },
+                  }}
+                  error={!!errors.memberSSN2}
+                ></Controller>
+                {errors.memberSSN2 && (
+                  <span className={classes.error}>
+                    {errors.memberSSN2.message}
+                  </span>
+                )}
+              </CardContent>
+            </Card>
           </Container>
-          <br />
+
           <Typography>Leieforholdet løper fra den..</Typography>
           <Controller
             as={TextField}
@@ -873,7 +818,7 @@ const PdfComponent = () => {
             variant="outlined"
             label=" STRØMMÅLERNR.:"
             rules={{
-              required: true,
+              required: false,
               pattern: {
                 value: /^[[0-9]{17,17}]*$/,
                 message: "Strømmåler nummer er 17 tall, kun tillat med tall.",
@@ -892,7 +837,6 @@ const PdfComponent = () => {
             as={TextField}
             name="electrictyDate"
             type="Date"
-            required
             variant="filled"
             control={control}
           ></Controller>
@@ -905,6 +849,30 @@ const PdfComponent = () => {
             variant="filled"
             control={control}
           ></Controller>
+
+          <Controller
+            as={TextField}
+            name="leietakerOrdner"
+            control={control}
+            defaultValue="Leietaker ordner strøm selv."
+            variant="outlined"
+            label="Leietaker ordner strøm selv?"
+            required
+            rules={{
+              required: false,
+              pattern: {
+                value: /^[A-Za-z0-9" "ÆØÅæøå,." "-]*$/,
+                message: "Bare bokstaver og nummer tillatt",
+              },
+            }}
+            error={!!errors.leietakerOrdner}
+          ></Controller>
+
+          {errors.leietakerOrdner && (
+            <span className={classes.error}>
+              {errors.leietakerOrdner.message}
+            </span>
+          )}
 
           <Button
             type="submit"

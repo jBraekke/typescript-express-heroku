@@ -12,7 +12,18 @@ import SignUpPage from "../pages/signup/SignUpPage";
 import ApartmentViewPage from "../pages/apartmentView/ApartmentViewPage";
 import RegisterPage from "../pages/register/RegisterPage";
 import LoginPage from "../pages/login/LoginPage";
+import { useAuthContext } from "../context/AuthProvider";
 
+const AdminRoutes = ({ children, ...rest }: any) => {
+  const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
+
+  return (
+    <Route
+      {...rest}
+      render={() => isLoggedIn && isAdmin && !isLoading && children}
+    />
+  );
+};
 const Routes = () => (
   <Router>
     <MainLayout>
@@ -27,9 +38,9 @@ const Routes = () => (
           <ApartmentViewPage />
         </Route>
 
-        {/* <Route exact path="/contact/">
+        <Route exact path="/contact/">
           <ContactUsPage />
-        </Route> */}
+        </Route>
 
         <Route exact path="/contact/:city/:address">
           <ContactUsPage />
@@ -48,9 +59,9 @@ const Routes = () => (
           <AboutUsPage />
         </Route>
 
-        <Route exact path="/pdf">
+        <AdminRoutes exact path="/pdf">
           <PdfPage />
-        </Route>
+        </AdminRoutes>
 
         <Route exact path="/createuser">
           <RegisterPage />
