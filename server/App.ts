@@ -42,20 +42,32 @@ class App {
     });
     initialiseAuthentication(this.express);
 
-    //Only allows authenticated users to access page but uses Next.js instead of CRA
+    /* //Only allows authenticated users to access page but uses Next.js instead of CRA
     this.express.get(
       "/pdf",
       passport.authenticate("jwt", { failureRedirect: "/loginuser" }),
       utils.checkIsInRole(ROLES.Admin),
       (req, res) => {
-        res.redirect("/pdf");
+        res.redirect("/loginuser");
       }
-    );
+    ); */
 
     this.express.use("/", router);
     this.express.use("/contact/", cors(), email);
     this.express.use(process.env.API_KEY + "auth/", cors(), authRoutes);
+
+    //Example usage of authentication
+    /*this.express.use(
+      process.env.API_KEY + "apartments/",
+      passport.authenticate("jwt", { failureRedirect: "/loginuser" }),
+      utils.checkIsInRole(ROLES.Admin),
+      cors(),
+      apartment
+    );
+    */
+    //Example usage of authentication
     this.express.use(process.env.API_KEY + "apartments/", cors(), apartment);
+
     this.express.use(process.env.API_KEY + "multer/", cors(), uploadimage);
     this.express.post("/api/world", (req, res) => {
       console.log(req.body);
