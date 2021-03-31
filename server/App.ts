@@ -65,6 +65,9 @@ class App {
       apartment
     );
     */
+    //Example usage of authentication
+    this.express.use(process.env.API_KEY + "apartments/", cors(), apartment);
+
     this.express.use(process.env.API_KEY + "multer/", cors(), uploadimage);
     this.express.post("/api/world", (req, res) => {
       console.log(req.body);
