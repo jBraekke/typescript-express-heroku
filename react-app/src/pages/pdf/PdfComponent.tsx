@@ -11,11 +11,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import { AcroFormCheckBox, jsPDF } from "jspdf";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
 import AddIcon from "@material-ui/icons/Add";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import { useAuthContext } from "../../context/AuthProvider";
+import { useHistory } from "react-router-dom";
 export interface IContract {
   fileName: string;
   adress: string;
@@ -98,17 +100,15 @@ const PdfComponent = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [openError, setOpenError] = useState(false);
-  /*useEffect(() => {
-    export const getPdf = async () => {
-      try {
-        return await fetch("api/auth/me")
-          .then((response) => response.json())
-          .then((data) => data);
-      } catch (err) {
-        return err.response;
-      }
-    };
-  })*/
+  const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
+  const history = useHistory();
+  useEffect(() => {
+    console.log(isAdmin);
+    console.log(isLoggedIn);
+    if (!isAdmin || !isLoggedIn) {
+      history.push("/pdf");
+    }
+  });
 
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;

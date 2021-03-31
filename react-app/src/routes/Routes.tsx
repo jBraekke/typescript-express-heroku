@@ -1,5 +1,10 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AboutUsPage from "../pages/about/AboutUsPage";
 import AddApartmentPage from "../pages/addApartment/AddApartmentPage";
@@ -21,6 +26,23 @@ const AdminRoutes = ({ children, ...rest }: any) => {
     <Route
       {...rest}
       render={() => isLoggedIn && isAdmin && !isLoading && children}
+    />
+  );
+};
+
+const TestRoutes = ({ children, ...rest }: any) => {
+  const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
+
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        isLoggedIn && isAdmin && !isLoading ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: "/loginuser" }} />
+        )
+      }
     />
   );
 };
@@ -59,9 +81,9 @@ const Routes = () => (
           <AboutUsPage />
         </Route>
 
-        <AdminRoutes exact path="/pdf">
+        <TestRoutes exact path="/pdf">
           <PdfPage />
-        </AdminRoutes>
+        </TestRoutes>
 
         <Route exact path="/createuser">
           <RegisterPage />
