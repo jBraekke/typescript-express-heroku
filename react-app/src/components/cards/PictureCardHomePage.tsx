@@ -1,10 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import { Box } from "@material-ui/core";
+import theme from "../../themes/theme";
 
 const useStyles = makeStyles({
   root: {
@@ -16,6 +20,13 @@ const useStyles = makeStyles({
   content: {
     height: "300px",
   },
+
+  text: {
+    fontWeight: 400,
+  },
+  textDescription: {
+    marginTop: theme.spacing(20),
+  },
 });
 
 const PictureCardHomePage = ({ title, description, image }: any) => {
@@ -25,7 +36,8 @@ const PictureCardHomePage = ({ title, description, image }: any) => {
       backgroundImage: "url(" + image + ")",
       backgroundRepeat: "no-repeat, repeat",
       backgroundSize: "cover",
-      background: "rgba(0,0,0,0.1)",
+      // //background: "rgba(0,0,0,0.1)",
+      //color: "black",
     },
   });
   const classes2 = testStyles();
@@ -44,17 +56,19 @@ const PictureCardHomePage = ({ title, description, image }: any) => {
         <CardContent className={classes.content}>
           <Typography
             align="center"
-            color="primary"
-            variant="h4"
-            component="h3"
+            //color="primary"
+            variant="h2"
+            component="h2"
+            className={classes.text}
           >
             {title}
           </Typography>
           <Typography
             align="center"
             color="primary"
-            variant="body1"
-            component="p"
+            variant="h6"
+            component="h6"
+            className={classes.textDescription}
           >
             {description}
           </Typography>
