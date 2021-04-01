@@ -19,6 +19,9 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddIcon from '@material-ui/icons/Add';
 import { useAuthContext } from "../../context/AuthProvider";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { LocalDiningOutlined } from "@material-ui/icons";
+import { setupMaster } from "cluster";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -100,9 +103,29 @@ const useStyles = makeStyles((theme) => ({
 function SleekDrawerNavigationAdmin
 () {
   
-    const { isLoggedIn, isAdmin, isLoading, user } = useAuthContext() as any;
+    const { isLoggedIn, isAdmin, isLoading, setUser,  user } = useAuthContext() as any;
+    
   
   
+    
+    const getUserInfo = async () => {
+        try {
+          return await fetch("api/auth/logout").then((response) => response.json());
+        } catch (err) {
+          return err.response;
+        }
+      
+      
+    };
+    //user(url);
+    //   //setUser(null);
+  const handleLogout = async () => {
+    const user1 = await getUserInfo();
+    console.log(user1);
+    setUser(user1);
+    console.log("jeg er trykket");
+
+  }
   
     const headersData = [
 
@@ -122,9 +145,10 @@ function SleekDrawerNavigationAdmin
         comp: PersonAddIcon,
       },
       {
-        label: "Logg inn",
+        label: "Logg ut",
         href: "/loginuser",
-        comp: LockOpenIcon,
+        comp:  ExitToAppIcon,
+        onClick: {handleLogout}
       },
   ];
   const classes = useStyles();
@@ -134,7 +158,7 @@ function SleekDrawerNavigationAdmin
     setMobileOpen(!mobileOpen);
   }
   const getMenuButtons = () => {
-    return headersData.map(({ label, href, comp }: any) => {
+    return headersData.map(({ label, href, comp}: any) => {
       return (
         <Box>
           <Button
@@ -143,8 +167,13 @@ function SleekDrawerNavigationAdmin
               to: href,
               component: RouterLink,
               className: classes.menuItems,
+        
+    
+              
             }}
           >
+             
+             
             <Box mr={1}>
               <Avatar className={classes.icon}>
                 <SvgIcon component={comp} />
@@ -155,6 +184,7 @@ function SleekDrawerNavigationAdmin
         </Box>
       );
     });
+    
   };
 
   return (
@@ -202,6 +232,15 @@ function SleekDrawerNavigationAdmin
        
          
           {getMenuButtons()}
+          <Button
+        variant="contained"
+        color="secondary"
+        className={classes.menuItems}
+        onClick={handleLogout}
+        endIcon={<ExitToAppIcon>LOGG UT</ExitToAppIcon>}
+      >
+        LOGG UT
+      </Button>
 
             
             <Avatar
