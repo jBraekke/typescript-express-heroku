@@ -16,7 +16,7 @@ export interface IApartment {
   house: boolean;
   commerce: boolean;
 
-  deposit?: Number;
+  deposit?: number;
   rentGuarantee?: string;
   parking: boolean;
   newlyBuilt: boolean;
