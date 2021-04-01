@@ -7,7 +7,7 @@ const AuthContext = createContext(null) as any;
 const { Provider } = AuthContext;
 export const getUserInfo = async () => {
   try {
-    return await fetch("api/auth/me").then((response) => response.json());
+    return await fetch("api/login/me").then((response) => response.json());
   } catch (err) {
     return err.response;
   }

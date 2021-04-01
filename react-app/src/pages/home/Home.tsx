@@ -5,33 +5,31 @@ import Grid from "@material-ui/core/Grid";
 import InfoCard from "../../components/cards/InfoCardHomePage";
 import PictureCard from "../../components/cards/PictureCardHomePage";
 import { Box, Container, Slide } from "@material-ui/core";
-import LoadingScreen from "../../components/loading/LoadingScreen"
-
+import LoadingScreen from "../../components/loading/LoadingScreen";
 
 const Frontpage = () => {
   const [imageLoad, setImageLoad] = useState(false);
   const img = new Image();
   img.onload = function () {
     setImageLoad(true);
-  }
+  };
   img.src = "header1.jpg";
   const titleString = "Velkommen til Vestengveien!";
   const descriptionString =
     "Vi er et norsk eiendomsfirma som arbeider med alt innenfor bolig og rennovasjon. Vårt hovedkontor ligger ved tunejordet ta gjerne en tur innom!";
 
-
-    const useStyles = makeStyles({
-      root: { flexGrow: 1 },
-      gridheader: {
-        backgroundImage: "url(" + img.src + ")",
-        backgroundRepeat: "no-repeat, repeat",
-        backgroundSize: "cover",
-      },
-      titleBox: {
-        textAlign: "center",
-      },
-    });
-    const classes = useStyles();
+  const useStyles = makeStyles({
+    root: { flexGrow: 1 },
+    gridheader: {
+      backgroundImage: "url(" + img.src + ")",
+      backgroundRepeat: "no-repeat, repeat",
+      backgroundSize: "cover",
+    },
+    titleBox: {
+      textAlign: "center",
+    },
+  });
+  const classes = useStyles();
   const InfoRow = () => {
     return (
       <>
@@ -45,9 +43,6 @@ const Frontpage = () => {
       </>
     );
   };
-
-
-
 
   const FancyRow = () => {
     return (
@@ -70,7 +65,6 @@ const Frontpage = () => {
 
   return imageLoad ? (
     <div>
-      
       <Grid container item xs={12}>
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
           <Grid className={classes.gridheader} item xs={12}>
@@ -85,7 +79,9 @@ const Frontpage = () => {
         </Slide>
       </Grid>
     </div>
-  ): <LoadingScreen></LoadingScreen>
+  ) : (
+    <LoadingScreen></LoadingScreen>
+  );
 };
 
 export default Frontpage;

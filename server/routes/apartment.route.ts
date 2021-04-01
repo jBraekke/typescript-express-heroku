@@ -7,6 +7,8 @@ const router = expressRouter.Router();
 
 router.post("/add", apartmentController.create);
 
+router.post("/edit/:id", apartmentController.update);
+
 router.get("/getlist", apartmentController.listApartments);
 
 router.get("/:id", apartmentController.get);

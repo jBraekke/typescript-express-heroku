@@ -20,7 +20,12 @@ export const create = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const get = catchAsyncErrors(async (req, res, next) => {
-  const user = await userService.getUserById(req.params.id);
+  const cookie = req.cookies["jwt"];
+  if (!cookie) {
+    res.status(401).json({ success: false });
+  }
+  const userjwt = jwt_decode(cookie) as any;
+  const user = await userService.getUserById(userjwt.data._id);
   if (!user) {
     return next(
       new ErrorHandler(`Can't find apartment with ID ${req.params.id}`, 404)

@@ -18,6 +18,7 @@ import ApartmentViewPage from "../pages/apartmentView/ApartmentViewPage";
 import RegisterPage from "../pages/register/RegisterPage";
 import LoginPage from "../pages/login/LoginPage";
 import { useAuthContext } from "../context/AuthProvider";
+import EditApartmentPage from "../pages/editApartment/EditApartmentPage";
 
 const AdminRoutes = ({ children, ...rest }: any) => {
   const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
@@ -76,6 +77,9 @@ const Routes = () => (
         </Route>
         <Route exact path="/addApartment">
           <AddApartmentPage />
+        </Route>
+        <Route exact path="/editApartment/:id">
+          <EditApartmentPage />
         </Route>
         <Route exact path="/aboutus">
           <AboutUsPage />
