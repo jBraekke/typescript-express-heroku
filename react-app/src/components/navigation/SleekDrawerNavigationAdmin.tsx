@@ -13,15 +13,22 @@ import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import Divider from '@material-ui/core/Divider';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import AddIcon from '@material-ui/icons/Add';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     //display: "flex",
+    backgroundColor: theme.palette.primary.main
   },
   drawer: {
     width: drawerWidth,
     //flexShrink: 0,
+    backgroundColor: theme.palette.primary.main,
   },
   icon: {
     backgroundColor: theme.palette.secondary.main,
@@ -38,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     //zIndex: theme.zIndex.drawer + 1,
     position: "relative",
+    
   },
   menuButton: {
     float: "right",
@@ -50,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(30),
     opacity: "50%",
     
+    
+  },
+  containerNav: {
+   
     
   },
 
@@ -69,40 +81,37 @@ const useStyles = makeStyles((theme) => ({
    backgroundColor: theme.palette.primary.main,
   },
   
-  content: {},
+  content: {backgroundColor: theme.palette.primary.main},
   closeMenuButton: {
     marginLeft: "auto",
     marginRight: 0,
   },
 }));
 
-function SleekDrawerNav() {
+function SleekDrawerNavigationAdmin
+() {
   const headersData = [
-    {
-      label: "HJEM",
-      href: "/",
-      comp: HomeIcon,
-    },
-    {
-      label: "VÅRE LEILIGHETER",
-      href: "/welcome",
-      comp: HomeWorkIcon,
-    },
-    {
-      label: "KONTAKT OSS",
-      href: "/contact",
-      comp: ContactMailSharpIcon,
-    },
-    {
-      label: "OM OSS",
-      href: "/aboutus",
-      comp: ImportContactsIcon,
-    },
-    {
-      label: "Legg ut annonse",
-      href: "/addApartment",
-      comp: HomeIcon,
-    },
+
+      {
+        label: "Legg ut annonse",
+        href: "/addApartment",
+        comp:AddCircleIcon,
+      },
+      {
+        label: "Lag Kontrakt",
+        href: "/pdf",
+        comp: AddIcon,
+      },
+      {
+        label: "Lag bruker",
+        href: "/createuser",
+        comp: PersonAddIcon,
+      },
+      {
+        label: "Logg inn",
+        href: "/loginuser",
+        comp: LockOpenIcon,
+      },
   ];
   const classes = useStyles();
   const theme = useTheme();
@@ -135,14 +144,14 @@ function SleekDrawerNav() {
   };
 
   return (
-    <Box>
+    <Box className={classes.containerNav}>
       <IconButton
-        color="inherit"
+        color="secondary"
         aria-label="Open drawer"
         onClick={handleDrawerToggle}
         className={classes.menuButton}
       >
-        <MenuIcon fontSize="large" />
+        <AccountCircleIcon fontSize="large" />
       </IconButton>
 
       <nav className={classes.drawer}>
@@ -191,9 +200,11 @@ function SleekDrawerNav() {
     </Box>
   );
 }
-SleekDrawerNav.propTypes = {
+SleekDrawerNavigationAdmin
+.propTypes = {
   // Injected by the documentation to work in an iframe.
   // You won't need it on your project.
   container: PropTypes.object,
 };
-export default SleekDrawerNav;
+export default SleekDrawerNavigationAdmin
+;
