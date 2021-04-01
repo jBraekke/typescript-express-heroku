@@ -12,8 +12,17 @@ router.get("/me", userController.me);
 //router.get("/logout", userController.logout);
 
 router.get('/logout', function(req, res){
-    req.logout();
-    console.log(res);
-    res.redirect('/loginuser');
-  });
+        req.logOut();
+    delete req.session;
+        res.clearCookie('connect.sid');
+        res.redirect('/loginuser');
+        console.log(req);
+    });
+  
+
+
+
+
+
+
 export default router;

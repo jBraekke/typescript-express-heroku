@@ -109,21 +109,22 @@ function SleekDrawerNavigationAdmin
   
     
     const getUserInfo = async () => {
+        
+        
         try {
           return await fetch("api/auth/logout").then((response) => response.json());
         } catch (err) {
           return err.response;
         }
-      
-      
     };
     //user(url);
     //   //setUser(null);
   const handleLogout = async () => {
-    const user1 = await getUserInfo();
-    console.log(user1);
-    setUser(user1);
-    console.log("jeg er trykket");
+    await getUserInfo();
+    //console.log(user1);
+
+    setUser(null);
+    //console.log("jeg er trykket");
 
   }
   
