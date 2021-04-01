@@ -98,11 +98,7 @@ function SleekDrawerNav() {
       href: "/aboutus",
       comp: ImportContactsIcon,
     },
-    {
-      label: "Legg ut annonse",
-      href: "/addApartment",
-      comp: HomeIcon,
-    },
+
   ];
   const classes = useStyles();
   const theme = useTheme();

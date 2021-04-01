@@ -95,26 +95,6 @@ const headersData = [
     comp: ImportContactsIcon,
   },
 
-  {
-    label: "Legg ut annonse",
-    href: "/addApartment",
-    comp: HomeIcon,
-  },
-  {
-    label: "Lag Kontrakt",
-    href: "/pdf",
-    comp: HomeIcon,
-  },
-  {
-    label: "Lag bruker",
-    href: "/createuser",
-    comp: HomeIcon,
-  },
-  {
-    label: "Logg inn med bruker",
-    href: "/loginuser",
-    comp: HomeIcon,
-  },
 ];
 
 const SleekNav = () => {
