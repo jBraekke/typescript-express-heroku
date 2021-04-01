@@ -200,6 +200,7 @@ import SleekDrawerNavigationAdmin from "./SleekDrawerNavigationAdmin";
               Vestengveien 
               Eiendomsutvikling A/S
             </Typography>
+           
           </Box>
           <Box borderRadius={16} className={classes.gucciFlip}>
           <SleekDrawerNavigationAdmin/>

@@ -18,6 +18,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddIcon from '@material-ui/icons/Add';
+import { useAuthContext } from "../../context/AuthProvider";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +42,14 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "1px solid lightgreen",
     paddingBottom: "5px",
   },
+  title2: {
+    fontFamily: "EB Garamond",
+    marginBottom: theme.spacing(3),
+    color: "#FFFFFF",
+    borderBottom: "1px solid white",
+    paddingBottom: "5px",
+  },
+
 
   appBar: {
     //zIndex: theme.zIndex.drawer + 1,
@@ -90,7 +99,12 @@ const useStyles = makeStyles((theme) => ({
 
 function SleekDrawerNavigationAdmin
 () {
-  const headersData = [
+  
+    const { isLoggedIn, isAdmin, isLoading, user } = useAuthContext() as any;
+  
+  
+  
+    const headersData = [
 
       {
         label: "Legg ut annonse",
@@ -180,6 +194,12 @@ function SleekDrawerNavigationAdmin
           <Typography color="textPrimary" variant="h6" component="h6" className={classes.title}>
           Vestengveien Eiendomsutvikling AS        
         </Typography>
+
+        <Typography variant="h6" component="h6" className={classes.title}>
+              Velkommen, {user.firstName} {user.lastName}! <br/> <br/>
+              Her er dine admin funksjoner.
+            </Typography>
+       
          
           {getMenuButtons()}
 
