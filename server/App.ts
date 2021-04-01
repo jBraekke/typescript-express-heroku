@@ -16,6 +16,7 @@ import * as passport from "passport";
 //const swaggerDocument = require("../swagger.json");
 import { ROLES } from "./utils";
 import { initialiseAuthentication, utils } from "./auth";
+import middlewareCount from "./utils/middlewareCount";
 dotenv.config();
 class App {
   public express;
@@ -52,7 +53,7 @@ class App {
         res.redirect("/loginuser");
       }
     ); */
-
+    this.express.use(middlewareCount);
     this.express.use("/", router);
     this.express.use("/contact/", cors(), email);
     this.express.use(process.env.API_KEY + "auth/", cors(), authRoutes);

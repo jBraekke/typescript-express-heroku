@@ -21,7 +21,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { useAuthContext } from "../../context/AuthProvider";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { LocalDiningOutlined } from "@material-ui/icons";
-import { setupMaster } from "cluster";
+import Badge from '@material-ui/core/Badge';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -196,7 +196,9 @@ function SleekDrawerNavigationAdmin
         onClick={handleDrawerToggle}
         className={classes.menuButton}
       >
+        <Badge badgeContent={4} color="error">
         <AccountCircleIcon fontSize="large" />
+        </Badge>
       </IconButton>
 
       <nav className={classes.drawer}>
