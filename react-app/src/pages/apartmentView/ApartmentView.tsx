@@ -239,7 +239,7 @@ const ApartmentView = () => {
                 height="500"
                 alt="Apartment"
                 src={
-                  process.env.PUBLIC_URL + "/uploads/" + realEstate.imagePath
+                  "/uploads/" + realEstate.imagePath
                 }
                 title="Apartment"
               />
@@ -250,7 +250,7 @@ const ApartmentView = () => {
                 component="img"
                 height="500"
                 alt="Apartment"
-                src={process.env.PUBLIC_URL + "/hus.jpg"}
+                src="/hus.jpg"
                 title="Apartment"
               />
             </>
@@ -363,7 +363,7 @@ const ApartmentView = () => {
               component="img"
               height="250"
               alt="Apartment"
-              src={process.env.PUBLIC_URL + "./vestengveien1.jpg"}
+              src={"/vestengveien1.jpg"}
               title="vestengveien"
             />
 
