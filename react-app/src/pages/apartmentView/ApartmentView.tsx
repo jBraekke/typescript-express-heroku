@@ -168,10 +168,6 @@ const useStyles = makeStyles({
 });
 
 const ApartmentView = () => {
-  const { id } = useParams() as any;
-
-  console.log('current ID: ', id);
-
   const url2 = "/api/apartments/";
   const params = useParams() as any;
   const { status, data } = useFetch(url2 + params.id);
