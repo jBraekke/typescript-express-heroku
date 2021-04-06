@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { useFetch } from "../../hooks/useFetch";
 import { IApartment } from "../../interfaces/IApartment";
@@ -8,7 +7,7 @@ import SendIcon from "@material-ui/icons/Send";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Link as RouterLink, NavLink } from "react-router-dom";
+import { Link as RouterLink, NavLink, useParams, useHistory } from "react-router-dom";
 
 import {
   Box,
@@ -169,6 +168,10 @@ const useStyles = makeStyles({
 });
 
 const ApartmentView = () => {
+  const { id } = useParams() as any;
+
+  console.log('current ID: ', id);
+
   const url2 = "/api/apartments/";
   const params = useParams() as any;
   const { status, data } = useFetch(url2 + params.id);
@@ -236,7 +239,7 @@ const ApartmentView = () => {
                 height="500"
                 alt="Apartment"
                 src={
-                  process.env.PUBLIC_URL + "./uploads/" + realEstate.imagePath
+                  process.env.PUBLIC_URL + "/uploads/" + realEstate.imagePath
                 }
                 title="Apartment"
               />
@@ -247,7 +250,7 @@ const ApartmentView = () => {
                 component="img"
                 height="500"
                 alt="Apartment"
-                src={process.env.PUBLIC_URL + "./hus.jpg"}
+                src={process.env.PUBLIC_URL + "/hus.jpg"}
                 title="Apartment"
               />
             </>
@@ -440,7 +443,7 @@ const ApartmentView = () => {
                   color="primary"
                   endIcon={<SendIcon></SendIcon>}
                   size={"large"}
-                  //to="#form"
+                //to="#form"
                 >
                   SEND OSS EN MAIL
                 </Button>
