@@ -6,15 +6,16 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { Link as RouterLink, NavLink } from "react-router-dom";
 import { IApartmentProps } from "../../interfaces/IApartment";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 import theme from "../../themes/theme";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
     marginBottom: 0,
     padding: 0,
     //padding: theme.spacing(4),
-  
+
     "&:hover": {
       boxShadow: "17px 17px 18px #D4D2D2",
       transition: "all 0.2s ease-in",
@@ -28,28 +29,30 @@ const useStyles = makeStyles({
 
   card: {
     maxWidth: 345,
-    
   },
   text: {
     marginTop: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   secondInformationText: {
-    display: "block",
     marginTop: theme.spacing(1),
+
     fontWeight: "bold",
   },
+  flexContent: {},
 });
 
 const ApartmentCard = ({ props }: IApartmentProps) => {
   const classes = useStyles();
 
   return (
-    <RouterLink to={`apartmentview/${props._id}`}
-    {...{
-      color: "inherit",
-      style: { textDecoration: "none" },
-      key: "label",
-    }} 
+    <RouterLink
+      to={`apartmentview/${props._id}`}
+      {...{
+        color: "inherit",
+        style: { textDecoration: "none" },
+        key: "label",
+      }}
     >
       <Card
         className={classes.root}
@@ -77,56 +80,70 @@ const ApartmentCard = ({ props }: IApartmentProps) => {
           </>
         )}
 
-        <CardContent>
+        <CardContent className={classes.flexContent}>
           <Typography gutterBottom variant="h4" component="h4">
-          <span className={classes.secondInformationText}>
-                  {props?.title}
-                </span>{" "}
+            <span className={classes.secondInformationText}>
+              {props?.title}
+            </span>{" "}
           </Typography>
-          <Divider/>
+          <Divider />
+
           <Typography variant="h6" component="h6" className={classes.text}>
-          <span className={classes.secondInformationText} >
-          {props?.address}, {props?.city}
-                </span>{" "}
-          </Typography>
-          <Typography variant="h6"  component="h6" className={classes.text}>
-          <span >
-                
-                </span>{" "}
-          </Typography>
-          <Typography variant="h6"  component="h6" className={classes.text}>
-             Kvadratmeter <span className={classes.secondInformationText}>
-                  {props?.squareMeter} m²
-                </span>{" "} 
+            <span className={classes.secondInformationText}>
+              {props?.address}, {props?.city}
+            </span>{" "}
           </Typography>
 
-          <Typography variant="h6"  component="h6" className={classes.text}>
-             Antall soverom<span className={classes.secondInformationText}>
+          <Grid container item xs={12}>
+            <Grid item xs={6}>
+              <Typography variant="h6" component="h6" className={classes.text}>
+                Kvadratmeter{": "}
+                <span className={classes.secondInformationText}>
+                  {props?.squareMeter} m²
+                </span>{" "}
+              </Typography>
+
+              <Typography variant="h6" component="h6" className={classes.text}>
+                Antall soverom{": "}
+                <span className={classes.secondInformationText}>
                   {props?.bedrooms}
                 </span>{" "}
-          </Typography>
-
-          <Typography variant="h6"  component="h6" className={classes.text}>
-             Antall bad <span className={classes.secondInformationText}>
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="h6" component="h6" className={classes.text}>
+                Antall bad{": "}
+                <span className={classes.secondInformationText}>
                   {props?.bathrooms}
                 </span>{" "}
-          </Typography>
-          {props.newlyBuilt ? (
-            <Typography variant="h6"  component="h6" className={classes.text}>
-              Kjøpspris: <span className={classes.secondInformationText}>
-                  {props?.price}
-                </span>{" "}kr
-            </Typography>
-          ) : (
-            <Typography variant="h6"  component="h6" className={classes.text}>
-              Pris per måned <span className={classes.secondInformationText}>
-                  {props?.price} Kr
-                </span>{" "}
-            </Typography>
-          )}
-         
-        
-        
+              </Typography>
+
+              {props.newlyBuilt ? (
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  className={classes.text}
+                >
+                  Kjøpspris{": "}
+                  <span className={classes.secondInformationText}>
+                    {props?.price}
+                  </span>{" "}
+                  kr
+                </Typography>
+              ) : (
+                <Typography
+                  variant="h6"
+                  component="h6"
+                  className={classes.text}
+                >
+                  Pris per måned{": "}
+                  <span className={classes.secondInformationText}>
+                    {props?.price} Kr
+                  </span>{" "}
+                </Typography>
+              )}
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     </RouterLink>

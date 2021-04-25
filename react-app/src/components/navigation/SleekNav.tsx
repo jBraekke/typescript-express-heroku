@@ -16,10 +16,12 @@ import { Link as RouterLink } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 //import FolderIcon from "@material-ui/icons/Folder";
 import HomeIcon from "@material-ui/icons/Home";
+import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import theme from "../../themes/theme";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import SleekDrawerNav from "./SleekDrawerNav";
 
 const useStyles = makeStyles({
@@ -94,7 +96,11 @@ const headersData = [
     href: "/aboutus",
     comp: ImportContactsIcon,
   },
-
+  {
+    label: "Logg inn",
+    href: "/login/signin",
+    comp: LockOutlinedIcon,
+  },
 ];
 
 const SleekNav = () => {
