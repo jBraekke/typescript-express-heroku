@@ -94,7 +94,7 @@ const Routes = () => (
         </Route>
 
         <Route exact path="/loginuser">
-          <LoginPage />
+          <SignInPage />
         </Route>
       </Switch>
     </MainLayout>

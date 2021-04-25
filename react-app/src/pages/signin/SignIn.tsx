@@ -64,6 +64,21 @@ export default function SignIn() {
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleCloseError = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenError(false);
+  };
 
   const onSubmit = (data: any, e: any) => {
     setDatas("sending" + data.status);
@@ -89,22 +104,6 @@ export default function SignIn() {
       });
   };
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const handleCloseError = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenError(false);
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -126,6 +125,7 @@ export default function SignIn() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+
         <Typography component="h1" variant="h5">
           Logg inn
         </Typography>
@@ -154,7 +154,7 @@ export default function SignIn() {
             autoFocus
             rows={2}
             label="Email Adresse*"
-            id="email"
+            id="text"
           />
           {errors.email && (
             <span className={classes.error}>{errors.email.message}</span>
@@ -177,7 +177,8 @@ export default function SignIn() {
             variant="outlined"
             rows={2}
             label="Passord*"
-            id="password"
+            autoFocus
+            id="text"
             autoComplete="current-password"
           />
           {errors.password && (
@@ -194,10 +195,10 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Typography>Test bruker</Typography>
+              <Typography>Mail: test123@gmail.com</Typography>
             </Grid>
             <Grid item xs>
-              <Typography>Test bruker</Typography>
+              <Typography>Passord: 12345asd</Typography>
             </Grid>
           </Grid>
         </form>
