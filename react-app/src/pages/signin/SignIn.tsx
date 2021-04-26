@@ -200,6 +200,9 @@ export default function SignIn() {
             <Grid item xs>
               <Typography>Passord: 12345asd</Typography>
             </Grid>
+            
+              <Typography>Husk og trykke F5 etter du har logget inn</Typography>
+           
           </Grid>
         </form>
       </div>
