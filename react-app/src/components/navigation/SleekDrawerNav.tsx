@@ -12,8 +12,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
-import Divider from '@material-ui/core/Divider';
-
+import Divider from "@material-ui/core/Divider";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,26 +49,26 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(5.5),
     marginTop: theme.spacing(30),
     opacity: "50%",
-    
-    
   },
 
-  menuItems: { opacity: "100%",
-  color: "#FFFFFF",
-  marginTop: theme.spacing(2),
-  "&:hover": {
-    textDecoration: "underline",
-    textDecorationColor: "lightgreen",
+  menuItems: {
     opacity: "100%",
-    textUnderlineOffset: "30px",
-  },},
+    color: "#FFFFFF",
+    marginTop: theme.spacing(2),
+    "&:hover": {
+      textDecoration: "underline",
+      textDecorationColor: "lightgreen",
+      opacity: "100%",
+      textUnderlineOffset: "30px",
+    },
+  },
   toolbar: {},
 
   drawerPaper: {
     width: drawerWidth,
-   backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.main,
   },
-  
+
   content: {},
   closeMenuButton: {
     marginLeft: "auto",
@@ -98,7 +98,11 @@ function SleekDrawerNav() {
       href: "/aboutus",
       comp: ImportContactsIcon,
     },
-
+    {
+      label: "Logg inn",
+      href: "/loginuser",
+      comp: LockOutlinedIcon,
+    },
   ];
   const classes = useStyles();
   const theme = useTheme();
@@ -143,7 +147,7 @@ function SleekDrawerNav() {
 
       <nav className={classes.drawer}>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-       
+
         <Drawer
           variant="temporary"
           anchor={theme.direction === "rtl" ? "left" : "right"}
@@ -156,29 +160,29 @@ function SleekDrawerNav() {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-         
           <IconButton
             onClick={handleDrawerToggle}
             className={classes.closeMenuButton}
           >
-            <CloseIcon style={{ color: 'white' }}   />
-            
+            <CloseIcon style={{ color: "white" }} />
           </IconButton>
-          <Typography color="textPrimary" variant="h6" component="h6" className={classes.title}>
-          Vestengveien Eiendomsutvikling AS        
-        </Typography>
-         
+          <Typography
+            color="textPrimary"
+            variant="h6"
+            component="h6"
+            className={classes.title}
+          >
+            Vestengveien Eiendomsutvikling AS
+          </Typography>
+
           {getMenuButtons()}
 
-            
-            <Avatar
+          <Avatar
             className={classes.pictureLogo}
             alt="logo"
             //src="vestengveien1.jpg"¨
             src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
-        
-
         </Drawer>
       </nav>
       <div className={classes.content}>
