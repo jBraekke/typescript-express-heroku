@@ -584,7 +584,7 @@ const PdfComponent = () => {
                   as={TextField}
                   name="memberName1"
                   className={classes.member}
-                  defaultValue=""
+                  defaultValue=" "
                   variant="outlined"
                   label="Skriv inn navn til husstandsmedlem 1"
                   control={control}
@@ -608,7 +608,7 @@ const PdfComponent = () => {
                   name="memberSSN1"
                   className={classes.member}
                   control={control}
-                  defaultValue=""
+                  defaultValue=" "
                   variant="outlined"
                   label="Skriv inn personnummer til husstandsmedlem 1"
                   rules={{
@@ -638,7 +638,7 @@ const PdfComponent = () => {
                   name="memberName2"
                   className={classes.member}
                   control={control}
-                  defaultValue=""
+                  defaultValue=" "
                   variant="outlined"
                   label="Skriv inn navn til husstandsmedlem 2"
                   rules={{
@@ -661,7 +661,7 @@ const PdfComponent = () => {
                   name="memberSSN2"
                   className={classes.member}
                   control={control}
-                  defaultValue=""
+                  defaultValue=" "
                   variant="outlined"
                   label="Skriv inn personummer til husstandsmedlem 2"
                   rules={{
