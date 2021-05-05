@@ -224,15 +224,18 @@ const PdfComponent = () => {
       10,
       155
     );
-    doc.text(
-      "Leieforholdet opphører uten oppsigelse den:" +
-        " " +
-        moment(formData?.rentTime2).format("DD.MM.yyyy") +
-        " " +
-        "(minimum 3 år).",
-      10,
-      160
-    );
+
+    formData.rentTime2
+      ? doc.text(
+          "Leieforholdet opphører uten oppsigelse den:" +
+            " " +
+            moment(formData?.rentTime2).format("DD.MM.yyyy") +
+            " " +
+            "(minimum 3 år).",
+          10,
+          160
+        )
+      : doc.text("Leieforholdet opphører uten oppsigelse den:", 10, 160);
 
     doc.text(
       "I avtalt leieperiode er det:" +
