@@ -308,7 +308,7 @@ const PdfComponent = () => {
     doc.setFontSize(12);
     doc.setFont("Times New Roman", "italic");
     doc.text(
-      "Ved bruk av husleiegaranti er det leietakers plikt og til en hver tid passe på at denne er gyldig.",
+      "Ved bruk av depositumsgaranti er det leietakers plikt og til en hver tid passe på at denne er gyldig.",
       10,
       200
     );
