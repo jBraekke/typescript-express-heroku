@@ -22,9 +22,9 @@ const AuthProvider = ({ children }: any) => {
       console.log(user);
       if (user === null) {
         setLoading(true);
-        const { data } = await getUserInfo();
-        if (data) {
-          const currentUser = data;
+        const response = await getUserInfo();
+        if (response && response.data) {
+          const currentUser = response.data;
           setUser(currentUser);
         } else {
           setUser(null);

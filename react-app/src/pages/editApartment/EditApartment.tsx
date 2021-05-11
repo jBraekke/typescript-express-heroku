@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 //import { makeStyles } from "@material-ui/core/styles";
+import EditApartmentForm from "../../components/forms/EditApartmentForm";
 import { Container } from "@material-ui/core";
-import LoginUser from "../../components/forms/LoginUser";
 
 /*const useStyles = makeStyles({
   root: { flexGrow: 1 },
 });*/
 
-const Login = () => {
+const EditApartment = () => {
   //const classes = useStyles();
-  
+
   return (
     <>
       <Container>
-        <LoginUser></LoginUser>
+        <EditApartmentForm></EditApartmentForm>
       </Container>
-      
-
     </>
   );
 };
 
-export default Login;
+export default EditApartment;

@@ -4,34 +4,39 @@ import Grid from "@material-ui/core/Grid";
 //import CarCard from "../../components/cards/CarCard";
 import InfoCard from "../../components/cards/InfoCardHomePage";
 import PictureCard from "../../components/cards/PictureCardHomePage";
-import { Box, Container, Slide } from "@material-ui/core";
-import LoadingScreen from "../../components/loading/LoadingScreen"
-
+import { Box, Container, Slide, Typography, Divider } from "@material-ui/core";
+import LoadingScreen from "../../components/loading/LoadingScreen";
+import theme from "../../themes/theme";
 
 const Frontpage = () => {
   const [imageLoad, setImageLoad] = useState(false);
   const img = new Image();
   img.onload = function () {
     setImageLoad(true);
-  }
+  };
   img.src = "header1.jpg";
   const titleString = "Velkommen til Vestengveien!";
   const descriptionString =
     "Vi er et norsk eiendomsfirma som arbeider med alt innenfor bolig og rennovasjon. Vårt hovedkontor ligger ved tunejordet ta gjerne en tur innom!";
 
-
-    const useStyles = makeStyles({
-      root: { flexGrow: 1 },
-      gridheader: {
-        backgroundImage: "url(" + img.src + ")",
-        backgroundRepeat: "no-repeat, repeat",
-        backgroundSize: "cover",
-      },
-      titleBox: {
-        textAlign: "center",
-      },
-    });
-    const classes = useStyles();
+  const useStyles = makeStyles({
+    root: { flexGrow: 1 },
+    gridheader: {
+      backgroundImage: "url(" + img.src + ")",
+      backgroundRepeat: "no-repeat, repeat",
+      backgroundSize: "cover",
+    },
+    titleBox: {
+      textAlign: "center",
+    },
+    boxContainerHeaderTitle: {
+      marginBottom: theme.spacing(4),
+    },
+    text: {
+      fontWeight: 500,
+    },
+  });
+  const classes = useStyles();
   const InfoRow = () => {
     return (
       <>
@@ -46,23 +51,56 @@ const Frontpage = () => {
     );
   };
 
-
-
-
   const FancyRow = () => {
     return (
       <>
-        <Grid item xs={12} md={6}>
-          <PictureCard title={"Leiligheter"} image="apartments.jpg" />
+        <Grid container spacing={10}>
+          <Grid item xs={12}>
+            <Box className={classes.boxContainerHeaderTitle}>
+              <Typography
+                variant="h2"
+                component="h2"
+                align={"center"}
+                className={classes.text}
+              >
+                Velkommen!
+              </Typography>
+
+              <Typography variant="h2" component="h2" align={"center"}>
+                Hva ønsker du å leie?
+              </Typography>
+
+              <Divider />
+            </Box>
+          </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Hus"} image="house.jpg" />
+          <PictureCard
+            title={"Leiligheter"}
+            description="Trykk her for å se våre tilgjenlige leiligheter"
+            image="apartments.jpg"
+          />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Kommende boliger"} image="incoming.jpeg" />
+          <PictureCard
+            title={"Hus"}
+            description={"Trykk her for å se våre tilgjenlige hus"}
+            image="house.jpg"
+          />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Næringsbygg"} image="leieboer.jpg" />
+          <PictureCard
+            title={"Kommende boliger"}
+            description={"Trykk her for å se våre inkommende leiligheter"}
+            image="incoming.jpeg"
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <PictureCard
+            title={"Næringsbygg"}
+            description={"Trykk her for å se våre næringsbygg"}
+            image="leieboer.jpg"
+          />
         </Grid>
       </>
     );
@@ -70,7 +108,6 @@ const Frontpage = () => {
 
   return imageLoad ? (
     <div>
-      
       <Grid container item xs={12}>
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
           <Grid className={classes.gridheader} item xs={12}>
@@ -85,7 +122,9 @@ const Frontpage = () => {
         </Slide>
       </Grid>
     </div>
-  ): <LoadingScreen></LoadingScreen>
+  ) : (
+    <LoadingScreen></LoadingScreen>
+  );
 };
 
 export default Frontpage;

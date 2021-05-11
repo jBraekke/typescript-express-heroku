@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { useFetch } from "../../hooks/useFetch";
 import { IApartment } from "../../interfaces/IApartment";
@@ -8,7 +7,7 @@ import SendIcon from "@material-ui/icons/Send";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Link as RouterLink, NavLink } from "react-router-dom";
+import { Link as RouterLink, NavLink, useParams, useHistory } from "react-router-dom";
 
 import {
   Box,
@@ -22,6 +21,8 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import theme from "../../themes/theme";
+import { useAuthContext } from "../../context/AuthProvider";
+import { deleteData } from "../../utils/fetchPost";
 
 //import CarCard from "../../components/cards/CarCard";
 //import { Button, Input } from "@material-ui/core";
@@ -29,6 +30,10 @@ import theme from "../../themes/theme";
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+  },
+  cardButtons: {
+    display: "flex",
+    flexDirection: "column",
   },
 
   headerAddress: {
@@ -143,32 +148,48 @@ const useStyles = makeStyles({
       backgroundColor: "#abd32e",
     },
   },
+  redbutton: {
+    backgroundColor: "#c70000",
+    color: "white",
+
+    "&:hover": {
+      backgroundColor: "#3b0000",
+    },
+  },
+
+  greenbutton: {
+    color: "white",
+    backgroundColor: "#008040",
+
+    "&:hover": {
+      backgroundColor: "#408000",
+    },
+  },
 });
 
 const ApartmentView = () => {
   const url2 = "/api/apartments/";
-  /*const getData = () => {
-    fetch(url2 + params.id, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then(function (response) {
-        console.log(response);
-        return response.json();
-      })
-      .then(function (myJson) {
-        console.log(myJson);
-        //setData(myJson.data)
-        setRealEstate(myJson.data);;
-      });
-    }*/
   const params = useParams() as any;
   const { status, data } = useFetch(url2 + params.id);
   const [realEstate, setRealEstate] = useState<IApartment>();
   const [imageRefresh, setimageRefresh] = useState({});
+  const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
+  const removeClickHandler = () => {
+    const deleteMethod = {
+      method: "DELETE", // Method itself
+      headers: {
+        "Content-type": "application/json; charset=UTF-8", // Indicates the content
+      },
+      // No need to have body, because we don't send nothing to the server.
+    };
+    // Make the HTTP Delete call using fetch api
 
+    fetch(url2 + params.id, deleteMethod)
+      .then((response) => response.json())
+      .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
+      .catch((err) => console.log(err)); // Do something with the error
+    alert("slettet");
+  };
   const boolAnswers = {
     YES: "Ja",
     NO: "Nei",
@@ -214,7 +235,7 @@ const ApartmentView = () => {
                 height="500"
                 alt="Apartment"
                 src={
-                  process.env.PUBLIC_URL + "./uploads/" + realEstate.imagePath
+                  "/uploads/" + realEstate.imagePath
                 }
                 title="Apartment"
               />
@@ -225,7 +246,7 @@ const ApartmentView = () => {
                 component="img"
                 height="500"
                 alt="Apartment"
-                src={process.env.PUBLIC_URL + "./hus.jpg"}
+                src="/hus.jpg"
                 title="Apartment"
               />
             </>
@@ -338,7 +359,7 @@ const ApartmentView = () => {
               component="img"
               height="250"
               alt="Apartment"
-              src={process.env.PUBLIC_URL + "./vestengveien1.jpg"}
+              src={"/vestengveien1.jpg"}
               title="vestengveien"
             />
 
@@ -401,7 +422,10 @@ const ApartmentView = () => {
               <br />
             </CardContent>
 
-            <CardActions style={{ justifyContent: "center" }}>
+            <CardActions
+              className={classes.cardButtons}
+              style={{ justifyContent: "center" }}
+            >
               <RouterLink
                 to={`../contact/${realEstate?.city}/${realEstate?.address}`}
                 {...{
@@ -415,29 +439,44 @@ const ApartmentView = () => {
                   color="primary"
                   endIcon={<SendIcon></SendIcon>}
                   size={"large"}
-                  //to="#form"
+                //to="#form"
                 >
                   SEND OSS EN MAIL
                 </Button>
               </RouterLink>
 
-              {/* <Button
-                  variant={"contained"}
-                  color="primary"
-                  endIcon={<EditIcon></EditIcon>}
-                  size={"large"}
-                >
-                  Rediger annonse
-                </Button>
-
-                <Button
-                  variant={"contained"}
-                  color="primary"
-                  endIcon={<DeleteIcon></DeleteIcon>}
-                  size={"large"}
-                >
-                  Slett annonse
-                </Button> */}
+              {isLoggedIn ? (
+                <>
+                  <RouterLink
+                    to={`../editApartment/${realEstate?._id}`}
+                    {...{
+                      color: "inherit",
+                      style: { textDecoration: "none" },
+                      key: "label",
+                    }}
+                  >
+                    <Button
+                      variant={"contained"}
+                      className={classes.greenbutton}
+                      endIcon={<EditIcon></EditIcon>}
+                      size={"large"}
+                    >
+                      Rediger Artikkel
+                    </Button>
+                  </RouterLink>
+                  <Button
+                    variant={"contained"}
+                    className={classes.redbutton}
+                    endIcon={<DeleteIcon></DeleteIcon>}
+                    size={"large"}
+                    onClick={removeClickHandler}
+                  >
+                    Slett Artikkel
+                  </Button>
+                </>
+              ) : (
+                <></>
+              )}
             </CardActions>
           </Card>
         </Grid>

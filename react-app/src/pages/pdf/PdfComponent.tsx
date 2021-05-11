@@ -224,15 +224,18 @@ const PdfComponent = () => {
       10,
       155
     );
-    doc.text(
-      "Leieforholdet opphører uten oppsigelse den:" +
-        " " +
-        moment(formData?.rentTime2).format("DD.MM.yyyy") +
-        " " +
-        "(minimum 3 år).",
-      10,
-      160
-    );
+
+    formData.rentTime2
+      ? doc.text(
+          "Leieforholdet opphører uten oppsigelse den:" +
+            " " +
+            moment(formData?.rentTime2).format("DD.MM.yyyy") +
+            " " +
+            "(minimum 3 år).",
+          10,
+          160
+        )
+      : doc.text("Leieforholdet opphører uten oppsigelse den:", 10, 160);
 
     doc.text(
       "I avtalt leieperiode er det:" +
@@ -305,7 +308,7 @@ const PdfComponent = () => {
     doc.setFontSize(12);
     doc.setFont("Times New Roman", "italic");
     doc.text(
-      "Ved bruk av husleiegaranti er det leietakers plikt og til en hver tid passe på at denne er gyldig.",
+      "Ved bruk av depositumsgaranti er det leietakers plikt og til en hver tid passe på at denne er gyldig.",
       10,
       200
     );
@@ -581,7 +584,7 @@ const PdfComponent = () => {
                   as={TextField}
                   name="memberName1"
                   className={classes.member}
-                  defaultValue=""
+                  defaultValue=" "
                   variant="outlined"
                   label="Skriv inn navn til husstandsmedlem 1"
                   control={control}
@@ -605,7 +608,7 @@ const PdfComponent = () => {
                   name="memberSSN1"
                   className={classes.member}
                   control={control}
-                  defaultValue=""
+                  defaultValue=" "
                   variant="outlined"
                   label="Skriv inn personnummer til husstandsmedlem 1"
                   rules={{
@@ -635,7 +638,7 @@ const PdfComponent = () => {
                   name="memberName2"
                   className={classes.member}
                   control={control}
-                  defaultValue=""
+                  defaultValue=" "
                   variant="outlined"
                   label="Skriv inn navn til husstandsmedlem 2"
                   rules={{
@@ -658,7 +661,7 @@ const PdfComponent = () => {
                   name="memberSSN2"
                   className={classes.member}
                   control={control}
-                  defaultValue=""
+                  defaultValue=" "
                   variant="outlined"
                   label="Skriv inn personummer til husstandsmedlem 2"
                   rules={{
