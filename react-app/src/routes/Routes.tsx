@@ -1,10 +1,5 @@
-import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AboutUsPage from "../pages/about/AboutUsPage";
 import AddApartmentPage from "../pages/addApartment/AddApartmentPage";
@@ -16,10 +11,8 @@ import SignInPage from "../pages/signin/SignInPage";
 import SignUpPage from "../pages/signup/SignUpPage";
 import ApartmentViewPage from "../pages/apartmentView/ApartmentViewPage";
 import RegisterPage from "../pages/register/RegisterPage";
-import LoginPage from "../pages/login/LoginPage";
-import { useAuthContext } from "../context/AuthProvider";
 import EditApartmentPage from "../pages/editApartment/EditApartmentPage";
-
+/*
 const AdminRoutes = ({ children, ...rest }: any) => {
   const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
 
@@ -29,9 +22,9 @@ const AdminRoutes = ({ children, ...rest }: any) => {
       render={() => isLoggedIn && isAdmin && !isLoading && children}
     />
   );
-};
+};*/
 
-const TestRoutes = ({ children, ...rest }: any) => {
+/*const TestRoutes = ({ children, ...rest }: any) => {
   const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
 
   return (
@@ -46,7 +39,8 @@ const TestRoutes = ({ children, ...rest }: any) => {
       }
     />
   );
-};
+};*/
+
 const Routes = () => (
   <Router>
     <MainLayout>
