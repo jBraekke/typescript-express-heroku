@@ -120,12 +120,6 @@ function SleekDrawerNavigationAdmin() {
       href: "/createuser",
       comp: PersonAddIcon,
     },
-    {
-      label: "Logg ut",
-      href: "/loginuser",
-      comp: ExitToAppIcon,
-      onClick: { handleLogout },
-    },
   ];
   const classes = useStyles();
   const theme = useTheme();
@@ -191,18 +185,9 @@ function SleekDrawerNavigationAdmin() {
           >
             <CloseIcon style={{ color: "white" }} />
           </IconButton>
-          <Typography
-            color="textPrimary"
-            variant="h6"
-            component="h6"
-            className={classes.title}
-          >
-            Vestengveien Eiendomsutvikling AS
-          </Typography>
 
           <Typography variant="h6" component="h6" className={classes.title}>
-            Velkommen, {user.firstName} {user.lastName}! <br /> <br />
-            Her er dine admin funksjoner.
+            Velkommen, {user.firstName} {user.lastName}!
           </Typography>
 
           {getMenuButtons()}

@@ -89,16 +89,16 @@ const Frontpage = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Leiligheter"} image="pic6-min.jpg" />
+          <PictureCard title={"Leiligheter"} image={img1.src} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Hus"} image="pic5.jpg" />
+          <PictureCard title={"Hus"} image={img2.src} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Kommende boliger"} image="pic3.jpg" />
+          <PictureCard title={"Kommende boliger"} image={img3.src} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Næringsbygg"} image="pic4.jpg" />
+          <PictureCard title={"Næringsbygg"} image={img4.src} />
         </Grid>
       </>
     );
