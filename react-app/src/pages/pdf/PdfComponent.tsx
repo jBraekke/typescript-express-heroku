@@ -3,15 +3,13 @@ import {
   Card,
   CardContent,
   Container,
-  FormGroup,
-  Grid,
   makeStyles,
   Snackbar,
   TextField,
   Typography,
 } from "@material-ui/core";
 import { AcroFormCheckBox, jsPDF } from "jspdf";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
 import AddIcon from "@material-ui/icons/Add";
@@ -95,14 +93,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PdfComponent = () => {
-  const [formData, setFormData] = useState<IContract>();
+  const [, setFormData] = useState<IContract>();
   const methods = useForm();
   const { handleSubmit, control, errors } = methods;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [openError, setOpenError] = useState(false);
-  const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
-  const history = useHistory();
 
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
