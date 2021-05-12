@@ -81,7 +81,7 @@ export default function SignIn() {
 
   const onSubmit = (data: any, e: any) => {
     setDatas("sending" + data.status);
-    console.log(e);
+
     postData("api/auth/login", data)
       .then((data) => {
         setDatas("sending" + data.status);
@@ -92,9 +92,7 @@ export default function SignIn() {
         setOpen(true);
         return data.json();
       })
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => {})
       .catch((err) => {
         err.text().then((errorMessage: any) => {
           var dd = JSON.parse(errorMessage);

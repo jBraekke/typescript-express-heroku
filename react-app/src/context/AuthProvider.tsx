@@ -18,7 +18,6 @@ const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     const fetchUserdata = async () => {
-      console.log(user);
       if (user === null) {
         setLoading(true);
         const response = await getUserInfo();

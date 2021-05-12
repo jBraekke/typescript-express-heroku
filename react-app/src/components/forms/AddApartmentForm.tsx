@@ -61,7 +61,7 @@ const ContactForm = () => {
     data.deposit = true;
     data.newlyBuilt = true;*/
     /*
-    console.log(data);
+
     postData("/api/apartments/add", data).then((data) => {
       setDatas("sending" + data.status);
       if (data.status === 204) {
@@ -75,7 +75,6 @@ const ContactForm = () => {
     });
 */
 
-    console.log(e);
     postData("/api/apartments/add", data)
       .then((data) => {
         //setDatas("sending" + data.status);
@@ -87,9 +86,7 @@ const ContactForm = () => {
         setDatas("Leilighet lagt til!");
         return data.json();
       })
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => {})
       .catch((err) => {
         err.text().then((errorMessage: any) => {});
       });

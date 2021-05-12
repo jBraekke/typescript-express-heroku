@@ -53,7 +53,6 @@ const EditApartment = () => {
   useEffect(() => {
     if (params.id) {
       setRealEstate(data);
-      console.log(data);
     }
   }, [params.id, data]);
 

@@ -180,10 +180,7 @@ const ApartmentView = () => {
     };
     // Make the HTTP Delete call using fetch api
 
-    fetch(url2 + params.id, deleteMethod)
-      .then((response) => response.json())
-      .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
-      .catch((err) => console.log(err)); // Do something with the error
+    fetch(url2 + params.id, deleteMethod).then((response) => response.json());
     alert("slettet");
   };
   const boolAnswers = {

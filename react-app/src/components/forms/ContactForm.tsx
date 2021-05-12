@@ -47,7 +47,7 @@ const ContactForm = () => {
 
   const onSubmit = (data: any, e: any) => {
     setDatas("sending" + data.status);
-    console.log(e);
+
     postData("/contact/sendmail", data).then((data) => {
       setDatas("sending" + data.status);
       if (data.status === 250) {

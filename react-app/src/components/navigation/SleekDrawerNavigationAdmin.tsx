@@ -97,14 +97,11 @@ function SleekDrawerNavigationAdmin() {
       return err.response;
     }
   };
-  //user(url);
-  //   //setUser(null);
+
   const handleLogout = async () => {
     await getUserInfo();
-    //console.log(user1);
 
     setUser(null);
-    //console.log("jeg er trykket");
   };
 
   const headersData = [
