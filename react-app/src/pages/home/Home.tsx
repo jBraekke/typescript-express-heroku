@@ -9,11 +9,40 @@ import theme from "../../themes/theme";
 
 const Frontpage = () => {
   const [imageLoad, setImageLoad] = useState(false);
+  const [imageLoad1, setImageLoad1] = useState(false);
+  const [imageLoad2, setImageLoad2] = useState(false);
+  const [imageLoad3, setImageLoad3] = useState(false);
+  const [imageLoad4, setImageLoad4] = useState(false);
   const img = new Image();
+  const img1 = new Image();
+  const img2 = new Image();
+  const img3 = new Image();
+  const img4 = new Image();
   img.onload = function () {
     setImageLoad(true);
   };
   img.src = "pic8.jpg";
+
+  img1.onload = function () {
+    setImageLoad1(true);
+  };
+  img1.src = "pic6-min.jpg";
+
+  img2.onload = function () {
+    setImageLoad2(true);
+  };
+  img2.src = "pic5.jpg";
+
+  img3.onload = function () {
+    setImageLoad3(true);
+  };
+  img3.src = "pic3.jpg";
+
+  img4.onload = function () {
+    setImageLoad4(true);
+  };
+  img4.src = "pic4.jpg";
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -60,7 +89,7 @@ const Frontpage = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Leiligheter"} image="pic6.jpg" />
+          <PictureCard title={"Leiligheter"} image="pic6-min.jpg" />
         </Grid>
         <Grid item xs={12} md={6}>
           <PictureCard title={"Hus"} image="pic5.jpg" />
@@ -75,7 +104,7 @@ const Frontpage = () => {
     );
   };
 
-  return imageLoad ? (
+  return imageLoad && imageLoad1 && imageLoad2 && imageLoad3 && imageLoad4 ? (
     <div>
       <Grid container item xs={12}>
         <Grid className={classes.gridheader} item xs={12}>
