@@ -16,7 +16,6 @@ import { Link as RouterLink } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 //import FolderIcon from "@material-ui/icons/Folder";
 import HomeIcon from "@material-ui/icons/Home";
-import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
@@ -153,7 +152,7 @@ const SleekNav = () => {
           />
         </Box>
         <Box>
-          <Typography variant="h4" component="h4" className={classes.sexyText}>
+          <Typography variant="h4" component="h1" className={classes.sexyText}>
             Vestengveien Eiendomsutvikling A/S
           </Typography>
         </Box>
@@ -172,7 +171,7 @@ const SleekNav = () => {
             src={process.env.PUBLIC_URL + "/vestengveien1.jpg"}
           />
 
-          <Typography variant="h4" component="h4" className={classes.sexyText}>
+          <Typography variant="h4" component="h1" className={classes.sexyText}>
             Vestengveien <br />
             Eiendomsutvikling A/S
           </Typography>

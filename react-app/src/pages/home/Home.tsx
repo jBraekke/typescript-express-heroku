@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 //import CarCard from "../../components/cards/CarCard";
-import InfoCard from "../../components/cards/InfoCardHomePage";
 import PictureCard from "../../components/cards/PictureCardHomePage";
 import { Box, Container, Slide, Typography, Divider } from "@material-ui/core";
 import LoadingScreen from "../../components/loading/LoadingScreen";
@@ -14,11 +13,10 @@ const Frontpage = () => {
   img.onload = function () {
     setImageLoad(true);
   };
-  img.src = "header1.jpg";
-  const titleString = "Velkommen til Vestengveien!";
-  const descriptionString =
-    "Vi er et norsk eiendomsfirma som arbeider med alt innenfor bolig og rennovasjon. Vårt hovedkontor ligger ved tunejordet ta gjerne en tur innom!";
-
+  img.src = "pic8.jpg";
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const useStyles = makeStyles({
     root: { flexGrow: 1 },
     gridheader: {
@@ -37,19 +35,6 @@ const Frontpage = () => {
     },
   });
   const classes = useStyles();
-  const InfoRow = () => {
-    return (
-      <>
-        <Grid item xs={12}>
-          {" "}
-          <InfoCard
-            title={titleString}
-            description={descriptionString}
-          ></InfoCard>
-        </Grid>
-      </>
-    );
-  };
 
   const FancyRow = () => {
     return (
@@ -75,32 +60,16 @@ const Frontpage = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard
-            title={"Leiligheter"}
-            description="Trykk her for å se våre tilgjenlige leiligheter"
-            image="apartments.jpg"
-          />
+          <PictureCard title={"Leiligheter"} image="pic6.jpg" />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard
-            title={"Hus"}
-            description={"Trykk her for å se våre tilgjenlige hus"}
-            image="house.jpg"
-          />
+          <PictureCard title={"Hus"} image="pic5.jpg" />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard
-            title={"Kommende boliger"}
-            description={"Trykk her for å se våre inkommende leiligheter"}
-            image="incoming.jpeg"
-          />
+          <PictureCard title={"Kommende boliger"} image="pic3.jpg" />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard
-            title={"Næringsbygg"}
-            description={"Trykk her for å se våre næringsbygg"}
-            image="leieboer.jpg"
-          />
+          <PictureCard title={"Næringsbygg"} image="pic4.jpg" />
         </Grid>
       </>
     );

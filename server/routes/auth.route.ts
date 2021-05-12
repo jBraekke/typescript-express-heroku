@@ -11,18 +11,13 @@ router.get("/getlistUsers", userController.listUsers);
 router.get("/me", userController.me);
 //router.get("/logout", userController.logout);
 
-router.get('/logout', function(req, res){
-        req.logOut();
-    delete req.session;
-        res.clearCookie('connect.sid');
-        res.redirect('/loginuser');
-        console.log(req);
-    });
-  
-
-
-
-
-
+router.get("/logout", function (req, res) {
+  req.logOut();
+  delete req.session;
+  res.cookie("jwt", { expires: new Date(0) });
+  res.clearCookie("jwt");
+  res.redirect("/loginuser");
+  console.log(req);
+});
 
 export default router;

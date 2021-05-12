@@ -1,10 +1,9 @@
+/* eslint-disable no-useless-escape */
 import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 //import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -57,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const methods = useForm();
-  const [datas, setDatas] = useState("");
+  const [, setDatas] = useState("");
   const { handleSubmit, control, errors } = methods;
   const [open, setOpen] = useState(false);
   const [openError, setOpenError] = useState(false);
@@ -200,9 +199,8 @@ export default function SignIn() {
             <Grid item xs>
               <Typography>Passord: 12345asd</Typography>
             </Grid>
-            
-              <Typography>Husk og trykke F5 etter du har logget inn</Typography>
-           
+
+            <Typography>Husk og trykke F5 etter du har logget inn</Typography>
           </Grid>
         </form>
       </div>

@@ -1,11 +1,12 @@
+/* eslint-disable no-useless-escape */
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Card, MenuItem, Select, Snackbar } from "@material-ui/core";
+import { Button, Snackbar } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { postData, postImage } from "../../utils/fetchPost";
+import { postData } from "../../utils/fetchPost";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -51,7 +52,6 @@ const LoginUser = () => {
 
   const onSubmit = (data: any, e: any) => {
     setDatas("sending" + data.status);
-    console.log(e);
     postData("api/auth/login", data)
       .then((data) => {
         setDatas("sending" + data.status);
@@ -62,9 +62,7 @@ const LoginUser = () => {
         setOpen(true);
         return data.json();
       })
-      .then((data) => {
-        console.log(data);
-      })
+      .then(() => {})
       .catch((err) => {
         err.text().then((errorMessage: any) => {
           var dd = JSON.parse(errorMessage);

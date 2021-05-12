@@ -32,6 +32,8 @@ class App {
     this.express.use(express.json());
     this.express.use(cookieParser());
     this.express.use(passport.initialize());
+    this.express.use(helmet());
+    this.express.use(compression());
     //router.use("/api-docs", swaggerUi.serve);
     //router.get("/api-docs", swaggerUi.setup(swaggerDocument));
     this.express.use(

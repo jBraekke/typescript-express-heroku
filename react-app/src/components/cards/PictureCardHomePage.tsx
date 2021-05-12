@@ -6,8 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import { Box } from "@material-ui/core";
 import theme from "../../themes/theme";
 
 const useStyles = makeStyles({
@@ -62,15 +60,6 @@ const PictureCardHomePage = ({ title, description, image }: any) => {
             className={classes.text}
           >
             {title}
-          </Typography>
-          <Typography
-            align="center"
-            color="primary"
-            variant="h6"
-            component="h6"
-            className={classes.textDescription}
-          >
-            {description}
           </Typography>
         </CardContent>
       </Card>

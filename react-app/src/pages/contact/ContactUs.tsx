@@ -3,10 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ContactForm from "../../components/forms/ContactForm";
 import { Container } from "@material-ui/core";
-import LoadingScreen from "../../components/loading/LoadingScreen";
 
 const ContactUs = () => {
-  const [imageLoad, setImageLoad] = useState(false);
+  const [, setImageLoad] = useState(false);
   const image = new Image();
   image.onload = function () {
     setImageLoad(true);
@@ -31,7 +30,7 @@ const ContactUs = () => {
     <div className={classes.root}>
       <Grid className={classes.gridheader} container>
         <Container>
-          <Grid container item xs={12} spacing={3}>
+          <Grid container item xs={12}>
             <Grid item xs={12}></Grid>
             <Grid item xs={12}>
               <ContactForm></ContactForm>
