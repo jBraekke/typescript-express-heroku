@@ -9,6 +9,9 @@ import { Container } from "@material-ui/core";
 
 const EditApartment = () => {
   //const classes = useStyles();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

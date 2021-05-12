@@ -48,7 +48,7 @@ const EditApartment = () => {
   const [realEstate, setRealEstate] = useState<IApartment>();
   const params = useParams() as any;
   const url2 = "/api/apartments/";
-  const { status, data } = useFetch(url2 + params.id);
+  const { data } = useFetch(url2 + params.id);
 
   useEffect(() => {
     if (params.id) {
@@ -77,7 +77,7 @@ const EditApartment = () => {
         console.log(data);
       })
       .catch((err) => {
-        err.text().then((errorMessage: any) => {});
+        err.text().then(() => {});
       });
 
     if (images) {

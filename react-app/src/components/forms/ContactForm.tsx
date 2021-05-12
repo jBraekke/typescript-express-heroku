@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Card, MenuItem, Select } from "@material-ui/core";
+import { Button, Card } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -86,12 +86,12 @@ const ContactForm = () => {
 
           <Controller
             as={TextField}
-            name=""
+            name="city"
             control={control}
             defaultValue={params.city}
             variant="outlined"
             label="By"
-            id="subject"
+            id="city"
             InputProps={{
               readOnly: true,
             }}
@@ -99,37 +99,37 @@ const ContactForm = () => {
 
           <Controller
             as={TextField}
-            name=""
+            name="email"
             control={control}
             defaultValue=""
             variant="outlined"
             multiline
             label="Vennligst skriv inn din epost adresse.."
-            id="text"
+            id="email"
             required
           />
           <Controller
             as={TextField}
-            name=""
+            name="number"
             control={control}
             defaultValue=""
             variant="outlined"
             multiline
             label="Vennligst skriv inn ditt telefonnummer.."
-            id="text"
+            id="number"
             required
           />
 
           <Controller
             as={TextField}
-            name="text"
+            name="description"
             control={control}
             defaultValue=""
             variant="outlined"
             multiline
             rows={5}
             label="Om du ønsker kan du skrive en liten melding om hva du er ute etter..."
-            id="text"
+            id="description"
           />
 
           <Button

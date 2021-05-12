@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import {
   Button,
   Card,
@@ -14,8 +15,6 @@ import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
 import AddIcon from "@material-ui/icons/Add";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { useAuthContext } from "../../context/AuthProvider";
-import { useHistory } from "react-router-dom";
 export interface IContract {
   fileName: string;
   adress: string;
@@ -162,8 +161,8 @@ const PdfComponent = () => {
     doc.setFont("Times New Roman", "bold");
     doc.text("EIENDOM", 10, 50);
     doc.setFont("Times New Roman", "normal");
-    doc.text("Adresse:" + " " + formData?.adress, 10, 55);
-    doc.text("Bolignr:" + " " + formData?.apartmentNumber, 10, 60);
+    doc.text("Adresse: " + formData?.adress, 10, 55);
+    doc.text("Bolignr: " + formData?.apartmentNumber, 10, 60);
     doc.text("Avtalen gjelder:", 10, 65);
 
     doc.text("Hus", 70, 65);
@@ -201,10 +200,10 @@ const PdfComponent = () => {
     doc.setFont("Times New Roman", "bold");
     doc.text("LEIETAKER", 10, 75);
     doc.setFont("Times New Roman", "normal");
-    doc.text("Navn:" + " " + formData?.name, 10, 80);
-    doc.text("Personnr:" + " " + formData?.socialSecurityNumber, 10, 85);
-    doc.text("Tlf/Mobil:" + " " + formData?.phoneNumber, 10, 90);
-    doc.text("E-Post:" + " " + formData?.email, 10, 95);
+    doc.text("Navn: " + formData?.name, 10, 80);
+    doc.text("Personnr: " + formData?.socialSecurityNumber, 10, 85);
+    doc.text("Tlf/Mobil: " + formData?.phoneNumber, 10, 90);
+    doc.text("E-Post: " + formData?.email, 10, 95);
 
     doc.setFont("Times New Roman", "bold");
     doc.text("HUSSTANDSMEDLEMMER (som bor i samme leieenheten)", 10, 105);
@@ -338,7 +337,7 @@ const PdfComponent = () => {
     doc.setFont("Times New Roman", "normal");
     doc.text("Strøm er inkludert i husleien.", 20, 227);
     doc.setFont("Times New Roman", "bold");
-    doc.text("STRØMMÅLERNR.: " + " " + formData?.electrictyNumber, 10, 237);
+    doc.text("STRØMMÅLERNR.: " + formData?.electrictyNumber, 10, 237);
 
     formData.electrictyDate
       ? doc.text(
@@ -351,7 +350,7 @@ const PdfComponent = () => {
       : doc.text("Dato: ", 107, 237);
     formData.read
       ? doc.text(
-          "AVLEST: " + " " + moment(formData?.read).format("DD.MM.yyyy"),
+          "AVLEST: " + moment(formData?.read).format("DD.MM.yyyy"),
           160,
           237
         )

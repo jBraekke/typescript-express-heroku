@@ -1,12 +1,13 @@
+/* eslint-disable no-useless-escape */
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Card, MenuItem, Select, Snackbar } from "@material-ui/core";
+import { Button, Snackbar } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { postData, postImage } from "../../utils/fetchPost";
+import { postData } from "../../utils/fetchPost";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {

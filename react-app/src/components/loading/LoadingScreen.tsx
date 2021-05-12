@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Avatar, Typography } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import theme from "../../themes/theme";
 const useStyles = makeStyles({
   test: {

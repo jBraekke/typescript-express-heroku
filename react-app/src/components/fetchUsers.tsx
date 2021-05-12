@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
-import { IUser, IUserProps } from "../interfaces/IUser";
+import { IUser } from "../interfaces/IUser";
 import UserCard from "./cards/UserCard";
 import Fade from "@material-ui/core/Fade";
 

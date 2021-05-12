@@ -7,10 +7,9 @@ import SendIcon from "@material-ui/icons/Send";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Link as RouterLink, NavLink, useParams, useHistory } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 
 import {
-  Box,
   Card,
   CardActions,
   CardContent,
@@ -18,11 +17,9 @@ import {
   Container,
   Divider,
   Typography,
-  useMediaQuery,
 } from "@material-ui/core";
 import theme from "../../themes/theme";
 import { useAuthContext } from "../../context/AuthProvider";
-import { deleteData } from "../../utils/fetchPost";
 
 //import CarCard from "../../components/cards/CarCard";
 //import { Button, Input } from "@material-ui/core";
@@ -170,10 +167,9 @@ const useStyles = makeStyles({
 const ApartmentView = () => {
   const url2 = "/api/apartments/";
   const params = useParams() as any;
-  const { status, data } = useFetch(url2 + params.id);
+  const { data } = useFetch(url2 + params.id);
   const [realEstate, setRealEstate] = useState<IApartment>();
-  const [imageRefresh, setimageRefresh] = useState({});
-  const { isLoggedIn, isAdmin, isLoading } = useAuthContext() as any;
+  const { isLoggedIn } = useAuthContext() as any;
   const removeClickHandler = () => {
     const deleteMethod = {
       method: "DELETE", // Method itself
@@ -205,10 +201,9 @@ const ApartmentView = () => {
        }])
     */
     }
-  });
+  }, [params.id, data]);
 
   const classes = useStyles();
-  const history = useHistory();
 
   const TestDisplay = () => {
     return (
@@ -234,9 +229,7 @@ const ApartmentView = () => {
                 component="img"
                 height="500"
                 alt="Apartment"
-                src={
-                  "/uploads/" + realEstate.imagePath
-                }
+                src={"/uploads/" + realEstate.imagePath}
                 title="Apartment"
               />
             </>
@@ -439,7 +432,7 @@ const ApartmentView = () => {
                   color="primary"
                   endIcon={<SendIcon></SendIcon>}
                   size={"large"}
-                //to="#form"
+                  //to="#form"
                 >
                   SEND OSS EN MAIL
                 </Button>
@@ -483,9 +476,6 @@ const ApartmentView = () => {
       </>
     );
   };
-
-  const mobileView = useMediaQuery(theme.breakpoints.up("xs"));
-  const desktopView = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
     <div className={classes.root}>

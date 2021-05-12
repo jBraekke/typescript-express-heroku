@@ -12,7 +12,6 @@ import HomeIcon from "@material-ui/icons/Home";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import ContactMailSharpIcon from "@material-ui/icons/ContactMailSharp";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
-import Divider from "@material-ui/core/Divider";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({

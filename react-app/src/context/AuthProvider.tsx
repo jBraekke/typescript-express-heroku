@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { useFetch } from "../hooks/useFetch";
+import { createContext, useContext, useEffect, useState } from "react";
 //import { getUserInfo } from "../utils/authService";
 
 const AuthContext = createContext(null) as any;

@@ -9,12 +9,9 @@ import {
   Box,
   Button,
   Card,
-  CardContent,
   Checkbox,
   Container,
   FormControlLabel,
-  Slide,
-  Typography,
   useMediaQuery,
 } from "@material-ui/core";
 
@@ -95,15 +92,10 @@ const useStyles = makeStyles({
 });
 
 const Home = () => {
-  const url = "api/apartments/getlist";
   const url2 = "api/apartments/getlist";
-
   const { status, data } = useFetch(url2);
   const [page, setPage] = useState(1);
-  const [checked, setChecked] = useState(true);
-
   const [realEstate, setData] = useState<IApartment[]>([]);
-
   const [filter, setFilter] = useState<IApartmentFilter>({
     apartment: true,
     incoming: true,
@@ -169,7 +161,7 @@ const Home = () => {
 
   const FilterButtons = () => {
     return (
-      <Box mt={2} className={classes.toolbar}>
+      <Box mt={6} className={classes.toolbar}>
         <Button
           className={classes.menuButton}
           onClick={() => setFilter({ ...filter, city: "Sarpsborg" })}
@@ -189,82 +181,6 @@ const Home = () => {
           Fredrikstad
         </Button>
       </Box>
-    );
-  };
-
-  const LeftGridDesktop = () => {
-    return (
-      <Grid className={classes.leftGrid} item xs={2}>
-        <Typography>Velg type bolig</Typography>
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() => setFilter({ ...filter, house: !filter.house })}
-              name="checkedHouse"
-              color="primary"
-              value={filter.house}
-              checked={filter.house}
-            />
-          }
-          label="Hus"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() =>
-                setFilter({ ...filter, apartment: !filter.apartment })
-              }
-              name="checkedApartment"
-              color="primary"
-              value={filter.apartment}
-              checked={filter.apartment}
-            />
-          }
-          label="Leilighet"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() =>
-                setFilter({ ...filter, incoming: !filter.incoming })
-              }
-              name="checkedIncoming"
-              color="primary"
-              value={filter.incoming}
-              checked={filter.incoming}
-            />
-          }
-          label="Innkommende"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() =>
-                setFilter({ ...filter, commerce: !filter.commerce })
-              }
-              name="checkedCommerce"
-              color="primary"
-              value={filter.commerce}
-              checked={filter.commerce}
-            />
-          }
-          label="Næringsbygg"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() =>
-                setFilter({ ...filter, newlyBuilt: !filter.newlyBuilt })
-              }
-              name="checkedB"
-              color="primary"
-              value={filter.newlyBuilt}
-              checked={filter.newlyBuilt}
-            />
-          }
-          label="Nybygg"
-        />
-      </Grid>
     );
   };
 
@@ -483,7 +399,7 @@ const Home = () => {
   const BottomGridMobile = () => {
     return (
       <Grid item xs={12}>
-        <Grid container item xs={12} spacing={3}>
+        <Grid container item xs={12}>
           <Grid item xs={12}>
             <FilterButtons />
           </Grid>
@@ -513,7 +429,7 @@ const Home = () => {
       <div className={classes.root}>
         <Grid className={classes.gridheader} container spacing={0}>
           <Container>
-            <Grid container item xs={12} spacing={3}>
+            <Grid container item xs={12}>
               <BottomGridMobile></BottomGridMobile>
             </Grid>
           </Container>

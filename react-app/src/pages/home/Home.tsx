@@ -14,7 +14,9 @@ const Frontpage = () => {
     setImageLoad(true);
   };
   img.src = "pic8.jpg";
-
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const useStyles = makeStyles({
     root: { flexGrow: 1 },
     gridheader: {
@@ -58,24 +60,16 @@ const Frontpage = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Leiligheter"} description="" image="pic6.jpg" />
+          <PictureCard title={"Leiligheter"} image="pic6.jpg" />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard title={"Hus"} description={""} image="pic5.jpg" />
+          <PictureCard title={"Hus"} image="pic5.jpg" />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard
-            title={"Kommende boliger"}
-            description={""}
-            image="pic3.jpg"
-          />
+          <PictureCard title={"Kommende boliger"} image="pic3.jpg" />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PictureCard
-            title={"Næringsbygg"}
-            description={""}
-            image="pic4.jpg"
-          />
+          <PictureCard title={"Næringsbygg"} image="pic4.jpg" />
         </Grid>
       </>
     );
