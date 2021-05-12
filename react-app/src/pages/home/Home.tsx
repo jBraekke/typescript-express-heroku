@@ -78,17 +78,15 @@ const Frontpage = () => {
   return imageLoad ? (
     <div>
       <Grid container item xs={12}>
-        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
-          <Grid className={classes.gridheader} item xs={12}>
-            <Container>
-              <Box m={4}>
-                <Grid container item xs={12}>
-                  <FancyRow />
-                </Grid>
-              </Box>
-            </Container>
-          </Grid>
-        </Slide>
+        <Grid className={classes.gridheader} item xs={12}>
+          <Container>
+            <Box m={4}>
+              <Grid container item xs={12}>
+                <FancyRow />
+              </Grid>
+            </Box>
+          </Container>
+        </Grid>
       </Grid>
     </div>
   ) : (
