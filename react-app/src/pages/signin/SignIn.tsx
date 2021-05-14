@@ -92,7 +92,9 @@ export default function SignIn() {
         setOpen(true);
         return data.json();
       })
-      .then((data) => {})
+      .then((data) => {
+        window.location.href = "/";
+      })
       .catch((err) => {
         err.text().then((errorMessage: any) => {
           var dd = JSON.parse(errorMessage);
@@ -100,7 +102,9 @@ export default function SignIn() {
         });
       });
   };
-
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Container component="main" maxWidth="xs">
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -174,7 +178,6 @@ export default function SignIn() {
             variant="outlined"
             rows={2}
             label="Passord*"
-            autoFocus
             id="text"
             autoComplete="current-password"
           />

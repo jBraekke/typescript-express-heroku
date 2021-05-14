@@ -189,6 +189,7 @@ const ApartmentView = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (params.id) {
       setRealEstate(data);
       /*

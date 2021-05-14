@@ -386,7 +386,9 @@ const PdfComponent = () => {
     doc.line(140, 295, 200, 295);
     doc.save(formData?.fileName + ".pdf");
   };
-
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
