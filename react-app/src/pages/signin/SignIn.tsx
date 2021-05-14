@@ -94,6 +94,8 @@ export default function SignIn() {
       })
       .then((data) => {
         console.log(data);
+        //redirecting client-side
+        window.location.href = "/";
       })
       .catch((err) => {
         err.text().then((errorMessage: any) => {

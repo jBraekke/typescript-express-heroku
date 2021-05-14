@@ -54,15 +54,17 @@ const LoginUser = () => {
     setDatas("sending" + data.status);
     postData("api/auth/login", data)
       .then((data) => {
+        debugger;
         setDatas("sending" + data.status);
         if (!data.ok) {
           setOpenError(true);
           throw data;
         }
         setOpen(true);
+        //window.location.href = '/';
         return data.json();
       })
-      .then(() => {})
+      .then(() => { })
       .catch((err) => {
         err.text().then((errorMessage: any) => {
           var dd = JSON.parse(errorMessage);
