@@ -104,16 +104,18 @@ const Home = () => {
     newlyBuilt: true,
     city: "",
   });
+  const predictedView1 = realEstate.filter((x) => {
+    return filter.city === "" ? x : filter.city === x.city;
+  });
 
-  const predictedView = realEstate.filter((x) => {
-    return ((filter.apartment && x.apartment === true) ||
+  const predictedView = predictedView1.filter((x) => {
+    return (
+      (filter.apartment && x.apartment === true) ||
       (filter.incoming && x.incoming === true) ||
       (filter.house && x.house === true) ||
       (filter.commerce && x.commerce === true) ||
-      (filter.newlyBuilt && x.newlyBuilt === true)) &&
-      filter.city === ""
-      ? x
-      : filter.city === x.city;
+      (filter.newlyBuilt && x.newlyBuilt === true)
+    );
   });
 
   useEffect(() => {
