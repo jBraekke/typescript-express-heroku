@@ -167,19 +167,28 @@ const Home = () => {
       <Box mt={6} className={classes.toolbar}>
         <Button
           className={classes.menuButton}
-          onClick={() => setFilter({ ...filter, city: "Sarpsborg" })}
+          onClick={() => {
+            setFilter({ ...filter, city: "Sarpsborg" });
+            setPage(1);
+          }}
         >
           Sarpsborg
         </Button>
         <Button
           className={classes.menuButton}
-          onClick={() => setFilter({ ...filter, city: "Moss" })}
+          onClick={() => {
+            setFilter({ ...filter, city: "Moss" });
+            setPage(1);
+          }}
         >
           Moss
         </Button>
         <Button
           className={classes.menuButton}
-          onClick={() => setFilter({ ...filter, city: "Fredrikstad" })}
+          onClick={() => {
+            setFilter({ ...filter, city: "Fredrikstad" });
+            setPage(1);
+          }}
         >
           Fredrikstad
         </Button>
